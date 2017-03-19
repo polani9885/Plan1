@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Scheduler" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/Scheduler.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/Scheduler.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/Scheduler.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/Scheduler.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISchedulers_Services_CheckAttractionExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:Services_CheckAttractionExist" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Services_CheckAttractionExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Services_CheckAttractionExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Service_TravelDistance_InputMessage">
+    <wsdl:part name="parameters" element="tns:Service_TravelDistance" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Service_TravelDistance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Service_TravelDistanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Services_AddAttraction_InputMessage">
+    <wsdl:part name="parameters" element="tns:Services_AddAttraction" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Services_AddAttraction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Services_AddAttractionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Services_GetPlaceDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:Services_GetPlaceDetails" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Services_GetPlaceDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Services_GetPlaceDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Service_GetSearchTextNotCorrect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Service_GetSearchTextNotCorrect" />
+  </wsdl:message>
+  <wsdl:message name="ISchedulers_Service_GetSearchTextNotCorrect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Service_GetSearchTextNotCorrectResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISchedulers">
+    <wsdl:operation name="Services_CheckAttractionExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISchedulers/Services_CheckAttractionExist" message="tns:ISchedulers_Services_CheckAttractionExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISchedulers/Services_CheckAttractionExistResponse" message="tns:ISchedulers_Services_CheckAttractionExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Service_TravelDistance">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISchedulers/Service_TravelDistance" message="tns:ISchedulers_Service_TravelDistance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISchedulers/Service_TravelDistanceResponse" message="tns:ISchedulers_Service_TravelDistance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Services_AddAttraction">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISchedulers/Services_AddAttraction" message="tns:ISchedulers_Services_AddAttraction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISchedulers/Services_AddAttractionResponse" message="tns:ISchedulers_Services_AddAttraction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Services_GetPlaceDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISchedulers/Services_GetPlaceDetails" message="tns:ISchedulers_Services_GetPlaceDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISchedulers/Services_GetPlaceDetailsResponse" message="tns:ISchedulers_Services_GetPlaceDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Service_GetSearchTextNotCorrect">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISchedulers/Service_GetSearchTextNotCorrect" message="tns:ISchedulers_Service_GetSearchTextNotCorrect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISchedulers/Service_GetSearchTextNotCorrectResponse" message="tns:ISchedulers_Service_GetSearchTextNotCorrect_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ISchedulers" type="tns:ISchedulers">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Services_CheckAttractionExist">
+      <soap:operation soapAction="http://tempuri.org/ISchedulers/Services_CheckAttractionExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Service_TravelDistance">
+      <soap:operation soapAction="http://tempuri.org/ISchedulers/Service_TravelDistance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Services_AddAttraction">
+      <soap:operation soapAction="http://tempuri.org/ISchedulers/Services_AddAttraction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Services_GetPlaceDetails">
+      <soap:operation soapAction="http://tempuri.org/ISchedulers/Services_GetPlaceDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Service_GetSearchTextNotCorrect">
+      <soap:operation soapAction="http://tempuri.org/ISchedulers/Service_GetSearchTextNotCorrect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Scheduler">
+    <wsdl:port name="BasicHttpBinding_ISchedulers" binding="tns:BasicHttpBinding_ISchedulers">
+      <soap:address location="http://localhost:23457/Schedulers/Scheduler.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

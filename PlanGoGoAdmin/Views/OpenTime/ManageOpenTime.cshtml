@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+
+@Scripts.Render("~/controllerOpenTime")
+<div ng-controller="controllerOpenTime">
+
+    <table cellpadding="0" cellspacing="0" border="0">        
+        <tr>            
+            <td>
+                <a href="/OpenTime/UpdateOpenTime?AttractionsActiveStatusId=0&AttractionId={{AttractionId}}">Add New Open Time</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                Week Name
+                            </th>
+                            <th>
+                                Open Time
+                            </th>
+                            <th>
+                                Close Time
+                            </th>
+                        </tr>
+                    </tbody>
+                    <tr ng-repeat="_result in OpenTime">
+                        <td>                            
+                            <a href="/OpenTime/UpdateOpenTime?AttractionId=0&AttractionsActiveStatusId={{_result.AttractionsActiveStatusId}}" title="Update Open Time">
+                                Edit
+                            </a>
+                        </td>
+                        <td title="'Week Name'">
+                            {{_result.WeekName}}
+                        </td>
+                        <td title="'Open Time'">
+                            {{_result.OpenTime}}
+                        </td>
+                        <td title="'Close Time'">
+                            {{_result.CloseTime}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+

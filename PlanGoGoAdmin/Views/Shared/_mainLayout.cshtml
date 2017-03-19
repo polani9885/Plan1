@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui", "~/bundles/jqueryval", "~/customScript")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularSupport")
+    <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyAEjAToubvwF6pNknAD_68E-EVIoix44ZQ"></script>
+    @Scripts.Render("~/bundles/plugins")
+
+
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

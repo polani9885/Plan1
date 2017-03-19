@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlXC2zK4IWAsbBDHTd3YEnguZz5Ua7l-8&sensor=false&callback=GetDistanceBetweenTwoPoints"></script>    
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/CustomScripts")
+    
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            debugger;
+        if('@ViewBag.SearchData' == 'True')
+        {
+            GetAddressInformation('@ViewBag.googleSearchText', '@ViewBag.attractionId', '@ViewBag.userRequest');
+        }        
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div id="map"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerAttractionTravelTimeDistance")
+<div ng-controller="controllerAttractionTravelTimeDistance">
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Attraction Name
+                </th>
+                <th>
+                    Address One
+                </th>
+                <th>
+                    Address Two
+                </th>
+                <th>
+                    Longitude
+                </th>
+                <th>
+                    Latitude
+                </th>
+                <th>
+                    PlaceId
+                </th>
+                <th>
+                    RankId
+                </th>
+                <th>
+                    Google Search Text
+                </th>
+                <th>
+                    Google Web Site
+                </th>
+                <th>
+                    Google ICon
+                </th>
+                <th>
+                    Google International phone number
+                </th>
+                <th>
+                    Googleadr address
+                </th>
+                <th>
+                    Google Name
+                </th>
+                <th>
+                    Google Rating
+                </th>
+                <th>
+                    Google User Ratings total
+                </th>
+            </tr>
+        </tbody>
+        <tr ng-repeat="_attractions in manageAttractionTravelTimeDistance">
+            
+            <td title="'Attraction Name'">
+                {{_attractions.SourceAttractionName}}
+            </td>
+            <td title="'Destination Attraction Name'">
+                {{_attractions.DestinationAttractionName}}
+            </td>
+            <td title="'Travel Time'">
+                {{_attractions.TravelTime}}
+            </td>
+            <td title="'Distance'">
+                {{_attractions.Distance}}
+            </td>
+            <td title="'Travel Type'">
+                {{_attractions.TravelType}}
+            </td>
+            <td title="'Place Id'">
+                {{_attractions.PlaceId}}
+            </td>
+            <td title="'Google Search Text'">
+                {{_attractions.GoogleSearchText}}
+            </td>
+            <td title="'Google Web Site'">
+                {{_attractions.GoogleWebSite}}
+            </td>
+            <td title="'Google ICon'">
+                {{_attractions.GoogleICon}}
+            </td>
+            <td title="'Google International phone number'">
+                {{_attractions.GoogleInternational_phone_number}}
+            </td>
+            <td title="'Googleadr_address'">
+                {{_attractions.Googleadr_address}}
+            </td>
+            <td title="'Google Name'">
+                {{_attractions.GoogleName}}
+            </td>
+            <td title="'Google Rating'">
+                {{_attractions.GoogleRating}}
+            </td>
+            <td title="'GoogleUser ratings total'">
+                {{_attractions.GoogleUser_ratings_total}}
+            </td>
+        </tr>
+    </table>
+
+
+
+</div>
+

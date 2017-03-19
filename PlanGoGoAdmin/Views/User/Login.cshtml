@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/shared/_mainLayout.cshtml";
+}
+@model PlanGoGoAdmin.Models.User.ModelLogin    
+@using (Html.BeginForm())
+{
+<div >
+    Login Screen
+    <div>
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td>@Model.ErrorMessage</td>
+            </tr>
+            <tr>
+                <td>
+                    User Name: @Html.TextBoxFor(m=>m.UserName,new { @placeholder = "Enter User Name", @id = "txtUserName" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password: @Html.TextBoxFor(m=>m.Password,new { @placeholder = "Enter Password", @id = "txtPassword" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Login" id="btnLogin" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+}
+

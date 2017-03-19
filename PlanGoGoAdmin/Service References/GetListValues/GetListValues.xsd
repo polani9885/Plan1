@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+  <xs:element name="Public_GetCityList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_GetCityListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_GetCityListResult" nillable="true" type="q1:ArrayOfpublic_GetCityList" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_GetCategory">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_GetCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_GetCategoryResult" nillable="true" type="q2:ArrayOfPublic_GetCategory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_FilterAttractions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="enterLocationName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="categoryList" nillable="true" type="q3:ArrayOfuserTable_Category" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_FilterAttractionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_FilterAttractionsResult" nillable="true" type="q4:ArrayOfpublic_FilterAttractions" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_GetOrderOfAttractionVisit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
+        <xs:element minOccurs="0" name="SourceAttractionID" type="xs:int" />
+        <xs:element minOccurs="0" name="DestinationAttractionID" type="xs:int" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="AttractionID" nillable="true" type="q5:ArrayOfuserTable_OnlyId" />
+        <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Public_GetOrderOfAttractionVisitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_GetOrderOfAttractionVisitResult" nillable="true" type="q6:ArrayOfGetOrderOfAttractionVisit" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAttractionOpenTime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AttractionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAttractionOpenTimeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="GetAttractionOpenTimeResult" nillable="true" type="q7:ArrayOfGetAttractionOpenTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

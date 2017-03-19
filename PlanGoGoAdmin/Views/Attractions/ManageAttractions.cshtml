@@ -1,0 +1,150 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerAttractions")
+<div ng-controller="controllerAttractions">
+
+    <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            
+            <td>
+                Country
+            </td>
+            <td>
+                <select id="ddlCountryId" ng-model="CountrySelectedValue" ng-change="CountryDropDownSelected()"
+                        ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
+            </td>
+
+            <td>
+                State
+            </td>
+            <td>
+                <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
+                        ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
+            </td>
+            <td>
+                City
+            </td>
+            <td>
+                <select id="ddlCityId" ng-model="CitySelectedValue" ng-change="CityDropDownSelected()"
+                        ng-options="_city as _city.CityName for _city in manageCity track by _city.CityId"></select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table class="table" >
+                    <tbody>
+                        <tr>
+                            <th>
+
+                            </th>
+                            <th>
+                                Attraction Name
+                            </th>
+                            <th>
+                                Address One
+                            </th>
+                            <th>
+                                Address Two
+                            </th>
+                            <th>
+                                Longitude
+                            </th>
+                            <th>
+                                Latitude
+                            </th>
+                            <th>
+                                PlaceId
+                            </th>
+                            <th>
+                                RankId
+                            </th>
+                            <th>
+                                Google Search Text
+                            </th>
+                            <th>
+                                Google Web Site
+                            </th>
+                            <th>
+                                Google ICon
+                            </th>
+                            <th>
+                                Google International phone number
+                            </th>
+                            <th>
+                                Googleadr address
+                            </th>
+                            <th>
+                                Google Name
+                            </th>
+                            <th>
+                                Google Rating
+                            </th>
+                            <th>
+                                Google User Ratings total
+                            </th>
+                        </tr>
+                    </tbody>
+                    <tr ng-repeat="_attractions in Attractions">
+                        <td>
+                            <a href="/AttractionTravelTimeDistance/ManageAttractionTravelTimeDistance?AttractionsId={{_attractions.AttractionsId}}" title="Update Attractions">
+                                Nearest Attractions
+                            </a>
+                            <a href="/OpenTime/ManageOpenTime?AttractionsId={{_attractions.AttractionsId}}" title="Open Time">
+                                Open Time
+                            </a>                            
+                            <a href="/Attractions/UpdateAttractions?CityId={{_attractions.AttractionsId}}" title="Update Attractions">
+                                Edit
+                            </a>
+                        </td>                        
+                        <td title="'Attraction Name'">
+                            {{_attractions.AttractionName}}
+                        </td>
+                        <td title="'Address One'">
+                            {{_attractions.AddressOne}}
+                        </td>
+                        <td title="'Address Two'">
+                            {{_attractions.AddressTwo}}
+                        </td>
+                        <td title="'Longitude'">
+                            {{_attractions.Longitude}}
+                        </td>
+                        <td title="'Latitude'">
+                            {{_attractions.Latitude}}
+                        </td>
+                        <td title="'Place Id'">
+                            {{_attractions.PlaceId}}
+                        </td>
+                        <td title="'Google Search Text'">
+                            {{_attractions.GoogleSearchText}}
+                        </td>
+                        <td title="'Google Web Site'">
+                            {{_attractions.GoogleWebSite}}
+                        </td>
+                        <td title="'Google ICon'">
+                            {{_attractions.GoogleICon}}
+                        </td>
+                        <td title="'Google International phone number'">
+                            {{_attractions.GoogleInternational_phone_number}}
+                        </td>
+                        <td title="'Googleadr_address'">
+                            {{_attractions.Googleadr_address}}
+                        </td>
+                        <td title="'Google Name'">
+                            {{_attractions.GoogleName}}
+                        </td>
+                        <td title="'Google Rating'">
+                            {{_attractions.GoogleRating}}
+                        </td>
+                        <td title="'GoogleUser ratings total'">
+                            {{_attractions.GoogleUser_ratings_total}}
+                        </td>                        
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+

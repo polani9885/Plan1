@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="AttractionsDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressOne" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AddressTwo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttractionsId" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CityId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GoogleICon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoogleInternational_phone_number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoogleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoogleRating" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoogleSearchText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoogleUser_ratings_total" type="xs:int" />
+      <xs:element minOccurs="0" name="GoogleWebSite" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Googleadr_address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PlaceId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RankId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AttractionsDTO" nillable="true" type="tns:AttractionsDTO" />
+  <xs:complexType name="ArrayOfAttractionsDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AttractionsDTO" nillable="true" type="tns:AttractionsDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAttractionsDTO" nillable="true" type="tns:ArrayOfAttractionsDTO" />
+</xs:schema>

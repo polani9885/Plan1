@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_LayoutBeachResort.cshtml";
+}
+@Scripts.Render("~/index")
+
+<div id="main" ng-controller="controlerIndex" >
+
+    <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td>
+                <div class="divIndex" id="controlerIndex">
+                    <div id="tabs" style="width:1200px;height:500px;">
+                        <ul>
+                            <li><a href="#tab_Filter">Filter</a></li>
+                            <li><a href="#tab_Categories">Categories</a></li>
+                            <li><a href="#tab_TourPlan">Tour Plan</a></li>
+                            <li><a href="#tab_TourMap">Tour Map</a></li>
+                            <li><a href="#tab_SuggestedAttractions">Suggested Attractions</a></li>
+                            <li><a href="#tab_NotInterested">Not Interested Attractions</a></li>
+                            <li><a href="#tab_TourAnalysis">Tour Analysis</a></li>
+                        </ul>
+                        <div id="tab_Filter">
+                            <div class="ui-widget" style="float:left;padding:5px">
+                                <input id="autoCityName" placeholder="Enter City Name">
+                                <br />
+                                <div id="travelBasic" style="display:none">
+                                    <input id="autoStartLocation" placeholder="Start Location">
+                                    <br />
+                                    <input id="autoDestinationLocation" placeholder="End Location">
+                                    <br />
+                                    <input id="calStartDateAndTime" placeholder="Start Date And Time">
+                                    <br />
+                                    <input id="calDropDateAndTime" placeholder="End Date And Time">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab_Categories">
+                            <div ng-repeat="categoryList in CategoryList" style="float:left;padding:15px">
+                                <div>
+                                    <input type="checkbox" checked="checked" ng-click="CategorySelected(categoryList)" />
+                                    {{categoryList.CategoryName}}
+                                </div>                                
+                            </div>
+                        </div>
+                        <div id="tab_TourPlan">
+                            <!--Tour Plan tabs-->
+                            <div id="subtabs" style="width:1130px;height:400px;">
+                                <ul></ul>
+
+                            </div>
+
+
+
+
+
+
+
+                            <div>
+
+                            </div>
+                        </div>
+                        <div id="tab_TourMap">
+                            <div id="googleMaps" style="float:left">
+                            </div>
+                        </div>
+                        <div id="tab_SuggestedAttractions">
+                            <p>
+                                UP Comming
+                            </p>
+                        </div>
+                        <div id="tab_NotInterested">
+                            <div>
+                                <table cellpadding="5" cellspacing="5" border="1">
+                                    <tr ng-repeat="_notIntereseted in notInterestedList">                                        
+                                        <td>                                            
+                                            <img src="/Images/Custome/intersted.png" alt="Intereseted" width="30px" height="30px" ng-click="Interested(_notIntereseted.AttractionsId)" />
+                                        </td>
+                                        <td>                                            
+                                            {{_notIntereseted.AttractionName}}
+                                        </td>
+                                        <td>
+                                            {{_notIntereseted.AddressOne}}
+                                        </td>
+                                        <td>
+                                            {{_notIntereseted.AddressTwo}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="tab_TourAnalysis">
+                            <p>
+                                UP Comming
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </td>
+        </tr>
+
+    </table>
+
+    <br />
+    <br />
+
+    <div id="editTour" title="Modify Tour Information">
+        <p class="validateTips">All form fields are required.</p>
+        <form>
+            <fieldset>
+                <label for="name">No Of Hours Required to View</label>
+                <input type="text" alt="View Time" id="ViewTime" />
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="addingAttraction" title="Adddint Attraction Information">
+        <p class="validateTips">All form fields are required.</p>
+        <form>
+            <fieldset>                
+                    <input id="autoAddAttraction" placeholder="Location" onKeyUp="getAttractions()">                                    
+            </fieldset>
+        </form>
+    </div>
+
+    
+
+</div>

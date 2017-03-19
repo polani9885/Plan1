@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerManageUser")
+
+<div ng-controller="controllerManageUser">
+
+    <table class="table" >
+        <tbody>
+            <tr>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Password
+                </th>
+            </tr>
+        </tbody>
+        <tr ng-repeat="user in manageUsers">
+            <td>
+                <a href="/User/AddUpdateUser?adminUserId={{user.AdminUserId}}" title="Update User">
+                    Edit User
+                </a>
+            </td>
+            <td title="'User Name'" >
+                {{user.UserName}}
+            </td>
+            <td title="'Password'" >
+                {{user.Password}}
+            </td>
+        </tr>
+    </table>
+
+</div>

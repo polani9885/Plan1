@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessEntites" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessEntites" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfpublic_GetCityList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="public_GetCityList" nillable="true" type="tns:public_GetCityList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfpublic_GetCityList" nillable="true" type="tns:ArrayOfpublic_GetCityList" />
+  <xs:complexType name="public_GetCityList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CityId" type="xs:int" />
+      <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CityShortName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StateId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="public_GetCityList" nillable="true" type="tns:public_GetCityList" />
+  <xs:complexType name="ArrayOfPublic_GetCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Public_GetCategory" nillable="true" type="tns:Public_GetCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPublic_GetCategory" nillable="true" type="tns:ArrayOfPublic_GetCategory" />
+  <xs:complexType name="Public_GetCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Public_GetCategory" nillable="true" type="tns:Public_GetCategory" />
+  <xs:complexType name="ArrayOfuserTable_Category">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="userTable_Category" nillable="true" type="tns:userTable_Category" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfuserTable_Category" nillable="true" type="tns:ArrayOfuserTable_Category" />
+  <xs:complexType name="userTable_Category">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="userTable_Category" nillable="true" type="tns:userTable_Category" />
+  <xs:complexType name="ArrayOfpublic_FilterAttractions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="public_FilterAttractions" nillable="true" type="tns:public_FilterAttractions" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfpublic_FilterAttractions" nillable="true" type="tns:ArrayOfpublic_FilterAttractions" />
+  <xs:complexType name="public_FilterAttractions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressOne" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AddressTwo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttractionsId" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CityId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GoogleSearchText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PlaceId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RankId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="public_FilterAttractions" nillable="true" type="tns:public_FilterAttractions" />
+  <xs:complexType name="ArrayOfuserTable_OnlyId">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfuserTable_OnlyId" nillable="true" type="tns:ArrayOfuserTable_OnlyId" />
+  <xs:complexType name="userTable_OnlyId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
+  <xs:complexType name="ArrayOfGetOrderOfAttractionVisit">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetOrderOfAttractionVisit" nillable="true" type="tns:GetOrderOfAttractionVisit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetOrderOfAttractionVisit" nillable="true" type="tns:ArrayOfGetOrderOfAttractionVisit" />
+  <xs:complexType name="GetOrderOfAttractionVisit">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateAndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="DestinationAttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationIcon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReachTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="SourceAttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceIcon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeRequiredToView" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
+      <xs:element minOccurs="0" name="TravelTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TravelType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ViewTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetOrderOfAttractionVisit" nillable="true" type="tns:GetOrderOfAttractionVisit" />
+  <xs:complexType name="ArrayOfGetAttractionOpenTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetAttractionOpenTime" nillable="true" type="tns:GetAttractionOpenTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetAttractionOpenTime" nillable="true" type="tns:ArrayOfGetAttractionOpenTime" />
+  <xs:complexType name="GetAttractionOpenTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttractionsId" type="xs:int" />
+      <xs:element minOccurs="0" name="CloseTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WeekName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetAttractionOpenTime" nillable="true" type="tns:GetAttractionOpenTime" />
+</xs:schema>

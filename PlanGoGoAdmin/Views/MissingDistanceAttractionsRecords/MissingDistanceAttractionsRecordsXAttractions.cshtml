@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerMissingDistanceAttractionsRecords")
+
+<div ng-controller="controllerMissingDistanceAttractionsRecords">
+
+    <table class="table">
+        <tbody>
+            <tr>                
+                <th>
+                    Attraction Name
+                </th>
+                <th>
+                    Desination Attraction Name
+                </th>
+                <th>
+                    Created By
+                </th>
+                <th>
+                    Created Date
+                </th>
+            </tr>
+        </tbody>
+        <tr ng-repeat="_result in MissingDistanceAttractionsRecordsXAttractions">            
+            <td title="'Attraction Name'">
+                {{_result.AttractionName}}
+            </td>
+            <td title="'Desination Attraction Name'">
+                {{_result.DesinationAttractionName}}
+            </td>            
+            <td title="'Created By'">
+                {{_result.CreatedBy}}
+            </td>
+            <td title="'Created Date'">
+                {{_result.CreatedDate}}
+            </td>
+        </tr>
+    </table>
+
+</div>

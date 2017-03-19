@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2dd041d2-da4a-4fee-8f50-18d18ff27be4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23457/Admin/MasterState.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MasterState.xsd" MetadataType="Schema" ID="63ceeb67-f7e0-4185-bb6c-048e644dadb8" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterState1.xsd" MetadataType="Schema" ID="c6a40102-c0e5-4d32-8ce6-b7aab3124549" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterState2.xsd" MetadataType="Schema" ID="7a0f6c02-17da-4e0c-8093-843055895c1f" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterState.disco" MetadataType="Disco" ID="5f4726df-38d7-4cc9-8e5b-2fceb5c6af53" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?disco" />
+    <MetadataFile FileName="MasterState.wsdl" MetadataType="Wsdl" ID="bc9db613-26d6-4f95-8477-98e0ec394cc0" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

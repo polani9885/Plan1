@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PlanGoGoService.Schedulers.Scheduler" CodeBehind="Scheduler.svc.cs" %>

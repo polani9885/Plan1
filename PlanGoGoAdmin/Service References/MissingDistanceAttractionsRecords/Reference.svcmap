@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="37322bf1-381f-4294-b619-20bacff2a610" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MissingDistanceAttractionsRecords.xsd" MetadataType="Schema" ID="4bf31f4d-38ee-460c-bb5d-296cc20137cd" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd1" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords.disco" MetadataType="Disco" ID="bbc469a9-a014-4fb0-8624-a369591cd416" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?disco" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords1.xsd" MetadataType="Schema" ID="a4cab6d0-e2e0-466c-8d02-2a6a2b1623a6" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd2" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords.wsdl" MetadataType="Wsdl" ID="811bd6cf-5535-4b70-9cf3-dd31f4baddb6" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?wsdl" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords2.xsd" MetadataType="Schema" ID="1b422855-4273-4d5e-a778-b557accf492f" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

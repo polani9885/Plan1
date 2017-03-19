@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MasterCategory" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterCategory.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterCategory.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterCategory.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Admin" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryGet_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryGet" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryGet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryGetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryCheckExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryCheckExists" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryCheckExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryCheckExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryOnCategoryId_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryOnCategoryId" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCategory_Admin_MasterCategoryOnCategoryId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCategoryOnCategoryIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMasterCategory">
+    <wsdl:operation name="Admin_MasterCategoryUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdate" message="tns:IMasterCategory_Admin_MasterCategoryUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdateResponse" message="tns:IMasterCategory_Admin_MasterCategoryUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCategoryGet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryGet" message="tns:IMasterCategory_Admin_MasterCategoryGet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryGetResponse" message="tns:IMasterCategory_Admin_MasterCategoryGet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCategoryCheckExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryCheckExists" message="tns:IMasterCategory_Admin_MasterCategoryCheckExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryCheckExistsResponse" message="tns:IMasterCategory_Admin_MasterCategoryCheckExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCategoryOnCategoryId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryOnCategoryId" message="tns:IMasterCategory_Admin_MasterCategoryOnCategoryId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryOnCategoryIdResponse" message="tns:IMasterCategory_Admin_MasterCategoryOnCategoryId_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMasterCategory" type="tns:IMasterCategory">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Admin_MasterCategoryUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCategoryGet">
+      <soap:operation soapAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCategoryCheckExists">
+      <soap:operation soapAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryCheckExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCategoryOnCategoryId">
+      <soap:operation soapAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryOnCategoryId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MasterCategory">
+    <wsdl:port name="BasicHttpBinding_IMasterCategory" binding="tns:BasicHttpBinding_IMasterCategory">
+      <soap:address location="http://localhost:23457/Admin/MasterCategory.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

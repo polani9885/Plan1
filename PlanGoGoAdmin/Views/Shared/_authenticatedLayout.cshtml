@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui", "~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularSupport")
+    @Styles.Render("~/Content/themes/base/css")
+
+    @Scripts.Render("~/customscript")
+    
+    
+
+    <script>
+  $( function() {
+    $( "#menu" ).menu();
+  } );
+    </script>
+    <style>
+        .ui-menu {
+            width: 150px;
+        }
+    </style>
+</head>
+<body ng-app="AppPlanGoGo">
+    <div id="MainDev">
+        <!--Menu List-->
+        <div style="float:left">
+            <ul id="menu">
+                <li>
+                    <div>Manage Users</div>
+                    <ul>
+                        <li>
+                            <a href="/User/ManageUser" title="Manage User">
+                                View Users
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/User/AddUpdateUser?adminUserId=0" title="Update User">
+                                Add User
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Manage Country</div>
+                    <ul>
+                        <li>
+                            <a href="/Country/ManageCountry" title="Manage Country">
+                                View Country
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Country/AddCountry?CountryId=0" title="Update Country">
+                                Add Country
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Manage States</div>
+                    <ul>
+                        <li>
+                            <a href="/MasterState/ManageState" title="Manage State">
+                                View States
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/MasterState/UpdateState?StateId=0" title="Update State">
+                                Update State
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Manage City</div>
+                    <ul>
+                        <li>
+                            <a href="/MasterCity/ManageCity" title="Manage City">
+                                View City
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/MasterCity/UpdateCity?CityId=0" title="Update City">
+                                Update City
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Manage Category</div>
+                    <ul>
+                        <li>
+                            <a href="/MasterCategory/ManageMasterCategory" title="Manage Category">
+                                View Category
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/MasterCategory/UpdateMasterCategory?Category=0" title="Update Category">
+                                Update Category
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Manage Attractions</div>
+                    <ul>
+                        <li>
+                            <a href="/Attractions/ManageAttractions" title="Manage Attractions">
+                                View Attractions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Attractions/UpdateAttractions?attractionsId=0" title="Update Attractions">
+                                Update Attractions
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Missing Distance</div>
+                    <ul>
+                        <li>
+                            <a href="/MissingDistanceAttractionsRecords/ManageMissingDistanceAttractionsRecords" title="Missing DistanceAttractions Records">
+                                View Missing
+                            </a>
+                        </li>                        
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div style="float:left;padding:30px">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

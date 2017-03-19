@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Attractions</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{21727476-ebf6-4da4-9f24-a4a761795318}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Attractions</RootNamespace>
+    <AssemblyName>Attractions</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <GenerateCreateScript>True</GenerateCreateScript>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\MasterTravelMode.sql" />
+    <Build Include="dbo\Tables\MasterCategory.sql" />
+    <Build Include="dbo\Tables\MasterCountry.sql" />
+    <Build Include="dbo\Tables\MasterState.sql" />
+    <Build Include="dbo\Tables\CityStartPoint.sql" />
+    <Build Include="dbo\Tables\Attractions.sql" />
+    <Build Include="dbo\Tables\MasterCity.sql" />
+    <Build Include="dbo\Tables\AttractionTravelTimeDistance.sql" />
+    <Build Include="dbo\Tables\MissingDistanceAttractionsRecords.sql" />
+    <Build Include="dbo\Tables\MasterRank.sql" />
+    <Build Include="dbo\Tables\MissingDistanceAttractionsRecordsXAttractions.sql" />
+    <Build Include="dbo\Tables\MasterWeek.sql" />
+    <Build Include="dbo\Tables\AttractionsActiveStatus.sql" />
+    <Build Include="dbo\Tables\AttractionAverageTime.sql" />
+    <Build Include="dbo\Tables\AttractionsNextAttractions.sql" />
+    <Build Include="dbo\Tables\MasterGoogleType.sql" />
+    <Build Include="dbo\Tables\AttractionXMasterGoogleType.sql" />
+    <Build Include="dbo\Stored Procedures\GetNextNearestLocation.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrderOfAttractionVisit.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_AddMissingDistanceRecords.sql" />
+    <Build Include="dbo\Stored Procedures\public_GetCityList.sql" />
+    <Build Include="dbo\Stored Procedures\Public_GetCategory.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_GetCountryList.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_InsertCountry.sql" />
+    <Build Include="dbo\Stored Procedures\GetAttractionOpenTime.sql" />
+    <Build Include="dbo\Stored Procedures\public_FilterAttractions.sql" />
+    <Build Include="dbo\User Defined Types\userTable_Category.sql" />
+    <Build Include="dbo\User Defined Types\userTable_OnlyId.sql" />
+    <Build Include="dbo\User Defined Types\userTable_OrderAttraction.sql" />
+    <Build Include="dbo\Tables\AdminUser.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_CheckUser.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_GetUser.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_CheckUserExist.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_UpdateUser.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_GetUserOnId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_UpdateCountry.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_GetCountry.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_CheckCountryExist.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_GetCountryOnId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterStateCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterStateGetOnStateId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterStateUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterStateGetOnCountryId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterStateGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCityCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCityGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCityGetOnStateId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCityGetOnCityId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCityUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCategoryUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCategoryOnCategoryId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCategoryGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCategoryCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\AttractionsCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\AttractionsOnCityId.sql" />
+    <Build Include="dbo\Stored Procedures\AttractionsOnAttractionsId.sql" />
+    <Build Include="dbo\Stored Procedures\AttractionsUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_AttractionsActiveStatusGetOnAttractionsActiveStatusId.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterWeekGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_AttractionTravelTimeDistanceGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MissingDistanceAttractionsRecordsGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MissingDistanceAttractionsRecordsXAttractionsGet.sql" />
+    <Build Include="dbo\Tables\UserAttractionsVisit.sql" />
+    <Build Include="dbo\Tables\UserAttraction.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Stored Procedures\User_UserExistChecking.sql" />
+    <Build Include="dbo\Stored Procedures\User_UserAttractionUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\User_InsertingUserInfo.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetUserInformation.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetUserAttractionSaved.sql" />
+    <Build Include="dbo\Stored Procedures\User_DeleteUserAttractions.sql" />
+    <Build Include="dbo\Stored Procedures\Services_GetPlaceDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Services_CheckAttractionExist.sql" />
+    <Build Include="dbo\Stored Procedures\Services_AddAttraction.sql" />
+    <Build Include="dbo\Stored Procedures\Service_TravelDistance.sql" />
+    <Build Include="dbo\Stored Procedures\Service_GetSearchTextNotCorrect.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
+    <Build Include="dbo\User Defined Types\user_AttractionsActiveStatus.sql" />
+    <Build Include="dbo\User Defined Types\parameter_OrderAttraction.sql" />
+  </ItemGroup>
+</Project>

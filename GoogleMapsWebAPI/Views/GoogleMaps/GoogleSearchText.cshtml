@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+@using BusinessEntites.Common;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/CustomScripts")
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlXC2zK4IWAsbBDHTd3YEnguZz5Ua7l-8&sensor=false&callback=GetDistanceBetweenTwoPoints"></script>    
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            debugger;
+        @if(ViewBag.SearchTextNotCorrect != null)
+            {
+                foreach (AttractionsDTO _attractionsDTO in ViewBag.SearchTextNotCorrect)
+                {
+                <text>
+            GetAddressInformation(@_attractionsDTO.AttractionsId,'@_attractionsDTO.AttractionName @_attractionsDTO.AddressOne');
+            </text>
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <div>
+    
+    </div>
+</body>
+</html>

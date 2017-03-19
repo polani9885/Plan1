@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2ddf4fb9-66fe-4d24-8f68-6d9368af9bc3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23457/GetListValues.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GetListValues.xsd" MetadataType="Schema" ID="f05fd8b6-81ef-4111-8b2e-ed1a08441d00" SourceId="1" SourceUrl="http://localhost:23457/GetListValues.svc?xsd=xsd0" />
+    <MetadataFile FileName="GetListValues1.xsd" MetadataType="Schema" ID="f83351a5-cadc-48f7-8dd6-520cff513f16" SourceId="1" SourceUrl="http://localhost:23457/GetListValues.svc?xsd=xsd2" />
+    <MetadataFile FileName="GetListValues.wsdl" MetadataType="Wsdl" ID="f7315e99-9edd-4cb3-9fb5-d74bc31d1e53" SourceId="1" SourceUrl="http://localhost:23457/GetListValues.svc?wsdl" />
+    <MetadataFile FileName="GetListValues.disco" MetadataType="Disco" ID="95b3779f-bf45-4fbe-84d2-39e3dc0b1a5b" SourceId="1" SourceUrl="http://localhost:23457/GetListValues.svc?disco" />
+    <MetadataFile FileName="GetListValues2.xsd" MetadataType="Schema" ID="3d3836de-e663-4698-a827-88a4fe3851ac" SourceId="1" SourceUrl="http://localhost:23457/GetListValues.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@model PlanGoGoAdmin.Models.Attractions.ModelAttractions
+@Scripts.Render("~/controllerAttractions")
+@using (Html.BeginForm())
+{
+    <div ng-controller="controllerAttractions" id="controllerAttractions">
+        <table cellpadding="0" cellspacing="0" border="1">
+            <tr>
+                <td colspan="2" style="color:red">
+                    @Model.ErrorMessage
+                </td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>
+                    <select id="ddlCountryId" ng-model="CountrySelectedValue"
+                            ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td>
+                    <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
+                            ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>
+                    <select id="ddlCityId" ng-model="CitySelectedValue" ng-change="CityDropDownSelected()"
+                            ng-options="_city as _city.CityName for _city in manageCity track by _city.CityId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select id="ddlCategoryId" ng-model="CategorySelectedValue" ng-change="CategoryDropDownSelected()"
+                            ng-options="_category as _category.CategoryName for _category in masterCategory track by _category._CategoryId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Attraction Name</td>
+                <td>
+                    @Html.TextBoxFor(m => m.AttractionName)
+                </td>
+            </tr>
+            <tr>
+                <td>Address One</td>
+                <td>
+                    @Html.TextBoxFor(m => m.AddressOne)
+                </td>
+            </tr>
+            <tr>
+                <td>Address Two</td>
+                <td>
+                    @Html.TextBoxFor(m => m.AddressTwo)
+                </td>
+            </tr>
+            <tr>
+                <td>Longitude</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Longitude)
+                </td>
+            </tr>
+            <tr>
+                <td>Latitude</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Latitude)
+                </td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>
+                    @Html.TextBoxFor(m => m.PlaceId)
+                </td>
+            </tr>
+            <tr>
+                <td>Rank</td>
+                <td>
+                    @Html.TextBoxFor(m => m.RankId)
+                </td>
+            </tr>
+            <tr>
+                <td>Google Search Text</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleSearchText)
+                </td>
+            </tr>
+            <tr>
+                <td>Google Web Site</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleWebSite)
+                </td>
+            </tr>
+            <tr>
+                <td>Google ICon</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleICon)
+                </td>
+            </tr>           
+            <tr>
+                <td>Google Phone Number</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleInternational_phone_number)
+                </td>
+            </tr>
+            <tr>
+                <td>Google Address</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Googleadr_address)
+                </td>
+            </tr>
+            <tr>
+                <td>Google Name</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleName)
+                </td>
+            </tr>
+            <tr>
+                <td>Google Rating</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleRating)
+                </td>
+            </tr>
+            <tr>
+                <td>Google User Rating</td>
+                <td>
+                    @Html.TextBoxFor(m => m.GoogleUser_ratings_total)
+                </td>
+            </tr>            
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Submit" onclick="AttractionSubmitClick()" />
+                </td>
+            </tr>
+        </table>
+        @Html.HiddenFor(m => m.StateId)
+        @Html.HiddenFor(m => m.CountryId)
+        @Html.HiddenFor(m => m.CityId)
+        @Html.HiddenFor(m => m.CategoryId)
+    </div>
+}
+

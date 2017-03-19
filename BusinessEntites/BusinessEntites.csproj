@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessEntites</RootNamespace>
+    <AssemblyName>BusinessEntites</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AdminUser.cs" />
+    <Compile Include="Admin\AttractionTravelTimeDistanceDTO.cs" />
+    <Compile Include="Admin\MasterCategoryDTO.cs" />
+    <Compile Include="Admin\MasterCityDTO.cs" />
+    <Compile Include="Admin\MasterCountryDTO.cs" />
+    <Compile Include="Admin\MasterStateDTO.cs" />
+    <Compile Include="Admin\MasterWeekDTO.cs" />
+    <Compile Include="Admin\MissingDistanceAttractionsRecordsDTO.cs" />
+    <Compile Include="Admin_GetCountryList.cs" />
+    <Compile Include="Admin_GetUser.cs" />
+    <Compile Include="Common\AttractionsDTO.cs" />
+    <Compile Include="Custom\GroupWithDateAttractions.cs" />
+    <Compile Include="Custom\InputParameters.cs" />
+    <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />
+    <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\Entitydebug_log.cs" />
+    <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityMatched_substrings.cs" />
+    <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityPredictions.cs" />
+    <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityTerms.cs" />
+    <Compile Include="EntityGoogleMaps\EntityGoogleMaps\GoogleApiResponseDistance.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\EntityPlaceDetails.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityAddress_components.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityAspects.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityClose.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityDebug_log.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityGeometry.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityLocation.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityOpen.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityOpening_hours.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityPeriods.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityPhotos.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityResult.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityReviews.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\Entitydebug_log.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityGeometry.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\Entityline.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityLocation.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityPlaceSearch.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityResults.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\ReferenceObjects\EntityOpening_hours.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\ReferenceObjects\EntityPhotos.cs" />
+    <Compile Include="GetAttractionOpenTime.cs" />
+    <Compile Include="GetNextNearestLocation.cs" />
+    <Compile Include="GetOrderOfAttractionVisit.cs" />
+    <Compile Include="JsonParameters\FilterLocations.cs" />
+    <Compile Include="MasterCity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="public_FilterAttractions.cs" />
+    <Compile Include="Public_GetCategory.cs" />
+    <Compile Include="public_GetCityList.cs" />
+    <Compile Include="Users\UserAttractionEntity.cs" />
+    <Compile Include="Users\UserEntity.cs" />
+    <Compile Include="userTable_Category.cs" />
+    <Compile Include="userTable_OnlyId.cs" />
+    <Compile Include="userTable_OrderAttraction.cs" />
+    <Compile Include="user_AttractionsActiveStatus.cs" />
+    <Compile Include="user_AttractionTravelTimeDistance.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

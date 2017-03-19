@@ -1,0 +1,69 @@
+﻿@using BusinessEntites;
+@model PlanGoGo.Models.UserControls.AttractionsInformation
+@{
+    Layout = null;
+}
+@Scripts.Render("~/TourInformation")
+<div style="overflow:auto;height:300px" ng-controller="controlerTourInformation" id="TourInformation">
+    <table cellpadding="0" cellspacing="0" border="1">        
+        @if (Model.attractionsList != null)
+        {
+            foreach (GetOrderOfAttractionVisit _attraction in Model.attractionsList)
+            {
+
+                <tr>
+                    <td >
+                        <div style="float:left">
+                            <img src="/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)" />
+                            @if (_attraction.RecordCount != 1)
+                            {
+                                <img src="/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId,@_attraction.RecordCount, true)" />
+                            }
+                            else
+                            {
+                                <span style="width:30px;height:30px">&nbsp;</span>
+                            }
+                            <img src="/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId,@_attraction.RecordCount, false)" />
+
+                            <img src="/Images/Custome/edit.jpg" alt="Modify Tour Information" width="30px" height="30px" id="create-user" onclick="editTourInformation(@_attraction.TimeRequiredToView,@_attraction.RecordCount)" />
+
+                            <img src="/Images/Custome/add.png" alt="Custom Plan" width="30px" height="30px" onclick="addingAttraction(@_attraction.RecordCount)"/>
+                        </div>     
+                        
+                        
+                    </td>                    
+                    <td>
+                        <div style="float:left">
+                            <img src="/Images/Custome/start.jpg" alt="Start" width="30px" height="30px" />
+                            @_attraction.DateAndTime
+
+
+                            <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="30px" height="30px" />
+                            @_attraction.SourceAttractionName
+                            
+                            <img src="/Images/Custome/car.png" alt="Start" width="30px" height="30px" />
+                            @_attraction.ReachTime
+                            
+                            <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="30px" height="30px" />
+                            @_attraction.DestinationAttractionName
+
+                            
+                            
+
+                            <img src="/Images/Custome/park.png" alt="Start" width="30px" height="30px" />
+                            @_attraction.ReachTime
+
+                            <img src="/Images/Custome/view.jpg" alt="Start" width="30px" height="30px" />
+                            @_attraction.ViewTime
+                        </div>
+                        
+
+                    </td>
+                    
+                </tr>
+
+            }
+        }
+
+    </table>
+</div>

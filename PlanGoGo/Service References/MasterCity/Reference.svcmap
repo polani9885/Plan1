@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0348dc9c-6b87-42f0-9460-e7088c730023" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23457/Admin/MasterCity.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MasterCity.xsd" MetadataType="Schema" ID="9749c878-2ed2-4a35-97bf-1ab57be6d433" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterCity1.xsd" MetadataType="Schema" ID="08b6b873-0386-487d-969e-ac96dbd92061" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterCity.wsdl" MetadataType="Wsdl" ID="099291bd-c2f9-492c-bbfe-7c73fcdb5353" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?wsdl" />
+    <MetadataFile FileName="MasterCity.disco" MetadataType="Disco" ID="fc7a325a-6cc2-4151-9f15-7946ced72144" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?disco" />
+    <MetadataFile FileName="MasterCity2.xsd" MetadataType="Schema" ID="92b37e56-7c8d-4679-9195-339853a3f638" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

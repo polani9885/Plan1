@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerManageCategory")
+
+<div ng-controller="controllerManageCategory">
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>
+                    Category Name
+                </th>                
+            </tr>
+        </tbody>
+        <tr ng-repeat="_result in masterCategory">
+            <td>
+                <a href="/MasterCategory/UpdateMasterCategory?Category={{_result.CategoryId}}" title="Update Category">
+                    Edit 
+                </a>
+            </td>            
+            <td title="'Category Name'">
+                {{_result.CategoryName}}
+            </td>                        
+        </tr>
+    </table>
+
+</div>

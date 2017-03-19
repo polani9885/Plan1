@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlXC2zK4IWAsbBDHTd3YEnguZz5Ua7l-8&sensor=false"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/CustomScripts")
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            debugger;        
+        if('@ViewBag.SourcePlaceInformation'!='' && '@ViewBag.DestinationPlaceInformation'!='')
+        {
+            //GetDistanceBetweenTwoPoints();
+            var desination = '@ViewBag.DestinationPlaceInformation'.split('^');
+            for(var i=0;i<=desination.length;i++)
+            {
+                GetDistanceBetweenTwoPoints('@ViewBag.SourcePlaceInformation'.split('~')[0], '@ViewBag.SourcePlaceInformation'.split('~')[1], desination[i].split('~')[0], desination[i].split('~')[1]);
+            }
+        }
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div id="map"></div>
+    </div>
+</body>
+</html>

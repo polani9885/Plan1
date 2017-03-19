@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:23457/Schedulers/Scheduler.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" />
+  <xs:import schemaLocation="http://localhost:23457/Schedulers/Scheduler.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+  <xs:element name="Services_CheckAttractionExist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="googleSearchText" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Services_CheckAttractionExistResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="Services_CheckAttractionExistResult" nillable="true" type="q1:AttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Service_TravelDistance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="attractionTravelTimeDistance" nillable="true" type="q2:ArrayOfuser_AttractionTravelTimeDistance" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Service_TravelDistanceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Services_AddAttraction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="attractionDTO" nillable="true" type="q3:AttractionsDTO" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Category" nillable="true" type="q4:ArrayOfuserTable_Category" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="attractionsActiveStatus" nillable="true" type="q5:ArrayOfuser_AttractionsActiveStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Services_AddAttractionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Services_AddAttractionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Services_GetPlaceDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="attractionIds" nillable="true" type="q6:ArrayOfuserTable_OnlyId" />
+        <xs:element minOccurs="0" name="SourceAttractionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Services_GetPlaceDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="Services_GetPlaceDetailsResult" nillable="true" type="q7:ArrayOfAttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Service_GetSearchTextNotCorrect">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Service_GetSearchTextNotCorrectResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="Service_GetSearchTextNotCorrectResult" nillable="true" type="q8:ArrayOfAttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
