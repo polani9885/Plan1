@@ -64,6 +64,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="dbo\Data" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\MasterTravelMode.sql" />
@@ -147,5 +148,8 @@
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
     <Build Include="dbo\User Defined Types\user_AttractionsActiveStatus.sql" />
     <Build Include="dbo\User Defined Types\parameter_OrderAttraction.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Data\GoogleTypes.sql" />
   </ItemGroup>
 </Project>
