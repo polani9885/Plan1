@@ -8,6 +8,8 @@ using BusinessEntites;
 using BusinessEntites.Common;
 using Dapper;
 using HelperFunctions;
+using BusinessEntites.Scheduler;
+using BusinessEntites.Admin;
 
 namespace DataAccessLayer.Schedulers
 {
@@ -122,5 +124,73 @@ namespace DataAccessLayer.Schedulers
                 throw ex;
             }
         }
+
+        public List<RadiusInfo> Scheduler_AttractionGetOnCityId(int cityId,int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<RadiusInfo> _returnResult = SqlHelper.QuerySP<RadiusInfo>("Scheduler_AttractionGetOnCityId ", new
+                {
+                    CityId = cityId
+                }).ToList();
+
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<MasterCityDTO> Scheduler_GetCityOnCountryId(int countryId)
+        {
+            try
+            {
+                List<MasterCityDTO> _returnResult = SqlHelper.QuerySP<MasterCityDTO>("Scheduler_GetCityOnCountryId",
+                    new
+                    {
+                        CountryId = countryId
+                    }).ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GoogleTypes> Scheduler_GetTypes()
+        {
+            try
+            {
+                List<GoogleTypes> _returnResult = SqlHelper.QuerySP<GoogleTypes>("Scheduler_GetTypes").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_InsertGoogleSearchText(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_InsertGoogleSearchText",
+                    new
+                    {
+                        NearBySearchData = DataTableFun.ToDataTable<NearByPlaceSearchEntity>(nearByPlaceSearchEntity)
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using OCCC.DAL;
+﻿using BusinessEntites.Scheduler;
+using OCCC.DAL;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -17,6 +18,8 @@ namespace Dapper
     public static class SqlHelper 
     {
         #region Query
+
+        public static int countryId { get; set; }
 
         public static IEnumerable<dynamic> QuerySP(string storedProcedure, dynamic param = null, dynamic outParam = null, SqlTransaction transaction = null, bool buffered = true, int? commandTimeout = null, string connectionString = null)
         {
@@ -740,10 +743,56 @@ namespace Dapper
 
         public static string GetConnectionString(string connectionString = null)
         {
-            if (string.IsNullOrEmpty(connectionString))
-                return ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            else
+            if (countryId != 0)
+            {
+                connectionString = CountryConnectionString(countryId);
+                countryId = 0;
                 return connectionString;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(connectionString))
+                    return ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                else
+                    return connectionString;
+            }
+            return "";
+        }
+
+
+        private static string CountryConnectionString(int paramcountryId)
+        {
+            string connectionString = string.Empty;
+            try
+            {
+                countryId = 0;
+                MasterCountryScheduler _returnResult =
+                    SqlHelper.QuerySP<MasterCountryScheduler>("Scheduler_GetCountryOnId",
+                        new
+                        {
+                            CountryId = paramcountryId
+                        }).ToList().FirstOrDefault();
+                if (_returnResult != null)
+                {
+                    if (_returnResult.IsWindowsAccess)
+                    {
+                        connectionString =
+                            "Server = " + _returnResult.ServerName + "; Initial Catalog = " + _returnResult.DatabaseName +
+                            "; Integrated Security = True; Integrated Security = True";
+                    }
+                    else
+                    {
+                        connectionString = "Data Source=" + _returnResult.ServerName + "; Initial Catalog=" +
+                                           _returnResult.DatabaseName + "; Integrated Security=SSPI;User ID = " +
+                                           _returnResult.UserName + "; Password = " + _returnResult.Password + "; ";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return connectionString;
         }
 
         public static int ConnectionTimeout { get; set; }

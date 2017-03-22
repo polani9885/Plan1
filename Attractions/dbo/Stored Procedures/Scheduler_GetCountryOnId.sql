@@ -1,4 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[Admin_GetCountry] 
+﻿CREATE PROCEDURE [dbo].[Scheduler_GetCountryOnId] 
+(
+	@CountryId AS INT
+)
 AS
 BEGIN
 	SELECT [CountryId]
@@ -13,5 +16,7 @@ BEGIN
 			,IsWindowsAccess
 			,UserName
 			,[Password]
+			,DatabaseName
 	FROM [dbo].[MasterCountry]
+	WHERE CountryId = @CountryId
 END

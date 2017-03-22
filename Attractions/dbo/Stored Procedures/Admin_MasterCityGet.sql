@@ -9,6 +9,8 @@ BEGIN
       ,MS.[CountryId]
       ,MC.[CityShortName]	  
 	  ,MC.IsDefault
+	  ,MC.Latitude
+	  ,MC.Longitude
 	FROM [dbo].[MasterCity] MC
 	JOIN dbo.MasterState MS ON MS.StateId = MC.StateId
 	JOIN dob.MasterCountry MAC ON MAC.CountryId = MS.CountryId

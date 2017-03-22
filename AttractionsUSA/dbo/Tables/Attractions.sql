@@ -21,6 +21,7 @@
     [GoogleName]                       VARCHAR (500)  NULL,
     [GoogleRating]                     VARCHAR (50)   NULL,
     [GoogleUser_ratings_total]         INT            NULL,
+    [IsScannedNearBy] BIT NULL, 
     CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED ([AttractionsId] ASC)
 );
 

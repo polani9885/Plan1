@@ -7,6 +7,11 @@
     [ModifiedBy] VARCHAR(50) NULL, 
     [ModifiedDate] DATETIME NULL, 
     [IsDefault] BIT NULL, 
+    [ServerName] VARCHAR(50) NULL, 
+    [IsWindowsAccess] BIT NULL, 
+    [UserName] VARCHAR(50) NULL, 
+    [Password] VARCHAR(50) NULL, 
+    [DatabaseName] VARCHAR(50) NULL, 
     CONSTRAINT [PK_MaterCountry] PRIMARY KEY CLUSTERED ([CountryId] ASC)
 );
 

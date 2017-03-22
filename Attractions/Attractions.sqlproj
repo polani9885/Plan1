@@ -64,7 +64,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
-    <Folder Include="dbo\Data" />
+    <Folder Include="dbo\Seeds" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\MasterTravelMode.sql" />
@@ -143,6 +143,9 @@
     <Build Include="dbo\Stored Procedures\Services_AddAttraction.sql" />
     <Build Include="dbo\Stored Procedures\Service_TravelDistance.sql" />
     <Build Include="dbo\Stored Procedures\Service_GetSearchTextNotCorrect.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetCityOnCountryId.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetCountryOnId.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
@@ -150,6 +153,9 @@
     <Build Include="dbo\User Defined Types\parameter_OrderAttraction.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dbo\Data\GoogleTypes.sql" />
+    <None Include="dbo\Seeds\GoogleTypes.sql" />
+    <None Include="dbo\Seeds\MasterCountry.sql" />
+    <None Include="dbo\Seeds\MasterState.sql" />
+    <None Include="dbo\Seeds\MasterCity.sql" />
   </ItemGroup>
 </Project>

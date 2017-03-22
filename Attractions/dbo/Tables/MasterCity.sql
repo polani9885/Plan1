@@ -4,6 +4,8 @@
     [CityShortName] VARCHAR (50)  NULL,
     [StateId]       INT           NULL,
     [IsDefault] BIT NULL, 
+    [Latitude] VARCHAR(50) NULL, 
+    [Longitude] VARCHAR(50) NULL, 
     CONSTRAINT [PK_MasterCity] PRIMARY KEY CLUSTERED ([CityId] ASC),
     CONSTRAINT [FK_MasterCity_MasterState] FOREIGN KEY ([StateId]) REFERENCES [dbo].[MasterState] ([StateId])
 );

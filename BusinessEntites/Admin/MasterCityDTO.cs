@@ -28,5 +28,10 @@ namespace BusinessEntites.Admin
 
         [DataMember]
         public bool IsDefault { get; set; }
+
+        [DataMember]
+        public string Latitude { get; set; }
+        [DataMember]
+        public string Longitude { get; set; }
     }
 }
