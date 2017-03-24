@@ -89,6 +89,8 @@
     <Build Include="dbo\User Defined Types\userTable_OrderAttraction.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_AttractionGetOnCityId.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertGoogleSearchText.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetPlaceDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionAuto.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />

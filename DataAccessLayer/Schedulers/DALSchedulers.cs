@@ -190,6 +190,66 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
+        public List<GetPlaceDetails> Scheduler_GetPlaceDetails(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<GetPlaceDetails> _returnResult = SqlHelper.QuerySP<GetPlaceDetails>("Scheduler_GetPlaceDetails").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public MasterCountryScheduler Scheduler_GetCountryOnId(int countryId)
+        {
+            try
+            {
+                MasterCountryScheduler _returnResult = SqlHelper.QuerySP<MasterCountryScheduler>("Scheduler_GetCountryOnId", new
+                {
+                    CountryId = countryId
+                }).ToList().FirstOrDefault();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_InsertAttractionAuto(AttractionsDTO attractionsDTO,int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_InsertAttractionAuto",
+                    new
+                    {
+                        Latitude = attractionsDTO.Latitude,
+                        AddressOne = attractionsDTO.AddressOne,
+                        AddressTwo = attractionsDTO.AddressTwo,
+                        CityName = attractionsDTO.CityName,
+                        CreatedBy = attractionsDTO.CreatedBy,
+                        Longitude = attractionsDTO.Longitude,
+                        PlaceId = attractionsDTO.PlaceId,
+                        StateName = attractionsDTO.StateName,
+                        CountryId = attractionsDTO.CountryId,
+                        AttractionsId = attractionsDTO.AttractionsId,
+                        StateShortName = attractionsDTO.StateShortName,
+                        CityShortName = attractionsDTO.CityShortName
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
 
 
     }

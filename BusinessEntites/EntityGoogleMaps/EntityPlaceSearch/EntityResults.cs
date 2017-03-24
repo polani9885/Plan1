@@ -1,4 +1,5 @@
-﻿using BusinessEntites.EntityPlaceSearch.ReferenceObjects;
+﻿using BusinessEntites.EntityGoogleMaps.EntityPlaceSearch.ReferenceObjects;
+using BusinessEntites.EntityPlaceSearch.ReferenceObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,7 @@ namespace BusinessEntites.EntityPlaceSearch
         public string[] types { get; set; }
 
         public string vicinity { get; set; }
+
+        public List<address_components> address_components { get; set; }
     }
 }

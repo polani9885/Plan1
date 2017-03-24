@@ -45,7 +45,7 @@ BEGIN
      VALUES
            (1
            ,'United States'
-           ,'USA'
+           ,'US'
            ,'Seed'
            ,GetDATE()           
            ,0

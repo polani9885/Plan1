@@ -83,6 +83,7 @@
     <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityLocation.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityPlaceSearch.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceSearch\EntityResults.cs" />
+    <Compile Include="EntityGoogleMaps\EntityPlaceSearch\ReferenceObjects\address_components.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceSearch\ReferenceObjects\EntityOpening_hours.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceSearch\ReferenceObjects\EntityPhotos.cs" />
     <Compile Include="GetAttractionOpenTime.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="public_FilterAttractions.cs" />
     <Compile Include="Public_GetCategory.cs" />
     <Compile Include="public_GetCityList.cs" />
+    <Compile Include="Scheduler\GetPlaceDetails.cs" />
     <Compile Include="Scheduler\GoogleTypes.cs" />
     <Compile Include="Scheduler\MasterCountryScheduler.cs" />
     <Compile Include="Scheduler\NearByPlaceSearchEntity.cs" />

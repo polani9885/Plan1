@@ -32,5 +32,14 @@ namespace BusinessEntites.Common
         public int GoogleUser_ratings_total { get; set; }
         public bool IsUserPersonalRequest { get; set; }
         public bool AttractionTimeExisted { get; set; }
+
+        public string CityName { get; set; }
+
+        public string StateName { get; set; }
+        public int CountryId { get; set; }
+
+        public string StateShortName { get; set; }
+
+        public string CityShortName { get; set; }
     }
 }
