@@ -249,6 +249,44 @@ namespace DataAccessLayer.Schedulers
         }
 
 
+        public void Scheduler_InsertAttractionInfo(SchedulerInsertPlaceDetails schedulerInsertPlaceDetails,int countryId)
+        {
+            try
+            {
+                if (schedulerInsertPlaceDetails.WeekDaysOpenClose == null)
+                    schedulerInsertPlaceDetails.WeekDaysOpenClose = new List<WeekDaysOpenClose>();
+
+                if (schedulerInsertPlaceDetails.GooglePhotos == null)
+                    schedulerInsertPlaceDetails.GooglePhotos = new List<GooglePhotos>();
+
+                if(schedulerInsertPlaceDetails.GoogleReview == null)
+                    schedulerInsertPlaceDetails.GoogleReview = new List<GoogleReview>();
+
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_InsertAttractionInfo",
+                    new
+                    {
+                        AttractionsId = schedulerInsertPlaceDetails.AttractionsId,
+                        CategoryDt = ConvertArrayToDataTable.GetDataTableCateogry(schedulerInsertPlaceDetails.Category),
+                        GoogleWebSite  = schedulerInsertPlaceDetails.GoogleWebSite,
+                        GoogleICon = schedulerInsertPlaceDetails.GoogleICon,
+                        GoogleInternational_phone_number  = schedulerInsertPlaceDetails.GoogleInternational_phone_number,
+                        Googleadr_address = schedulerInsertPlaceDetails.Googleadr_address,
+                        GoogleName  = schedulerInsertPlaceDetails.GoogleName,
+                        GoogleRating = schedulerInsertPlaceDetails.GoogleRating,
+                        WeekDaysOpenClose = DataTableFun.ToDataTable<WeekDaysOpenClose>(schedulerInsertPlaceDetails.WeekDaysOpenClose),
+                        GooglePhotos = DataTableFun.ToDataTable<GooglePhotos>(schedulerInsertPlaceDetails.GooglePhotos),
+                        GoogleReview = DataTableFun.ToDataTable<GoogleReview>(schedulerInsertPlaceDetails.GoogleReview),
+                        Pricelevel = schedulerInsertPlaceDetails.Pricelevel
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
 
 

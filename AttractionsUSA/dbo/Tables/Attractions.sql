@@ -1,27 +1,32 @@
-﻿CREATE TABLE [dbo].[Attractions] (
-    [AttractionsId]                    INT            IDENTITY (1, 1) NOT NULL,
-    [AttractionName]                   VARCHAR (500)  NULL,
-    [AddressOne]                       VARCHAR (500)  NULL,
-    [AddressTwo]                       VARCHAR (500)  NULL,
-    [CityId]                           INT            NULL,
-    [CategoryId]                       INT            NULL,
-    [Longitude]                        VARCHAR (250)  NULL,
-    [Latitude]                         VARCHAR (250)  NULL,
-    [PlaceId]                          VARCHAR (250)  NULL,
-    [RankId]                           INT            NULL,
-    [CreatedDate]                      DATETIME       NULL,
-    [CreatedBy]                        VARCHAR (250)  NULL,
-    [ModifiedDate]                     DATETIME       NULL,
-    [ModifiedBy]                       VARCHAR (250)  NULL,
-    [GoogleSearchText]                 VARCHAR (500)  NULL,
-    [GoogleWebSite]                    VARCHAR (500)  NULL,
-    [GoogleICon]                       VARCHAR (500)  NULL,
-    [GoogleInternational_phone_number] VARCHAR (500)  NULL,
-    [Googleadr_address]                VARCHAR (2000) NULL,
-    [GoogleName]                       VARCHAR (500)  NULL,
-    [GoogleRating]                     VARCHAR (50)   NULL,
-    [GoogleUser_ratings_total]         INT            NULL,
-    [IsScannedNearBy] BIT NULL, 
-    CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED ([AttractionsId] ASC)
-);
+﻿CREATE TABLE [dbo].[Attractions](
+	[AttractionsId] [int] IDENTITY(1,1) NOT NULL,
+	[AttractionName] [varchar](500) NULL,
+	[AddressOne] [varchar](500) NULL,
+	[AddressTwo] [varchar](500) NULL,
+	[CityId] [int] NULL,
+	[CategoryId] [int] NULL,
+	[Longitude] [varchar](250) NULL,
+	[Latitude] [varchar](250) NULL,
+	[PlaceId] [varchar](250) NULL,
+	[RankId] [int] NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [varchar](250) NULL,
+	[ModifiedDate] [datetime] NULL,
+	[ModifiedBy] [varchar](250) NULL,
+	[GoogleSearchText] [varchar](500) NULL,
+	[GoogleWebSite] [varchar](500) NULL,
+	[GoogleICon] [varchar](500) NULL,
+	[GoogleInternational_phone_number] [varchar](500) NULL,
+	[Googleadr_address] [varchar](2000) NULL,
+	[GoogleName] [varchar](500) NULL,
+	[IsScannedNearBy] [bit] NULL,
+	[IsPlaceDetailsDone] [bit] NULL,
+	[IsNearDistanceDone] [bit] NULL,
+	[PriceLevel] [int] NULL,
+	[GoogleRating] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED 
+(
+	[AttractionsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 

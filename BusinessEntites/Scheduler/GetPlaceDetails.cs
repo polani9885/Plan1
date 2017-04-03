@@ -13,5 +13,7 @@ namespace BusinessEntites.Scheduler
         public string GoogleSearchText { get; set; }
 
         public string PlaceId { get; set; }
+
+        public string AttractionName { get; set; }
     }
 }

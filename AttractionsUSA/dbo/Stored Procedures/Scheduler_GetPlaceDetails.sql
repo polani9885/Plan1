@@ -23,8 +23,7 @@ BEGIN
 		  ,[GoogleInternational_phone_number]
 		  ,[Googleadr_address]
 		  ,[GoogleName]
-		  ,[GoogleRating]
-		  ,[GoogleUser_ratings_total]
+		  ,[GoogleRating]		  
 		  ,[IsScannedNearBy]
 	  FROM [dbo].[Attractions]
 	  WHERE Longitude IS NULL

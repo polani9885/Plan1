@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConvertArrayToDataTable.cs" />
     <Compile Include="ConvertListToDataSet.cs" />
     <Compile Include="DataTableFun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

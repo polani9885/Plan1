@@ -49,5 +49,7 @@ namespace BusinessEntites.EntityPlaceDetails.RefernceObjects
         public string vicinity { get; set; }
 
         public string website { get; set; }
+
+        public string price_level { get; set; }
     }
 }

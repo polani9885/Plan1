@@ -16,7 +16,7 @@
 AS
 BEGIN
 
-	DECLARE @CityId AS INT
+	DECLARE @CityId AS INT 
 	DECLARE @StateId AS INT
 
 	SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC
@@ -25,10 +25,10 @@ BEGIN
 	AND MC.CityName = @CityName
 	AND MS.StateName = @StateName
 
-	IF @CityId = 0
+	IF ISNULL(@CityId,0) = 0
 	BEGIN
 		SELECT @StateId = StateId FROM Attractions.dbo.MasterState WHERE StateName = @StateName
-		IF @StateId = 0
+		IF ISNULL(@StateId,0) = 0
 		BEGIN		
 			INSERT INTO Attractions.[dbo].[MasterState]
 			   ([StateId]
@@ -49,7 +49,7 @@ BEGIN
 		SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC
 		WHERE MC.StateId = @StateId
 
-		IF @CityId = 0 
+		IF ISNULL(@CityId,0) = 0 
 		BEGIN			
 			INSERT INTO Attractions.[dbo].[MasterCity]
 				   ([CityId]

@@ -96,10 +96,14 @@
     <Compile Include="Public_GetCategory.cs" />
     <Compile Include="public_GetCityList.cs" />
     <Compile Include="Scheduler\GetPlaceDetails.cs" />
+    <Compile Include="Scheduler\GooglePhotos.cs" />
+    <Compile Include="Scheduler\GoogleReview.cs" />
     <Compile Include="Scheduler\GoogleTypes.cs" />
     <Compile Include="Scheduler\MasterCountryScheduler.cs" />
     <Compile Include="Scheduler\NearByPlaceSearchEntity.cs" />
     <Compile Include="Scheduler\RadiusInfo.cs" />
+    <Compile Include="Scheduler\SchedulerInsertPlaceDetails.cs" />
+    <Compile Include="Scheduler\WeekDaysOpenClose.cs" />
     <Compile Include="Users\UserAttractionEntity.cs" />
     <Compile Include="Users\UserEntity.cs" />
     <Compile Include="userTable_Category.cs" />

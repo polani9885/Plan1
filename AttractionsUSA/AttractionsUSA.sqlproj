@@ -91,8 +91,23 @@
     <Build Include="dbo\Stored Procedures\Scheduler_InsertGoogleSearchText.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetPlaceDetails.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionAuto.sql" />
+    <Build Include="dbo\Tables\AttractionPhotos.sql" />
+    <Build Include="dbo\Tables\AttractionReview.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\user_Category.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\user_GooglePhotos.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\User_GoogleReview.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\user_WeekDaysOpenClose.sql" />
   </ItemGroup>
 </Project>
