@@ -94,6 +94,8 @@
     <Build Include="dbo\Tables\AttractionPhotos.sql" />
     <Build Include="dbo\Tables\AttractionReview.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionInfo.sql" />
+    <Build Include="dbo\Tables\LoggInfo.sql" />
+    <Build Include="dbo\Stored Procedures\InsertExceptionInformation.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />

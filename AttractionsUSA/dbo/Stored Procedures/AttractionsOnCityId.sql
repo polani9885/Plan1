@@ -30,8 +30,7 @@ BEGIN
 		  ,[GoogleInternational_phone_number]
 		  ,[Googleadr_address]
 		  ,[GoogleName]
-		  ,[GoogleRating]
-		  ,[GoogleUser_ratings_total]
+		  ,[GoogleRating]		  
 	  FROM [dbo].[Attractions]
 		WHERE CityId = @CityId
 END

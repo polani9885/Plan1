@@ -34,8 +34,7 @@ BEGIN
 			  ,[GoogleInternational_phone_number]
 			  ,[Googleadr_address]
 			  ,[GoogleName]
-			  ,[GoogleRating]
-			  ,[GoogleUser_ratings_total]
+			  ,[GoogleRating]			  
 		  FROM [dbo].[Attractions]		
 		WHERE AttractionName = @AttractionName
 		
@@ -62,8 +61,7 @@ BEGIN
 			  ,[GoogleInternational_phone_number]
 			  ,[Googleadr_address]
 			  ,[GoogleName]
-			  ,[GoogleRating]
-			  ,[GoogleUser_ratings_total]
+			  ,[GoogleRating]			  
 		  FROM [dbo].[Attractions]		
 		WHERE AttractionName = @AttractionName
 		AND AttractionsId NOT IN (@AttractionsId)		

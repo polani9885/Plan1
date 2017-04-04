@@ -23,8 +23,7 @@ Create PROCEDURE [dbo].[AttractionsUpdate]
 	,@GoogleInternational_phone_number varchar(500)
 	,@Googleadr_address varchar(2000)
 	,@GoogleName varchar(500)
-	,@GoogleRating varchar(50)
-	,@GoogleUser_ratings_total int
+	,@GoogleRating varchar(50)	
 )	
 AS
 BEGIN
@@ -49,8 +48,7 @@ BEGIN
 			  ,[GoogleInternational_phone_number] = @GoogleInternational_phone_number
 			  ,[Googleadr_address] = @Googleadr_address
 			  ,[GoogleName] = @GoogleName
-			  ,[GoogleRating] = @GoogleRating
-			  ,[GoogleUser_ratings_total] = @GoogleUser_ratings_total
+			  ,[GoogleRating] = @GoogleRating			  
 		 WHERE AttractionsId = @AttractionsId
 
 
@@ -82,7 +80,7 @@ BEGIN
 				   ,[Googleadr_address]
 				   ,[GoogleName]
 				   ,[GoogleRating]
-				   ,[GoogleUser_ratings_total])
+				   )
 			 VALUES
 				   (@AttractionName
 				   ,@AddressOne
@@ -102,7 +100,7 @@ BEGIN
 				   ,@Googleadr_address 
 				   ,@GoogleName
 				   ,@GoogleRating
-				   ,@GoogleUser_ratings_total)
+				   )
 	END	
 
 END

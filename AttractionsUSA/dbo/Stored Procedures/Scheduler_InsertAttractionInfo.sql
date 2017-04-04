@@ -24,8 +24,7 @@ BEGIN
 		  ,[GoogleICon] = @GoogleICon
 		  ,[GoogleInternational_phone_number] = @GoogleInternational_phone_number		  
 		  ,[GoogleName] = @GoogleName
-		  ,[GoogleRating] = @GoogleRating
-		  ,[GoogleUser_ratings_total] = @GoogleUser_ratings_total		  
+		  ,[GoogleRating] = @GoogleRating		  		  
 		  ,[IsPlaceDetailsDone] = 1		  
 		  ,[PriceLevel] = @Pricelevel
 	 WHERE AttractionsId = @AttractionsId
