@@ -30,7 +30,7 @@ namespace GoogleMapsAPI
 
 
 
-            string argMessage = "Please enter arguments in the following format /mode:NEARBYSEARCH~2 or /mode:PLACEDETAILS~2";
+            string argMessage = "Please enter arguments in the following format /mode:NEARBYSEARCH~2 or /mode:PLACEDETAILS~2 or /mode:DISTANCECALCULATION~2";
 
             try
             {
@@ -62,6 +62,10 @@ namespace GoogleMapsAPI
                     case "PLACEDETAILS~2":
                     {
                         getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        break;
+                    }
+                    case "DISTANCECALCULATION~2":
+                    {
                         break;
                     }
                     default:
