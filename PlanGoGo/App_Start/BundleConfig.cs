@@ -66,17 +66,19 @@ namespace PlanGoGo
             bundles.Add(new ScriptBundle("~/index").Include(
                         "~/CustomScripts/index.js",
                         "~/CustomScripts/Controlers/controlerIndex.js",
-                        "~/CustomScripts/Common/commonFunctions.js"
+                        "~/CustomScripts/Common/commonFunctions.js"                        
                         ));
 
             bundles.Add(new ScriptBundle("~/TourInformation").Include(
-                "~/CustomScripts/Controlers/UserControls/controlerTourInformation.js"
+                "~/CustomScripts/Controlers/UserControls/controlerTourInformation.js"                
                 ));
 
             bundles.Add(new ScriptBundle("~/Login").Include(
-                "~/CustomScripts/Controlers/UserControls/controlerLogin.js"
+                "~/CustomScripts/Controlers/UserControls/controlerLogin.js",
+                "~/CustomScripts/Controlers/UserControls/controlerUserAccount.js",
+                "~/CustomScripts/UserActions.js",
+               "~/CustomScripts/Common/AjaxUserAccount.js"
                 ));
-
         }
     }
 }

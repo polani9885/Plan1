@@ -90,6 +90,7 @@
     <Compile Include="GetNextNearestLocation.cs" />
     <Compile Include="GetOrderOfAttractionVisit.cs" />
     <Compile Include="JsonParameters\FilterLocations.cs" />
+    <Compile Include="JsonResultReturn.cs" />
     <Compile Include="LoggingEntity.cs" />
     <Compile Include="MasterCity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

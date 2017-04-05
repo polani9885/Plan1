@@ -107,7 +107,19 @@ namespace DataAccessLayer.User
 
         public bool User_UserExistChecking(string userName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<UserEntity> _returnResult = SqlHelper.QuerySP<UserEntity>("User_UserExistChecking",
+                    new
+                    {
+                        UserName = userName
+                    }).ToList();
+                return _returnResult.Count > 0 ? false : true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
