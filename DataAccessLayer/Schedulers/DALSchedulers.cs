@@ -286,6 +286,51 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
+        public List<AttractionsDTO> Scheduler_GetDistancePending(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<AttractionsDTO> _returnResult = SqlHelper.QuerySP<AttractionsDTO>("Scheduler_GetDistancePending").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionsDTO> Scheduler_GetAttractionNearBy(int countryId,int attractionId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<AttractionsDTO> _returnResult = SqlHelper.QuerySP<AttractionsDTO>("Scheduler_GetAttractionNearBy",new
+                {
+                    AttractionsId = attractionId
+                }).ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<MasterTravelModeDTO> Scheduler_GetTravelMode()
+        {
+            try
+            {
+                
+                List<MasterTravelModeDTO> _returnResult = SqlHelper.QuerySP<MasterTravelModeDTO>("Scheduler_GetTravelMode").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
 
