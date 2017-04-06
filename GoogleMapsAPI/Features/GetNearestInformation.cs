@@ -56,7 +56,7 @@ namespace GoogleMapsAPI.Features
                 }
                 string radiusData = string.Empty;
                 string url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + latitude + "," +
-                             longitude + "&radius=500&key=" + ConfigurationManager.AppSettings["apiKey"];
+                             longitude + "&radius=5000&key=" + ConfigurationManager.AppSettings["apiKey"];
                 radiusData = webRequest.WebServiceInformation(url);
                 var returnsInformation = Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
 

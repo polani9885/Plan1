@@ -56,7 +56,7 @@ namespace GoogleMapsAPI
                     case "NEARBYSEARCH~2":
                     {
                         getNearestInformation.GetRadiusInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));
-                        getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        //getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
                     case "PLACEDETAILS~2":
