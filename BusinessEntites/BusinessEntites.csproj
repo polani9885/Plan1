@@ -52,6 +52,7 @@
     <Compile Include="Admin_GetCountryList.cs" />
     <Compile Include="Admin_GetUser.cs" />
     <Compile Include="Common\AttractionsDTO.cs" />
+    <Compile Include="Common\MasterTravelModeDTO.cs" />
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
     <Compile Include="Custom\InputParameters.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />

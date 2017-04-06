@@ -97,6 +97,8 @@
     <Build Include="dbo\Tables\LoggInfo.sql" />
     <Build Include="dbo\Stored Procedures\InsertExceptionInformation.sql" />
     <Build Include="dbo\Tables\AttractionXCategory.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetDistancePending.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetAttractionNearBy.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />

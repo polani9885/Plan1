@@ -27,6 +27,7 @@ namespace GoogleMapsAPI
 
             GetNearestInformation getNearestInformation = new GetNearestInformation();
             GetPlaceInformation getPlaceInformation = new GetPlaceInformation();
+            GetDistanceCalculation getDistanceCalculation = new GetDistanceCalculation();
 
 
 
@@ -51,20 +52,22 @@ namespace GoogleMapsAPI
 
 
 
-                switch (argmentarray[1].ToUpper())
+                switch (argmentarray[1].ToUpper().Split('~')[0])
                 {
-                    case "NEARBYSEARCH~2":
+                    case "NEARBYSEARCH":
                     {
-                        getNearestInformation.GetRadiusInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));                        
+                        getNearestInformation.GetRadiusInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        //getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
-                    case "PLACEDETAILS~2":
+                    case "PLACEDETAILS":
                     {
                         getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
-                    case "DISTANCECALCULATION~2":
+                    case "DISTANCECALCULATION":
                     {
+                            getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
                     default:
