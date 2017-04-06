@@ -25,8 +25,6 @@ namespace GoogleMapsAPI.Features
         {
             try
             {
-
-
                 var masterCityList = dALSchedulers.Scheduler_GetCityOnCountryId(countryId);
                 string latitude = string.Empty;
                 string longitude = string.Empty;
@@ -73,8 +71,7 @@ namespace GoogleMapsAPI.Features
                     }).ToList();
 
                     dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId);
-                }
-                throw new ArgumentNullException("someMethod received a null argument!");
+                }                
             }
             catch (Exception ex)
             {
