@@ -141,5 +141,6 @@
     <None Include="dbo\Seeds\MasterCountry.sql" />
     <None Include="dbo\Seeds\MasterState.sql" />
     <None Include="dbo\Seeds\MasterCity.sql" />
+    <None Include="dbo\Seeds\MasterTravelMode.sql" />
   </ItemGroup>
 </Project>
