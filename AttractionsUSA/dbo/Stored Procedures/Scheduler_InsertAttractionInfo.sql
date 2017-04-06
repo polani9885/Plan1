@@ -1,14 +1,13 @@
 ﻿CREATE PROCEDURE Scheduler_InsertAttractionInfo 
 (
 	@AttractionsId INT
-	,@Category user_Category ReadOnly
+	,@CategoryDt user_Category ReadOnly
 	,@GoogleWebSite Varchar(500)
 	,@GoogleICon Varchar(500)
 	,@GoogleInternational_phone_number Varchar(500)
 	,@Googleadr_address Varchar(500)
 	,@GoogleName Varchar(500)
-	,@GoogleRating Decimal(18,2)
-	,@GoogleUser_ratings_total Int
+	,@GoogleRating Decimal(18,2)	
 	,@WeekDaysOpenClose user_WeekDaysOpenClose ReadOnly
 	,@GooglePhotos user_GooglePhotos ReadOnly
 	,@GoogleReview  User_GoogleReview ReadOnly
@@ -24,7 +23,7 @@ BEGIN
 		  ,[GoogleICon] = @GoogleICon
 		  ,[GoogleInternational_phone_number] = @GoogleInternational_phone_number		  
 		  ,[GoogleName] = @GoogleName
-		  ,[GoogleRating] = @GoogleRating		  		  
+		  ,[GoogleRating] = @GoogleRating		  	  
 		  ,[IsPlaceDetailsDone] = 1		  
 		  ,[PriceLevel] = @Pricelevel
 	 WHERE AttractionsId = @AttractionsId
@@ -32,15 +31,54 @@ BEGIN
 
 
 
-	INSERT INTO Attractions..[MasterGoogleType]
-           ([GoogleTypeID]
-           ,[TypeName]
-           ,[IsNeeded])
-	SELECT (SELECT ISNULL(MAX(GoogleTypeID),0) FROM  Attractions..MasterGoogleType)
-			,Category
-			,0
-	FROM @Category
-	WHERE Category NOT IN (SELECT TypeName FROM Attractions..MasterGoogleType)
+	 DECLARE @CategoryList user_Category 
+	 DECLARE @Categorycounter AS INT = 0
+	 DECLARE @categoryName AS Varchar(250)
+
+
+
+	 IF(SELECT Count(1)			
+	FROM @CategoryDt
+	WHERE Category NOT IN (SELECT TypeName FROM Attractions..MasterGoogleType)) > 0
+	BEGIN
+		
+		
+		 INSERT INTO @CategoryList 
+		 SELECT Category			
+		FROM @CategoryDt
+		WHERE Category NOT IN (SELECT TypeName FROM Attractions..MasterGoogleType)
+
+		SET @Categorycounter = (SELECT Count(*) FROM @CategoryList)
+
+		WHILE(@Categorycounter >= 0)
+		BEGIN
+			IF(SELECT Count(1) FROM @CategoryList) > 0
+			BEGIN
+				SET @categoryName = (SELECT TOP 1 Category FROM @CategoryList)
+				DELETE FROM @CategoryList WHERE Category = @categoryName
+
+				INSERT INTO Attractions..[MasterGoogleType]
+				   ([GoogleTypeID]
+				   ,[TypeName]
+				   ,[IsNeeded]
+				   )
+				VALUES(
+			
+						CAST((SELECT ISNULL(MAX(GoogleTypeID),0)+1 FROM Attractions..MasterGoogleType) AS INT),
+					@categoryName,
+					0
+				)
+			END
+
+			SET @Categorycounter = @Categorycounter - 1	
+		
+		 
+		END
+	END
+
+
+	
+	
 
 	
 	DELETE FROM [dbo].[AttractionXCategory]
@@ -54,7 +92,7 @@ BEGIN
 			@AttractionsId
 			,GoogleTypeID
 	FROM Attractions..MasterGoogleType
-	WHERE TypeName IN (SELECT Category FROM @Category)
+	WHERE TypeName IN (SELECT Category FROM @Categorydt)
 
 
 
@@ -82,8 +120,7 @@ BEGIN
            ,[Author_url]
            ,[Language]
            ,[Profile_photo_url]
-           ,[Text]
-           ,[CreatedDate]
+           ,[Text]           
            ,[IsGoogleCreated])
      SELECT @AttractionsId
 			,Rating
@@ -91,8 +128,7 @@ BEGIN
 			,Author_url
 			,[Language]
 			,Profile_photo_url
-			,[Text]
-			,CreatedDate
+			,[Text]			
 			,1
 	 FROM @GoogleReview
 
@@ -110,5 +146,7 @@ BEGIN
 			,Html_attributions	
 			,Width
 	FROM @GooglePhotos
+
+	
 
 END
