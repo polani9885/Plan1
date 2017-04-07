@@ -1,4 +1,6 @@
-﻿using BusinessEntites.Common;
+﻿using BusinessEntites;
+using BusinessEntites.Common;
+using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
 using DataAccessLayer.LogException;
 using DataAccessLayer.Schedulers;
 using GoogleMapsAPI.Helper;
@@ -22,6 +24,8 @@ namespace GoogleMapsAPI.Features
             var pendingRecords = dALSchedulers.Scheduler_GetDistancePending(countryId);
             var travelMode = dALSchedulers.Scheduler_GetTravelMode();
 
+            AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
+
             foreach (AttractionsDTO attractionsDTO in pendingRecords)
             {
                 var attractionInformation = dALSchedulers.Scheduler_GetAttractionNearBy(countryId,
@@ -31,13 +35,52 @@ namespace GoogleMapsAPI.Features
                 {
                     foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode)
                     {
-                        string radiusData = string.Empty;
-                        string url =
-                            "https://maps.googleapis.com/maps/api/directions/json?&mode=" +
-                            masterTravelModeDTO.TravelType + "&origin=" + attractionsDTO.GoogleSearchText +
-                            "&destination=" + _attractionsDTO.GoogleSearchText + "&key=" +
-                            ConfigurationManager.AppSettings["apiKey"];
-                        radiusData = webRequest.WebServiceInformation(url);
+                        try
+                        {
+
+
+                            string radiusData = string.Empty;
+                            string url =
+                                "https://maps.googleapis.com/maps/api/directions/json?&mode=" +
+                                masterTravelModeDTO.TravelType.ToLower() + "&origin=" + attractionsDTO.GoogleSearchText +
+                                "&destination=" + _attractionsDTO.GoogleSearchText + "&key=" +
+                                ConfigurationManager.AppSettings["apiKey"];
+                            radiusData = webRequest.WebServiceInformation(url);
+                            var returnsInformation =
+                                Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
+
+                            attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
+                            attractionTravelTimeDistanceDTO.SourceAttractionId = attractionsDTO.AttractionsId;
+                            attractionTravelTimeDistanceDTO.DestinationAttractionId = _attractionsDTO.AttractionsId;
+                            attractionTravelTimeDistanceDTO.TravelModeId = masterTravelModeDTO.TravelModeId;
+                            attractionTravelTimeDistanceDTO.Distance =
+                                Convert.ToInt32(
+                                    returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().distance.value);
+
+                            attractionTravelTimeDistanceDTO.TravelTime =
+                                Convert.ToInt32(
+                                    returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().duration.value);
+
+                            dALSchedulers.Scheduler_InsertAttractionTravelTimeDistance(attractionTravelTimeDistanceDTO,
+                                countryId);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            exceptionLogging.InsertExceptionInformation(new LoggingEntity
+                            {
+                                CreatedBy = "scheduler",
+                                ExceptionMessage = ex.Message,
+                                ExceptionStackTrace = ex.StackTrace,
+                                MethodName = "CalculateDistance",
+                                Parameters =
+                                    "SourceAttractionId  = " + attractionsDTO.AttractionsId +
+                                    " DestinationAttractionId = " + _attractionsDTO.AttractionsId + " TravelModeId = " +
+                                    masterTravelModeDTO.TravelModeId,
+                                CountryId = countryId
+                            });
+                        }
+
                     }
                 }
             }

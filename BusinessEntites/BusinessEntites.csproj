@@ -52,6 +52,7 @@
     <Compile Include="Admin_GetCountryList.cs" />
     <Compile Include="Admin_GetUser.cs" />
     <Compile Include="Common\AttractionsDTO.cs" />
+    <Compile Include="Common\AttractionTravelTimeDistanceDTO.cs" />
     <Compile Include="Common\MasterTravelModeDTO.cs" />
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
     <Compile Include="Custom\InputParameters.cs" />
@@ -61,6 +62,10 @@
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityPredictions.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityTerms.cs" />
     <Compile Include="EntityGoogleMaps\EntityGoogleMaps\GoogleApiResponseDistance.cs" />
+    <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Distance.cs" />
+    <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Duration.cs" />
+    <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Legs.cs" />
+    <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Routes.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\geometryList.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\locationList.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\NearBySearchEntity.cs" />

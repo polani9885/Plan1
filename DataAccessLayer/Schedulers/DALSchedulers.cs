@@ -331,6 +331,28 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
+        public void Scheduler_InsertAttractionTravelTimeDistance(BusinessEntites.Common.AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_InsertAttractionTravelTimeDistance",
+                    new
+                    {
+                        SourceAttractionId = attractionTravelTimeDistanceDTO.SourceAttractionId,
+                        DestinationAttractionId = attractionTravelTimeDistanceDTO.DestinationAttractionId,
+                        TravelModeId = attractionTravelTimeDistanceDTO.TravelModeId,
+                        TravelTime = attractionTravelTimeDistanceDTO.TravelTime,
+                        Distance = attractionTravelTimeDistanceDTO.Distance
+
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
 

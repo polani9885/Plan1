@@ -99,6 +99,7 @@
     <Build Include="dbo\Tables\AttractionXCategory.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetDistancePending.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetAttractionNearBy.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionTravelTimeDistance.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />

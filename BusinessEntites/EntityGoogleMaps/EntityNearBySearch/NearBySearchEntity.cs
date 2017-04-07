@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntites.EntityGoogleMaps.EntityNearBySearch.Distance;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace BusinessEntites.EntityGoogleMaps.EntityNearBySearch
     public class NearBySearchEntity
     {
         public List<ResultsList> results { get; set; }
+
+        public List<Routes> routes { get; set; }
     }
 }
