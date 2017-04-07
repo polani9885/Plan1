@@ -15,6 +15,7 @@ BEGIN
 	ANd CityId = @CityId
 	AND Latitude IS NOt NULL
 	ANd Longitude Is NOt NULL
+	AND ISNULL(IsScannedNearBy,0) = 0
 
 	IF (@AttractionsId > 0)
 	BEGIN

@@ -26,7 +26,6 @@ BEGIN
 		  ,[GoogleRating]		  
 		  ,[IsScannedNearBy]
 	  FROM [dbo].[Attractions]
-	  WHERE Longitude IS NULL
-	  AND Latitude IS NULL
-	  AND GoogleSearchText IS NOT NULL
+	  WHERE PlaceId IS NOT NULL
+	  AND ISNULL(IsPlaceDetailsDone,0) = 0 
 END
