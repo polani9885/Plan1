@@ -330,7 +330,7 @@ END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'night_club') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded) VALUES(67,'night_club',0)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded) VALUES(67,'night_club',1)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'painter') < 1
