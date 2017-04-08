@@ -12,5 +12,7 @@ namespace BusinessEntites.EntityGoogleMaps.EntityNearBySearch
         public List<ResultsList> results { get; set; }
 
         public List<Routes> routes { get; set; }
+
+        public string next_page_token { get; set; }
     }
 }

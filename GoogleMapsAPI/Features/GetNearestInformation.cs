@@ -60,17 +60,7 @@ namespace GoogleMapsAPI.Features
 
                 if (returnsInformation != null)
                 {
-                    returnsInformation.results =
-                        returnsInformation.results.Where(
-                            x => x.types.Intersect(googleType.Select(type => type.TypeName).ToArray()).Any()).ToList();
-
-                    var nearByPlaceSearchEntity = returnsInformation.results.Select(x => new NearByPlaceSearchEntity
-                    {
-                        AttractionName = x.name,
-                        GoogleSearchText = x.vicinity
-                    }).ToList();
-
-                    dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId);
+                    InsertSearchResult(returnsInformation, googleType, countryId, url);
                 }                
             }
             catch (Exception ex)
@@ -84,6 +74,35 @@ namespace GoogleMapsAPI.Features
                     Parameters = "countryId = " + countryId.ToString(),
                     CountryId = countryId
                 });
+            }
+        }
+
+        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType,int countryId,string url)
+        {
+            string radiusData = string.Empty;
+            string urlString = string.Empty;
+            returnsInformation.results =
+                        returnsInformation.results.Where(
+                            x => x.types.Intersect(googleType.Select(type => type.TypeName).ToArray()).Any()).ToList();
+
+            var nearByPlaceSearchEntity = returnsInformation.results.Select(x => new NearByPlaceSearchEntity
+            {
+                AttractionName = x.name,
+                GoogleSearchText = x.vicinity
+            }).ToList();
+
+            dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId);
+
+            if (!string.IsNullOrEmpty(returnsInformation.next_page_token))
+            {
+                urlString = url + "&" + returnsInformation.next_page_token;
+                radiusData = webRequest.WebServiceInformation(url);
+                returnsInformation = Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
+
+                if (returnsInformation != null)
+                {
+                    InsertSearchResult(returnsInformation, googleType, countryId, url);
+                }
             }
         }
     }
