@@ -36,7 +36,8 @@
 							<a href="about.html" >About</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" onclick="loginControl()">Login</a>
+						    <a href="javascript:void(0)" onclick="loginControl()" id="linkLogin">Login</a>
+                            <a href="javascript:void(0)" onclick="UserLogOut()" id="linkLogOut" style="display: none">Log Out</a>
 						</li>
 						<li>
 							<a href="dives.html">Dive Site</a>
@@ -47,9 +48,15 @@
 						<li>
 							<a href="news.html">News</a>
 						</li>
-						<li>
-							<a href="contact.html">Contact</a>
-						</li>
+					    <li>
+					        <a href="contact.html">Contact</a>
+					    </li>
+					    <li id="linkMyAccount" style="display: none">
+					        <a href="contact.html">My Account</a>
+					    </li>
+                        <li id="linkMyPlans" style="display: none">
+                            <a href="contact.html">My Plans</a>
+                        </li>
 					</ul>
 				</div>
 			</div>
@@ -67,32 +74,37 @@
                 <p class="validateTips">All form fields are required.</p>
                 <form>
                     <fieldset>
-                        
-                            <table cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td>
-                                        User Name:
-                                    </td>
-                                    <td>
-                                        <input id="txtLoginUsername" placeholder="User Name">
-                                        <label style="display:none" class="validationError" id="lblLoginUsernameError">User name should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Password:
-                                    </td>
-                                    <td>
-                                        <input id="txtLoginPassword" placeholder="Password">
-                                        <label style="display:none" class="validationError" id="lblLoginPasswordError">Password should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input id="btnLogin" type="button" value="Login" onclick="LoginValidation()">
-                                    </td>
-                                </tr>
-                            </table>
+                            
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td colspan="2">
+                                    <label style="display: none" class="validationError" id="lblUserRegisterError">User name and Password is not correct</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    User Name:
+                                </td>
+                                <td>
+                                    <input id="txtLoginUsername" placeholder="User Name">
+                                    <label style="display: none" class="validationError" id="lblLoginUsernameError">User name should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password:
+                                </td>
+                                <td>
+                                    <input id="txtLoginPassword" placeholder="Password">
+                                    <label style="display: none" class="validationError" id="lblLoginPasswordError">Password should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input id="btnLogin" type="button" value="Login" onclick="LoginValidation()">
+                                </td>
+                            </tr>
+                        </table>
                             
 </fieldset>
                 </form>
@@ -102,113 +114,118 @@
                 <p class="validateTips">All form fields are required.</p>
                 <form>
                     <fieldset>                        
-                            <table cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td>
-                                        User Name:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterLogin" placeholder="User Name" onblur="UserCheckUserNameExisted()" onkeydown="UserCheckUserNameExisted()">
-                                        <label style="display:none" class="validationError" id="lblRegisterUsernameError">User name should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Password:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterPassword" placeholder="Password">
-                                        <label style="display:none" class="validationError" id="lblRegisterPasswordError">Password should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Confirm Password:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterConfirmPassword" placeholder="Confirm Password">
-                                        <label style="display:none" class="validationError" id="lblRegisterConfirmPasswordError">Confirm Password should not be blank</label>
-                                        <label style="display:none" class="validationError" id="lblRegisterPasswordConfirmPasswordError">Password and Confirm Password should be same</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Email:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterEmail" placeholder="Email">
-                                        <label style="display:none" class="validationError" id="lblRegisterEmailError">Email should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Country:
-                                    </td>
-                                    <td>
-                                        <select id="ddlRegisterCountryList" onchange="CountrySelected()"></select>
-                                        <label style="display:none" class="validationError" id="lblRegisterCountryError">Country should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        State:
-                                    </td>
-                                    <td>
-                                        <select id="ddlRegisterStateList" onchange="StateSelected()"></select>
-                                        <label style="display:none" class="validationError" id="lblRegisterStateError">State should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        City:
-                                    </td>
-                                    <td>
-                                        <select id="ddlRegisterCityList"></select>
-                                        <label style="display:none" class="validationError" id="lblRegisterCityError">City should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Address One:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterAddressOne" placeholder="Address One">
-                                        <label style="display:none" class="validationError" id="lblRegisterAddressOneError">Address One should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Address Two:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterAddressTwo" placeholder="Address Two">
-                                        <label style="display:none" class="validationError" id="lblRegisterAddressTwoError">Address Two should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Zip Code:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterZipCode" placeholder="Zip Code">
-                                        <label style="display:none" class="validationError" id="lblRegisterZipError">Zip should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Phone Number:
-                                    </td>
-                                    <td>
-                                        <input id="txtRegisterPhoneNumber" placeholder="Phone Number">
-                                        <label style="display:none" class="validationError" id="lblRegisterPhoneNumberError">Phone Number should not be blank</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input id="btnRegisterRegister" type="button" value="Register" onclick="RegisterValidation()">
-                                    </td>
-                                </tr>
-                            </table>
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td colspan="2">
+                                    <label style="display: none" class="validationError" id="lblLoginUsernameCheckError">Because of Some error, user not registered</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    User Name:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterLogin" placeholder="User Name" onblur="UserCheckUserNameExisted()" onkeydown="UserCheckUserNameExisted()">
+                                    <label style="display: none" class="validationError" id="lblRegisterUsernameError">User name should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterPassword" placeholder="Password">
+                                    <label style="display: none" class="validationError" id="lblRegisterPasswordError">Password should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Confirm Password:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterConfirmPassword" placeholder="Confirm Password">
+                                    <label style="display: none" class="validationError" id="lblRegisterConfirmPasswordError">Confirm Password should not be blank</label>
+                                    <label style="display: none" class="validationError" id="lblRegisterPasswordConfirmPasswordError">Password and Confirm Password should be same</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Email:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterEmail" placeholder="Email">
+                                    <label style="display: none" class="validationError" id="lblRegisterEmailError">Email should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Country:
+                                </td>
+                                <td>
+                                    <select id="ddlRegisterCountryList" onchange="CountrySelected()"></select>
+                                    <label style="display: none" class="validationError" id="lblRegisterCountryError">Country should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    State:
+                                </td>
+                                <td>
+                                    <select id="ddlRegisterStateList" onchange="StateSelected()"></select>
+                                    <label style="display: none" class="validationError" id="lblRegisterStateError">State should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    City:
+                                </td>
+                                <td>
+                                    <select id="ddlRegisterCityList"></select>
+                                    <label style="display: none" class="validationError" id="lblRegisterCityError">City should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Address One:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterAddressOne" placeholder="Address One">
+                                    <label style="display: none" class="validationError" id="lblRegisterAddressOneError">Address One should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Address Two:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterAddressTwo" placeholder="Address Two">
+                                    <label style="display: none" class="validationError" id="lblRegisterAddressTwoError">Address Two should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Zip Code:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterZipCode" placeholder="Zip Code">
+                                    <label style="display: none" class="validationError" id="lblRegisterZipError">Zip should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Phone Number:
+                                </td>
+                                <td>
+                                    <input id="txtRegisterPhoneNumber" placeholder="Phone Number">
+                                    <label style="display: none" class="validationError" id="lblRegisterPhoneNumberError">Phone Number should not be blank</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input id="btnRegisterRegister" type="button" value="Register" onclick="RegisterValidation()">
+                                </td>
+                            </tr>
+                        </table>
                            
 </fieldset>
                 </form>
