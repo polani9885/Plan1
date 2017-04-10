@@ -1,5 +1,5 @@
 ﻿function NotIntereseted(attractionId) {
-    debugger;
+    
     var angularScope = angular.element(document.getElementById('main')).scope();
     angularScope.$apply(function () {
         angularScope.NotIntereseted(attractionId);

@@ -30,7 +30,7 @@ appPlanGoGo.controller('controllerAttractions', function ($scope, $http, NgTable
 
     $scope.manageStatesBinding = function (data) {
         if (data.length > 0) {
-            debugger;
+            
             Admin_GetCity($scope, $http, NgTableParams, data[0]);
             $scope.StateSelectedValue = data[0];
         }

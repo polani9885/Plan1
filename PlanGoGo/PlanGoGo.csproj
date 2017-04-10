@@ -302,12 +302,15 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="CustomScripts\Common\AjaxCalls.js" />
     <Content Include="CustomScripts\Common\AjaxCallsAngular.js" />
+    <Content Include="CustomScripts\Common\AjaxUserAccount.js" />
     <Content Include="CustomScripts\Common\commonFunctions.js" />
     <Content Include="CustomScripts\Common\Constants.js" />
     <Content Include="CustomScripts\Controlers\controlerIndex.js" />
     <Content Include="CustomScripts\Controlers\UserControls\controlerLogin.js" />
     <Content Include="CustomScripts\Controlers\UserControls\controlerTourInformation.js" />
+    <Content Include="CustomScripts\Controlers\UserControls\controlerUserAccount.js" />
     <Content Include="CustomScripts\index.js" />
+    <Content Include="CustomScripts\UserActions.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\Custome\add.png" />

@@ -80,7 +80,7 @@ function PublicFilterAttractions(angularScope, http) {
 }
 
 function Public_GetOrderOfAttractionVisit(angularScope, http) {
-    debugger;
+    
     var jsonObject = {
         "TravelModeId": angularScope.TravelModeId,
         "SourceAttractionID": angularScope.SourceAttractionID,

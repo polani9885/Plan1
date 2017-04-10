@@ -176,7 +176,7 @@ function Admin_MasterCategoryGet(angularScope, http, ngTableParams) {
 
 //Getting the attractions
 function AttractionsOnCityId(angularScope, http, ngTableParams) {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/Attractions/AttractionsOnCityId',
@@ -201,7 +201,7 @@ function AttractionsOnCityId(angularScope, http, ngTableParams) {
 }
 //Getting attraction Opentime
 function GetAttractionOpenTime(angularScope, http, ngTableParams) {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/OpenTime/GetAttractionOpenTime',
@@ -226,7 +226,7 @@ function GetAttractionOpenTime(angularScope, http, ngTableParams) {
 }
 
 function AttractionTravelTimeDistanceGet(angularScope, http, ngTableParams) {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/AttractionTravelTimeDistance/AttractionTravelTimeDistanceGet',
@@ -251,7 +251,7 @@ function AttractionTravelTimeDistanceGet(angularScope, http, ngTableParams) {
 }
 
 function MissingDistanceAttractionsRecordsGet(angularScope, http, ngTableParams) {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/MissingDistanceAttractionsRecords/MissingDistanceAttractionsRecordsGet',       

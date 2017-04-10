@@ -241,7 +241,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.IsOrderUpdated = function (destinationAttractionId, recordCount, isUp) {
         var isFound = false;
         $.each($scope.OrderOfAttractionList, function (recordKey, recordValue) {
-            debugger;
+            
             $.each(recordValue.ListGetOrderOfAttractionVisit, function (groupKey, groupValue) {
                 if (groupValue.DestinationAttractionId == destinationAttractionId) {
                     if (isUp = true) {
@@ -263,7 +263,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     }
 
     $scope.Interested = function (attractionID) {
-        debugger;
+        
         var attractionIndex = 0;
         $.each($scope.notInterestedList, function (attractionKey, attractionValue) {
             if (attractionValue.AttractionsId == attractionID) {
@@ -272,7 +272,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 return false;
             }
         });
-        debugger;
+        
         //removing the not inetreseted attraction from the attraction list
         $scope.notInterestedList.splice(attractionIndex, 1);
 

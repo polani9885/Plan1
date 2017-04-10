@@ -170,7 +170,7 @@ function GetDistanceBetweenTwoPoints(sourceAttractionId, sourceText, destination
         if (status !== 'OK') {
             alert('Error was: ' + status);
         } else {
-            debugger;
+            
             var originList = response.originAddresses;
             var destinationList = response.destinationAddresses;
             //var outputDiv = document.getElementById('output');
@@ -181,7 +181,7 @@ function GetDistanceBetweenTwoPoints(sourceAttractionId, sourceText, destination
                 var icon = asDestination ? destinationIcon : originIcon;
                 return function (results, status) {
                     if (status === 'OK') {
-                        debugger;
+                        
                         
                     } else {
                         alert('Geocode was not successful due to: ' + status);

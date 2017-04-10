@@ -127,7 +127,7 @@ function SelectedPlace(selectedPlace, attractionId) {
         },
         success: function (data) {
             address = [];
-            debugger;
+            
         },
         error: function (result) {
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
@@ -139,7 +139,7 @@ function SelectedPlace(selectedPlace, attractionId) {
 }
 
 function GetCountry() {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/Home/Admin_GetCountry',
@@ -162,7 +162,7 @@ function GetCountry() {
 }
 
 function GetState(countryId) {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/Home/Admin_MasterStateGetOnCountryId',
@@ -186,7 +186,7 @@ function GetState(countryId) {
 }
 
 function GetCity(stateId) {
-    debugger;
+    
     $.ajax({
         type: "GET",
         url: '/Home/Admin_MasterCityGetOnStateId',
