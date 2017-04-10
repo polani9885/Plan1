@@ -226,8 +226,8 @@ function LoginValidation() {
         $("#lblLoginPasswordError").hide();
     }
 
-    if (!validationError) {
-
+    if (validationError) {
+        LoginCheck();
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.Users;
+using PlanGoGo.Helper;
 using PlanGoGo.Models.UserControls;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace PlanGoGo.Controllers
 {
-    public class UserControlsController : Controller
+    public class UserControlsController : BaseControler
     {
 
         PlanGoGo.Repository.Interfaces.IUserInfo _IUserInfo;
@@ -61,11 +62,13 @@ namespace PlanGoGo.Controllers
             }
         }
 
+        [HttpGet]
         public JsonResult  User_GetUserInformation(string userName, string password)
         {
             List<UserEntity> result = _IUserInfo.User_GetUserInformation(userName, password);
             if (result.Count() > 0)
             {
+                userEntity = result.FirstOrDefault();
                 var jsonResults = Json(result, JsonRequestBehavior.AllowGet);
                 jsonResults.MaxJsonLength = int.MaxValue;
                 return jsonResults;
@@ -76,20 +79,13 @@ namespace PlanGoGo.Controllers
             }
         }
 
-        //public JsonResult  User_InsertingUserInfo(UserEntity userEntity)
-        //{
-        //    _IUserInfo.User_InsertingUserInfo(userEntity);
-        //    if (getCityList.Count() > 0)
-        //    {
-        //        var jsonResults = Json(getCityList, JsonRequestBehavior.AllowGet);
-        //        jsonResults.MaxJsonLength = int.MaxValue;
-        //        return jsonResults;
-        //    }
-        //    else
-        //    {
-        //        return Json(new List<public_GetCityList>(), JsonRequestBehavior.AllowGet);
-        //    }
-        //}
+        public JsonResult User_InsertingUserInfo(UserEntity userEntity)
+        {
+            _IUserInfo.User_InsertingUserInfo(userEntity);
+            var jsonResults = Json(new JsonResultReturn { Success = true }, JsonRequestBehavior.AllowGet);
+            jsonResults.MaxJsonLength = int.MaxValue;
+            return jsonResults;
+        }
 
         //public JsonResult User_UserAttractionUpdate(UserAttractionEntity userAttractionEntity)
         //{
@@ -106,7 +102,7 @@ namespace PlanGoGo.Controllers
         //    }
         //}
 
-            [HttpGet]
+        [HttpGet]
         public JsonResult UserExistChecking(string userName)
         {
             bool success = _IUserInfo.User_UserExistChecking(userName);
@@ -122,6 +118,32 @@ namespace PlanGoGo.Controllers
                 jsonResults.MaxJsonLength = int.MaxValue;
                 return jsonResults;
             }
+        }
+
+        [HttpGet]
+        public JsonResult IsUserLoggedIn()
+        {
+            if (IsUserAuthenticated())
+            {
+                var jsonResults = Json(new JsonResultReturn { Success = true, UserName = userEntity.UserName }, JsonRequestBehavior.AllowGet);
+                jsonResults.MaxJsonLength = int.MaxValue;
+                return jsonResults;
+            }
+            else
+            {
+                var jsonResults = Json(new JsonResultReturn { Success = false }, JsonRequestBehavior.AllowGet);
+                jsonResults.MaxJsonLength = int.MaxValue;
+                return jsonResults;
+            }
+        }
+
+        [HttpGet]
+        public JsonResult UserLogOut()
+        {
+            base.LogOut();
+            var jsonResults = Json(new JsonResultReturn { Success = true, UserName = userEntity.UserName }, JsonRequestBehavior.AllowGet);
+            jsonResults.MaxJsonLength = int.MaxValue;
+            return jsonResults;
         }
     }
 }

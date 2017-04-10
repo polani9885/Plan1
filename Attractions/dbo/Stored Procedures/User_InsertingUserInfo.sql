@@ -1,18 +1,18 @@
 ﻿CREATE PROCEDURE [dbo].[User_InsertingUserInfo] 
 (
-                @UserId INT
-                ,@UserName Varchar(250)
+    @UserId INT
+	,@UserName Varchar(250)
     ,@Email Varchar(250)
     ,@Password Varchar(250)
-    ,@GooglePlusId Varchar(250)
-    ,@FaceBookId INT
-    ,@MasterCountryId INT
-    ,@MasterStateId INT
-    ,@MasterCityId INT
-    ,@AddressOne Varchar(250)
-    ,@AddressTwo Varchar(250)
-    ,@ZipCode Varchar(50)
-    ,@PhoneNumber Varchar(50)        
+    ,@GooglePlusId Varchar(250) = NULL
+    ,@FaceBookId INT = NULL
+    ,@MasterCountryId INT = NULL
+    ,@MasterStateId INT = NULL
+    ,@MasterCityId INT = NULL
+    ,@AddressOne Varchar(250) = NULL
+    ,@AddressTwo Varchar(250) = NULL
+    ,@ZipCode Varchar(50) = NULL
+    ,@PhoneNumber Varchar(50)   = NULL      
     ,@ModifiedBy Varchar(250)
 )              
 AS
