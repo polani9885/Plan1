@@ -353,6 +353,44 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
+        public void Scheduler_GoogleLogging(string mapType,string methodName,string attractionName,string logitude,string latitude,bool isError,int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_GoogleLogging",
+                    new
+                    {
+                        MapType = mapType,
+                        MethodName = methodName,
+                        AttractionName = attractionName,
+                        Logitude = logitude,
+                        Latitude = latitude,
+                        IsError = isError
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public GoogleMapsLoggingDTO Scheduler_GetGoogleMapsMethodCount(string mapType,int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<GoogleMapsLoggingDTO> _returnResult =
+                    SqlHelper.QuerySP<GoogleMapsLoggingDTO>("Scheduler_GetGoogleMapsMethodCount",
+                        new {MapType = mapType}).ToList();
+                return _returnResult.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
 

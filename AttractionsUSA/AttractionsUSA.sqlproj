@@ -100,6 +100,9 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetDistancePending.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetAttractionNearBy.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionTravelTimeDistance.sql" />
+    <Build Include="dbo\Tables\GoogleMapsLogging.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GoogleLogging.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetGoogleMapsMethodCount.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />
