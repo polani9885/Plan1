@@ -11,9 +11,11 @@ BEGIN
 
 
 
-SELECT [CategoryId]
-      ,[CategoryName]
-  FROM [dbo].[MasterCategory]
+SELECT [GoogleTypeID]
+      ,[TypeName]
+      ,[IsNeeded]
+  FROM [dbo].[MasterGoogleType]
+  WHERE IsNeeded = 1
 
 
 

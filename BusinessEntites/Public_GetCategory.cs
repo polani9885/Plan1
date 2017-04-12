@@ -8,8 +8,8 @@ namespace BusinessEntites
 {
     public class Public_GetCategory
     {
-        public int CategoryId { get; set; }
+        public int GoogleTypeID { get; set; }
 
-        public string CategoryName { get; set; }
+        public string TypeName { get; set; }
     }
 }
