@@ -28,10 +28,10 @@ namespace PlanGoGo.UsersService {
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Users.UserAttractionEntity>> User_GetUserAttractionSavedAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_GetUserInformation", ReplyAction="http://tempuri.org/IUserServices/User_GetUserInformationResponse")]
-        System.Collections.Generic.List<BusinessEntites.Users.UserEntity> User_GetUserInformation(string userName, string password);
+        BusinessEntites.Users.UserEntity User_GetUserInformation(string userName, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_GetUserInformation", ReplyAction="http://tempuri.org/IUserServices/User_GetUserInformationResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Users.UserEntity>> User_GetUserInformationAsync(string userName, string password);
+        System.Threading.Tasks.Task<BusinessEntites.Users.UserEntity> User_GetUserInformationAsync(string userName, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_InsertingUserInfo", ReplyAction="http://tempuri.org/IUserServices/User_InsertingUserInfoResponse")]
         void User_InsertingUserInfo(BusinessEntites.Users.UserEntity userEntity);
@@ -95,11 +95,11 @@ namespace PlanGoGo.UsersService {
             return base.Channel.User_GetUserAttractionSavedAsync(userId);
         }
         
-        public System.Collections.Generic.List<BusinessEntites.Users.UserEntity> User_GetUserInformation(string userName, string password) {
+        public BusinessEntites.Users.UserEntity User_GetUserInformation(string userName, string password) {
             return base.Channel.User_GetUserInformation(userName, password);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Users.UserEntity>> User_GetUserInformationAsync(string userName, string password) {
+        public System.Threading.Tasks.Task<BusinessEntites.Users.UserEntity> User_GetUserInformationAsync(string userName, string password) {
             return base.Channel.User_GetUserInformationAsync(userName, password);
         }
         

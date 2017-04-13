@@ -38,7 +38,7 @@
   <xs:element name="User_GetUserInformationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_GetUserInformationResult" nillable="true" type="q2:ArrayOfUserEntity" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_GetUserInformationResult" nillable="true" type="q2:UserEntity" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

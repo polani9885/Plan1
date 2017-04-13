@@ -25,7 +25,7 @@ namespace PlanGoGoService.Schedulers
             return _businessUserBAL.User_GetUserAttractionSaved(userId);
         }
 
-        public List<UserEntity> User_GetUserInformation(string userName, string password)
+        public UserEntity User_GetUserInformation(string userName, string password)
         {
             return _businessUserBAL.User_GetUserInformation(userName, password);
         }

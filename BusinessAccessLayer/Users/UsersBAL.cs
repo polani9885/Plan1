@@ -25,9 +25,9 @@ namespace BusinessAccessLayer.Users
             return _dataAccessUsers.User_GetUserAttractionSaved(userId);
         }
 
-        public List<UserEntity> User_GetUserInformation(string userName, string password)
+        public UserEntity User_GetUserInformation(string userName,string password)
         {
-            return _dataAccessUsers.User_GetUserInformation(userName, password);
+            return _dataAccessUsers.User_GetUserInformation(userName,password);
         }
 
         public void User_InsertingUserInfo(UserEntity userEntity)

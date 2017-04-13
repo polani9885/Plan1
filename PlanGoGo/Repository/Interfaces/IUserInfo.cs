@@ -15,7 +15,7 @@ namespace PlanGoGo.Repository.Interfaces
 
         List<UserAttractionEntity> User_GetUserAttractionSaved(int userId);
 
-        List<UserEntity> User_GetUserInformation(string userName, string password);
+        UserEntity User_GetUserInformation(string userName, string password);
 
         void User_InsertingUserInfo(UserEntity userEntity);
 

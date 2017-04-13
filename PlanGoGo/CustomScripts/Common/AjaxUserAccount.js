@@ -1,5 +1,4 @@
 ﻿function CheckUserNameExisted(username) {
-    debugger;
     if (username!=null && username!="") {
         $.ajax({
             type: "GET",
@@ -10,7 +9,13 @@
                 $(".blockPage").show();
             },
             success: function (data) {
-
+                $("#imgCheckUserNameExisted").show();
+                $("#imgCheckUserNameExisted").removeAttr("src");
+                if (data.Success) {
+                    $("#imgCheckUserNameExisted").attr("src", "/Images/User/UI/Correct.png");
+                } else {
+                    $("#imgCheckUserNameExisted").attr("src", "/Images/User/UI/Wrong.png");
+                }
             },
             error: function (result) {
                 alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
@@ -23,7 +28,6 @@
 }
 
 function LoginCheck() {
-    debugger;
     if ($("#txtLoginUsername").val() != null && $("#txtLoginUsername").val() != "") {
         $.ajax({
             type: "GET",
@@ -34,8 +38,9 @@ function LoginCheck() {
                 $(".blockPage").show();
             },
             success: function (data) {
-                if (data.length > 0) {
+                if (data != null) {
                     $("#lblLoginUsernameCheckError").hide();
+                    $("#loginController").dialog("close");
                     IsUserLoggedIn();
                 } else {
                     $("#lblLoginUsernameCheckError").show();
@@ -52,7 +57,6 @@ function LoginCheck() {
 }
 
 function IsUserLoggedIn() {
-    debugger;
     $.ajax({
         type: "GET",
         url: '/UserControls/IsUserLoggedIn',
@@ -61,7 +65,7 @@ function IsUserLoggedIn() {
             $(".blockPage").show();
         },
         success: function(data) {
-            if (data.success) {
+            if (data.Success) {
                 userLoggedIn();
             } else {
                 userLoggOut();
@@ -109,6 +113,7 @@ function User_InsertingUserInfo() {
             if (data.Success) {
                 IsUserLoggedIn();
                 $("#lblUserRegisterError").hide();
+                $("#registerController").dialog("close");
             } else {
                 $("#lblUserRegisterError").show();
             }

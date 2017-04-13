@@ -37,7 +37,7 @@ namespace PlanGoGo.Repository.References
             }
         }
 
-        public List<UserEntity> User_GetUserInformation(string userName, string password)
+        public UserEntity User_GetUserInformation(string userName, string password)
         {
             try
             {

@@ -31,12 +31,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserAttractionEntity" nillable="true" type="tns:UserAttractionEntity" />
-  <xs:complexType name="ArrayOfUserEntity">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserEntity" nillable="true" type="tns:UserEntity" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfUserEntity" nillable="true" type="tns:ArrayOfUserEntity" />
   <xs:complexType name="UserEntity">
     <xs:sequence>
       <xs:element minOccurs="0" name="AddressOne" nillable="true" type="xs:string" />

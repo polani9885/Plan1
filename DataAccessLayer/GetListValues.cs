@@ -88,7 +88,7 @@ namespace DataAccessLayer
                         AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(AttractionID),
                         StartDate = StartDate == string.Empty ? null : StartDate,
                         StartTime = StartTime == string.Empty ? null : StartTime,
-                        UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit)
+                        //UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit)
                     }).ToList();
                 return _public_GetOrderOfAttractionVisit;
             }

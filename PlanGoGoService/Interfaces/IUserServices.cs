@@ -18,7 +18,7 @@ namespace PlanGoGoService.Interfaces
         List<UserAttractionEntity> User_GetUserAttractionSaved(int userId);
 
         [OperationContract]
-        List<UserEntity> User_GetUserInformation(string userName, string password);
+        UserEntity User_GetUserInformation(string userName, string password);
 
         [OperationContract]
         void User_InsertingUserInfo(UserEntity userEntity);

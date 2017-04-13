@@ -65,10 +65,11 @@ namespace PlanGoGo.Controllers
         [HttpGet]
         public JsonResult  User_GetUserInformation(string userName, string password)
         {
-            List<UserEntity> result = _IUserInfo.User_GetUserInformation(userName, password);
-            if (result.Count() > 0)
+            UserEntity result = _IUserInfo.User_GetUserInformation(userName, password);
+            if (result!=null)
             {
-                userEntity = result.FirstOrDefault();
+                userEntity = result;
+                base.CreateCookie();
                 var jsonResults = Json(result, JsonRequestBehavior.AllowGet);
                 jsonResults.MaxJsonLength = int.MaxValue;
                 return jsonResults;

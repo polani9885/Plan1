@@ -39,9 +39,22 @@ namespace DataAccessLayer.User
             throw new NotImplementedException();
         }
 
-        public List<UserEntity> User_GetUserInformation(string userName, string password)
+        public UserEntity User_GetUserInformation(string userName, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<UserEntity> _returnResult = SqlHelper.QuerySP<UserEntity>("User_GetUserInformation",
+                    new
+                    {
+                        UserName = userName,
+                        Password = password
+                    }).ToList();
+                return _returnResult.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void User_InsertingUserInfo(UserEntity userEntity)

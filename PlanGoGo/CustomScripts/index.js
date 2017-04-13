@@ -208,7 +208,7 @@ function forgetPassword() {
     .dialog("open");
 }
 
-function LoginValidation() {    
+function LoginValidation() {
     var validationError = false;
     if ($("#txtLoginUsername").val() == null || $("#txtLoginUsername").val()=="") {
         $("#lblLoginUsernameError").show();
@@ -226,7 +226,7 @@ function LoginValidation() {
         $("#lblLoginPasswordError").hide();
     }
 
-    if (validationError) {
+    if (!validationError) {
         LoginCheck();
     }
 }
@@ -277,7 +277,7 @@ function RegisterValidation() {
       
 
     if (!validationError) {
-
+        User_InsertingUserInfo();
     }
 }
 

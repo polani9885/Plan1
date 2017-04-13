@@ -45,12 +45,12 @@ function PublicFilterAttractions(angularScope, http) {
         if (!isFirst)
         {
             newArr += ",";
-            newArr += [obj.CategoryId + "~" + obj.CategoryName];
+            newArr += [obj.GoogleTypeID + "~" + obj.TypeName];
         }
         else
         {
             isFirst = false;
-            newArr = [obj.CategoryId + "~" + obj.CategoryName];
+            newArr = [obj.GoogleTypeID + "~" + obj.TypeName];
         }
         
     });        
