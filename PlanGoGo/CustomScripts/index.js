@@ -274,54 +274,7 @@ function RegisterValidation() {
     else {
         $("#lblRegisterEmailError").hide();
     }
-
-    if ($("#ddlRegisterCountryList").val() == null || $("#ddlRegisterCountryList").val() == "") {
-        $("#lblRegisterCountryError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterCountryError").hide();
-    }
-
-    if ($("#ddlRegisterStateList").val() == null || $("#ddlRegisterStateList").val() == "") {
-        $("#lblRegisterStateError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterStateError").hide();
-    }
-
-    if ($("#ddlRegisterCityList").val() == null || $("#ddlRegisterCityList").val() == "") {
-        $("#lblRegisterCityError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterCityError").hide();
-    }
-
-    if ($("#txtRegisterAddressOne").val() == null || $("#txtRegisterAddressOne").val() == "") {
-        $("#lblRegisterAddressOneError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterAddressOneError").hide();
-    }
-
-    if ($("#txtRegisterZipCode").val() == null || $("#txtRegisterZipCode").val() == "") {
-        $("#lblRegisterZipError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterZipError").hide();
-    }
-
-    if ($("#txtRegisterPhoneNumber").val() == null || $("#txtRegisterPhoneNumber").val() == "") {
-        $("#lblRegisterPhoneNumberError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterPhoneNumberError").hide();
-    }    
+      
 
     if (!validationError) {
 

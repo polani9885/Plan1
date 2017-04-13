@@ -1,13 +1,13 @@
 /* Website template by freewebsitetemplates.com */
-body {
+/*body {
 	background: #ffb744 url(/Templates/FormatedTemplates/beachresort/images/bg-body.jpg) repeat left bottom;
 	font-family: "Times New Roman", Times, serif;
 	margin: 0;
-}
-#background {
+}*/
+/*#background {
 	background: url(/Templates/FormatedTemplates/beachresort/images/bg-pattern.jpg) repeat-x center top;
 	
-}
+}*/
 #page {
 	/*width: 960px;*/
 	margin: 0 auto;
@@ -144,12 +144,12 @@ img {
 	padding: 30px 40px 0;
 }
 /** Adbox **/
-#adbox {
+/*#adbox {
 	background: url(/Templates/FormatedTemplates/beachresort/images/bg-adbox.png) no-repeat left top;
 	width: 852px;
 	margin: 0 auto;
 	padding: 4px 5px 18px;
-}
+}*/
 #adbox p {
 	font-size: 16px;
 }
