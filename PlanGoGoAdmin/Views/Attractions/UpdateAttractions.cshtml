@@ -6,140 +6,295 @@
 @using (Html.BeginForm())
 {
     <div ng-controller="controllerAttractions" id="controllerAttractions">
-        <table cellpadding="0" cellspacing="0" border="1">
-            <tr>
-                <td colspan="2" style="color:red">
-                    @Model.ErrorMessage
-                </td>
-            </tr>
-            <tr>
-                <td>Country</td>
-                <td>
-                    <select id="ddlCountryId" ng-model="CountrySelectedValue"
-                            ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>State</td>
-                <td>
-                    <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
-                            ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>City</td>
-                <td>
-                    <select id="ddlCityId" ng-model="CitySelectedValue" ng-change="CityDropDownSelected()"
-                            ng-options="_city as _city.CityName for _city in manageCity track by _city.CityId"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>Category</td>
-                <td>
-                    <select id="ddlCategoryId" ng-model="CategorySelectedValue" ng-change="CategoryDropDownSelected()"
-                            ng-options="_category as _category.CategoryName for _category in masterCategory track by _category._CategoryId"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>Attraction Name</td>
-                <td>
-                    @Html.TextBoxFor(m => m.AttractionName)
-                </td>
-            </tr>
-            <tr>
-                <td>Address One</td>
-                <td>
-                    @Html.TextBoxFor(m => m.AddressOne)
-                </td>
-            </tr>
-            <tr>
-                <td>Address Two</td>
-                <td>
-                    @Html.TextBoxFor(m => m.AddressTwo)
-                </td>
-            </tr>
-            <tr>
-                <td>Longitude</td>
-                <td>
-                    @Html.TextBoxFor(m => m.Longitude)
-                </td>
-            </tr>
-            <tr>
-                <td>Latitude</td>
-                <td>
-                    @Html.TextBoxFor(m => m.Latitude)
-                </td>
-            </tr>
-            <tr>
-                <td>Place</td>
-                <td>
-                    @Html.TextBoxFor(m => m.PlaceId)
-                </td>
-            </tr>
-            <tr>
-                <td>Rank</td>
-                <td>
-                    @Html.TextBoxFor(m => m.RankId)
-                </td>
-            </tr>
-            <tr>
-                <td>Google Search Text</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleSearchText)
-                </td>
-            </tr>
-            <tr>
-                <td>Google Web Site</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleWebSite)
-                </td>
-            </tr>
-            <tr>
-                <td>Google ICon</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleICon)
-                </td>
-            </tr>           
-            <tr>
-                <td>Google Phone Number</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleInternational_phone_number)
-                </td>
-            </tr>
-            <tr>
-                <td>Google Address</td>
-                <td>
-                    @Html.TextBoxFor(m => m.Googleadr_address)
-                </td>
-            </tr>
-            <tr>
-                <td>Google Name</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleName)
-                </td>
-            </tr>
-            <tr>
-                <td>Google Rating</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleRating)
-                </td>
-            </tr>
-            <tr>
-                <td>Google User Rating</td>
-                <td>
-                    @Html.TextBoxFor(m => m.GoogleUser_ratings_total)
-                </td>
-            </tr>            
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit" onclick="AttractionSubmitClick()" />
-                </td>
-            </tr>
-        </table>
+        <div class="adminPanelBody">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td colspan="2" style="color: red">
+                        @Model.ErrorMessage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Country
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            <select id="ddlCountryId" ng-model="CountrySelectedValue"
+                                    ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                State
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
+                                    ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                City
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            <select id="ddlCityId" ng-model="CitySelectedValue" ng-change="CityDropDownSelected()"
+                                    ng-options="_city as _city.CityName for _city in manageCity track by _city.CityId"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Category
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            <select id="ddlCategoryId" ng-model="CategorySelectedValue" ng-change="CategoryDropDownSelected()"
+                                    ng-options="_category as _category.CategoryName for _category in masterCategory track by _category._CategoryId"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Attraction Name
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.AttractionName)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Address One
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.AddressOne)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Address Two
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.AddressTwo)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Longitude
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.Longitude)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Latitude
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.Latitude)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Place
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.PlaceId)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Rank
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.RankId)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google Search Text
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleSearchText)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google Web Site
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleWebSite)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google ICon
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleICon)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google Phone Number
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleInternational_phone_number)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google Address
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.Googleadr_address)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google Name
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleName)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google Rating
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleRating)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Google User Rating
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.GoogleUser_ratings_total)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="adminActionControl">
+                            <input type="submit" value="Submit" onclick="AttractionSubmitClick()" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         @Html.HiddenFor(m => m.StateId)
         @Html.HiddenFor(m => m.CountryId)
         @Html.HiddenFor(m => m.CityId)
         @Html.HiddenFor(m => m.CategoryId)
     </div>
 }
-

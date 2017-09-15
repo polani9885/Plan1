@@ -3,44 +3,70 @@
 }
 @model PlanGoGoAdmin.Models.OpenTime.ModelOpenTime
 
-
 @Scripts.Render("~/controllerManageOpenTime")
 @using (Html.BeginForm())
 {
     <div ng-controller="controllerManageOpenTime" id="controllerManageOpenTime">
-        <table cellpadding="0" cellspacing="0" border="1">
-            <tr>
-                <td colspan="2" style="color:red">
-                    @Model.ErrorMessage
-                </td>
-            </tr>
-            <tr>
-                <td>Week</td>
-                <td>
-                    @Html.DropDownListFor(m=>m.MasterWeekId, new SelectList(Model.listMasterWeek, "MasterWeekId", "WeekName", Model.MasterWeekId))                    
-                </td>
-            </tr>
-            <tr>
-                <td>Open Time</td>
-                <td>
-                    @Html.TextBoxFor(m => m.OpenTime)
-                </td>
-            </tr>
-            <tr>
-                <td>Close Time</td>
-                <td>
-                    @Html.TextBoxFor(m => m.CloseTime)
-                </td>
-            </tr>           
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit" onclick="StateSubmitClick()" />
-                </td>
-            </tr>
-        </table>
+        <div class="adminPanelBody">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td colspan="2" style="color:red">
+                        @Model.ErrorMessage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Week
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.DropDownListFor(m => m.MasterWeekId, new SelectList(Model.listMasterWeek, "MasterWeekId", "WeekName", Model.MasterWeekId))
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Open Time
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.OpenTime)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Close Time
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.CloseTime)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="adminActionControl">
+                            <input type="submit" value="Submit" onclick="StateSubmitClick()" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         @Html.HiddenFor(m => m.AttractionsId)
         @Html.HiddenFor(m => m.AttractionsActiveStatusId)
         @Html.HiddenFor(m => m.MasterWeekId)
     </div>
 }
-

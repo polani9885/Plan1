@@ -50,7 +50,8 @@ namespace PlanGoGoAdmin
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/*.css",
-                        "~/Content/ng-table.css"
+                        "~/Content/ng-table.css",
+                        "~/Content/internalstyless.css"
                         ));
 
             //Custom scripts

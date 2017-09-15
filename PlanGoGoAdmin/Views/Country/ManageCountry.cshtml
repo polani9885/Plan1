@@ -4,27 +4,35 @@
 @Scripts.Render("~/controllerManageCountry")
 
 <div ng-controller="controllerManageCountry">
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>
-                    Country Name
-                </th>
-                <th>
-                    Shoare Name
-                </th>
-            </tr>
+    <table class="gridTable" cellpadding="5px">
+        <tbody class="gridHeader">
+        <tr>
+            <th>
+                Actions
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                Country Name
+            </th>
+            <th>
+                Short Name
+            </th>
+            <th>
+                isDefault
+            </th>
+        </tr>
         </tbody>
         <tr ng-repeat="user in manageCountry">
             <td>
                 <a href="/Country/AddCountry?CountryId={{user.CountryId}}" title="Update Country">
-                    Edit Country
+                    Edit 
                 </a>
             </td>
             <td>
                 <a href="/MasterState/ManageState?CountryId={{user.CountryId}}" title="State List">
-                    State List
+                    State 
                 </a>
             </td>
             <td title="'Country Name'">

@@ -1,57 +1,99 @@
 ﻿@{
     Layout = "~/Views/shared/_authenticatedLayout.cshtml";
 }
-
 @model PlanGoGoAdmin.Models.MasterCity.ModelMasterCity
-
 @Scripts.Render("~/controllerManageCity")
 @using (Html.BeginForm())
 {
     <div ng-controller="controllerManageCity" id="controllerManageCity">
-        <table cellpadding="0" cellspacing="0" border="1">
-            <tr>
-                <td colspan="2" style="color:red">
-                    @Model.ErrorMessage
-                </td>
-            </tr>
-            <tr>
-                <td>Country</td>
-                <td>
-                    <select id="ddlCountryId" ng-model="CountrySelectedValue"
-                            ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>State</td>
-                <td>
-                    <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
-                            ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>City Name</td>
-                <td>
-                    @Html.TextBoxFor(m => m.CityName)
-                </td>
-            </tr>
-            <tr>
-                <td>State Short Name</td>
-                <td>
-                    @Html.TextBoxFor(m => m.CityShortName)
-                </td>
-            </tr>
-            <tr>
-                <td>Is Default</td>
-                <td>
-                    @Html.CheckBoxFor(m => m.IsDefault)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit" onclick="CitySubmitClick()" />
-                </td>
-            </tr>
-        </table>
+        <div class="adminPanelBody">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td colspan="2" style="color: red">
+                        @Model.ErrorMessage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Country
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            <select id="ddlCountryId" ng-model="CountrySelectedValue"
+                                    ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                State
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
+                                    ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                City Name
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.CityName)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                State Short Name
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.TextBoxFor(m => m.CityShortName)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Is Default
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.CheckBoxFor(m => m.IsDefault)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="adminActionControl">
+                            <input type="submit" value="Submit" onclick="CitySubmitClick()" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         @Html.HiddenFor(m => m.StateId)
         @Html.HiddenFor(m => m.CountryId)
         @Html.HiddenFor(m => m.CityId)

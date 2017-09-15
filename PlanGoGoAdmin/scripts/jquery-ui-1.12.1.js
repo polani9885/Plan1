@@ -11979,7 +11979,6 @@ $.widget( "ui.dialog", {
 		maxHeight: null,
 		maxWidth: null,
 		minHeight: 150,
-		minWidth: 150,
 		modal: false,
 		position: {
 			my: "center",

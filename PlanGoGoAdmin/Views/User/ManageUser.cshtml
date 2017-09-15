@@ -2,24 +2,23 @@
     Layout = "~/Views/shared/_authenticatedLayout.cshtml";
 }
 @Scripts.Render("~/controllerManageUser")
-
-<div ng-controller="controllerManageUser">
-
-    <table class="table" >
-        <tbody>
-            <tr>
-                <th>
-                    User Name
-                </th>
-                <th>
-                    Password
-                </th>
-            </tr>
+<div ng-controller="controllerManageUser" class="content">
+    <table  class="gridTable" cellpadding="5px">
+        <tbody class="gridHeader">
+        <tr>
+            <th>Actions</th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Password
+            </th>
+        </tr>
         </tbody>
         <tr ng-repeat="user in manageUsers">
             <td>
                 <a href="/User/AddUpdateUser?adminUserId={{user.AdminUserId}}" title="Update User">
-                    Edit User
+                    Edit
                 </a>
             </td>
             <td title="'User Name'" >
@@ -30,5 +29,4 @@
             </td>
         </tr>
     </table>
-
 </div>

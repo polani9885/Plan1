@@ -1,0 +1,80 @@
+﻿.adminMainHeader {
+    background-color: #337ab7;
+    width: 100%;
+    height: 100px;
+    position: inherit;
+    margin-bottom: 10px;
+}
+
+.adminPanelHeader {
+    background-color: #337ab7;
+    height: 35px;
+    border: 1px solid  #337ab7;
+    position: inherit;
+}
+.adminPanelHeaderText {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.adminPanelBody {
+    border: 1px solid  #337ab7;
+    padding: 20px;
+    text-align: center;
+}
+.adminField {
+    padding: 10px;
+    display: inline-block;
+}
+.adminFieldText {
+    font-size: 25px;
+}
+.adminInputControl {
+    display: inline-block;
+    text-align: left;
+}
+
+input[type=text] {
+    font-size: 20px;
+    border: 1px solid  #337ab7;
+}
+
+input[type=submit] {
+    border: 1px solid  #337ab7;
+    background-color: #337ab7;
+    font-weight: bold;
+    color: white;
+    font-size: 25px;
+}
+
+.adminActionControl {
+    text-align: center;
+    font-size: 25px;
+}
+
+.mainMenu {
+    position: inherit;
+}
+
+.bodyContent {
+    margin-top: 100px;
+}
+
+.content {
+    margin: 10px;
+}
+
+.gridHeader{
+    background-color: #337ab7;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+.gridTable {
+    padding: 0px;
+    margin: 20px;
+    border-spacing: 0px;
+    border: 1px solid  #337ab7;
+}

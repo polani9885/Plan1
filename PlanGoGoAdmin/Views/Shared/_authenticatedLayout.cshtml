@@ -18,17 +18,13 @@
     $( "#menu" ).menu();
   } );
     </script>
-    <style>
-        .ui-menu {
-            width: 150px;
-        }
-    </style>
 </head>
 <body ng-app="AppPlanGoGo">
-    <div id="MainDev">
+    <div class="adminMainHeader">
+    <div id="MainDev" class="mainMenu">
         <!--Menu List-->
-        <div style="float:left">
-            <ul id="menu">
+        <div style="float: left">
+            <ul id="menu" class="bodyContent">
                 <li>
                     <div>Manage Users</div>
                     <ul>
@@ -126,15 +122,15 @@
                             <a href="/MissingDistanceAttractionsRecords/ManageMissingDistanceAttractionsRecords" title="Missing DistanceAttractions Records">
                                 View Missing
                             </a>
-                        </li>                        
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
-
-        <div style="float:left;padding:30px">
+        <div style="float: left;" class="bodyContent">
             @RenderBody()
         </div>
+    </div>
     </div>
 </body>
 </html>
