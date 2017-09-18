@@ -143,5 +143,9 @@
     <None Include="dbo\Seeds\MasterState.sql" />
     <None Include="dbo\Seeds\MasterCity.sql" />
     <None Include="dbo\Seeds\MasterTravelMode.sql" />
+    <None Include="dbo\Seeds\MasterCategory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Attractions.refactorlog" />
   </ItemGroup>
 </Project>
