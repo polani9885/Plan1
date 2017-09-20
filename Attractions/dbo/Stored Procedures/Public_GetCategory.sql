@@ -14,6 +14,7 @@ BEGIN
 SELECT [GoogleTypeID]
       ,[TypeName]
       ,[IsNeeded]
+	  ,MasterCategoryId
   FROM [dbo].[MasterGoogleType]
   WHERE IsNeeded = 1
 

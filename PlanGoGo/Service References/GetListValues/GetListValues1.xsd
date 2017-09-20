@@ -23,11 +23,24 @@
   <xs:element name="ArrayOfPublic_GetCategory" nillable="true" type="tns:ArrayOfPublic_GetCategory" />
   <xs:complexType name="Public_GetCategory">
     <xs:sequence>
+      <xs:element minOccurs="0" name="GoogleTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Public_GetCategory" nillable="true" type="tns:Public_GetCategory" />
+  <xs:complexType name="ArrayOfPublic_GetMasterCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Public_GetMasterCategory" nillable="true" type="tns:Public_GetMasterCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPublic_GetMasterCategory" nillable="true" type="tns:ArrayOfPublic_GetMasterCategory" />
+  <xs:complexType name="Public_GetMasterCategory">
+    <xs:sequence>
       <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
       <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Public_GetCategory" nillable="true" type="tns:Public_GetCategory" />
+  <xs:element name="Public_GetMasterCategory" nillable="true" type="tns:Public_GetMasterCategory" />
   <xs:complexType name="ArrayOfuserTable_Category">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="userTable_Category" nillable="true" type="tns:userTable_Category" />
@@ -107,7 +120,25 @@
       <xs:element minOccurs="0" name="UpdatedOrder" type="xs:int" />
       <xs:element minOccurs="0" name="UpdatedTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ViewTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userTable_Category" nillable="true" type="tns:ArrayOfuserTable_Category" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetOrderOfAttractionVisit" nillable="true" type="tns:GetOrderOfAttractionVisit" />
+  <xs:complexType name="ArrayOfGetAttractionOpenTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetAttractionOpenTime" nillable="true" type="tns:GetAttractionOpenTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetAttractionOpenTime" nillable="true" type="tns:ArrayOfGetAttractionOpenTime" />
+  <xs:complexType name="GetAttractionOpenTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttractionsActiveStatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="AttractionsId" type="xs:int" />
+      <xs:element minOccurs="0" name="CloseTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MasterWeekId" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WeekName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetAttractionOpenTime" nillable="true" type="tns:GetAttractionOpenTime" />
 </xs:schema>

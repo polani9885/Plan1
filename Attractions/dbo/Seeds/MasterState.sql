@@ -45,3 +45,18 @@ BEGIN
            ,'TN'
            ,1)
 END
+IF(SELECT Count(1) FROM MasterState WHERE StateName = 'Toronto' AND CountryId = 3) < 1
+BEGIN
+	INSERT INTO [dbo].[MasterState]
+           ([StateId]
+           ,[StateName]
+           ,[CountryId]
+           ,[StateShortName]
+           ,[IsDefault])
+     VALUES
+           (4
+           ,'Toronto'
+           ,3
+           ,'TO'
+           ,1)
+END

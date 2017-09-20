@@ -131,6 +131,7 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetCountryOnId.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetTypes.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetTravelMode.sql" />
+    <Build Include="dbo\Stored Procedures\Public_GetMasterCategory.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />

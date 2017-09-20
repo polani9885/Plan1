@@ -39,3 +39,25 @@ BEGIN
 		   ,'-82.537078')
 
 END
+GO
+IF(SELECT Count(1) FROM MasterCity WHERE CityName = 'Ontario' AND StateId = 4) < 1
+BEGIN	
+
+	INSERT INTO [dbo].[MasterCity]
+           ([CityId]
+           ,[CityName]
+           ,[CityShortName]
+           ,[StateId]
+           ,[IsDefault]
+		   ,Latitude
+		   ,Longitude)
+     VALUES
+           (3
+           ,'Ontario'
+           ,'ON'
+           ,'4'
+           ,1
+		   ,'43.653226'
+		   ,'-79.3831843')
+
+END

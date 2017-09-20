@@ -27,6 +27,12 @@ namespace PlanGoGo.GetListValues {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetCategory", ReplyAction="http://tempuri.org/IGetListValues/Public_GetCategoryResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Public_GetCategory>> Public_GetCategoryAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetMasterCategory", ReplyAction="http://tempuri.org/IGetListValues/Public_GetMasterCategoryResponse")]
+        System.Collections.Generic.List<BusinessEntites.Public_GetMasterCategory> Public_GetMasterCategory();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetMasterCategory", ReplyAction="http://tempuri.org/IGetListValues/Public_GetMasterCategoryResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Public_GetMasterCategory>> Public_GetMasterCategoryAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_FilterAttractions", ReplyAction="http://tempuri.org/IGetListValues/Public_FilterAttractionsResponse")]
         System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(string enterLocationName, System.Collections.Generic.List<BusinessEntites.userTable_Category> categoryList);
         
@@ -38,6 +44,12 @@ namespace PlanGoGo.GetListValues {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit", ReplyAction="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisitResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> Public_GetOrderOfAttractionVisitAsync(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, string StartDate, string StartTime, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/GetAttractionOpenTime", ReplyAction="http://tempuri.org/IGetListValues/GetAttractionOpenTimeResponse")]
+        System.Collections.Generic.List<BusinessEntites.GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/GetAttractionOpenTime", ReplyAction="http://tempuri.org/IGetListValues/GetAttractionOpenTimeResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetAttractionOpenTime>> GetAttractionOpenTimeAsync(int AttractionId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +95,14 @@ namespace PlanGoGo.GetListValues {
             return base.Channel.Public_GetCategoryAsync();
         }
         
+        public System.Collections.Generic.List<BusinessEntites.Public_GetMasterCategory> Public_GetMasterCategory() {
+            return base.Channel.Public_GetMasterCategory();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Public_GetMasterCategory>> Public_GetMasterCategoryAsync() {
+            return base.Channel.Public_GetMasterCategoryAsync();
+        }
+        
         public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(string enterLocationName, System.Collections.Generic.List<BusinessEntites.userTable_Category> categoryList) {
             return base.Channel.Public_FilterAttractions(enterLocationName, categoryList);
         }
@@ -97,6 +117,14 @@ namespace PlanGoGo.GetListValues {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> Public_GetOrderOfAttractionVisitAsync(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, string StartDate, string StartTime, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit) {
             return base.Channel.Public_GetOrderOfAttractionVisitAsync(TravelModeId, SourceAttractionID, DestinationAttractionID, AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit);
+        }
+        
+        public System.Collections.Generic.List<BusinessEntites.GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId) {
+            return base.Channel.GetAttractionOpenTime(AttractionId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetAttractionOpenTime>> GetAttractionOpenTimeAsync(int AttractionId) {
+            return base.Channel.GetAttractionOpenTimeAsync(AttractionId);
         }
     }
 }

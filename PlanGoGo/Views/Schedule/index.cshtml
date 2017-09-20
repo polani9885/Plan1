@@ -36,12 +36,20 @@
                             </div>
                         </div>
                         <div id="tab_Categories">
-                            <div ng-repeat="categoryList in CategoryList" style="float:left;padding:15px">
-                                <div>
-                                    <img src="/Images/User/Category/{{categoryList.TypeName}}.png" alt="{{categoryList.TypeName}}" width="100px" height="100px"/>
-                                    <input type="checkbox" checked="checked" ng-click="CategorySelected(categoryList)"/>
-                                    {{categoryList.TypeName}}
-                                </div>                                
+                                
+                            <div ng-repeat="mainCategoryList in MasterCategoryList" id="#tab_{{mainCategoryList.CategoryName}}">
+                                <div class="cat_Content" relattr="cat_tab" ng-class="{cat_ContentDisplay:$index>0}" id="cat_{{mainCategoryList.CategoryId}}">
+                                    <div ng-repeat="categoryList in CategoryList | filter: {MasterCategoryId : mainCategoryList.CategoryId }" style="float: left; padding: 15px">
+                                        <div class="cat_DisplayNewLine">
+                                            <img src="/Images/User/Category/{{categoryList.TypeName}}.png" alt="{{categoryList.TypeName}}" width="50px" height="50px"/>
+                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(categoryList)"/>
+                                            {{categoryList.TypeName}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cat_MainList" ng-click="categoryClick(mainCategoryList.CategoryId)">
+                                    {{mainCategoryList.CategoryName}}
+                                </div>
                             </div>
                         </div>
                         <div id="tab_TourPlan">

@@ -71,6 +71,24 @@ namespace PlanGoGo.Controllers
             }
         }
 
+
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0)]
+        public JsonResult GetMasterCategory()
+        {
+            List<Public_GetMasterCategory> getMasterCategory = _IGetListValues.Public_GetMasterCategory();
+            if (getMasterCategory.Count() > 0)
+            {
+                var jsonResults = Json(getMasterCategory, JsonRequestBehavior.AllowGet);
+                jsonResults.MaxJsonLength = int.MaxValue;
+                return jsonResults;
+            }
+            else
+            {
+                return Json(new List<Public_GetCategory>(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
         /// <summary>
         /// Getting the attrations based on the selection of the location 
         /// </summary>

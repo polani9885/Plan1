@@ -36,6 +36,44 @@ function GetCategoryList(angularScope, http) {
 }
 
 
+function GetMasterCategory(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: '/Schedule/GetMasterCategory',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            angularScope.$apply(function () {
+                angularScope.MasterCategoryList = data;
+            });
+
+            //inserting the categoryid into the global varaible
+            //$.each(data, function (categoryKey, categoryValue) {
+            //    item = [];
+            //    item.CategoryID = categoryValue["CategoryId"];
+            //    item.CategoryName = categoryValue.CategoryName;
+            //    selectedCategoryList.push(item);
+            //});
+
+            //It will get the all the attractions information
+            //PublicFilterAttractions(angularScope, http);
+
+            GetCategoryList(angularScope, http);
+
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+
 function PublicFilterAttractions(angularScope, http) {
     
     var newArr;

@@ -104,6 +104,7 @@
     <Compile Include="public_FilterAttractions.cs" />
     <Compile Include="Public_GetCategory.cs" />
     <Compile Include="public_GetCityList.cs" />
+    <Compile Include="Public_GetMasterCategory.cs" />
     <Compile Include="Scheduler\GetPlaceDetails.cs" />
     <Compile Include="Scheduler\GooglePhotos.cs" />
     <Compile Include="Scheduler\GoogleReview.cs" />

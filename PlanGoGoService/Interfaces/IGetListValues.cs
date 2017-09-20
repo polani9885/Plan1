@@ -17,6 +17,9 @@ namespace PlanGoGoService.Interfaces
         List<Public_GetCategory> Public_GetCategory();
 
         [OperationContract]
+        List<Public_GetMasterCategory> Public_GetMasterCategory();
+
+        [OperationContract]
         List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList);
 
         [OperationContract]

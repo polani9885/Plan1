@@ -49,6 +49,18 @@ namespace PlanGoGoService
             }
         }
 
+        public List<Public_GetMasterCategory> Public_GetMasterCategory()
+        {
+            try
+            {
+                return _businessAccess.Public_GetMasterCategory();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList)
         {
             try

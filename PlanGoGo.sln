@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsAPI", "GoogleMaps
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AttractionsUSA", "AttractionsUSA\AttractionsUSA.sqlproj", "{E9D31C50-F5A9-497A-B9CC-3F3D1AED740E}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AttractionsCanada", "AttractionsCanada\AttractionsCanada.sqlproj", "{F3A188FE-33DA-4C48-8F46-406212B0DD5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,12 @@ Global
 		{E9D31C50-F5A9-497A-B9CC-3F3D1AED740E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9D31C50-F5A9-497A-B9CC-3F3D1AED740E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9D31C50-F5A9-497A-B9CC-3F3D1AED740E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,5 +140,6 @@ Global
 		{48DBFB0D-7731-402D-B172-76FFA6251858} = {D77F5573-6777-4CF8-BBDA-7B094BD79397}
 		{F3DFCACC-3110-4D28-9344-2C47923DA332} = {041FA24C-5985-40F3-AA4E-AC5026B2EC0D}
 		{E9D31C50-F5A9-497A-B9CC-3F3D1AED740E} = {E7E3E5DB-2066-4D11-AF18-75234F7E621D}
+		{F3A188FE-33DA-4C48-8F46-406212B0DD5B} = {E7E3E5DB-2066-4D11-AF18-75234F7E621D}
 	EndGlobalSection
 EndGlobal

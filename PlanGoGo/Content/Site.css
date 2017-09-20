@@ -757,3 +757,26 @@ tr.pager td {
 .ui-dialog{
     width:500px !important;
 }
+
+.cat_MainList {
+    background-color:gray; 
+    color: white; 
+    font-size: 15px; 
+    font-weight: bold; 
+    width: 150px; 
+    padding: 10px; 
+    margin: 5px;
+}
+.cat_Content {
+    padding-left: 180px; 
+    padding-top: 0px; 
+    margin: 0px;
+    vertical-align: top;
+}
+.cat_ContentDisplay {
+    display: none;
+}
+.cat_DisplayNewLine {
+    width: 50%;
+}
+

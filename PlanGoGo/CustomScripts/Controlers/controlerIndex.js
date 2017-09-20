@@ -3,6 +3,7 @@ var appPlanGoGo = angular.module('AppPlanGoGo', ["ngTable"]);
 appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     
     $scope.CategoryList = [];
+    $scope.MasterCategoryList = [];
     $scope.TravelModeId;
     $scope.SourceAttractionID;
     $scope.DestinationAttractionID;
@@ -20,7 +21,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     //GetCategoryList($scope, $http);
 
     $scope.GetCategoryList = function () {        
-        GetCategoryList($scope, $http);
+        GetMasterCategory($scope, $http);
     };
 
     $scope.CategorySelected = function (categoryList) {
@@ -302,5 +303,10 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.GetPlaceDetails = function (selectedAttraction) {
         GetPlaceDetails(selectedAttraction);
     };
-    
+
+    $scope.categoryClick = function (categoryId) {
+        $('div[relattr="cat_tab"]').hide();
+        $('#cat_' + categoryId).show();
+    };
+
 });

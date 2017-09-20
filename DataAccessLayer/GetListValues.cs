@@ -44,6 +44,19 @@ namespace DataAccessLayer
             }
         }
 
+        public List<Public_GetMasterCategory> Public_GetMasterCategory()
+        {
+            try
+            {
+                List<Public_GetMasterCategory> _public_GetMasterCategory = SqlHelper.QuerySP<Public_GetMasterCategory>("Public_GetMasterCategory").ToList();
+                return _public_GetMasterCategory;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// If we select or unselect any category this method will resturn the result
         /// </summary>

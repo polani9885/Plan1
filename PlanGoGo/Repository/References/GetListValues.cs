@@ -20,6 +20,11 @@ namespace PlanGoGo.Repository
             return _client.Public_GetCategory().ToList();
         }
 
+        public List<Public_GetMasterCategory> Public_GetMasterCategory()
+        {
+            return _client.Public_GetMasterCategory().ToList();
+        }
+
         public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList)
         {
             return _client.Public_FilterAttractions(enterLocationName, categoryList).ToList();

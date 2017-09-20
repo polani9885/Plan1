@@ -43,7 +43,7 @@ BEGIN
 		   ,[Password]
 		   ,DatabaseName)
      VALUES
-           (1
+           (2
            ,'United States'
            ,'US'
            ,'Seed'
@@ -71,7 +71,7 @@ BEGIN
 		   ,[Password]
 		   ,DatabaseName)
      VALUES
-           (1
+           (3
            ,'Canada'
            ,'CA'
            ,'Seed'
@@ -81,6 +81,6 @@ BEGIN
 		   ,1
 		   ,NULL
 		   ,NULL
-		   ,'AttractionsCA')
+		   ,'AttractionsCanada')
 END
 GO

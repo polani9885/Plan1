@@ -9,9 +9,8 @@ function GetCityList() {
         },
         success: function (data) {
             cityList = [];
-            
-            $.each(data, function (cityKey, cityValue) {                
-                item = [];
+            $.each(data, function (cityKey, cityValue) {
+                var item = [];
                 item.value = cityValue["CityName"];
                 item.data = cityValue["CityId"];
                 cityList.push(item);

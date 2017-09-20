@@ -19,6 +19,12 @@
   <wsdl:message name="IGetListValues_Public_GetCategory_OutputMessage">
     <wsdl:part name="parameters" element="tns:Public_GetCategoryResponse" />
   </wsdl:message>
+  <wsdl:message name="IGetListValues_Public_GetMasterCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:Public_GetMasterCategory" />
+  </wsdl:message>
+  <wsdl:message name="IGetListValues_Public_GetMasterCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Public_GetMasterCategoryResponse" />
+  </wsdl:message>
   <wsdl:message name="IGetListValues_Public_FilterAttractions_InputMessage">
     <wsdl:part name="parameters" element="tns:Public_FilterAttractions" />
   </wsdl:message>
@@ -31,6 +37,12 @@
   <wsdl:message name="IGetListValues_Public_GetOrderOfAttractionVisit_OutputMessage">
     <wsdl:part name="parameters" element="tns:Public_GetOrderOfAttractionVisitResponse" />
   </wsdl:message>
+  <wsdl:message name="IGetListValues_GetAttractionOpenTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAttractionOpenTime" />
+  </wsdl:message>
+  <wsdl:message name="IGetListValues_GetAttractionOpenTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAttractionOpenTimeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGetListValues">
     <wsdl:operation name="Public_GetCityList">
       <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/Public_GetCityList" message="tns:IGetListValues_Public_GetCityList_InputMessage" />
@@ -40,6 +52,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/Public_GetCategory" message="tns:IGetListValues_Public_GetCategory_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/Public_GetCategoryResponse" message="tns:IGetListValues_Public_GetCategory_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="Public_GetMasterCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/Public_GetMasterCategory" message="tns:IGetListValues_Public_GetMasterCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/Public_GetMasterCategoryResponse" message="tns:IGetListValues_Public_GetMasterCategory_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Public_FilterAttractions">
       <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/Public_FilterAttractions" message="tns:IGetListValues_Public_FilterAttractions_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/Public_FilterAttractionsResponse" message="tns:IGetListValues_Public_FilterAttractions_OutputMessage" />
@@ -47,6 +63,10 @@
     <wsdl:operation name="Public_GetOrderOfAttractionVisit">
       <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit" message="tns:IGetListValues_Public_GetOrderOfAttractionVisit_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisitResponse" message="tns:IGetListValues_Public_GetOrderOfAttractionVisit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttractionOpenTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/GetAttractionOpenTime" message="tns:IGetListValues_GetAttractionOpenTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/GetAttractionOpenTimeResponse" message="tns:IGetListValues_GetAttractionOpenTime_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGetListValues" type="tns:IGetListValues">
@@ -69,6 +89,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Public_GetMasterCategory">
+      <soap:operation soapAction="http://tempuri.org/IGetListValues/Public_GetMasterCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Public_FilterAttractions">
       <soap:operation soapAction="http://tempuri.org/IGetListValues/Public_FilterAttractions" style="document" />
       <wsdl:input>
@@ -80,6 +109,15 @@
     </wsdl:operation>
     <wsdl:operation name="Public_GetOrderOfAttractionVisit">
       <soap:operation soapAction="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttractionOpenTime">
+      <soap:operation soapAction="http://tempuri.org/IGetListValues/GetAttractionOpenTime" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

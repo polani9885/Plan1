@@ -11,5 +11,7 @@ namespace BusinessEntites
         public int GoogleTypeID { get; set; }
 
         public string TypeName { get; set; }
+
+        public int MasterCategoryId { get; set; }
     }
 }
