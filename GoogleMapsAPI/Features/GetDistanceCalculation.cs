@@ -18,16 +18,52 @@ namespace GoogleMapsAPI.Features
         private readonly DALSchedulers dALSchedulers = new DALSchedulers();
         private readonly WebRequest webRequest = new WebRequest();
         private readonly ExceptionLogging exceptionLogging = new ExceptionLogging();
+        
+
+        public void MissingDistance(int countryId)
+        {
+            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
+            if (googleCounter == null || googleCounter.Counter <
+                Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+            {
+                var pendingRecords = dALSchedulers.Scheduler_GetMissingDistance(countryId);
+                var travelMode = dALSchedulers.Scheduler_GetTravelMode();
+
+                AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
+
+                foreach (AttractionsDTO attractionsDTO in pendingRecords)
+                {
+                    var attractionInformation = dALSchedulers.Scheduler_GetDestinationMissingDistance(countryId,
+                        attractionsDTO.AttractionsId);
+
+                    foreach (MissingDataAttractionDTO _attractionsDTO in attractionInformation)
+                    {
+                        foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode)
+                        {
+                            DistanceGetting(masterTravelModeDTO.TravelType, _attractionsDTO.SourceText,
+                                _attractionsDTO.DestinationText, attractionsDTO.AttractionsId,
+                                _attractionsDTO.AttractionId, masterTravelModeDTO.TravelModeId, countryId);
+                        }
+
+                        dALSchedulers.Scheduler_DeleteMissingDistanceDestination(countryId,_attractionsDTO
+                            .MissingDistanceAttractionsRecordsXAttractionsID);
+                    }
+
+                    dALSchedulers.Scheduler_DeleteMissingDistance(countryId,attractionsDTO.AttractionsId);
+                }
+            }
+        }
+
 
         public void CalculateDistance(int countryId)
         {
-            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions", countryId);
+            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
             if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
             {
                 var pendingRecords = dALSchedulers.Scheduler_GetDistancePending(countryId);
                 var travelMode = dALSchedulers.Scheduler_GetTravelMode();
 
-                AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
+                
 
                 foreach (AttractionsDTO attractionsDTO in pendingRecords)
                 {
@@ -38,72 +74,80 @@ namespace GoogleMapsAPI.Features
                     {
                         foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode)
                         {
-                            try
-                            {
+                            DistanceGetting(masterTravelModeDTO.TravelType, attractionsDTO.GoogleSearchText,
+                                _attractionsDTO.GoogleSearchText, attractionsDTO.AttractionsId,
+                                _attractionsDTO.AttractionsId, masterTravelModeDTO.TravelModeId, countryId);
 
-
-                                string radiusData = string.Empty;
-                                string url =
-                                    "https://maps.googleapis.com/maps/api/directions/json?&mode=" +
-                                    masterTravelModeDTO.TravelType.ToLower() + "&origin=" +
-                                    attractionsDTO.GoogleSearchText +
-                                    "&destination=" + _attractionsDTO.GoogleSearchText + "&key=" +
-                                    ConfigurationManager.AppSettings["apiKey"];
-                                radiusData = webRequest.WebServiceInformation(url);
-                                var returnsInformation =
-                                    Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
-
-
-                                if (returnsInformation.results != null && returnsInformation.results.Count > 0)
-                                {
-                                    dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
-                                        attractionsDTO.Longitude, attractionsDTO.Latitude,
-                                        false, countryId);
-                                }
-                                else
-                                {
-                                    dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
-                                        attractionsDTO.Longitude, attractionsDTO.Latitude,
-                                        true, countryId);
-                                }
-
-                                attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
-                                attractionTravelTimeDistanceDTO.SourceAttractionId = attractionsDTO.AttractionsId;
-                                attractionTravelTimeDistanceDTO.DestinationAttractionId = _attractionsDTO.AttractionsId;
-                                attractionTravelTimeDistanceDTO.TravelModeId = masterTravelModeDTO.TravelModeId;
-                                attractionTravelTimeDistanceDTO.Distance =
-                                    Convert.ToInt32(
-                                        returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().distance.value);
-
-                                attractionTravelTimeDistanceDTO.TravelTime =
-                                    Convert.ToInt32(
-                                        returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().duration.value);
-
-                                dALSchedulers.Scheduler_InsertAttractionTravelTimeDistance(
-                                    attractionTravelTimeDistanceDTO,
-                                    countryId);
-
-                            }
-                            catch (Exception ex)
-                            {
-                                exceptionLogging.InsertExceptionInformation(new LoggingEntity
-                                {
-                                    CreatedBy = "scheduler",
-                                    ExceptionMessage = ex.Message,
-                                    ExceptionStackTrace = ex.StackTrace,
-                                    MethodName = "CalculateDistance",
-                                    Parameters =
-                                        "SourceAttractionId  = " + attractionsDTO.AttractionsId +
-                                        " DestinationAttractionId = " + _attractionsDTO.AttractionsId +
-                                        " TravelModeId = " +
-                                        masterTravelModeDTO.TravelModeId,
-                                    CountryId = countryId
-                                });
-                            }
 
                         }
                     }
                 }
+            }
+        }
+
+        public void DistanceGetting(string travelType,string origin, string destination,int sourceAttractionId, int destinationAttractionId, int travelTypeId, int countryId)
+        {
+            try
+            {
+                AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
+
+                string radiusData = string.Empty;
+                string url =
+                    "https://maps.googleapis.com/maps/api/directions/json?&mode=" +
+                    travelType.ToLower() + "&origin=" +
+                    origin +
+                    "&destination=" + destination + "&key=" +
+                    ConfigurationManager.AppSettings["apiKey"];
+                radiusData = webRequest.WebServiceInformation(url);
+                var returnsInformation =
+                    Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
+
+
+                if (returnsInformation.results != null && returnsInformation.results.Count > 0)
+                {
+                    dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
+                        string.Empty, string.Empty,
+                        false);
+                }
+                else
+                {
+                    dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
+                        string.Empty, string.Empty,
+                        true);
+                }
+
+                attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
+                attractionTravelTimeDistanceDTO.SourceAttractionId = sourceAttractionId;
+                attractionTravelTimeDistanceDTO.DestinationAttractionId = destinationAttractionId;
+                attractionTravelTimeDistanceDTO.TravelModeId = travelTypeId;
+                attractionTravelTimeDistanceDTO.Distance =
+                    Convert.ToInt32(
+                        returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().distance.value);
+
+                attractionTravelTimeDistanceDTO.TravelTime =
+                    Convert.ToInt32(
+                        returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().duration.value);
+
+                dALSchedulers.Scheduler_InsertAttractionTravelTimeDistance(
+                    attractionTravelTimeDistanceDTO,
+                    countryId);
+
+            }
+            catch (Exception ex)
+            {
+                exceptionLogging.InsertExceptionInformation(new LoggingEntity
+                {
+                    CreatedBy = "scheduler",
+                    ExceptionMessage = ex.Message,
+                    ExceptionStackTrace = ex.StackTrace,
+                    MethodName = "CalculateDistance",
+                    Parameters =
+                        "SourceAttractionId  = " + sourceAttractionId +
+                        " DestinationAttractionId = " + destinationAttractionId +
+                        " TravelModeId = " +
+                        travelTypeId,
+                    CountryId = countryId
+                });
             }
         }
 

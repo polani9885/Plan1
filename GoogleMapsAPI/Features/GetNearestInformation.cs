@@ -20,12 +20,13 @@ namespace GoogleMapsAPI.Features
         private readonly WebRequest webRequest = new WebRequest();
         private readonly NLogBaseClass nLogBaseClass = new NLogBaseClass();
         private readonly ExceptionLogging exceptionLogging = new ExceptionLogging();
+        private readonly GetPlaceInformation getPlaceInformation = new GetPlaceInformation();
 
         public void GetRadiusInformation(int countryId)
         {
             try
             {
-                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place", countryId);
+                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
                 if (googleCounter == null || googleCounter.Counter< Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                 { 
                     var masterCityList = dALSchedulers.Scheduler_GetCityOnCountryId(countryId);
@@ -34,27 +35,26 @@ namespace GoogleMapsAPI.Features
 
                     var googleType = dALSchedulers.Scheduler_GetTypes().ToArray();
 
-                    if (masterCityList != null)
-                    {
-                        masterCityList =
-                            masterCityList.Where(
-                                    x => !string.IsNullOrEmpty(x.Latitude) && !string.IsNullOrEmpty(x.Longitude))
-                                .ToList();
+                    var citylatitude = masterCityList.FirstOrDefault(x => !x.IsGettingNearLocationDone && !string.IsNullOrEmpty(x.Latitude) &&
+                                    !string.IsNullOrEmpty(x.Longitude));
 
+                    if (citylatitude != null)
+                    {
+                        latitude = citylatitude.Latitude;
+                        longitude = citylatitude.Longitude;
+                    }
+                    else
+                    {
                         var cityInfo =
-                            dALSchedulers.Scheduler_AttractionGetOnCityId(
-                                masterCityList.Select(x => x.CityId).FirstOrDefault(), countryId);
+                            dALSchedulers.Scheduler_AttractionGetOnCityId(countryId);
                         if (cityInfo != null && cityInfo.Count > 0)
                         {
                             latitude = cityInfo.Select(x => x.Latitude).FirstOrDefault();
                             longitude = cityInfo.Select(x => x.Longitude).FirstOrDefault();
                         }
-                        else
-                        {
-                            latitude = masterCityList.Select(x => x.Latitude).FirstOrDefault();
-                            longitude = masterCityList.Select(x => x.Longitude).FirstOrDefault();
-                        }
                     }
+                    
+                    
                     string radiusData = string.Empty;
                     string url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + latitude +
                                  "," +
@@ -65,21 +65,24 @@ namespace GoogleMapsAPI.Features
 
                     if (returnsInformation != null)
                     {
-                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude);
+                        if (citylatitude != null)
+                            dALSchedulers.UpdateCityNearestLocationDont(citylatitude.CityId);
+                        
+                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude, masterCityList.Select(x=>x.CountryName).FirstOrDefault());
                     }
 
                     if (returnsInformation.results != null && returnsInformation.results.Count > 0)
                     {
                         dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", longitude, latitude,
-                            false, countryId);
+                            false);
                     }
                     else
                     {
                         dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", longitude, latitude,
-                            true, countryId);
+                            true);
                     }
                 }
-
+                getPlaceInformation.GetPlaceDetails(countryId);
             }
             catch (Exception ex)
             {
@@ -95,7 +98,7 @@ namespace GoogleMapsAPI.Features
             }
         }
 
-        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType,int countryId,string url,string longitude,string latitude)
+        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType,int countryId,string url,string longitude,string latitude,string countryName)
         {
             string radiusData = string.Empty;
             string urlString = string.Empty;
@@ -111,7 +114,7 @@ namespace GoogleMapsAPI.Features
 
             dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId);
 
-            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place", countryId);
+            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
             if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
             {
                 if (!string.IsNullOrEmpty(returnsInformation.next_page_token))
@@ -124,17 +127,17 @@ namespace GoogleMapsAPI.Features
                     if (returnsInformation.results != null && returnsInformation.results.Count > 0)
                     {
                         dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", longitude, latitude,
-                            false, countryId);
+                            false);
                     }
                     else
                     {
                         dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", longitude, latitude,
-                            true, countryId);
+                            true);
                     }
 
                     if (returnsInformation != null)
                     {
-                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude);
+                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude,countryName);
                     }
                 }
             }

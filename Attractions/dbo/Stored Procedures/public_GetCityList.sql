@@ -9,10 +9,13 @@ AS
 BEGIN
 
 SELECT [CityId]
-      ,[CityName]
+      ,[CityName] + ', ' + MS.StateName + ', ' + MCC.CountryName AS CityName
       ,[CityShortName]
-      ,[StateId]
-  FROM [dbo].[MasterCity]
+      ,MC.[StateId]
+	  ,MCC.CountryId
+  FROM [dbo].[MasterCity] MC
+  JOIN dbo.MasterState MS ON MS.StateId = MC.StateId
+  JOIN dbo.MasterCountry MCC ON MCC.CountryId = MS.CountryId
 
 
 

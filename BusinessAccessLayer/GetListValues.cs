@@ -63,11 +63,11 @@ namespace BusinessAccessLayer
             }
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList)
+        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, int cityId)
         {
             try
             {
-                return _dataAccess.Public_FilterAttractions(enterLocationName, categoryList);
+                return _dataAccess.Public_FilterAttractions(enterLocationName, categoryList, countryId, cityId);
             }
             catch (Exception ex)
             {
@@ -75,11 +75,11 @@ namespace BusinessAccessLayer
             }
         }
 
-        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate, string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit)
+        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate, string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit,int CountryId)
         {
             try
             {
-                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, SourceAttractionID, DestinationAttractionID, AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit);
+                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, SourceAttractionID, DestinationAttractionID, AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit, CountryId);
             }
             catch (Exception ex)
             {

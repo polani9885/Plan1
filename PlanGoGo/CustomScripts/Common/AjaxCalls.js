@@ -13,9 +13,9 @@ function GetCityList() {
                 var item = [];
                 item.value = cityValue["CityName"];
                 item.data = cityValue["CityId"];
+                item.countryId = cityValue["CountryId"];
                 cityList.push(item);
             });
-
             $('#autoCityName').autocomplete({
                 source: cityList
             });
@@ -26,6 +26,8 @@ function GetCityList() {
                 //this will get the category list
                 var scope = angular.element("#controlerIndex").scope();
                 scope.$apply(function () {
+                    scope.countryId = 0;
+                    scope.cityId = 0;
                     scope.GetCategoryList();
                 });
             });

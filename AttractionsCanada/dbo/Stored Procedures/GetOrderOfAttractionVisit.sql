@@ -4,7 +4,7 @@
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[GetOrderOfAttractionVisit]	
-	@AttractionID userTable_OnlyId ReadOnly 
+		@AttractionID userTable_OnlyId ReadOnly 
 	,@TravelModeId INT
 	,@SourceAttractionID INT
 	,@DestinationAttractionID INT
@@ -293,7 +293,7 @@ SELECT	OA.*
 		,A.GoogleICon 'SourceIcon'
 		,AD.GoogleICon 'DestinationIcon'
 FROM @OrderAttraction OA
-JOIN MasterTravelMode MT ON MT.TravelModeId = OA.TravelModeId
+JOIN Attractions.dbo.MasterTravelMode MT ON MT.TravelModeId = OA.TravelModeId
 JOIN Attractions A ON A.AttractionsId = OA.SourceAttractionId
 JOIN Attractions AD ON AD.AttractionsId = OA.DestinationAttractionId
 
@@ -306,4 +306,5 @@ SELECT *
 FROM @MissingAttractions
 
 END
+
 

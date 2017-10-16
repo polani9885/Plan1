@@ -31,5 +31,6 @@ BEGIN
   WHERE ISNULL(IsNearDistanceDone,0) = 0
   AND Longitude IS NOT NULL
   AND Latitude Is NOT NULL
+  AND GoogleSearchText IS NOT NULL
 
 END

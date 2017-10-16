@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_GoogleLogging 
+﻿CREATE PROCEDURE [dbo].[Scheduler_GoogleLogging] 
 (
 	@MapType varchar(50)
     ,@MethodName varchar(50)    

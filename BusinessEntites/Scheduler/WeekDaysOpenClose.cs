@@ -14,9 +14,9 @@ namespace BusinessEntites.Scheduler
         public int WeekdayId { get; set; }
 
         [DataMember]
-        public TimeSpan OpenTime { get; set; }
+        public string OpenTime { get; set; }
 
         [DataMember]
-        public TimeSpan CloseTime { get; set; }
+        public string CloseTime { get; set; }
     }
 }

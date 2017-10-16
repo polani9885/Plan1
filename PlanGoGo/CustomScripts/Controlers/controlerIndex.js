@@ -13,6 +13,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.attractionList = [];
     $scope.attractionListAutoComplete = [];
     $scope.notInterestedList = [];
+    $scope.countryId = 0;
+    $scope.cityId = 0;
 
     $scope.OrderOfAttractionList = [];
 
@@ -41,9 +43,9 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
             }
         });        
         if (!isRecordFound) {
-            item = [];
-            item.CategoryId = categoryList.CategoryId;
-            item.CategoryName = categoryList.CategoryName;
+            var item = [];
+            item.CategoryId = categoryList.GoogleTypeID;
+            item.CategoryName = categoryList.TypeName;
             selectedCategoryList.push(item);
         }
         //It will get the all the attractions information
@@ -51,15 +53,15 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     };
 
     //City Selected
-    $scope.CitySelected=function(data)
-    {
+    $scope.CitySelected=function(data) {
+        
         //Google Maps data binding
         $scope.GoogleMapMarks(data);
-       
 
+        $scope.attractionList = [];
         $.each(data, function (attractionKey, attractionValue)
         {
-            item = [];            
+            var item = [];            
             item.value = attractionValue["GoogleSearchText"];
             item.data = attractionValue["AttractionsId"];
             $scope.attractionListAutoComplete.push(item);
@@ -195,8 +197,10 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
        
        
         var num_tabs = $("div#subtabs ul li").length + 1;
+        
 
         $.each(data, function (groupKey, groupValue) {
+            
             $("div#subtabs ul").append(
                 "<li><a href='#tab_" + groupValue.GroupDate.replace("/", "_").replace("/", "_") + "'>" + groupValue.GroupDate + "</a></li>"
             );
@@ -210,6 +214,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
             $("div#subtabs").tabs("refresh");
         }
         );
+        $("div#subtabs ul li").find('a:first').triggerHandler('click');
+        //$("#"+firstDate).triggerHandler('click');
     };
 
     $scope.CategoryStyleLeft = {

@@ -41,5 +41,7 @@ namespace BusinessEntites.Common
         public string StateShortName { get; set; }
 
         public string CityShortName { get; set; }
+
+        
     }
 }

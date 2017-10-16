@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_GetGoogleMapsMethodCount 
+﻿CREATE PROCEDURE [dbo].[Scheduler_GetGoogleMapsMethodCount] 
 (
 	@MapType AS Varchar(50)
 )	

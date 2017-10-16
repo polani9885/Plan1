@@ -83,17 +83,28 @@ function PublicFilterAttractions(angularScope, http) {
         if (!isFirst)
         {
             newArr += ",";
-            newArr += [obj.GoogleTypeID + "~" + obj.TypeName];
+            newArr += obj.CategoryId + "~" + obj.CategoryName;
         }
         else
         {
             isFirst = false;
-            newArr = [obj.GoogleTypeID + "~" + obj.TypeName];
+            newArr = obj.CategoryId + "~" + obj.CategoryName;
         }
         
-    });        
+    });
+    var cityId = 0;
+    var countryId = 0;
+    if (angularScope.countryId > 0 && angularScope.cityId > 0) {
+        cityId = angularScope.cityId;
+        countryId = angularScope.countryId;
+    } else {
+        cityId = $("#autoCityName").data().uiAutocomplete.selectedItem.data;
+        countryId = $("#autoCityName").data().uiAutocomplete.selectedItem.countryId;
+        angularScope.cityId = cityId;
+        angularScope.countryId = countryId;
+    }
     
-    var jsonObject = { "enterLocationName": $("#autoCityName").val(), "categoryList": newArr };
+    var jsonObject = { "enterLocationName": $("#autoCityName").val(), "categoryList": newArr, "countryId": countryId, "cityId": cityId };
     $.ajax({
         type: "POST",
         url: '/Schedule/Public_FilterAttractions',
@@ -104,9 +115,12 @@ function PublicFilterAttractions(angularScope, http) {
 
         },
         success: function (data) {
-            angularScope.$apply(function () {
-                angularScope.CitySelected(data);                
-            });
+            
+            if (data.length > 0) {
+                angularScope.$apply(function() {
+                    angularScope.CitySelected(data);
+                });
+            }
         },
         error: function (result) {
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
@@ -118,6 +132,48 @@ function PublicFilterAttractions(angularScope, http) {
 }
 
 function Public_GetOrderOfAttractionVisit(angularScope, http) {
+
+    debugger;
+    var OrderOfAttractionListTemp = [];
+    var OrderOfAttractionListTempSub = {};
+    
+    $.each(angularScope.OrderOfAttractionList,
+        function (key, value) {
+
+            OrderOfAttractionListTempSub.GroupDate =  value.GroupDate;
+            OrderOfAttractionListTempSub.ListGetOrderOfAttractionVisit = [];
+            counterCount = 0;
+            $.each(value.ListGetOrderOfAttractionVisit,
+                function(subKey, subValue) {
+                    var subListValue = {};
+                    subListValue.SourceAttractionId = subValue.SourceAttractionId;
+                    subListValue.DestinationAttractionId = subValue.DestinationAttractionId;
+                    //subListValue.Distance = subValue.Distance;
+                    //subListValue.TravelTime = subValue.TravelTime;
+                    //subListValue.TravelModeId = subValue.TravelModeId;
+                    //subListValue.SourceAttractionName = subValue.SourceAttractionName;
+                    //subListValue.DestinationAttractionName = subValue.DestinationAttractionName;
+                    //subListValue.DateAndTime = subValue.DateAndTime;
+                    //subListValue.ReachTime = subValue.ReachTime;
+                    //subListValue.TimeRequiredToView = subValue.TimeRequiredToView;
+                    //subListValue.ViewTime = subValue.ViewTime;
+                    //subListValue.TravelType = subValue.TravelType;
+                    //subListValue.SourceIcon = subValue.SourceIcon;
+                    //subListValue.DestinationIcon = subValue.DestinationIcon;
+                    //subListValue.RecordCount = subValue.RecordCount;
+                    //subListValue.IsOrderUpdated = subValue.IsOrderUpdated;
+                    //subListValue.UpdatedOrder = subValue.UpdatedOrder;
+                    //subListValue.IsUpdatedViewTime = subValue.IsUpdatedViewTime;
+                    //subListValue.UpdatedTime = subValue.UpdatedTime;
+                    //subListValue.IsPersonalRequest = subValue.IsPersonalRequest;
+
+                    OrderOfAttractionListTempSub.ListGetOrderOfAttractionVisit.push(subListValue);
+                    
+                });
+            
+            OrderOfAttractionListTemp.push(OrderOfAttractionListTempSub);
+
+        });
     
     var jsonObject = {
         "TravelModeId": angularScope.TravelModeId,
@@ -126,7 +182,8 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
         "AttractionID": angularScope.AttractionID,
         "StartDate": angularScope.StartDate,
         "StartTime": angularScope.StartTime,
-        "ListGroupWithDateAttractions": angularScope.OrderOfAttractionList
+        "ListGroupWithDateAttractions": OrderOfAttractionListTemp,
+        "CountryId": angularScope.countryId
     };
     var parameter = JSON.stringify(jsonObject);
 

@@ -61,18 +61,19 @@ namespace DataAccessLayer
         /// If we select or unselect any category this method will resturn the result
         /// </summary>
         /// <returns></returns>
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList)
+        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList,int countryId, int cityId)
         {
             try
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("EnterLocationName", enterLocationName);
                 //parameters.Add()
-
+                SqlHelper.countryId = countryId;
 
                 List<public_FilterAttractions> _public_FilterAttractions = SqlHelper.QuerySP<public_FilterAttractions>("public_FilterAttractions",
                     new {
                         EnterLocationName = enterLocationName,
+                        CityId = cityId,
                         CategoryID = CommonObjects.Convert.ToDataTable<userTable_Category>(categoryList)
                     }).ToList();
                 return _public_FilterAttractions;
@@ -83,7 +84,7 @@ namespace DataAccessLayer
             }
         }
 
-        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,int SourceAttractionID,int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit)
+        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,int SourceAttractionID,int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit,int CountryId)
         {
             try
             {
@@ -91,6 +92,7 @@ namespace DataAccessLayer
                 parameters.Add("TravelModeId", TravelModeId);
                 //parameters.Add()
 
+                SqlHelper.countryId = CountryId;
 
                 List<GetOrderOfAttractionVisit> _public_GetOrderOfAttractionVisit = SqlHelper.QuerySP<GetOrderOfAttractionVisit>("GetOrderOfAttractionVisit",
                     new

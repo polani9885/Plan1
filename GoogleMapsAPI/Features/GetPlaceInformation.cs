@@ -25,6 +25,7 @@ namespace GoogleMapsAPI.Features
         private readonly WebRequest webRequest = new WebRequest();
         private readonly NLogBaseClass nLogBaseClass = new NLogBaseClass();
         private readonly ExceptionLogging exceptionLogging = new ExceptionLogging();
+        private readonly GetDistanceCalculation getDistanceCalculation = new GetDistanceCalculation();
 
         public void GetPlaceDetails(int countryId)
         {
@@ -51,13 +52,14 @@ namespace GoogleMapsAPI.Features
                     });
                 }
             }
+            getDistanceCalculation.CalculateDistance(countryId);
         }
 
         private void GetAutoCompleteInformation(int countryId, GetPlaceDetails details, MasterCountryScheduler masterCountryScheduler, int attractionsId)
         {
             try
             {
-                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("geocode", countryId);
+                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("geocode");
                 if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                 {
                     AttractionsDTO attractionDto;
@@ -75,46 +77,63 @@ namespace GoogleMapsAPI.Features
                     {
                         dALSchedulers.Scheduler_GoogleLogging("geocode", "GetAutoCompleteInformation",
                             details.AttractionName, "", "",
-                            false, countryId);
+                            false);
                     }
                     else
                     {
                         dALSchedulers.Scheduler_GoogleLogging("geocode", "GetAutoCompleteInformation",
                             details.AttractionName, "", "",
-                            true, countryId);
+                            true);
                     }
 
                     if (placeDetailsInfo != null)
                     {
-                        attractionDto = new AttractionsDTO();
-                        attractionDto.Latitude = placeDetailsInfo.results.FirstOrDefault().geometry.location.lat;
-                        attractionDto.AddressOne = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
-                                                       .address_components, "street_number")
-                                                   + " "
-                                                   +
-                                                   GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
-                                                       .address_components, "route");
-                        attractionDto.AddressTwo = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
-                            .address_components, "administrative_area_level_2");
-                        attractionDto.CityName = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
-                            .address_components, "locality");
-                        attractionDto.CreatedBy = "schedule";
-                        attractionDto.Longitude = placeDetailsInfo.results.FirstOrDefault().geometry.location.lng;
-                        attractionDto.PlaceId = placeDetailsInfo.results.FirstOrDefault().place_id;
-                        attractionDto.StateName = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
-                            .address_components, "administrative_area_level_1");
-                        attractionDto.CountryId = countryId;
-                        attractionDto.AttractionsId = attractionsId;
-                        attractionDto.StateShortName =
-                            GetShortNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
-                                .address_components, "administrative_area_level_1");
-
-                        attractionDto.CityShortName =
-                            GetShortNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
+                        if (masterCountryScheduler.CountryName != GetLongNameAddressElement(placeDetailsInfo.results
+                                .FirstOrDefault()
+                                .address_components, "country"))
+                        {
+                            dALSchedulers.SchedulerDeleteAttraction(attractionsId, countryId);
+                        }
+                        else
+                        {
+                            attractionDto = new AttractionsDTO();
+                            attractionDto.Latitude = placeDetailsInfo.results.FirstOrDefault().geometry.location.lat;
+                            attractionDto.AddressOne = GetLongNameAddressElement(placeDetailsInfo.results
+                                                           .FirstOrDefault()
+                                                           .address_components, "street_number")
+                                                       + " "
+                                                       +
+                                                       GetLongNameAddressElement(placeDetailsInfo.results
+                                                           .FirstOrDefault()
+                                                           .address_components, "route");
+                            attractionDto.AddressTwo = GetLongNameAddressElement(placeDetailsInfo.results
+                                .FirstOrDefault()
+                                .address_components, "administrative_area_level_2");
+                            attractionDto.CityName = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
                                 .address_components, "locality");
-                        dALSchedulers.Scheduler_InsertAttractionAuto(attractionDto, countryId);
+                            attractionDto.CreatedBy = "schedule";
+                            attractionDto.Longitude = placeDetailsInfo.results.FirstOrDefault().geometry.location.lng;
+                            attractionDto.PlaceId = placeDetailsInfo.results.FirstOrDefault().place_id;
+                            attractionDto.StateName = GetLongNameAddressElement(placeDetailsInfo.results
+                                .FirstOrDefault()
+                                .address_components, "administrative_area_level_1");
+                            attractionDto.CountryId = countryId;
+                            attractionDto.AttractionsId = attractionsId;
+                            attractionDto.StateShortName =
+                                GetShortNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
+                                    .address_components, "administrative_area_level_1");
 
-                        GetPlaceDetails(attractionDto.PlaceId, attractionsId, countryId);
+                            attractionDto.CityShortName =
+                                GetShortNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
+                                    .address_components, "locality");
+                            dALSchedulers.Scheduler_InsertAttractionAuto(attractionDto, countryId);
+
+                            GetPlaceDetails(attractionDto.PlaceId, attractionsId, countryId);
+                        }
+                    }
+                    else
+                    {
+                        dALSchedulers.SchedulerDeleteAttraction(attractionsId, countryId);
                     }
                 }
             }
@@ -199,24 +218,31 @@ namespace GoogleMapsAPI.Features
 
                     if (time.Trim() == "Open 24 hours")
                     {
-                        weekDaysOpenClose.OpenTime = TimeSpan.Parse("00:00");
-                        weekDaysOpenClose.CloseTime = TimeSpan.Parse("23:59");
+                        weekDaysOpenClose.OpenTime = TimeSpan.Parse("00:00").ToString().Replace('.',':');
+                        weekDaysOpenClose.CloseTime = TimeSpan.Parse("23:59").ToString().Replace('.', ':');
+                    }
+                    else if (time.Trim() == "Closed")
+                    {
+                        weekDaysOpenClose = new WeekDaysOpenClose();
+                        weekDaysOpenClose.OpenTime = string.Empty;
+                        weekDaysOpenClose.CloseTime = string.Empty;
                     }
                     else
                     {
-                        weekDaysOpenClose.OpenTime = TimeSpan.Parse(DateTime.Parse(time.Trim().Split('–')[0].Trim()).Hour.ToString());
-                        weekDaysOpenClose.CloseTime = TimeSpan.Parse(DateTime.Parse(time.Trim().Split('–')[1].Trim()).Hour.ToString());
+                        weekDaysOpenClose.OpenTime = TimeSpan.Parse(DateTime.Parse(time.Trim().Split('–')[0].Trim()).Hour.ToString()).ToString().Replace('.', ':');
+                        weekDaysOpenClose.CloseTime = TimeSpan.Parse(DateTime.Parse(time.Trim().Split('–')[1].Trim()).Hour.ToString()).ToString().Replace('.', ':');
                     }
 
                     LlstWeekDaysOpenClose.Add(weekDaysOpenClose);
                 }
             }
-            return LlstWeekDaysOpenClose;
+            return LlstWeekDaysOpenClose.Where(x => !string.IsNullOrEmpty(x.OpenTime) ||
+                                                    !string.IsNullOrEmpty(x.CloseTime)).ToList();
         }
 
         private void GetPlaceDetails(string placeId, int attractionsId, int countryId)
         {
-            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place", countryId);
+            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
             if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
             {
                 string retsult = string.Empty;
@@ -231,12 +257,12 @@ namespace GoogleMapsAPI.Features
                 if (placeDetailsInfo.result != null)
                 {
                     dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
-                        false, countryId);
+                        false);
                 }
                 else
                 {
                     dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
-                        true, countryId);
+                        true);
                 }
 
 

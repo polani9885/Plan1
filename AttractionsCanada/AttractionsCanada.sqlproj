@@ -77,9 +77,7 @@
     <Build Include="dbo\Stored Procedures\Scheduler_AttractionGetOnCityId.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetAttractionNearBy.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetDistancePending.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_GetGoogleMapsMethodCount.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetPlaceDetails.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_GoogleLogging.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionAuto.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionInfo.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionTravelTimeDistance.sql" />
@@ -94,7 +92,6 @@
     <Build Include="dbo\Tables\AttractionXCategory.sql" />
     <Build Include="dbo\Tables\AttractionXMasterGoogleType.sql" />
     <Build Include="dbo\Tables\CityStartPoint.sql" />
-    <Build Include="dbo\Tables\GoogleMapsLogging.sql" />
     <Build Include="dbo\Tables\LoggInfo.sql" />
     <Build Include="dbo\Tables\MissingDistanceAttractionsRecords.sql" />
     <Build Include="dbo\Tables\MissingDistanceAttractionsRecordsXAttractions.sql" />
@@ -106,5 +103,10 @@
     <Build Include="dbo\User Defined Types\userTable_Category.sql" />
     <Build Include="dbo\User Defined Types\userTable_OnlyId.sql" />
     <Build Include="dbo\User Defined Types\userTable_OrderAttraction.sql" />
+    <Build Include="dbo\Stored Procedures\SchedulerDeleteAttraction.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetMissingDistance.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetDestinationMissingDistance.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_DeleteMissingDistanceDestination.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_DeleteMissingDistance.sql" />
   </ItemGroup>
 </Project>

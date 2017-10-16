@@ -27,7 +27,9 @@ BEGIN
 
 	IF ISNULL(@CityId,0) = 0
 	BEGIN
-		SELECT @StateId = StateId FROM Attractions.dbo.MasterState WHERE StateName = @StateName
+		SELECT @StateId = StateId FROM Attractions.dbo.MasterState 
+		WHERE StateName = @StateName
+		AND CountryId = @CountryId
 		IF ISNULL(@StateId,0) = 0
 		BEGIN		
 			INSERT INTO Attractions.[dbo].[MasterState]
@@ -43,7 +45,9 @@ BEGIN
 			   ,@StateShortName
 			   ,0)
 
-			SELECT @StateId = StateId FROM Attractions.dbo.MasterState WHERE StateName = @StateName
+			SELECT @StateId = StateId FROM Attractions.dbo.MasterState 
+			WHERE StateName = @StateName
+			AND CountryId = @CountryId
 		END
 
 		SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC

@@ -15,5 +15,7 @@ namespace BusinessEntites
         public string CityShortName { get; set; }
 
         public int StateId { get; set; }
+
+        public int CountryId { get; set; }
     }
 }

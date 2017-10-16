@@ -33,5 +33,9 @@ namespace BusinessEntites.Admin
         public string Latitude { get; set; }
         [DataMember]
         public string Longitude { get; set; }
+
+        public string CountryName { get; set; }
+
+        public bool IsGettingNearLocationDone { get; set; }
     }
 }

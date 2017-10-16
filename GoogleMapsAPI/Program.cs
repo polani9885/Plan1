@@ -67,7 +67,12 @@ namespace GoogleMapsAPI
                     }
                     case "DISTANCECALCULATION":
                     {
-                            getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        break;
+                    }
+                    case "MISSINGDISTANCE":
+                    {
+                        getDistanceCalculation.MissingDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
                     default:

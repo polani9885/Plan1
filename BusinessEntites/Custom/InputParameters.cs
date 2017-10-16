@@ -20,6 +20,8 @@ namespace BusinessEntites.Custom
 
         public string StartTime { get; set; }
 
+        public int CountryId { get; set; }
+
         public List<GroupWithDateAttractions> ListGroupWithDateAttractions { get; set; }
     }
 }

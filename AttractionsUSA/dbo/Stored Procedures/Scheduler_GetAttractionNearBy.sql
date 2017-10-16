@@ -33,6 +33,7 @@ BEGIN
       ,[GoogleRating]
   FROM [dbo].[Attractions]
   WHERE AttractionsId > @AttractionsId
+  AND GoogleSearchText IS NOT NULL
 
   UNION 
 	
@@ -64,5 +65,7 @@ BEGIN
       ,[GoogleRating]
   FROM [dbo].[Attractions]
   WHERE AttractionsId < @AttractionsId
+  AND GoogleSearchText IS NOT NULL
   ORDER BY AttractionsId DESC
+  
 END

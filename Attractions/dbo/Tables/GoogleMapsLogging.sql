@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[GoogleMapsLogging](
-	[GoogleMapsLoggingId] [int] Identity(1,1),
+	[GoogleMapsLoggingId] [int] IDENTITY(1,1) NOT NULL,
 	[MapType] [varchar](50) NULL,
 	[MethodName] [varchar](50) NULL,
 	[CreatedDate] [date] NULL,

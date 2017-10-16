@@ -110,7 +110,7 @@ namespace PlanGoGo.Controllers
                 ).ToList();
             }
 
-            List<public_FilterAttractions> _public_FilterAttractions =  _IGetListValues.Public_FilterAttractions(parameters.enterLocationName, categoryList);
+            List<public_FilterAttractions> _public_FilterAttractions =  _IGetListValues.Public_FilterAttractions(parameters.enterLocationName, categoryList, parameters.countryId, parameters.cityId);
             if (_public_FilterAttractions.Count() > 0)
             {
                 var jsonResults = Json(_public_FilterAttractions, JsonRequestBehavior.AllowGet);
@@ -145,20 +145,23 @@ namespace PlanGoGo.Controllers
                 ).ToList();
             }
 
-            if(inputParameters.ListGroupWithDateAttractions!=null)
+            if (inputParameters.ListGroupWithDateAttractions != null)
             {
-                foreach(GroupWithDateAttractions _GroupWithDateAttractions in inputParameters.ListGroupWithDateAttractions)
+                foreach (GroupWithDateAttractions _GroupWithDateAttractions in inputParameters.ListGroupWithDateAttractions)
                 {
-                    foreach(GetOrderOfAttractionVisit _GetOrderOfAttractionVisit in _GroupWithDateAttractions.ListGetOrderOfAttractionVisit)
+                    foreach (GetOrderOfAttractionVisit _GetOrderOfAttractionVisit in _GroupWithDateAttractions.ListGetOrderOfAttractionVisit)
                     {
                         listGetOrderOfAttractionVisit.Add(_GetOrderOfAttractionVisit);
                     }
                 }
             }
-            
 
 
-            List<GetOrderOfAttractionVisit> _ListGetOrderOfAttractionVisit = _IGetListValues.Public_GetOrderOfAttractionVisit(inputParameters.TravelModeId, inputParameters.SourceAttractionID, inputParameters.DestinationAttractionID, attractionList, inputParameters.StartDate, inputParameters.StartTime, listGetOrderOfAttractionVisit);
+
+            List<GetOrderOfAttractionVisit> _ListGetOrderOfAttractionVisit =
+                _IGetListValues.Public_GetOrderOfAttractionVisit(inputParameters.TravelModeId,
+                    inputParameters.SourceAttractionID, inputParameters.DestinationAttractionID, attractionList,
+                    inputParameters.StartDate, inputParameters.StartTime, listGetOrderOfAttractionVisit, inputParameters.CountryId);
 
             List<GroupWithDateAttractions> _listGroupWithDateAttractions = new List<GroupWithDateAttractions>();
             GroupWithDateAttractions _groupWithDateAttractions = new GroupWithDateAttractions();
@@ -167,13 +170,13 @@ namespace PlanGoGo.Controllers
             var groupDates = _ListGetOrderOfAttractionVisit.GroupBy(_date => Convert.ToDateTime(_date.DateAndTime).ToString("d"));
             List<GetOrderOfAttractionVisit> attractionListResult = _ListGetOrderOfAttractionVisit;
 
-            
+
             foreach (var _dates in groupDates)
             {
                 _groupWithDateAttractions = new GroupWithDateAttractions();
                 _groupWithDateAttractions.GroupDate = _dates.Key;
                 _ListGetOrderOfAttractionVisit = new List<GetOrderOfAttractionVisit>();
-                foreach (var _internalObjects in attractionListResult.Where(_filter=> Convert.ToDateTime(_filter.DateAndTime).ToString("d") == _dates.Key))
+                foreach (var _internalObjects in attractionListResult.Where(_filter => Convert.ToDateTime(_filter.DateAndTime).ToString("d") == _dates.Key))
                 {
                     _getOrderOfAttractionVisit = new GetOrderOfAttractionVisit();
                     _getOrderOfAttractionVisit.DateAndTime = Convert.ToDateTime(_internalObjects.DateAndTime).ToString("HH:MM");
@@ -192,12 +195,11 @@ namespace PlanGoGo.Controllers
                     _getOrderOfAttractionVisit.ViewTime = Convert.ToDateTime(_internalObjects.ViewTime).ToString("HH:MM");
                     _getOrderOfAttractionVisit.RecordCount = _internalObjects.RecordCount;
                     _ListGetOrderOfAttractionVisit.Add(_getOrderOfAttractionVisit);
-                                     
                 }
                 _groupWithDateAttractions.ListGetOrderOfAttractionVisit = _ListGetOrderOfAttractionVisit;
                 _listGroupWithDateAttractions.Add(_groupWithDateAttractions);
             }
-                
+
 
             if (_listGroupWithDateAttractions.Count() > 0)
             {

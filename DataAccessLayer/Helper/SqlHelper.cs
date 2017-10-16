@@ -778,7 +778,7 @@ namespace Dapper
                     {
                         connectionString =
                             "Server = " + _returnResult.ServerName + "; Initial Catalog = " + _returnResult.DatabaseName +
-                            "; Integrated Security = True; Integrated Security = True";
+                            "; Integrated Security = True";
                     }
                     else
                     {

@@ -1,6 +1,6 @@
 ﻿CREATE TYPE user_WeekDaysOpenClose AS TABLE 
 (
-	WeekdayId int
-	,OpenTime time
-	,CloseTime time
+	[WeekdayId] [int] NULL,
+	[OpenTime] varchar(50) NULL,
+	[CloseTime] varchar(50) NULL
 )

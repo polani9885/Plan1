@@ -55,6 +55,7 @@
     <Compile Include="Common\AttractionTravelTimeDistanceDTO.cs" />
     <Compile Include="Common\GoogleMapsLoggingDTO.cs" />
     <Compile Include="Common\MasterTravelModeDTO.cs" />
+    <Compile Include="Common\MissingDataAttractionDTO.cs" />
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
     <Compile Include="Custom\InputParameters.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />

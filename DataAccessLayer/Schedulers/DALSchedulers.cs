@@ -125,15 +125,12 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public List<RadiusInfo> Scheduler_AttractionGetOnCityId(int cityId,int countryId)
+        public List<RadiusInfo> Scheduler_AttractionGetOnCityId(int countryId)
         {
             try
             {
                 SqlHelper.countryId = countryId;
-                List<RadiusInfo> _returnResult = SqlHelper.QuerySP<RadiusInfo>("Scheduler_AttractionGetOnCityId ", new
-                {
-                    CityId = cityId
-                }).ToList();
+                List<RadiusInfo> _returnResult = SqlHelper.QuerySP<RadiusInfo>("Scheduler_AttractionGetOnCityId ").ToList();
 
                 return _returnResult;
             }
@@ -249,6 +246,23 @@ namespace DataAccessLayer.Schedulers
         }
 
 
+        public void UpdateCityNearestLocationDont(int cityId)
+        {
+            try
+            {
+                SqlHelper.QuerySP("UpdateCityNearestLocationDont",
+                    new
+                    {
+                        cityId = cityId
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public void Scheduler_InsertAttractionInfo(SchedulerInsertPlaceDetails schedulerInsertPlaceDetails,int countryId)
         {
             try
@@ -259,7 +273,7 @@ namespace DataAccessLayer.Schedulers
                 if (schedulerInsertPlaceDetails.GooglePhotos == null)
                     schedulerInsertPlaceDetails.GooglePhotos = new List<GooglePhotos>();
 
-                if(schedulerInsertPlaceDetails.GoogleReview == null)
+                if (schedulerInsertPlaceDetails.GoogleReview == null)
                     schedulerInsertPlaceDetails.GoogleReview = new List<GoogleReview>();
 
                 SqlHelper.countryId = countryId;
@@ -300,6 +314,20 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
+        public List<AttractionsDTO> Scheduler_GetMissingDistance(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<AttractionsDTO> _returnResult = SqlHelper.QuerySP<AttractionsDTO>("Scheduler_GetMissingDistance").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<AttractionsDTO> Scheduler_GetAttractionNearBy(int countryId,int attractionId)
         {
             try
@@ -310,6 +338,57 @@ namespace DataAccessLayer.Schedulers
                     AttractionsId = attractionId
                 }).ToList();
                 return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<MissingDataAttractionDTO> Scheduler_GetDestinationMissingDistance(int countryId, int attractionId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<MissingDataAttractionDTO> _returnResult = SqlHelper.QuerySP<MissingDataAttractionDTO>("Scheduler_GetDestinationMissingDistance", new
+                {
+                    attractionId = attractionId
+                }).ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_DeleteMissingDistanceDestination(int countryId,int missingDistanceAttractionsRecordsXAttractionsID)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_DeleteMissingDistanceDestination",
+                    new
+                    {
+                        MissingDistanceAttractionsRecordsXAttractionsID = missingDistanceAttractionsRecordsXAttractionsID
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_DeleteMissingDistance(int countryId,int attractionsID)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_DeleteMissingDistance",
+                    new
+                    {
+                        AttractionsID = attractionsID
+                    });
             }
             catch (Exception ex)
             {
@@ -353,11 +432,28 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_GoogleLogging(string mapType,string methodName,string attractionName,string logitude,string latitude,bool isError,int countryId)
+        public void SchedulerDeleteAttraction(int attractionId, int countryId)
         {
             try
             {
                 SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("SchedulerDeleteAttraction",
+                    new
+                    {
+                        AttractionId = attractionId
+
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_GoogleLogging(string mapType,string methodName,string attractionName,string logitude,string latitude,bool isError)
+        {
+            try
+            {
                 SqlHelper.QuerySP("Scheduler_GoogleLogging",
                     new
                     {
@@ -375,11 +471,10 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public GoogleMapsLoggingDTO Scheduler_GetGoogleMapsMethodCount(string mapType,int countryId)
+        public GoogleMapsLoggingDTO Scheduler_GetGoogleMapsMethodCount(string mapType)
         {
             try
             {
-                SqlHelper.countryId = countryId;
                 List<GoogleMapsLoggingDTO> _returnResult =
                     SqlHelper.QuerySP<GoogleMapsLoggingDTO>("Scheduler_GetGoogleMapsMethodCount",
                         new {MapType = mapType}).ToList();

@@ -19,5 +19,11 @@ namespace BusinessEntites.JsonParameters
 
         [DataMember]
         public string categoryList { get; set; }
+
+        [DataMember]
+        public int countryId { get; set; }
+
+        [DataMember]
+        public int cityId { get; set; }
     }
 }

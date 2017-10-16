@@ -105,10 +105,11 @@ BEGIN
            ,[MasterWeekId])
 	SELECT    
 			 @AttractionsId
-			 ,OpenTime
-			 ,CloseTime
+			 ,CAST(OpenTime AS TIME)
+			 ,CAST(CloseTime AS TIME)
 			 ,WeekDayId
 	FROM @WeekDaysOpenClose
+	
 
 
 
@@ -150,3 +151,4 @@ BEGIN
 	
 
 END
+

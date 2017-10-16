@@ -11,6 +11,7 @@
       <xs:element minOccurs="0" name="CityId" type="xs:int" />
       <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CityShortName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:int" />
       <xs:element minOccurs="0" name="StateId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -24,6 +25,7 @@
   <xs:complexType name="Public_GetCategory">
     <xs:sequence>
       <xs:element minOccurs="0" name="GoogleTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="MasterCategoryId" type="xs:int" />
       <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
