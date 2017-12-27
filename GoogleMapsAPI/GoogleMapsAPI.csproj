@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="ExitCode.cs" />
     <Compile Include="Features\GetDistanceCalculation.cs" />
+    <Compile Include="Features\GetGoogleSearchText.cs" />
     <Compile Include="Features\GetNearestInformation.cs" />
     <Compile Include="Features\GetPlaceInformation.cs" />
     <Compile Include="Helper\WebRequest.cs" />

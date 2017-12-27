@@ -27,7 +27,7 @@ BEGIN
            (2
            ,'Florida'
            ,2
-           ,'AP'
+           ,'FL'
            ,1)
 END
 IF(SELECT Count(1) FROM MasterState WHERE StateName = 'Chennai' AND CountryId = 1) < 1

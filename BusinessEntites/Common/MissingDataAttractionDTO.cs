@@ -8,7 +8,7 @@ namespace BusinessEntites.Common
 {
     public class MissingDataAttractionDTO
     {
-        public int AttractionId { get; set; }
+        public int AttractionsId { get; set; }
 
         public int MissingDistanceAttractionsRecordsXAttractionsID { get; set; }
     

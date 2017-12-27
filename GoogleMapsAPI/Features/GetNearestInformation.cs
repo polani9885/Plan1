@@ -1,4 +1,5 @@
 ﻿using BusinessEntites;
+using BusinessEntites.Admin;
 using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
 using BusinessEntites.Scheduler;
 using DataAccessLayer.LogException;
@@ -32,57 +33,84 @@ namespace GoogleMapsAPI.Features
                     var masterCityList = dALSchedulers.Scheduler_GetCityOnCountryId(countryId);
                     string latitude = string.Empty;
                     string longitude = string.Empty;
+                    bool isCityInfo = true;
 
-                    var googleType = dALSchedulers.Scheduler_GetTypes().ToArray();
-
-                    var citylatitude = masterCityList.FirstOrDefault(x => !x.IsGettingNearLocationDone && !string.IsNullOrEmpty(x.Latitude) &&
-                                    !string.IsNullOrEmpty(x.Longitude));
-
-                    if (citylatitude != null)
+                    foreach (MasterCityDTO _masterCityDTO in masterCityList)
                     {
-                        latitude = citylatitude.Latitude;
-                        longitude = citylatitude.Longitude;
-                    }
-                    else
-                    {
-                        var cityInfo =
-                            dALSchedulers.Scheduler_AttractionGetOnCityId(countryId);
-                        if (cityInfo != null && cityInfo.Count > 0)
+                        isCityInfo = true;
+                        latitude = _masterCityDTO.Latitude;
+                        longitude = _masterCityDTO.Longitude;
+
+                        var googleType = dALSchedulers.Scheduler_GetTypes().ToArray();
+
+                        for (int i = 0; i <= 100; i++)
                         {
-                            latitude = cityInfo.Select(x => x.Latitude).FirstOrDefault();
-                            longitude = cityInfo.Select(x => x.Longitude).FirstOrDefault();
+
+                            var cityInfo =
+                                dALSchedulers.Scheduler_AttractionGetOnCityId(countryId);
+                            if (cityInfo != null && cityInfo.Count > 0)
+                            {
+                                latitude = cityInfo.Select(x => x.Latitude).FirstOrDefault();
+                                longitude = cityInfo.Select(x => x.Longitude).FirstOrDefault();
+                                isCityInfo = false;
+                            }
+
+                            if (!isCityInfo && cityInfo == null)
+                            {
+                                break;
+                            }
+
+
+                            if (!string.IsNullOrEmpty(latitude) && !string.IsNullOrEmpty(longitude))
+                            {
+                                googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                                if (googleCounter == null || googleCounter.Counter <
+                                    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                                {
+
+                                    string radiusData = string.Empty;
+                                    string url =
+                                        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
+                                        latitude +
+                                        "," +
+                                        longitude + "&radius=500&key=" +
+                                        ConfigurationManager.AppSettings["apiKey"];
+                                    radiusData = webRequest.WebServiceInformation(url);
+                                    var returnsInformation =
+                                        Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
+
+                                    if (returnsInformation != null)
+                                    {
+                                        if (isCityInfo)
+                                            dALSchedulers.UpdateCityNearestLocationDont(_masterCityDTO.CityId);
+
+                                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude,
+                                            latitude,
+                                            masterCityList.Select(x => x.CountryName).FirstOrDefault());
+                                    }
+
+                                    if (returnsInformation.results != null && returnsInformation.results.Count > 0)
+                                    {
+                                        dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "",
+                                            longitude,
+                                            latitude,
+                                            false);
+                                    }
+                                    else
+                                    {
+                                        dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "",
+                                            longitude,
+                                            latitude,
+                                            true);
+                                    }
+
+                                    getPlaceInformation.GetPlaceDetails(countryId);
+                                }
+                            }
                         }
                     }
-                    
-                    
-                    string radiusData = string.Empty;
-                    string url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + latitude +
-                                 "," +
-                                 longitude + "&radius=5000&key=" + ConfigurationManager.AppSettings["apiKey"];
-                    radiusData = webRequest.WebServiceInformation(url);
-                    var returnsInformation =
-                        Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(radiusData);
-
-                    if (returnsInformation != null)
-                    {
-                        if (citylatitude != null)
-                            dALSchedulers.UpdateCityNearestLocationDont(citylatitude.CityId);
-                        
-                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude, masterCityList.Select(x=>x.CountryName).FirstOrDefault());
-                    }
-
-                    if (returnsInformation.results != null && returnsInformation.results.Count > 0)
-                    {
-                        dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", longitude, latitude,
-                            false);
-                    }
-                    else
-                    {
-                        dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", longitude, latitude,
-                            true);
-                    }
                 }
-                getPlaceInformation.GetPlaceDetails(countryId);
+                
             }
             catch (Exception ex)
             {

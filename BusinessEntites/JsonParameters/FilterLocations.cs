@@ -24,6 +24,6 @@ namespace BusinessEntites.JsonParameters
         public int countryId { get; set; }
 
         [DataMember]
-        public int cityId { get; set; }
+        public List<CityVisitList> cityVisitList { get; set; }
     }
 }

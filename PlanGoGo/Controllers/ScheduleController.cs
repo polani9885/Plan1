@@ -7,6 +7,7 @@ using PlanGoGo.Repository;
 using BusinessEntites;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Custom;
+using BusinessEntites.Users;
 
 namespace PlanGoGo.Controllers
 {
@@ -110,7 +111,7 @@ namespace PlanGoGo.Controllers
                 ).ToList();
             }
 
-            List<public_FilterAttractions> _public_FilterAttractions =  _IGetListValues.Public_FilterAttractions(parameters.enterLocationName, categoryList, parameters.countryId, parameters.cityId);
+            List<public_FilterAttractions> _public_FilterAttractions = _IGetListValues.Public_FilterAttractions(parameters.enterLocationName, categoryList, parameters.countryId, parameters.cityVisitList);
             if (_public_FilterAttractions.Count() > 0)
             {
                 var jsonResults = Json(_public_FilterAttractions, JsonRequestBehavior.AllowGet);
@@ -156,12 +157,15 @@ namespace PlanGoGo.Controllers
                 }
             }
 
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks = new List<UserTable_UpdatedBreaks>();
+            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder = new List<UserTable_AttractionRequestOrder>();
 
 
             List<GetOrderOfAttractionVisit> _ListGetOrderOfAttractionVisit =
                 _IGetListValues.Public_GetOrderOfAttractionVisit(inputParameters.TravelModeId,
                     inputParameters.SourceAttractionID, inputParameters.DestinationAttractionID, attractionList,
-                    inputParameters.StartDate, inputParameters.StartTime, listGetOrderOfAttractionVisit, inputParameters.CountryId);
+                    inputParameters.StartDate, inputParameters.StartTime, listGetOrderOfAttractionVisit,
+                    inputParameters.CountryId, userTable_UpdatedBreaks, userTable_AttractionRequestOrder);
 
             List<GroupWithDateAttractions> _listGroupWithDateAttractions = new List<GroupWithDateAttractions>();
             GroupWithDateAttractions _groupWithDateAttractions = new GroupWithDateAttractions();
@@ -176,24 +180,33 @@ namespace PlanGoGo.Controllers
                 _groupWithDateAttractions = new GroupWithDateAttractions();
                 _groupWithDateAttractions.GroupDate = _dates.Key;
                 _ListGetOrderOfAttractionVisit = new List<GetOrderOfAttractionVisit>();
-                foreach (var _internalObjects in attractionListResult.Where(_filter => Convert.ToDateTime(_filter.DateAndTime).ToString("d") == _dates.Key))
+                foreach (var _internalObjects in attractionListResult.Where(
+                    _filter => Convert.ToDateTime(_filter.DateAndTime).ToString("d") == _dates.Key))
                 {
                     _getOrderOfAttractionVisit = new GetOrderOfAttractionVisit();
-                    _getOrderOfAttractionVisit.DateAndTime = Convert.ToDateTime(_internalObjects.DateAndTime).ToString("HH:MM");
+                    _getOrderOfAttractionVisit.DateAndTime =
+                        Convert.ToDateTime(_internalObjects.DateAndTime).ToString("HH:MM");
                     _getOrderOfAttractionVisit.DestinationAttractionId = _internalObjects.DestinationAttractionId;
                     _getOrderOfAttractionVisit.DestinationAttractionName = _internalObjects.DestinationAttractionName;
                     _getOrderOfAttractionVisit.DestinationIcon = _internalObjects.DestinationIcon;
                     _getOrderOfAttractionVisit.Distance = _internalObjects.Distance;
-                    _getOrderOfAttractionVisit.ReachTime = Convert.ToDateTime(_internalObjects.ReachTime).ToString("HH:MM");
+                    _getOrderOfAttractionVisit.ReachTime = Convert.ToDateTime(_internalObjects.ReachTime)
+                        .ToString("HH:MM");
                     _getOrderOfAttractionVisit.SourceAttractionId = _internalObjects.SourceAttractionId;
                     _getOrderOfAttractionVisit.SourceAttractionName = _internalObjects.SourceAttractionName;
                     _getOrderOfAttractionVisit.SourceIcon = _internalObjects.SourceIcon;
                     _getOrderOfAttractionVisit.TimeRequiredToView = _internalObjects.TimeRequiredToView;
                     _getOrderOfAttractionVisit.TravelModeId = _internalObjects.TravelModeId;
-                    _getOrderOfAttractionVisit.TravelTime = TimeSpan.FromSeconds(Convert.ToInt32(_internalObjects.TravelTime)).Hours + ":" + TimeSpan.FromSeconds(Convert.ToInt32(_internalObjects.TravelTime)).Minutes;
+                    _getOrderOfAttractionVisit.TravelTime =
+                        TimeSpan.FromSeconds(Convert.ToInt32(_internalObjects.TravelTime)).Hours + ":" + TimeSpan
+                            .FromSeconds(Convert.ToInt32(_internalObjects.TravelTime)).Minutes;
                     _getOrderOfAttractionVisit.TravelType = _internalObjects.TravelType;
-                    _getOrderOfAttractionVisit.ViewTime = Convert.ToDateTime(_internalObjects.ViewTime).ToString("HH:MM");
+                    _getOrderOfAttractionVisit.EventEndTime =
+                        Convert.ToDateTime(_internalObjects.EventEndTime).ToString("HH:MM");
                     _getOrderOfAttractionVisit.RecordCount = _internalObjects.RecordCount;
+                    _getOrderOfAttractionVisit.IsLunchDinnerBreakTime = _internalObjects.IsLunchDinnerBreakTime;
+                    _getOrderOfAttractionVisit.IsDistanceCalculationMissing =
+                        _internalObjects.IsDistanceCalculationMissing;
                     _ListGetOrderOfAttractionVisit.Add(_getOrderOfAttractionVisit);
                 }
                 _groupWithDateAttractions.ListGetOrderOfAttractionVisit = _ListGetOrderOfAttractionVisit;

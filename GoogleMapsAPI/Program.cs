@@ -28,6 +28,7 @@ namespace GoogleMapsAPI
             GetNearestInformation getNearestInformation = new GetNearestInformation();
             GetPlaceInformation getPlaceInformation = new GetPlaceInformation();
             GetDistanceCalculation getDistanceCalculation = new GetDistanceCalculation();
+            GetGoogleSearchText googleSearchText = new GetGoogleSearchText();
 
 
 
@@ -73,6 +74,11 @@ namespace GoogleMapsAPI
                     case "MISSINGDISTANCE":
                     {
                         getDistanceCalculation.MissingDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        break;
+                    }
+                    case "GOOGLESEARCHTEXT":
+                    {
+                        googleSearchText.GoogleSearchText(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
                     default:

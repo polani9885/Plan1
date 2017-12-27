@@ -1,4 +1,6 @@
 ﻿using BusinessEntites;
+using BusinessEntites.JsonParameters;
+using BusinessEntites.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +22,14 @@ namespace PlanGoGoService.Interfaces
         List<Public_GetMasterCategory> Public_GetMasterCategory();
 
         [OperationContract]
-        List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, int cityId);
+        List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, List<CityVisitList> cityVisitList);
 
         [OperationContract]
-        List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate, string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit,int CountryId);
+        List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
+            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
+            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
+            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder);
 
         [OperationContract]
         List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId);

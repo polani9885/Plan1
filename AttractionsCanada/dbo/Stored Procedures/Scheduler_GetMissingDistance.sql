@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_GetMissingDistance 
+﻿CREATE PROCEDURE [dbo].[Scheduler_GetMissingDistance] 
 	
 AS
 BEGIN

@@ -163,81 +163,103 @@ namespace GoogleMapsAPI.Features
         private List<WeekDaysOpenClose> SerilizeOpenCloseTime(EntityOpening_hours entityOpening_hours)
         {
             List<WeekDaysOpenClose> LlstWeekDaysOpenClose = new List<WeekDaysOpenClose>();
+            int weekDayId = 0;
             if (entityOpening_hours != null)
             {
-                WeekDaysOpenClose weekDaysOpenClose = new WeekDaysOpenClose();
+               
                 foreach (string weekDay in entityOpening_hours.weekday_text)
                 {
                     string time = string.Empty;
-                    weekDaysOpenClose = new WeekDaysOpenClose();
                     switch (weekDay.Split(':')[0].Trim())
                     {
                         case "Monday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 0;
-                                time = weekDay.Replace("Monday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 0;
+                            time = weekDay.Replace("Monday:", "");
+                            break;
+                        }
                         case "Tuesday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 1;
-                                time = weekDay.Replace("Tuesday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 1;
+                            time = weekDay.Replace("Tuesday:", "");
+                            break;
+                        }
                         case "Wednesday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 2;
-                                time = weekDay.Replace("Wednesday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 2;
+                            time = weekDay.Replace("Wednesday:", "");
+                            break;
+                        }
                         case "Thursday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 3;
-                                time = weekDay.Replace("Thursday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 3;
+                            time = weekDay.Replace("Thursday:", "");
+                            break;
+                        }
                         case "Friday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 4;
-                                time = weekDay.Replace("Friday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 4;
+                            time = weekDay.Replace("Friday:", "");
+                            break;
+                        }
                         case "Saturday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 5;
-                                time = weekDay.Replace("Saturday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 5;
+                            time = weekDay.Replace("Saturday:", "");
+                            break;
+                        }
                         case "Sunday":
-                            {
-                                weekDaysOpenClose.WeekdayId = 6;
-                                time = weekDay.Replace("Sunday:", "");
-                                break;
-                            }
+                        {
+                            weekDayId = 6;
+                            time = weekDay.Replace("Sunday:", "");
+                            break;
+                        }
                     }
 
-                    if (time.Trim() == "Open 24 hours")
+                    if (time.Split(',').Length > 1)
                     {
-                        weekDaysOpenClose.OpenTime = TimeSpan.Parse("00:00").ToString().Replace('.',':');
-                        weekDaysOpenClose.CloseTime = TimeSpan.Parse("23:59").ToString().Replace('.', ':');
-                    }
-                    else if (time.Trim() == "Closed")
-                    {
-                        weekDaysOpenClose = new WeekDaysOpenClose();
-                        weekDaysOpenClose.OpenTime = string.Empty;
-                        weekDaysOpenClose.CloseTime = string.Empty;
+                        for (int i = 0; i < time.Split(',').Length; i++)
+                        {
+                            LlstWeekDaysOpenClose = SaveCloseOpenTime(time.Split(',')[i], weekDayId, LlstWeekDaysOpenClose);
+                        }
                     }
                     else
                     {
-                        weekDaysOpenClose.OpenTime = TimeSpan.Parse(DateTime.Parse(time.Trim().Split('–')[0].Trim()).Hour.ToString()).ToString().Replace('.', ':');
-                        weekDaysOpenClose.CloseTime = TimeSpan.Parse(DateTime.Parse(time.Trim().Split('–')[1].Trim()).Hour.ToString()).ToString().Replace('.', ':');
+                        LlstWeekDaysOpenClose = SaveCloseOpenTime(time, weekDayId, LlstWeekDaysOpenClose);
                     }
-
-                    LlstWeekDaysOpenClose.Add(weekDaysOpenClose);
                 }
             }
             return LlstWeekDaysOpenClose.Where(x => !string.IsNullOrEmpty(x.OpenTime) ||
                                                     !string.IsNullOrEmpty(x.CloseTime)).ToList();
+        }
+
+        private List<WeekDaysOpenClose> SaveCloseOpenTime(string time, int weekdayId, List<WeekDaysOpenClose> llstWeekDaysOpenClose)
+        {
+            WeekDaysOpenClose weekDaysOpenClose = new WeekDaysOpenClose();
+            weekDaysOpenClose.WeekdayId = weekdayId;
+
+            if (time.Trim() == "Open 24 hours")
+            {
+                weekDaysOpenClose.OpenTime = TimeSpan.Parse("00:00").ToString().Replace('.', ':');
+                weekDaysOpenClose.CloseTime = TimeSpan.Parse("23:59").ToString().Replace('.', ':');
+            }
+            else if (time.Trim() == "Closed")
+            {
+                weekDaysOpenClose = new WeekDaysOpenClose();
+                weekDaysOpenClose.OpenTime = string.Empty;
+                weekDaysOpenClose.CloseTime = string.Empty;
+            }
+            else
+            {
+                weekDaysOpenClose.OpenTime = TimeSpan
+                    .Parse(DateTime.Parse(time.Trim().Split('–')[0].Trim()).Hour.ToString()).ToString()
+                    .Replace('.', ':');
+                weekDaysOpenClose.CloseTime = TimeSpan
+                    .Parse(DateTime.Parse(time.Trim().Split('–')[1].Trim()).Hour.ToString()).ToString()
+                    .Replace('.', ':');
+            }
+            llstWeekDaysOpenClose.Add(weekDaysOpenClose);
+            return llstWeekDaysOpenClose;
         }
 
         private void GetPlaceDetails(string placeId, int attractionsId, int countryId)

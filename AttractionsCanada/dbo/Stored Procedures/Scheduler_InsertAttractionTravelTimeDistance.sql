@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_InsertAttractionTravelTimeDistance
+﻿CREATE PROCEDURE [dbo].[Scheduler_InsertAttractionTravelTimeDistance]
 (
 	@SourceAttractionId int
     ,@DestinationAttractionId int

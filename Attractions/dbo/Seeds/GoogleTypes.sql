@@ -90,12 +90,12 @@ END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'car_repair') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(19,'car_repair',1,4)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(19,'car_repair',0,4)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'car_wash') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(20,'car_wash',1,4)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(20,'car_wash',0,4)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'casino') < 1
@@ -185,12 +185,12 @@ END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'food') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(38,'food',0,0)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(38,'food',1,0)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'funeral_home') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(39,'funeral_home',0,0)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(39,'funeral_home',1,0)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'furniture_store') < 1
@@ -200,7 +200,7 @@ END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'gas_station') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(41,'gas_station',0,0)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(41,'gas_station',1,0)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'general_contractor') < 1
@@ -235,7 +235,7 @@ END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'hindu_temple') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(48,'hindu_temple',0,0)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(48,'hindu_temple',1,0)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'home_goods_store') < 1
@@ -275,7 +275,7 @@ END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'liquor_store') < 1
 BEGIN
-	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(56,'liquor_store',1,3)
+	INSERT INTO MasterGoogleType(GoogleTypeID,TypeName,IsNeeded,MasterCategoryId) VALUES(56,'liquor_store',0,3)
 END
 GO
 IF(SELECT Count(1) FROM MasterGoogleType WHERE TypeName = 'local_government_office') < 1

@@ -4,97 +4,290 @@
     Layout = null;
 }
 @Scripts.Render("~/TourInformation")
-<div style="overflow:auto;height:300px" ng-controller="controlerTourInformation" id="TourInformation">
-    <table cellpadding="0" cellspacing="0" border="1">
-        @if (Model.attractionsList != null)
-        {
-            var isFirst = false;
-            foreach (GetOrderOfAttractionVisit _attraction in Model.attractionsList)
-            {
-                <tr>
-                    <td>
-                        <table cellpadding="0" cellpsacing="0" border="0">
-                            @if (!isFirst)
+<div style="overflow: auto;" ng-controller="controlerTourInformation" id="TourInformation">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1">
+                    @if (Model.attractionsList != null)
+                    {
+                        var isFirst = false;
+                        foreach (GetOrderOfAttractionVisit _attraction in Model.attractionsList)
+                        {
+                            if (!isFirst)
                             {
-                                <tr>
-                                    <td rowspan="2">
-                                        <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="100px" height="100px"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">
-                                        <table cellpadding="0" cellspacing="0" border="0">
+                                <tr class="attractionInfo">
+                                    <td>
+                                        <table cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td>
-                                                    @_attraction.SourceAttractionName
+                                                <td rowspan="2">
+                                                    <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="100px" height="100px"/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    Start Location
+                                                <td valign="top">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td class="attractionName">
+                                                                @_attraction.SourceAttractionName
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Start Location
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Start: @_attraction.DateAndTime hh
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
                                                 </td>
                                             </tr>
                                         </table>
-                                        
                                     </td>
                                 </tr>
                                 isFirst = true;
                             }
-                            else
-                            {
-                                <tr>
-                                    <td>
-                                        Start:@_attraction.DateAndTime
-                                    </td>
-                                    <td rowspan="4">
-                                        <img src="/Images/Custome/add.png" alt="Custom Plan" width="30px" height="30px" onclick="addingAttraction(@_attraction.RecordCount)" />
-                                        <img src="/Images/Custome/edit.jpg" alt="Modify Tour Information" width="30px" height="30px" id="create-user" onclick="editTourInformation(@_attraction.TimeRequiredToView,@_attraction.RecordCount)" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Drive Miles:@_attraction.Distance
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Drive Time:@_attraction.TravelTime
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Reach Time:@_attraction.ReachTime
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">
-                                        <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @_attraction.DestinationAttractionName
-                                        <br/>
-                                        Stay Here:@_attraction.ViewTime
-                                    </td>
-                                    <td>
-                                        <img src="/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)" />
-                                        @if (_attraction.RecordCount != 1)
+
+                            <tr class="attractionInfo">
+                                <td>
+                                    <table cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td rowspan="5">
+                                            @switch (_attraction.TravelModeId)
+                                            {
+
+                                                case 1:
+                                                {
+
+                                                    <img src="/Images/TravelMode/driving.png" alt="Driving" width="100px" height="100px"/>
+
+                                                    break;
+                                                }
+                                                case 2:
+                                                {
+
+                                                    <img src="/Images/TravelMode/walking.png" alt="Walking" width="100px" height="100px"/>
+
+                                                    break;
+                                                }
+                                                case 3:
+                                                {
+
+                                                    <img src="/Images/TravelMode/bicycling.png" alt="Bicycling" width="100px" height="100px"/>
+
+                                                    break;
+                                                }
+                                                case 4:
+                                                {
+
+                                                    <img src="/Images/TravelMode/transit.png" alt="Transit" width="100px" height="100px"/>
+
+                                                    break;
+                                                }
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Start Time :@_attraction.DateAndTime hh
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Distance: @_attraction.Distance
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Distance Cover Time: @_attraction.TravelTime hh
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Reach Time: @_attraction.ReachTime hh
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr class="attractionInfo">
+                                <td>
+                                    <table cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td rowspan="7">
+                                                <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="attractionName">
+                                                @_attraction.DestinationAttractionName
+                                            </td>
+                                            <td rowspan="6">
+                                                @if (!_attraction.IsLunchDinnerBreakTime)
+                                                {
+
+                                                    <img src="/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)"/>
+
+
+                                                    if (_attraction.RecordCount != 1)
+                                                    {
+                                                        <img src="/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true)"/>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span style="width: 30px; height: 30px">&nbsp;</span>
+                                                    }
+                                                    <img src="/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false)"/>
+
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Reach Time: @_attraction.ReachTime hh
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Stay for View: @_attraction.TimeRequiredToView hh
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Close Event: @_attraction.EventEndTime hh
+                                            </td>
+                                        </tr>
+                                        @if (!_attraction.IsLunchDinnerBreakTime)
                                         {
-                                            <img src="/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId,@_attraction.RecordCount, true)" />
+                                            if (!string.IsNullOrEmpty(_attraction.DestinationOpenTime) && !string.IsNullOrEmpty(_attraction.DestinationCloseTime))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        Open Time: @_attraction.DestinationOpenTime hh Close Time: @_attraction.DestinationCloseTime hh
+                                                    </td>
+                                                </tr>
+                                            }
+                                            if (!string.IsNullOrEmpty(_attraction.DestinationRating))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        Google Rating: @_attraction.DestinationRating
+                                                    </td>
+                                                </tr>
+                                            }
                                         }
-                                        else
-                                        {
-                                            <span style="width:30px;height:30px">&nbsp;</span>
-                                        }
-                                        <img src="/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId,@_attraction.RecordCount, false)" />
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </td>
-                </tr>
-            }
-        }
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>            
+            </td>
+            <td valign="top">
+                <table cellspacing="5" cellpadding="5" class="tableBreak">
+                    <tr>
+                        <td>
+                            Interested Day Break:
+                        </td>
+                        <td>
+                            <input type="checkbox" id="IsUserInterestedDayBreak"/>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>
+                            Update Day Start Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdateDayStartTime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Update Day End Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdateDayEndTime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Interested Lunch Break:
+                        </td>
+                        <td>
+                            <input type="checkbox" id="IsUserInterestedLunchBreak"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Lunch Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdatedLunchTime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Lunch Minimum Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdatedLunchMinimumTime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Interested Break:
+                        </td>
+                        <td>
+                            <input type="checkbox" id="IsUserInterestedBreak"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Break Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdatedBreakTime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Break Minimum Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdatedBreakMinimumTime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Interested Dinner Break:
+                        </td>
+                        <td>
+                            <input type="checkbox" id="IsUserInterestedDinnerBreak"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dinner Time
+                        </td>
+                        <td>
+                            <input type="text" id="UpdatedDinnerTime"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dinner Minimum Time:
+                        </td>
+                        <td>
+                            <input type="text" id="UpdateDinnerMinimumTime"/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
     </table>
+    
 </div>

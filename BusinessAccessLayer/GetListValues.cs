@@ -1,5 +1,7 @@
 ﻿using BusinessAccessLayer.Common;
 using BusinessEntites;
+using BusinessEntites.JsonParameters;
+using BusinessEntites.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,11 +65,11 @@ namespace BusinessAccessLayer
             }
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, int cityId)
+        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, List<CityVisitList> cityVisitList)
         {
             try
             {
-                return _dataAccess.Public_FilterAttractions(enterLocationName, categoryList, countryId, cityId);
+                return _dataAccess.Public_FilterAttractions(enterLocationName, categoryList, countryId, cityVisitList);
             }
             catch (Exception ex)
             {
@@ -75,16 +77,22 @@ namespace BusinessAccessLayer
             }
         }
 
-        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate, string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit,int CountryId)
+        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
+            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
+            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
+            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder)
         {
             try
             {
-                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, SourceAttractionID, DestinationAttractionID, AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit, CountryId);
+                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, SourceAttractionID,
+                    DestinationAttractionID, AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit,
+                    CountryId,userTable_UpdatedBreaks,userTable_AttractionRequestOrder);
             }
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
 
         public List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId)

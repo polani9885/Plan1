@@ -42,6 +42,9 @@ namespace BusinessEntites.Common
 
         public string CityShortName { get; set; }
 
-        
+        public int MasterTravelModeID { get; set; }
+
+
+
     }
 }

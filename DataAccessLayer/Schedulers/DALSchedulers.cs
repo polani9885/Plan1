@@ -486,9 +486,37 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
+        public List<GoogleSearchTextDTO> Scheduler_GetNoGoogleSearchText(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<GoogleSearchTextDTO> _returnResult =
+                    SqlHelper.QuerySP<GoogleSearchTextDTO>("Scheduler_GetNoGoogleSearchText").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-
-
-
+        public void Scheduler_UpdateGoogleSearchText(int attractionsId,string googleSearchText,int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_UpdateGoogleSearchText",
+                    new
+                    {
+                        AttractionsId = attractionsId,
+                        GoogleSearchText = googleSearchText
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

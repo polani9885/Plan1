@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[LoggInfo](
-	[LoggInfoId] [int]  identity(1,1),
+	[LoggInfoId] [int] IDENTITY(1,1) NOT NULL,
 	[MethodName] [varchar](250) NULL,
 	[Parameters] [varchar](max) NULL,
 	[ExceptionMessage] [varchar](max) NULL,

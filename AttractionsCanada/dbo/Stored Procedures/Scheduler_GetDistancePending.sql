@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_GetDistancePending
+﻿CREATE PROCEDURE [dbo].[Scheduler_GetDistancePending]
 	
 AS
 BEGIN
@@ -32,5 +32,6 @@ BEGIN
   AND Longitude IS NOT NULL
   AND Latitude Is NOT NULL
   AND GoogleSearchText IS NOT NULL
+  AND GoogleSearchText <> ''
 
 END

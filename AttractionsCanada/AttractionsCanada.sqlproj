@@ -61,6 +61,9 @@
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\User Defined Types" />
+    <Folder Include="dbo\Functions" />
+    <Folder Include="dbo\Functions\Scalar-valued Functions" />
+    <Folder Include="dbo\Functions\Table-valued Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Stored Procedures\Admin_AddMissingDistanceRecords.sql" />
@@ -108,5 +111,17 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetDestinationMissingDistance.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteMissingDistanceDestination.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteMissingDistance.sql" />
+    <Build Include="dbo\Stored Procedures\AddingMissingClaims.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrderOfAttractionVisit_Back.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetNoGoogleSearchText.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_UpdateGoogleSearchText.sql" />
+    <Build Include="dbo\Functions\Table-valued Functions\fun_BreakTimeCalculation.sql" />
+    <Build Include="dbo\Functions\Scalar-valued Functions\fun_GetStartTime.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\CityVisitList.sql" />
+    <Build Include="dbo\User Defined Types\user_OrderOfAttractionVisit.sql" />
+    <Build Include="dbo\User Defined Types\UserTable_AttractionRequestOrder.sql" />
+    <Build Include="dbo\User Defined Types\UserTable_UpdatedBreaks.sql" />
   </ItemGroup>
 </Project>

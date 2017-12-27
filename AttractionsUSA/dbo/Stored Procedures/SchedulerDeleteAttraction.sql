@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE SchedulerDeleteAttraction
+﻿CREATE PROCEDURE [dbo].[SchedulerDeleteAttraction]
 (
 	@AttractionId INT
 )	

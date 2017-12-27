@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace BusinessEntites
 
         public string TimeRequiredToView { get; set; }
 
-        public string ViewTime { get; set; }
+        public string EventEndTime { get; set; }
 
         public string TravelType { get; set; }
 
@@ -48,6 +49,35 @@ namespace BusinessEntites
         public string UpdatedTime { get; set; }
 
         public bool IsPersonalRequest { get; set; }
+
+        [DataMember]
+        public bool IsLunchDinnerBreakTime { get; set; }
+
+        [DataMember]
+        public bool IsDistanceCalculationMissing { get; set; }
+
+        public string SourceDirection { get; set; }
+        public string DestinationDirection { get; set; }
+        public string SourceRating { get; set; }
+        public string DestinationRating { get; set; }
+        public string SourceRatingTotal { get; set; }
+
+        public string DestinationRatingTotal { get; set; }
+
+        public string SourceSearchText { get; set; }
+        public string DestinationSearchText { get; set; }
+
+        public string SourceOpenTime { get; set; }
+
+        public string SourceCloseTime { get; set; }
+
+        public string DestinationOpenTime { get; set; }
+
+        public string DestinationCloseTime { get; set; }
+
+        public string SourcePhoto { get; set; }
+
+        public string DestinationPhoto { get; set; }
 
         public List<userTable_Category> userTable_Category { get; set; }
     }

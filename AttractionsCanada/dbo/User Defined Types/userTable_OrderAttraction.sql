@@ -1,14 +1,15 @@
-﻿CREATE TYPE [dbo].[userTable_OrderAttraction] AS TABLE (
-    [OrderNumber]               INT           IDENTITY (1, 1) NOT NULL,
-    [SourceAttractionId]        INT           NULL,
-    [DestinationAttractionId]   INT           NULL,
-    [Distance]                  INT           NULL,
-    [TravelTime]                INT           NULL,
-    [TravelModeId]              INT           NULL,
-    [SourceAttractionName]      VARCHAR (500) NULL,
-    [DestinationAttractionName] VARCHAR (500) NULL,
-    [DateAndTime]               DATETIME      NULL,
-    [ReachTime]                 DATETIME      NULL,
-    [TimeRequiredToView]        INT           NULL,
-    [ViewTime]                  DATETIME      NULL);
-
+﻿CREATE TYPE [dbo].[userTable_OrderAttraction] AS TABLE(
+	[OrderNumber] [int] IDENTITY(1,1) NOT NULL,
+	[SourceAttractionId] [int] NULL,
+	[DestinationAttractionId] [int] NULL,
+	[Distance] [int] NULL,
+	[TravelTime] [int] NULL,
+	[TravelModeId] [int] NULL,
+	[SourceAttractionName] [varchar](500) NULL,
+	[DestinationAttractionName] [varchar](500) NULL,
+	[DateAndTime] [datetime] NULL,
+	[ReachTime] [datetime] NULL,
+	[TimeRequiredToView] [int] NULL,
+	[ViewTime] [datetime] NULL
+)
+GO

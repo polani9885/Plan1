@@ -24,10 +24,10 @@
 	[IsNearDistanceDone] [bit] NULL,
 	[PriceLevel] [int] NULL,
 	[GoogleRating] [decimal](18, 2) NULL,
- [GoogleUser_ratings_total] INT NULL, 
-    CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED 
+	[GoogleUser_ratings_total] [int] NULL,
+	[IsGoogleSearchTextDone] [bit] NULL,
+ CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED 
 (
 	[AttractionsId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-

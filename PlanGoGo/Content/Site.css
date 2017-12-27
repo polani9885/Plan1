@@ -780,3 +780,20 @@ tr.pager td {
     width: 50%;
 }
 
+/*********************************Start Attraction Information *************************************************************/
+.avoidBorder {
+    border: none !important;
+}
+.attractionInfo {
+    border: 1px black solid;
+}
+.attractionName {
+    font-weight: bold;
+    color: blue;
+}
+.tableBreak {
+    border: 1px black solid;
+    font-weight: bold;
+    color: gray;
+}
+/*********************************End Attraction Information *************************************************************/

@@ -1,5 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Scheduler_AttractionGetOnCityId]
-	
+﻿CREATE PROCEDURE [dbo].[Scheduler_AttractionGetOnCityId]	
 AS
 BEGIN
 	DECLARE @Latitude AS Varchar(50)
@@ -11,8 +10,7 @@ BEGIN
 		,@Latitude = Latitude
 		,@Longitude = Longitude
 	FROM Attractions
-	WHERE ISNULL(IsScannedNearBy,0) = 0
-	
+	WHERE ISNULL(IsScannedNearBy,0) = 0	
 	AND Latitude IS NOt NULL
 	ANd Longitude Is NOt NULL
 	AND ISNULL(IsScannedNearBy,0) = 0

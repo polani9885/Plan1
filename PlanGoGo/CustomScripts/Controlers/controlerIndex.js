@@ -15,6 +15,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.notInterestedList = [];
     $scope.countryId = 0;
     $scope.cityId = 0;
+    $scope.selectedCityLabel = "";
+    $scope.VisitCityList = [];
 
     $scope.OrderOfAttractionList = [];
 
@@ -51,6 +53,81 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         //It will get the all the attractions information
         PublicFilterAttractions($scope, $http);
     };
+
+
+    $scope.addCitites = function () {
+
+        if ($scope.VisitCityList.length === 0)
+            GetCityList();
+
+        var existed = false;
+        var recordIndex = $scope.VisitCityList.length;
+        if ($scope.selectedCityLabel !== "") {
+            $.each($scope.VisitCityList,
+                function (key, value) {
+                    if (value.cityName === $scope.selectedCityLabel) {
+                        existed = true;
+                        return false;
+                    }
+                });
+            if (!existed) {
+                var item = [];
+                item.countryId = $scope.countryId;
+                item.cityId = $scope.cityId;
+                item.cityName = $scope.selectedCityLabel;
+                item.recordIndex = recordIndex;
+                $scope.VisitCityList.push(item);
+            }
+        }
+
+        $("#autoCityName").val("");
+    };
+
+
+    $scope.CityNotIntereseted = function (cityId) {
+        var recordOrder = 0;
+        $.each($scope.VisitCityList,
+            function(key, value) {
+                if (value.cityId === cityId) {
+                    recordOrder = key;
+                    return false;
+                }
+            });
+        $scope.VisitCityList.splice(recordOrder, 1);
+
+        if ($scope.VisitCityList.length === 0)
+            GetCityList();
+    };
+
+
+    $scope.IsCityOrderUpdated = function (cityId, recordIndex, isUp) {
+        
+
+        if (isUp) {
+            $.each($scope.VisitCityList,
+                function (key, value) {
+                    if (value.recordIndex === recordIndex) {
+                        value.recordIndex = recordIndex - 1;
+                    } else {
+                        if (value.recordIndex === recordIndex - 1) {
+                            value.recordIndex = recordIndex;
+                        }
+                    }
+                });
+        } else {
+            $.each($scope.VisitCityList,
+                function (key, value) {
+                    if (value.recordIndex === recordIndex + 1) {
+                        value.recordIndex = recordIndex;
+                    } else {
+                        if (value.recordIndex === recordIndex) {
+                            value.recordIndex = recordIndex + 1;
+                        }
+                    }
+                });
+        }
+        debugger;
+    }
 
     //City Selected
     $scope.CitySelected=function(data) {
@@ -200,7 +277,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         
 
         $.each(data, function (groupKey, groupValue) {
-            
+                
             $("div#subtabs ul").append(
                 "<li><a href='#tab_" + groupValue.GroupDate.replace("/", "_").replace("/", "_") + "'>" + groupValue.GroupDate + "</a></li>"
             );

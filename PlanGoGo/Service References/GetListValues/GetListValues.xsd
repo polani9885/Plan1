@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+  <xs:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" />
+  <xs:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" />
   <xs:element name="Public_GetCityList">
     <xs:complexType>
       <xs:sequence />
@@ -43,14 +45,14 @@
         <xs:element minOccurs="0" name="enterLocationName" nillable="true" type="xs:string" />
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="categoryList" nillable="true" type="q4:ArrayOfuserTable_Category" />
         <xs:element minOccurs="0" name="countryId" type="xs:int" />
-        <xs:element minOccurs="0" name="cityId" type="xs:int" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" minOccurs="0" name="cityVisitList" nillable="true" type="q5:ArrayOfCityVisitList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Public_FilterAttractionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_FilterAttractionsResult" nillable="true" type="q5:ArrayOfpublic_FilterAttractions" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_FilterAttractionsResult" nillable="true" type="q6:ArrayOfpublic_FilterAttractions" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -60,18 +62,20 @@
         <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
         <xs:element minOccurs="0" name="SourceAttractionID" type="xs:int" />
         <xs:element minOccurs="0" name="DestinationAttractionID" type="xs:int" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="AttractionID" nillable="true" type="q6:ArrayOfuserTable_OnlyId" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="AttractionID" nillable="true" type="q7:ArrayOfuserTable_OnlyId" />
         <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="listGetOrderOfAttractionVisit" nillable="true" type="q7:ArrayOfGetOrderOfAttractionVisit" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="listGetOrderOfAttractionVisit" nillable="true" type="q8:ArrayOfGetOrderOfAttractionVisit" />
         <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTable_UpdatedBreaks" nillable="true" type="q9:ArrayOfUserTable_UpdatedBreaks" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTable_AttractionRequestOrder" nillable="true" type="q10:ArrayOfUserTable_AttractionRequestOrder" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Public_GetOrderOfAttractionVisitResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_GetOrderOfAttractionVisitResult" nillable="true" type="q8:ArrayOfGetOrderOfAttractionVisit" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Public_GetOrderOfAttractionVisitResult" nillable="true" type="q11:ArrayOfGetOrderOfAttractionVisit" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,7 +89,7 @@
   <xs:element name="GetAttractionOpenTimeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="GetAttractionOpenTimeResult" nillable="true" type="q9:ArrayOfGetAttractionOpenTime" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="GetAttractionOpenTimeResult" nillable="true" type="q12:ArrayOfGetAttractionOpenTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

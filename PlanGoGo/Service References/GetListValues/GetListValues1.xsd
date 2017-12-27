@@ -105,8 +105,18 @@
       <xs:element minOccurs="0" name="DateAndTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
       <xs:element minOccurs="0" name="DestinationAttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationCloseTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationDirection" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationIcon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationOpenTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationPhoto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationRating" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationRatingTotal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationSearchText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Distance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventEndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDistanceCalculationMissing" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsLunchDinnerBreakTime" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsOrderUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsPersonalRequest" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUpdatedViewTime" type="xs:boolean" />
@@ -114,14 +124,20 @@
       <xs:element minOccurs="0" name="RecordCount" type="xs:int" />
       <xs:element minOccurs="0" name="SourceAttractionId" type="xs:int" />
       <xs:element minOccurs="0" name="SourceAttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceCloseTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceDirection" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SourceIcon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceOpenTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourcePhoto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceRating" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceRatingTotal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceSearchText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TimeRequiredToView" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
       <xs:element minOccurs="0" name="TravelTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TravelType" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdatedOrder" type="xs:int" />
       <xs:element minOccurs="0" name="UpdatedTime" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ViewTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="userTable_Category" nillable="true" type="tns:ArrayOfuserTable_Category" />
     </xs:sequence>
   </xs:complexType>

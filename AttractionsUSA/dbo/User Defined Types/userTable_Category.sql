@@ -1,4 +1,5 @@
-﻿CREATE TYPE [dbo].[userTable_Category] AS TABLE (
-    [CategoryID]   INT           NULL,
-    [CategoryName] VARCHAR (250) NULL);
-
+﻿CREATE TYPE [dbo].[userTable_Category] AS TABLE(
+	[CategoryID] [int] NULL,
+	[CategoryName] [varchar](250) NULL
+)
+GO

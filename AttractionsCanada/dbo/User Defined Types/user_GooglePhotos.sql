@@ -1,7 +1,7 @@
-﻿CREATE TYPE user_GooglePhotos AS TABLE 
-(
-	Height Int,
-	Html_attributions Varchar(500),
-	Photo_reference Varchar(500),
-	Width Int
+﻿CREATE TYPE [dbo].[user_GooglePhotos] AS TABLE(
+	[Height] [int] NULL,
+	[Html_attributions] [varchar](500) NULL,
+	[Photo_reference] [varchar](500) NULL,
+	[Width] [int] NULL
 )
+GO

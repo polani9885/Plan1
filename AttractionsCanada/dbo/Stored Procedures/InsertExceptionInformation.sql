@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE InsertExceptionInformation 
+﻿CREATE PROCEDURE [dbo].[InsertExceptionInformation] 
 (
 	@MethodName [varchar](250),
 	@Parameters [varchar](max),

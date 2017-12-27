@@ -42,7 +42,7 @@ namespace GoogleMapsAPI.Features
                         {
                             DistanceGetting(masterTravelModeDTO.TravelType, _attractionsDTO.SourceText,
                                 _attractionsDTO.DestinationText, attractionsDTO.AttractionsId,
-                                _attractionsDTO.AttractionId, masterTravelModeDTO.TravelModeId, countryId);
+                                _attractionsDTO.AttractionsId, masterTravelModeDTO.TravelModeId, countryId);
                         }
 
                         dALSchedulers.Scheduler_DeleteMissingDistanceDestination(countryId,_attractionsDTO
@@ -74,11 +74,14 @@ namespace GoogleMapsAPI.Features
                     {
                         foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode)
                         {
-                            DistanceGetting(masterTravelModeDTO.TravelType, attractionsDTO.GoogleSearchText,
-                                _attractionsDTO.GoogleSearchText, attractionsDTO.AttractionsId,
-                                _attractionsDTO.AttractionsId, masterTravelModeDTO.TravelModeId, countryId);
-
-
+                            googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
+                            if (googleCounter == null || googleCounter.Counter <
+                                Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                            {
+                                DistanceGetting(masterTravelModeDTO.TravelType, attractionsDTO.GoogleSearchText,
+                                    _attractionsDTO.GoogleSearchText, attractionsDTO.AttractionsId,
+                                    _attractionsDTO.AttractionsId, masterTravelModeDTO.TravelModeId, countryId);
+                            }
                         }
                     }
                 }
@@ -87,12 +90,15 @@ namespace GoogleMapsAPI.Features
 
         public void DistanceGetting(string travelType,string origin, string destination,int sourceAttractionId, int destinationAttractionId, int travelTypeId, int countryId)
         {
+            string url = string.Empty;
             try
             {
                 AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();
 
                 string radiusData = string.Empty;
-                string url =
+                origin = origin.Replace('#',' ');
+                destination = destination.Replace('#', ' ');
+                url =
                     "https://maps.googleapis.com/maps/api/directions/json?&mode=" +
                     travelType.ToLower() + "&origin=" +
                     origin +
@@ -145,7 +151,8 @@ namespace GoogleMapsAPI.Features
                         "SourceAttractionId  = " + sourceAttractionId +
                         " DestinationAttractionId = " + destinationAttractionId +
                         " TravelModeId = " +
-                        travelTypeId,
+                        travelTypeId +
+                        "url= " + url,
                     CountryId = countryId
                 });
             }

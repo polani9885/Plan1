@@ -1,4 +1,6 @@
 ﻿using BusinessEntites;
+using BusinessEntites.JsonParameters;
+using BusinessEntites.Users;
 using Dapper;
 using System;
 using System.Collections.Generic;
@@ -61,7 +63,7 @@ namespace DataAccessLayer
         /// If we select or unselect any category this method will resturn the result
         /// </summary>
         /// <returns></returns>
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList,int countryId, int cityId)
+        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList,int countryId, List<CityVisitList> cityVisitList)
         {
             try
             {
@@ -73,7 +75,7 @@ namespace DataAccessLayer
                 List<public_FilterAttractions> _public_FilterAttractions = SqlHelper.QuerySP<public_FilterAttractions>("public_FilterAttractions",
                     new {
                         EnterLocationName = enterLocationName,
-                        CityId = cityId,
+                        CityVisitList = CommonObjects.Convert.ToDataTable<CityVisitList>(cityVisitList),
                         CategoryID = CommonObjects.Convert.ToDataTable<userTable_Category>(categoryList)
                     }).ToList();
                 return _public_FilterAttractions;
@@ -84,7 +86,11 @@ namespace DataAccessLayer
             }
         }
 
-        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,int SourceAttractionID,int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit,int CountryId)
+        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
+            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
+            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
+            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder)
         {
             try
             {
@@ -94,17 +100,23 @@ namespace DataAccessLayer
 
                 SqlHelper.countryId = CountryId;
 
-                List<GetOrderOfAttractionVisit> _public_GetOrderOfAttractionVisit = SqlHelper.QuerySP<GetOrderOfAttractionVisit>("GetOrderOfAttractionVisit",
-                    new
-                    {
-                        TravelModeId = TravelModeId,
-                        SourceAttractionID = SourceAttractionID,
-                        DestinationAttractionID = DestinationAttractionID,
-                        AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(AttractionID),
-                        StartDate = StartDate == string.Empty ? null : StartDate,
-                        StartTime = StartTime == string.Empty ? null : StartTime,
-                        //UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit)
-                    }).ToList();
+                List<GetOrderOfAttractionVisit> _public_GetOrderOfAttractionVisit = SqlHelper
+                    .QuerySP<GetOrderOfAttractionVisit>("GetOrderOfAttractionVisit",
+                        new
+                        {
+                            TravelModeId = TravelModeId,
+                            SourceAttractionID = SourceAttractionID,
+                            DestinationAttractionID = DestinationAttractionID,
+                            AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(AttractionID),
+                            StartDate = StartDate == string.Empty ? null : StartDate,
+                            StartTime = StartTime == string.Empty ? null : StartTime,
+                            UserBreakTime =
+                            CommonObjects.Convert.ToDataTable<UserTable_UpdatedBreaks>(userTable_UpdatedBreaks),
+                            AttractionReqOrder =
+                            CommonObjects.Convert.ToDataTable<UserTable_AttractionRequestOrder>(
+                                userTable_AttractionRequestOrder),
+                            //UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit)
+                        }).ToList();
                 return _public_GetOrderOfAttractionVisit;
             }
             catch (Exception ex)

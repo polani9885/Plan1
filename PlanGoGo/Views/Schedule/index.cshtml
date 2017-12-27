@@ -10,7 +10,7 @@
         <tr>
             <td>
                 <div class="divIndex" id="controlerIndex">
-                    <div id="tabs" style="width:1200px;height:500px;">
+                    <div id="tabs" style="width:1200px;" class="avoidBorder">
                         <ul>
                             <li><a href="#tab_Filter">Filter</a></li>
                             <li><a href="#tab_Categories">Categories</a></li>
@@ -21,19 +21,56 @@
                             <li><a href="#tab_TourAnalysis">Tour Analysis</a></li>
                         </ul>
                         <div id="tab_Filter">
-                            <div class="ui-widget" style="float:left;padding:5px">
-                                <input id="autoCityName" placeholder="Enter City Name">
-                                <br />
-                                <div id="travelBasic" style="display:none">
-                                    <input id="autoStartLocation" placeholder="Start Location">
-                                    <br />
-                                    <input id="autoDestinationLocation" placeholder="End Location">
-                                    <br />
-                                    <input id="calStartDateAndTime" placeholder="Start Date And Time">
-                                    <br />
-                                    <input id="calDropDateAndTime" placeholder="End Date And Time">
-                                </div>
-                            </div>
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <div class="ui-widget" style="float: left; padding: 5px">
+                                            <input id="autoCityName" placeholder="Enter City Name"> <input type="button" value="Add More Cites" ng-click="addCitites()"/>
+                                            <br/>
+                                            <div id="travelBasic" style="display: none">
+                                                <input id="autoStartLocation" placeholder="Start Location">
+                                                <br/>
+                                                <input id="autoDestinationLocation" placeholder="End Location">
+                                                <br/>
+                                                <input id="calStartDateAndTime" placeholder="Start Date And Time">
+                                                <br/>
+                                                <input id="calDropDateAndTime" placeholder="End Date And Time">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td ng-show="VisitCityList.length>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    City Name
+                                                </td>
+                                                <td>
+                                                    Order or Visit
+                                                </td>
+                                            </tr>
+                                            <tr ng-repeat="cities in  VisitCityList | orderBy:'recordIndex'">
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                {{cities.cityName}}
+                                                            </td>
+                                                            <td>
+                                                                <img src="/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" ng-click="CityNotIntereseted(cities.cityId)" />
+                                                            </td>
+                                                            <td>
+                                                                
+                                                                <img ng-show="!$first" src="/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, true)"/>
+                                                                <img ng-show="!$last" src="/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, false)"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div id="tab_Categories">
                                 
@@ -54,7 +91,7 @@
                         </div>
                         <div id="tab_TourPlan">
                             <!--Tour Plan tabs-->
-                            <div id="subtabs" style="width:1130px;height:400px;">
+                            <div id="subtabs" style="width:1130px;">
                                 <ul></ul>
 
                             </div>

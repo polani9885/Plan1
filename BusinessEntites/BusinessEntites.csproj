@@ -54,6 +54,7 @@
     <Compile Include="Common\AttractionsDTO.cs" />
     <Compile Include="Common\AttractionTravelTimeDistanceDTO.cs" />
     <Compile Include="Common\GoogleMapsLoggingDTO.cs" />
+    <Compile Include="Common\GoogleSearchTextDTO.cs" />
     <Compile Include="Common\MasterTravelModeDTO.cs" />
     <Compile Include="Common\MissingDataAttractionDTO.cs" />
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="GetAttractionOpenTime.cs" />
     <Compile Include="GetNextNearestLocation.cs" />
     <Compile Include="GetOrderOfAttractionVisit.cs" />
+    <Compile Include="JsonParameters\CityVisitList.cs" />
     <Compile Include="JsonParameters\FilterLocations.cs" />
     <Compile Include="JsonResultReturn.cs" />
     <Compile Include="LoggingEntity.cs" />
@@ -117,6 +119,8 @@
     <Compile Include="Scheduler\WeekDaysOpenClose.cs" />
     <Compile Include="Users\UserAttractionEntity.cs" />
     <Compile Include="Users\UserEntity.cs" />
+    <Compile Include="Users\UserTable_AttractionRequestOrder.cs" />
+    <Compile Include="Users\UserTable_UpdatedBreaks.cs" />
     <Compile Include="userTable_Category.cs" />
     <Compile Include="userTable_OnlyId.cs" />
     <Compile Include="userTable_OrderAttraction.cs" />

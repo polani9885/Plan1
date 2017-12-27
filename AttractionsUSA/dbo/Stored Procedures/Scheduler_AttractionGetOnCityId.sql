@@ -1,5 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Scheduler_AttractionGetOnCityId]
-	
+﻿CREATE PROCEDURE [dbo].[Scheduler_AttractionGetOnCityId]	
 AS
 BEGIN
 	DECLARE @Latitude AS Varchar(50)

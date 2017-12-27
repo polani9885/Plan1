@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_GetPlaceDetails
+﻿CREATE PROCEDURE [dbo].[Scheduler_GetPlaceDetails]
 	
 AS
 BEGIN
@@ -26,6 +26,6 @@ BEGIN
 		  ,[GoogleRating]		  
 		  ,[IsScannedNearBy]
 	  FROM [dbo].[Attractions]
-	  WHERE PlaceId IS NOT NULL
-	  AND ISNULL(IsPlaceDetailsDone,0) = 0 
+	  WHERE ISNULL(GoogleSearchText,'') <> ''
+	  AND ISNULL(IsPlaceDetailsDone,0) = 0
 END

@@ -37,5 +37,7 @@ namespace BusinessEntites
         public string ModifiedBy { get; set; }
 
         public string GoogleSearchText { get; set; }
+
+        public int RecordIndex { get; set; }
     }
 }

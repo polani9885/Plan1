@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_DeleteMissingDistance 
+﻿CREATE PROCEDURE [dbo].[Scheduler_DeleteMissingDistance] 
 (
 	@AttractionsID AS INT
 )	

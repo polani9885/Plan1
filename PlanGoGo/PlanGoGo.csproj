@@ -321,6 +321,10 @@
     <Content Include="Images\Custome\red_x.png" />
     <Content Include="Images\Custome\up.jpg" />
     <Content Include="Images\Logos\Logo.png" />
+    <Content Include="Images\TravelMode\bicycling.png" />
+    <Content Include="Images\TravelMode\driving.png" />
+    <Content Include="Images\TravelMode\transit.png" />
+    <Content Include="Images\TravelMode\walking.png" />
     <Content Include="Images\User\Category\Accounting.png" />
     <Content Include="Images\User\Category\airport.png" />
     <Content Include="Images\User\Category\amusement_park.png" />
@@ -1261,6 +1265,12 @@
     <None Include="Service References\GetListValues\GetListValues.disco" />
     <None Include="Service References\GetListValues\configuration91.svcinfo" />
     <None Include="Service References\GetListValues\configuration.svcinfo" />
+    <None Include="Service References\GetListValues\GetListValues3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\GetListValues\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -1343,16 +1353,16 @@
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\OrderList\0.png" />
+    <Content Include="Images\OrderList\1.png" />
+    <Content Include="Images\OrderList\2.png" />
+    <Content Include="Images\OrderList\3.png" />
+    <Content Include="Images\OrderList\4.png" />
+    <Content Include="Images\OrderList\5.png" />
+    <Content Include="Images\OrderList\6.png" />
+    <Content Include="Images\OrderList\7.png" />
+    <Content Include="Images\OrderList\8.png" />
+    <Content Include="Images\OrderList\9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

@@ -103,8 +103,39 @@ function PublicFilterAttractions(angularScope, http) {
         angularScope.cityId = cityId;
         angularScope.countryId = countryId;
     }
+
+
+    var cityVisitList = [];
     
-    var jsonObject = { "enterLocationName": $("#autoCityName").val(), "categoryList": newArr, "countryId": countryId, "cityId": cityId };
+    var isCityFount = false;
+    $.each(angularScope.VisitCityList,
+        function (key, value) {
+            var subListValue = {};
+            if (value.cityId === cityId) {
+                isCityFount = true;
+            }
+            debugger;
+            subListValue.RecordIndex = value.recordIndex;
+            subListValue.CityId = value.cityId;
+            cityVisitList.push(subListValue);
+
+        });
+    if (!isCityFount) {
+        var subListValue = {};
+        subListValue.RecordIndex = (angularScope.VisitCityList.length == null ? 0 : angularScope.VisitCityList.length) +
+            1;
+        subListValue.CityId = cityId;
+        cityVisitList.push(subListValue);
+    } 
+    
+
+
+    var jsonObject = { "enterLocationName": $("#autoCityName").val(), "categoryList": newArr, "countryId": countryId, "cityVisitList": cityVisitList };
+
+    
+   
+
+
     $.ajax({
         type: "POST",
         url: '/Schedule/Public_FilterAttractions',
@@ -133,7 +164,7 @@ function PublicFilterAttractions(angularScope, http) {
 
 function Public_GetOrderOfAttractionVisit(angularScope, http) {
 
-    debugger;
+    
     var OrderOfAttractionListTemp = [];
     var OrderOfAttractionListTempSub = {};
     
@@ -198,12 +229,15 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
         beforeSend: function () {
 
         },
-        success: function (data) {            
+        success: function (data) {
+            
             angularScope.$apply(function () {
+                
                 angularScope.AttractionInformationRendaring(data);
             });
         },
         error: function (result) {
+            
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
         },
         complete: function () {
@@ -212,9 +246,9 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
     });
 }
 
+
 //Gettigng the attraction information
-function TourInformation(divId,tourInformation)
-{
+function TourInformation(divId,tourInformation) {
     
     var jsonObject = { "public_FilterAttractions": tourInformation };
     $.ajax({

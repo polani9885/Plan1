@@ -1,5 +1,3 @@
-﻿CREATE TYPE user_Category AS TABLE 
-(
-	Category Varchar(250)
+﻿CREATE TYPE [dbo].[user_Category] AS TABLE(
+	[Category] [varchar](250) NULL
 )
-GO

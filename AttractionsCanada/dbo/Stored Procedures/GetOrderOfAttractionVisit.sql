@@ -4,307 +4,531 @@
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[GetOrderOfAttractionVisit]	
-		@AttractionID userTable_OnlyId ReadOnly 
+	@AttractionID userTable_OnlyId ReadOnly 
 	,@TravelModeId INT
 	,@SourceAttractionID INT
 	,@DestinationAttractionID INT
+	,@UserBreakTime UserTable_UpdatedBreaks ReadOnly
+	,@AttractionReqOrder UserTable_AttractionRequestOrder ReadOnly
 	,@StartDate DATETIME = NULL
-	,@StartTime TIME = NULL
+	,@StartTime TIME = NULL		
 AS
 BEGIN
 
-DECLARE @StartDateAndTime DATETIME = CAST(CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE) AS DATETIME) + CAST(CAST(ISNULL(@StartTime,'9:00 AM') AS TIME) AS DATETIME)	
-
-DECLARE	@SourceAttractions userTable_OnlyId 
-DECLARE	@DestinationAttractions userTable_OnlyId 
-
-INSERT INTO @SourceAttractions
-SELECT * FROM @AttractionID
-
-INSERT INTO @DestinationAttractions
-SELECT * FROM @AttractionID
-
-
-DECLARE @OrderAttraction AS userTable_OrderAttraction
-
-DECLARE @OrderAttractionTemp AS userTable_OrderAttraction
-
-DECLARE @MissingAttractions AS userTable_OrderAttraction
-
-
-DECLARE @NextAttractionID INT = 0
-
-DECLARE @Counter INT = (SELECT Count(*) FROM @AttractionID) 
-DECLARE @LastSource INT = 0
-
-
-WHILE @Counter > 0
-BEGIN
-
-	--if((SELECT count(*) FROM @OrderAttraction)>0)
-	--BEGIN
-	--	SET @SourceAttractionID = (SELECT TOP 1 DestinationAttractionId  FROM @OrderAttraction ORDER BY 1 DESC)
-	--END
-	--SELECT * FROM @OrderAttraction
-	--SELECT @SourceAttractionID, (SELECT TOP 1 DestinationAttractionId  FROM @OrderAttraction ORDER BY 1 DESC)
-
-	--Getting next nearest attraction ID
-	--INSERT INTO @OrderAttraction(			
-	--		[SourceAttractionId],
-	--		[DestinationAttractionId],
-	--		[Distance],
-	--		[TravelTime],
-	--		[TravelModeId],
-	--		[SourceAttractionName],
-	--		[DestinationAttractionName],
-	--		[DateAndTime],
-	--		[ReachTime],
-	--		[TimeRequiredToView]
-	--		,[ViewTime])
-	--EXECUTE GetNextNearestLocation
-	--@TravelModeId  = @TravelModeId
-	--,@SourceAttractionID = @SourceAttractionID
-	--,@DestinationAttractionID = @DestinationAttractionID
-	--,@DestinationAttractions = @DestinationAttractions
-	--,@OrderAttraction = @OrderAttraction
-	--,@StartDateAndTime = @StartDateAndTime
-
-	--SELECT TOP 1 @NextAttractionID = DestinationAttractionId
-	--FROM @OrderAttractionTemp
-
-
-	--DELETE FROM @OrderAttractionTemp
-		
-		
+	DECLARE @GetStartingTimeEvent AS DATETIME = CAST(CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE) AS DATETIME) + CAST(CAST(ISNULL(@StartTime,'9:00 AM') AS TIME) AS DATETIME)	
 	
-	--if(@SourceAttractionID > 0)
-	--BEGIN
-		--IF(	@NextAttractionID = @SourceAttractionID OR @NextAttractionID = 0)
-		--BEGIN		
-			
-			
-		--	INSERT INTO @OrderAttraction(			
-		--	[SourceAttractionId],
-		--	[DestinationAttractionId],
-		--	[Distance],
-		--	[TravelTime],
-		--	[TravelModeId],
-		--	[SourceAttractionName],
-		--	[DestinationAttractionName],
-		--	[DateAndTime],
-		--	[ReachTime],
-		--	[TimeRequiredToView]
-		--	,[ViewTime])
-		--	SELECT 
-		--		CASE WHEN @NextAttractionID = 0 THEN @SourceAttractionID ELSE @NextAttractionID END
-		--		,0
-		--		,0
-		--		,0
-		--		,0
-		--		,''
-		--		,''
-		--		,NULL
-		--		,NULL
-		--		,NULL
-		--		,NULL
-			
-		--	DELETE FROM @SourceAttractions WHERE ID = CASE WHEN @NextAttractionID = 0 THEN @SourceAttractionID ELSE @NextAttractionID END
-		--	--SET @SourceAttractionID = 
-		--	--			(CASE WHEN (SELECT Count(*) FROM @SourceAttractions) = 1 
-		--	--			THEN
-		--	--				(SELECT TOP 1 ID FROM @SourceAttractions ORDER BY ID)			
-		--	--			ELSE
-		--	--				(SELECT TOP 1 ID FROM @SourceAttractions WHERE ID <> @DestinationAttractionID ORDER BY ID)			
-		--	--			END)
-			
-		--	SET @NextAttractionID = @SourceAttractionID
-
-			
-
-		--END
-		--ELSE
-		--BEGIN
-
-			--Checking is there any records are existed or not
-			INSERT INTO @OrderAttractionTemp(			
-			[SourceAttractionId],
-			[DestinationAttractionId],
-			[Distance],
-			[TravelTime],
-			[TravelModeId],
-			[SourceAttractionName],
-			[DestinationAttractionName],
-			[DateAndTime],
-			[ReachTime],
-			[TimeRequiredToView]
-			,[ViewTime])
-			EXECUTE GetNextNearestLocation
-			@TravelModeId  = @TravelModeId
-			,@SourceAttractionID = @SourceAttractionID
-			,@DestinationAttractionID = @DestinationAttractionID
-			,@DestinationAttractions = @DestinationAttractions
-			,@OrderAttraction = @OrderAttraction
-			,@StartDateAndTime = @StartDateAndTime
+	DECLARE @StartDateAndTime DATETIME = @GetStartingTimeEvent
+	DECLARE @CurrentWeekDay As INT = DATEPART(weekday, @GetStartingTimeEvent) - 1	
+	DECLARE @NextAttractionId AS INT = @SourceAttractionID		
+	DECLARE @IsDayUpdated AS BIT  = 1
+	DECLARE @RecordOrder AS INT = 1
+	DECLARE @IsSequenceRecordDone AS BIT = 0
 
 
-			IF((SELECT COUNT(1) FROM @OrderAttractionTemp) = 0)
-			BEGIN
+	
+	DECLARE @ResSourceAttractionId As INT
+	DECLARE @ResDestincationAttractionId AS INT
+	DECLARE @ResDistance AS INT
+	DECLARE @ResTravelTime AS INT
+	DECLARE @ResTravelModeId AS INT
+	DECLARE @ResSourceAttractionName AS Varchar(500)
+	DECLARE @ResDestincationAttractionName AS Varchar(500)	
+	DECLARE @ResDateAndtime As DATETIME
+	DECLARE @ReachTime AS DATETIME
+	DECLARE @ResTimeRequiredToView AS TIME
+	DECLARE @EventEndTime AS DATETIME	
+	DECLARE @IsDistanceCalculationMissing AS BIT	
 
-				--Adding Missing Distance records
-				EXEC [Admin_AddMissingDistanceRecords]
-				@SourceAttractionID  = @SourceAttractionID,
-				@DestinationAttractions =  @DestinationAttractions,
-				@TravelModeId = @TravelModeId
+	DECLARE @OrderOfAttactionInfomration AS user_OrderOfAttractionVisit
+
+	DECLARE @OrderOfAttactionInfomrationTemp AS user_OrderOfAttractionVisit	
+	
+	DECLARE @AverageMinimumTime AS TIME = '02:00:00.0000000'
+		
+	DECLARE @AttractionInfomation AS TABLE(AttractionId INT, RowNumber INT)
+
+	DECLARE @MissingAttractionID AS userTable_OnlyId
 
 
-				INSERT INTO @MissingAttractions(
-				[SourceAttractionId],
-				[DestinationAttractionId],
-				[Distance]
+	INSERT INTO @AttractionInfomation
+	SELECT ID,ROW_NUMBER() OVER(ORDER BY ID) FROM @AttractionID
+	WHERE ID NOT IN (@SourceAttractionID)	
+		
+
+	DECLARE @Counter INT = 0
+	DECLARE @LoopCounter INT = (SELECT Count(*) FROM @AttractionInfomation)
+
+	
+
+	WHILE @Counter <= @LoopCounter
+	BEGIN
+		SET @IsSequenceRecordDone = 0			
+
+		-----------------------------------------------------------------------------------------------------------------------------
+		--Start Break Time Logic
+
+		DELETE FROM @OrderOfAttactionInfomrationTemp
+		
+		INSERt INTO @OrderOfAttactionInfomrationTemp		
+		SELECT * FROM @OrderOfAttactionInfomration
+		
+		DELETE FROM @OrderOfAttactionInfomration
+
+		INSERT INTO @OrderOfAttactionInfomration
+		(
+		RecordCount,
+		[SourceAttractionId],
+		[DestinationAttractionId],
+		[Distance],
+		[TravelTime],
+		[TravelModeId],
+		[SourceAttractionName],
+		[DestinationAttractionName],
+		[DateAndtime],
+		[ReachTime],
+		[TimeRequiredToView],
+		[EventEndTime],
+		[IsLunchDinnerBreakTime],
+		[IsDistanceCalculationMissing],
+		WeekDayId
+		)
+		SELECT 
+			RecordCount
+			,SourceAttractionId 
+			,DestinationAttractionId 
+			,Distance 
+			,TravelTime
+			,TravelModeId 
+			,SourceAttractionName 
+			,DestinationAttractionName 
+			,DateAndtime 
+			,ReachTime 
+			,TimeRequiredToView 
+			,EventEndTime  
+			,IsLunchDinnerBreakTime  
+			,@IsDistanceCalculationMissing 
+			,WeekDayId
+		FROM dbo.fun_BreakTimeCalculation(@GetStartingTimeEvent,@OrderOfAttactionInfomrationTemp,@UserBreakTime,@RecordOrder)
+
+		SELECT TOP 1 @GetStartingTimeEvent = EventEndTime
+		FROM @OrderOfAttactionInfomration
+		ORDER BY RecordCount DESC
+		
+		IF((SELECT Count(*) FROM @OrderOfAttactionInfomrationTemp) < (SELECT Count(*) FROM @OrderOfAttactionInfomration))
+		BEGIN
+			SET @RecordOrder = @RecordOrder + 1
+		END
+		
+		--End Break Time Logic
+
+		------------------------------------------------------------------------------------------------------------------------------
+		--Checking the Day Brak
+		SET @GetStartingTimeEvent = dbo.fun_GetStartTime(@UserBreakTime,@GetStartingTimeEvent)	
+		
+		SET @CurrentWeekDay = DATEPART(weekday, @GetStartingTimeEvent) - 1			
+
+		--End Day Break
+
+		------------------------------------------------------------------------------------------------------
+		--Start Getting Record As User Requested Order
+		
+		
+		IF Exists (SELECT * FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)
+		BEGIN
+			IF Exists ( 
+				SELECT 1
+				FROM @AttractionInfomation A 
+				JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
+				JOIN AttractionsActiveStatus AAS WITH(NOLOCK) ON AAS.AttractionsId = ATTD.DestinationAttractionId
+				JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = ATTD.SourceAttractionId
+				JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = ATTD.DestinationAttractionId
+				WHERE ATTD.SourceAttractionId = @NextAttractionId
+				AND ATTD.TravelModeId = @TravelModeId
+				AND AAS.MasterWeekId = @CurrentWeekDay
+				AND AAS.CloseTime < CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)
+				AND AAS.OpenTime > CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)
+				AND ATTD.DestinationAttractionId = (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)				
+			)
+			BEGIN				
+				SELECT TOP 1 
+						@ResSourceAttractionId = ATTD.SourceAttractionId
+					,@ResDestincationAttractionId = ATTD.DestinationAttractionId
+					,@ResDistance = ATTD.Distance
+					,@ResTravelTime = ATTD.TravelTime
+					,@ResTravelModeId = ATTD.TravelModeId
+					,@ResSourceAttractionName = SA.AttractionName 
+					,@ResDestincationAttractionName = DA.AttractionName
+					,@ReachTime =  DateADD(ss,ATTD.TravelTime,@GetStartingTimeEvent)
+				FROM @AttractionInfomation A 
+				JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
+				JOIN AttractionsActiveStatus AAS WITH(NOLOCK) ON AAS.AttractionsId = ATTD.DestinationAttractionId
+				JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = ATTD.SourceAttractionId
+				JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = ATTD.DestinationAttractionId
+				WHERE ATTD.SourceAttractionId = @NextAttractionId
+				AND ATTD.TravelModeId = @TravelModeId
+				AND AAS.MasterWeekId = @CurrentWeekDay
+				AND AAS.CloseTime < CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)
+				AND AAS.OpenTime > CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)
+				AND ATTD.DestinationAttractionId = (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)
+				ORDER BY TravelTime
+
+				IF EXISTS( SELECT count(1) FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				BEGIN
+					SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				END
+				ELSE
+				BEGIN
+					SET @ResTimeRequiredToView = @AverageMinimumTime
+				END
+				SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
+
+				SET @ResDateAndtime  = @GetStartingTimeEvent
+				SET @GetStartingTimeEvent = @EventEndTime
+				SET @NextAttractionId = @ResDestincationAttractionId
+				
+
+
+				INSERT INTO @OrderOfAttactionInfomration(
+					RecordCount
+					,SourceAttractionId 
+					,DestinationAttractionId 
+					,Distance 
+					,TravelTime 
+					,TravelModeId 
+					,SourceAttractionName 
+					,DestinationAttractionName 
+					,DateAndtime 
+					,ReachTime 
+					,TimeRequiredToView 
+					,EventEndTime  
+					,IsLunchDinnerBreakTime  
+					,IsDistanceCalculationMissing
+					,WeekDayId
 				)
-				VALUES
-				(
-					@SourceAttractionID,
-					0,
-					0
-				)
+				SELECT @RecordOrder
+					,@ResSourceAttractionId
+					,@ResDestincationAttractionId 
+					,@ResDistance 
+					,@ResTravelTime
+					,@ResTravelModeId
+					,@ResSourceAttractionName
+					,@ResDestincationAttractionName
+					,@ResDateAndtime
+					,@ReachTime
+					,@ResTimeRequiredToView
+					,@EventEndTime
+					,NULL
+					,@IsDistanceCalculationMissing
+					,@CurrentWeekDay
 
+				SET @IsSequenceRecordDone = 1
 
-				SELECT TOP 1 @SourceAttractionID = ID FROM  @SourceAttractions 
-				WHERE ID NOT IN (@SourceAttractionID)
 			END
 			ELSE
 			BEGIN
-				INSERT INTO @OrderAttraction(			
-				[SourceAttractionId],
-				[DestinationAttractionId],
-				[Distance],
-				[TravelTime],
-				[TravelModeId],
-				[SourceAttractionName],
-				[DestinationAttractionName],
-				[DateAndTime],
-				[ReachTime],
-				[TimeRequiredToView]
-				,[ViewTime])			
-				EXECUTE GetNextNearestLocation
-				@TravelModeId  = @TravelModeId
-				,@SourceAttractionID = @SourceAttractionID
-				,@DestinationAttractionID = @DestinationAttractionID
-				,@DestinationAttractions = @DestinationAttractions
-				,@OrderAttraction = @OrderAttraction
-				,@StartDateAndTime = @StartDateAndTime
+				--Adding missing Attraction
 
-				SELECT TOP 1 @StartDateAndTime = ViewTime,
-					@SourceAttractionID = DestinationAttractionId
-				FROM @OrderAttraction
-				Order by  ViewTime DESC
+				DELETE FROM @MissingAttractionID
+
+				INSERT INTO @MissingAttractionID(ID)
+				SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder
+
+				EXEC AddingMissingClaims				
+					@AttractionId = @NextAttractionId
+					,@TravelModeId  = @ResTravelModeId
+					,@MissingAttractionID  = @MissingAttractionID
+					,@CreatedBy = 'User Requested Order'	
+						
+									
+
+				SET @IsDistanceCalculationMissing = 1
+
+				SET @IsSequenceRecordDone = 1
 			END
-
-			DELETE FROM @OrderAttractionTemp
-			
-			
-			
-			
-
-			--DELETE FROM @OrderAttractionTemp
-
-			DELETE FROM @DestinationAttractions WHERE ID IN  (SELECT DestinationAttractionId FROM @OrderAttraction)
-			DELETE FROM @SourceAttractions WHERE ID IN  (SELECT SourceAttractionId FROM @OrderAttraction)
-			--removing the missing attraction from the source also
-			DELETE FROM @SourceAttractions WHERE ID IN  (SELECT SourceAttractionId FROM @MissingAttractions)
-
-			--SET @SourceAttractionID = @NextAttractionID
-			
-			
-		--END	
-
-	--END
-
-	
-
-	SET @Counter = @Counter -1
-END
-
-
-
---IF(@DestinationAttractionID > 0)
---BEGIN	
-
---	--SELECT  @DestinationAttractionID
---	--Missing Destination adding to the order
---	IF((SELECT count(1) FROM @OrderAttraction WHERE SourceAttractionID = @DestinationAttractionID) = 1)
---	BEGIN
---		DELETE FROM @OrderAttraction WHERE SourceAttractionID = @DestinationAttractionID
+		END
+		--End Getting Record As User Requested Order
+		-------------------------------------------------------------------------------------------------------
+		--Start Get next attraction Information
 		
---		SELECT TOP 1 @LastSource = SourceAttractionId FROM @OrderAttraction 
---		WHERE OrderNumber = (SELECT Count(*) FROM @OrderAttraction )
+		IF @IsSequenceRecordDone = 0
+		BEGIN			
+			IF Exists ( 
+				SELECT 1 
+				FROM @AttractionInfomation A 
+				JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
+				JOIN AttractionsActiveStatus AAS WITH(NOLOCK) ON AAS.AttractionsId = ATTD.DestinationAttractionId
+				JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = ATTD.SourceAttractionId
+				JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = ATTD.DestinationAttractionId				
+				WHERE ATTD.SourceAttractionId = @NextAttractionId
+				AND ATTD.TravelModeId = @TravelModeId
+				AND AAS.MasterWeekId = @CurrentWeekDay
+				AND AAS.CloseTime > CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)
+				AND AAS.OpenTime < CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)	
+				AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)								
+				
+			)
+			BEGIN		
+				
+				SELECT TOP 1 
+					@ResSourceAttractionId = ATTD.SourceAttractionId
+					,@ResDestincationAttractionId = ATTD.DestinationAttractionId
+					,@ResDistance = ATTD.Distance
+					,@ResTravelTime = ATTD.TravelTime
+					,@ResTravelModeId = ATTD.TravelModeId
+					,@ResSourceAttractionName = SA.AttractionName 
+					,@ResDestincationAttractionName = DA.AttractionName
+					,@ReachTime =  DateADD(ss, ATTD.TravelTime , @GetStartingTimeEvent)  
+				FROM @AttractionInfomation A 
+				JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
+				JOIN AttractionsActiveStatus AAS WITH(NOLOCK) ON AAS.AttractionsId = ATTD.DestinationAttractionId
+				JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = ATTD.SourceAttractionId
+				JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = ATTD.DestinationAttractionId
+				WHERE ATTD.SourceAttractionId = @NextAttractionId
+				AND ATTD.TravelModeId = @TravelModeId
+				AND AAS.MasterWeekId = @CurrentWeekDay
+				AND AAS.CloseTime > CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)
+				AND AAS.OpenTime < CAST(DateADD(ss,ATTD.TravelTime, @GetStartingTimeEvent) AS TIME)		
+				AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)											
+				ORDER BY TravelTime
 
---		IF(@LastSource>0)
---		BEGIN
---			DELETE FROM @OrderAttraction 
---			WHERE OrderNumber = (SELECT Count(*) FROM @OrderAttraction )
+				IF EXISTS( SELECT * FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				BEGIN
+					SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				END
+				ELSE
+				BEGIN
+					SET @ResTimeRequiredToView = @AverageMinimumTime
+				END
+				SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
 
---			INSERT INTO @OrderAttraction(			
---			[SourceAttractionId],
---			[DestinationAttractionId],
---			[Distance],
---			[TravelTime],
---			[TravelModeId],
---			[SourceAttractionName],
---			[DestinationAttractionName])
---			SELECT 
---				S.SourceAttractionId
---				,S.DestinationAttractionId
---				,S.Distance
---				,S.TravelTime
---				,S.TravelModeId
---				,ATS.AttractionName AS 'SourceAttractionName'
---				,ATD.AttractionName As 'DestinationAttractionName'
---			FROM 
---			(
---				select *,
---				row_number() over (PARTITION BY SourceAttractionId order by Distance asc )RN
---				from AttractionTravelTimeDistance 
---				WHERE TravelModeId = @TravelModeId
---				AND SourceAttractionId = @LastSource
---				AND DestinationAttractionId  = @DestinationAttractionID				
---			)S
---			JOIN Attractions ATS ON ATS.AttractionsId = S.SourceAttractionId
---			JOIN Attractions ATD ON ATD.AttractionsId = S.DestinationAttractionId
---			WHERE RN =1 
---		END
---	END
---END
---ELSE
---BEGIN			
---	SELECT TOP 1 @LastSource = SourceAttractionId FROM @OrderAttraction 
---	WHERE OrderNumber = (SELECT Count(*) FROM @OrderAttraction )
---	IF(@LastSource>0)
---	BEGIN
---		DELETE FROM @OrderAttraction 
---		WHERE OrderNumber = (SELECT Count(*) FROM @OrderAttraction )
---	END
---END
---SELECT * FROM @DestinationAttractions 
---SELECT *  FROM @SourceAttractions   
-SELECT	OA.*
-		,MT.TravelType 
-		,A.GoogleICon 'SourceIcon'
-		,AD.GoogleICon 'DestinationIcon'
-FROM @OrderAttraction OA
-JOIN Attractions.dbo.MasterTravelMode MT ON MT.TravelModeId = OA.TravelModeId
-JOIN Attractions A ON A.AttractionsId = OA.SourceAttractionId
-JOIN Attractions AD ON AD.AttractionsId = OA.DestinationAttractionId
+				SET @ResDateAndtime  = @GetStartingTimeEvent
+				SET @GetStartingTimeEvent = @EventEndTime
+				SET @NextAttractionId = @ResDestincationAttractionId
+				
 
-UNION ALL
 
-SELECT *
-		,''
-		,''
-		,''
-FROM @MissingAttractions
+				INSERT INTO @OrderOfAttactionInfomration(
+					RecordCount
+					,SourceAttractionId 
+					,DestinationAttractionId 
+					,Distance 
+					,TravelTime 
+					,TravelModeId 
+					,SourceAttractionName 
+					,DestinationAttractionName 
+					,DateAndtime 
+					,ReachTime 
+					,TimeRequiredToView 
+					,EventEndTime  
+					,IsLunchDinnerBreakTime  
+					,IsDistanceCalculationMissing
+					,WeekDayId
+				)
+				SELECT @RecordOrder
+					,@ResSourceAttractionId
+					,@ResDestincationAttractionId 
+					,@ResDistance 
+					,@ResTravelTime
+					,@ResTravelModeId
+					,@ResSourceAttractionName
+					,@ResDestincationAttractionName
+					,@ResDateAndtime
+					,@ReachTime
+					,@ResTimeRequiredToView
+					,@EventEndTime
+					,NULL
+					,@IsDistanceCalculationMissing	
+					,@CurrentWeekDay	
 
+					
+					
+				
+
+			END
+			ELSE
+			BEGIN
+				---start Getting the not specific open time records
+				IF Exists ( 
+					SELECT 1
+					FROM @AttractionInfomation A 
+					JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
+					LEFT JOIN AttractionsActiveStatus AAS WITH(NOLOCK) ON AAS.AttractionsId = ATTD.DestinationAttractionId
+					JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = ATTD.SourceAttractionId
+					JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = ATTD.DestinationAttractionId
+					WHERE ATTD.SourceAttractionId = @NextAttractionId
+					AND ATTD.TravelModeId = @TravelModeId										
+					AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)									
+					AND AAS.AttractionsActiveStatusId IS NULL
+					
+				)
+				BEGIN		
+					
+							
+					SELECT TOP 1 
+						@ResSourceAttractionId = ATTD.SourceAttractionId
+						,@ResDestincationAttractionId = ATTD.DestinationAttractionId
+						,@ResDistance = ATTD.Distance
+						,@ResTravelTime = ATTD.TravelTime
+						,@ResTravelModeId = ATTD.TravelModeId
+						,@ResSourceAttractionName = SA.AttractionName 
+						,@ResDestincationAttractionName = DA.AttractionName
+						,@ReachTime =  DateADD(ss, ATTD.TravelTime , @GetStartingTimeEvent)
+					FROM @AttractionInfomation A 
+					JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
+					JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = ATTD.SourceAttractionId
+					JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = ATTD.DestinationAttractionId
+					WHERE ATTD.SourceAttractionId = @NextAttractionId
+					AND ATTD.TravelModeId = @TravelModeId					
+					AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)												
+					ORDER BY TravelTime
+
+					IF EXISTS( SELECT * FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+					BEGIN
+						SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+					END
+					ELSE
+					BEGIN
+						SET @ResTimeRequiredToView = @AverageMinimumTime
+					END
+					SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
+
+					SET @ResDateAndtime  = @GetStartingTimeEvent
+					SET @GetStartingTimeEvent = @EventEndTime
+					SET @NextAttractionId = @ResDestincationAttractionId
+					
+
+
+					INSERT INTO @OrderOfAttactionInfomration(
+						RecordCount
+						,SourceAttractionId 
+						,DestinationAttractionId 
+						,Distance 
+						,TravelTime 
+						,TravelModeId 
+						,SourceAttractionName 
+						,DestinationAttractionName 
+						,DateAndtime 
+						,ReachTime 
+						,TimeRequiredToView 
+						,EventEndTime  
+						,IsLunchDinnerBreakTime  
+						,IsDistanceCalculationMissing
+						,WeekDayId
+					)
+					SELECT @RecordOrder
+						,@ResSourceAttractionId
+						,@ResDestincationAttractionId 
+						,@ResDistance 
+						,@ResTravelTime
+						,@ResTravelModeId
+						,@ResSourceAttractionName
+						,@ResDestincationAttractionName
+						,@ResDateAndtime
+						,@ReachTime
+						,@ResTimeRequiredToView
+						,@EventEndTime
+						,NULL
+						,@IsDistanceCalculationMissing
+						,@CurrentWeekDay	
+
+					---End Getting the not specific open time records
+					END
+					ELSE
+					BEGIN
+						--Adding missing Attraction				
+						DELETE FROM @MissingAttractionID
+
+						INSERT INTO @MissingAttractionID(ID)
+						SELECT AttractionId FROM @AttractionInfomation
+
+						EXEC AddingMissingClaims				
+							@AttractionId = @NextAttractionId
+							,@TravelModeId  = @ResTravelModeId
+							,@MissingAttractionID  = @MissingAttractionID
+							,@CreatedBy = 'Missing Record'				
+
+				
+						SET @IsDistanceCalculationMissing = 1
+					END					
+									
+			END		
+				
+			SET @Counter = @Counter + 1	
+		END		
+		ELSE
+		BEGIN
+			SET @Counter = @Counter + 1	
+		END	
+			
+		
+
+		--SELECT @ResDestincationAttractionId		
+		DELETE FROM @AttractionInfomation
+		WHERE AttractionId = @ResDestincationAttractionId
+		--SELECT * FROM @AttractionInfomation
+		--ORDER BY 1 DESC
+
+		SET @RecordOrder = @RecordOrder + 1
+		
+
+
+
+		
+	END
+	--End Get next attraction Information
+	-------------------------------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		OAI.[RecordCount]
+		,OAI.[SourceAttractionId]
+		,OAI.[DestinationAttractionId]
+		,
+			CAST(
+				CAST( 
+					
+						CAST(
+								OAI.[Distance] AS DECIMAL(18,2)
+							) 
+							/ 5280 AS DECIMAL(18,2)
+					) AS Varchar(50)
+				)
+		 + ' Miles' 		
+		AS Distance
+		,OAI.[TravelTime]
+		,OAI.[TravelModeId]
+		,OAI.[SourceAttractionName]
+		,OAI.[DestinationAttractionName]
+		,CAST(OAI.[DateAndtime] AS VARCHAR(50)) AS DateAndtime
+		,CAST(OAI.[ReachTime] AS VARCHAR(50)) AS ReachTime
+		,CAST(OAI.[TimeRequiredToView] AS VARCHAR(50)) AS TimeRequiredToView
+		,CAST(OAI.[EventEndTime] AS VARCHAR(50)) AS EventEndTime
+		,OAI.[IsLunchDinnerBreakTime]
+		,OAI.[IsDistanceCalculationMissing]
+		,SA.GoogleICon SourceIcon
+		,DA.GoogleICon DestinationIcon
+		,SA.GoogleWebSite SourceDirection
+		,DA.GoogleWebSite DestinationDirection
+		,SA.GoogleRating SourceRating
+		,DA.GoogleRating DestinationRating
+		,SA.GoogleUser_ratings_total SourceRatingTotal
+		,DA.GoogleUser_ratings_total DestinationRatingTotal
+		,SA.GoogleSearchText SourceSearchText
+		,DA.GoogleSearchText DestinationSearchText
+		,MTW.TravelType
+		,OAI.WeekDayId
+		,CAST(SAAS.OpenTime AS VARCHAR(50)) SourceOpenTime
+		,CAST(SAAS.CloseTime AS VARCHAR(50)) SourceCloseTime
+		,CAST(DAAS.OpenTime AS VARCHAR(50)) DestinationOpenTime
+		,CAST(DAAS.CloseTime AS VARCHAR(50)) DestinationCloseTime
+		,(SELECT TOP 1 Html_attributions FROM AttractionPhotos SAP WITH(NOLOCK) WHERE SAP.AttractionId = OAI.SourceAttractionId) SourcePhoto
+		,(SELECT TOP 1 Html_attributions FROM AttractionPhotos DAP WITH(NOLOCK) WHERE DAP.AttractionId = OAI.DestinationAttractionId) DestinationPhoto
+	FROM @OrderOfAttactionInfomration OAI
+	LEFT JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = OAI.SourceAttractionId
+	LEFT JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = OAI.DestinationAttractionId
+	LEFT JOIN Attractions..MasterTravelMode MTW WITH(NOLOCK) ON MTW.TravelModeId = OAI.TravelModeId
+	LEFT JOIN AttractionsActiveStatus SAAS WITH(NOLOCK) ON SAAS.AttractionsId = OAI.SourceAttractionId AND SAAS.MasterWeekId = OAI.WeekDayId
+	LEFT JOIN AttractionsActiveStatus DAAS WITH(NOLOCK) ON DAAS.AttractionsId = OAI.DestinationAttractionId AND DAAS.MasterWeekId = OAI.WeekDayId
+	
 END
 
 

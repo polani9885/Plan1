@@ -9,12 +9,24 @@ function GetCityList() {
         },
         success: function (data) {
             cityList = [];
+            var scope = angular.element("#controlerIndex").scope();
+
             $.each(data, function (cityKey, cityValue) {
-                var item = [];
-                item.value = cityValue["CityName"];
-                item.data = cityValue["CityId"];
-                item.countryId = cityValue["CountryId"];
-                cityList.push(item);
+                if (scope.VisitCityList.length > 0) {
+                    if (cityValue["CountryId"] === scope.VisitCityList[0].countryId) {
+                        var item = [];
+                        item.value = cityValue["CityName"];
+                        item.data = cityValue["CityId"];
+                        item.countryId = cityValue["CountryId"];
+                        cityList.push(item);
+                    }
+                } else {
+                    var item = [];
+                    item.value = cityValue["CityName"];
+                    item.data = cityValue["CityId"];
+                    item.countryId = cityValue["CountryId"];
+                    cityList.push(item);
+                }
             });
             $('#autoCityName').autocomplete({
                 source: cityList
@@ -22,12 +34,12 @@ function GetCityList() {
 
 
             $("#autoCityName").on("autocompleteselect", function (event, ui) {
-                
                 //this will get the category list
-                var scope = angular.element("#controlerIndex").scope();
+                scope.selectedCityLabel = "";
                 scope.$apply(function () {
-                    scope.countryId = 0;
-                    scope.cityId = 0;
+                    scope.countryId = ui.item.countryId;
+                    scope.cityId = ui.item.data;
+                    scope.selectedCityLabel = ui.item.label;
                     scope.GetCategoryList();
                 });
             });

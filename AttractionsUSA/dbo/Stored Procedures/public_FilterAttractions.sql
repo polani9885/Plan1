@@ -5,16 +5,18 @@
 -- =============================================
 CREATE PROCEDURE [dbo].[public_FilterAttractions]
 	@EnterLocationName Varchar(250),
+	@CityVisitList CityVisitList ReadOnly,
 	@CategoryID userTable_Category ReadOnly 
 AS
 BEGIN
 
 
-SELECT [AttractionsId]
+
+	SELECT [AttractionsId]
       ,[AttractionName]
       ,[AddressOne]
       ,[AddressTwo]
-      ,[CityId]
+      ,A.[CityId]
       ,[CategoryId]
       ,[Longitude]
       ,[Latitude]
@@ -25,9 +27,22 @@ SELECT [AttractionsId]
       ,[ModifiedDate]
       ,[ModifiedBy]
 	  ,GoogleSearchText
-  FROM [dbo].[Attractions]
-  WHERE CategoryId NOT IN (SELECT CategoryID FROM @CategoryID)
+	  ,C.RecordIndex
+  FROM [dbo].[Attractions] A
+  JOIN dbo.AttractionXMasterGoogleType AMGT ON AMGT.AttractionId = A.AttractionsId
+  JOIN Attractions.dbo.MasterGoogleType MGT ON MGT.GoogleTypeID = AMGT.GoogleTypeId
+  JOIN @CityVisitList C ON C.CityId = A.CityId
+  WHERE 
+  AMGT.GoogleTypeId NOT IN (SELECT CategoryID FROM @CategoryID)
+  AND 
+  A.CityId = C.CityId
   AND GoogleSearchText IS NOT NULL
+  AND MGT.IsNeeded = 1	
+  ORDER BY C.RecordIndex
+
+  
+
+
 
 END
 

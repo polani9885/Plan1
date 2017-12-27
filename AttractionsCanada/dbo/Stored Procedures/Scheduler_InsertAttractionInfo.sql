@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_InsertAttractionInfo 
+﻿CREATE PROCEDURE [dbo].[Scheduler_InsertAttractionInfo] 
 (
 	@AttractionsId INT
 	,@CategoryDt user_Category ReadOnly

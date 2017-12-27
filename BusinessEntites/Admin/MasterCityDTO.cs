@@ -36,6 +36,8 @@ namespace BusinessEntites.Admin
 
         public string CountryName { get; set; }
 
+        public string CountryShortName { get; set; }
+
         public bool IsGettingNearLocationDone { get; set; }
     }
 }

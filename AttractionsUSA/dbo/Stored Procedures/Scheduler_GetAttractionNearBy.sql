@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Scheduler_GetAttractionNearBy
+﻿CREATE PROCEDURE [dbo].[Scheduler_GetAttractionNearBy]
 (
 	@AttractionsId As INT
 )	
@@ -34,6 +34,7 @@ BEGIN
   FROM [dbo].[Attractions]
   WHERE AttractionsId > @AttractionsId
   AND GoogleSearchText IS NOT NULL
+  AND GoogleSearchText <> ''
 
   UNION 
 	
@@ -66,6 +67,7 @@ BEGIN
   FROM [dbo].[Attractions]
   WHERE AttractionsId < @AttractionsId
   AND GoogleSearchText IS NOT NULL
+  AND GoogleSearchText <> ''
   ORDER BY AttractionsId DESC
   
 END
