@@ -2,6 +2,7 @@
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Users;
 using Dapper;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,21 +64,20 @@ namespace DataAccessLayer
         /// If we select or unselect any category this method will resturn the result
         /// </summary>
         /// <returns></returns>
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList,int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
         {
             try
             {
-                var parameters = new DynamicParameters();
-                parameters.Add("EnterLocationName", enterLocationName);
-                //parameters.Add()
                 SqlHelper.countryId = countryId;
+                
 
                 List<public_FilterAttractions> _public_FilterAttractions = SqlHelper.QuerySP<public_FilterAttractions>("public_FilterAttractions",
                     new {
-                        EnterLocationName = enterLocationName,
-                        CityVisitList = CommonObjects.Convert.ToDataTable<CityVisitList>(cityVisitList),
-                        CategoryID = CommonObjects.Convert.ToDataTable<userTable_Category>(categoryList)
+                        CityVisitList = CommonObjects.Convert.ToDataTable<CityVisitList>(cityVisitList)
                     }).ToList();
+
+
+
                 return _public_FilterAttractions;
             }
             catch (Exception ex)

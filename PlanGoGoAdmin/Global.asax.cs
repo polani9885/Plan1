@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using PlanGoGoAdmin.Helper.Principal;
 using System.IO;
 using System.Reflection;
+using Interfaces;
 
 namespace PlanGoGoAdmin
 {
@@ -38,17 +39,17 @@ namespace PlanGoGoAdmin
         {
             //create unitycontainer          
             IUnityContainer container = new UnityContainer()
-                .RegisterType<PlanGoGoAdmin.Repository.Interface.IUser, PlanGoGoAdmin.Repository.Reference.User>()
-                .RegisterType<PlanGoGoAdmin.Repository.Interface.ICountry, PlanGoGoAdmin.Repository.Reference.Country>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IMasterState, PlanGoGoAdmin.Repository.Reference.MasterState>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IMasterCity, PlanGoGoAdmin.Repository.Reference.MasterCity>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IMasterCategory, PlanGoGoAdmin.Repository.Reference.MasterCategory>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IAttractions, PlanGoGoAdmin.Repository.Reference.Attractions>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IGetListValues, PlanGoGoAdmin.Repository.Reference.GetListValues>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IAttractionsActiveStatus, PlanGoGoAdmin.Repository.Reference.AttractionsActiveStatus>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IMasterWeek, PlanGoGoAdmin.Repository.Reference.MasterWeek>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IAttractionTravelTimeDistance, PlanGoGoAdmin.Repository.Reference.AttractionTravelTimeDistance>()
-            .RegisterType<PlanGoGoAdmin.Repository.Interface.IMissingDistanceAttractionsRecords, PlanGoGoAdmin.Repository.Reference.RepMissingDistanceAttractionsRecords>();
+                .RegisterType<IAdminUser, PlanGoGoAdmin.Repository.Reference.User>()
+                .RegisterType<ICountry, PlanGoGoAdmin.Repository.Reference.Country>()
+            .RegisterType<IMasterState, PlanGoGoAdmin.Repository.Reference.MasterState>()
+            .RegisterType<IMasterCity, PlanGoGoAdmin.Repository.Reference.MasterCity>()
+            .RegisterType<IMasterCategory, PlanGoGoAdmin.Repository.Reference.MasterCategory>()
+            .RegisterType<IAttractions, PlanGoGoAdmin.Repository.Reference.Attractions>()
+            .RegisterType<IGetListValues, PlanGoGoAdmin.Repository.Reference.GetListValues>()
+            .RegisterType<IAttractionsActiveStatus, PlanGoGoAdmin.Repository.Reference.AttractionsActiveStatus>()
+            .RegisterType<IMasterWeek, PlanGoGoAdmin.Repository.Reference.MasterWeek>()
+            .RegisterType<IAttractionTravelTimeDistance, PlanGoGoAdmin.Repository.Reference.AttractionTravelTimeDistance>()
+            .RegisterType<IMissingDistanceAttractionsRecords, PlanGoGoAdmin.Repository.Reference.RepMissingDistanceAttractionsRecords>();
             return container;
         }
 

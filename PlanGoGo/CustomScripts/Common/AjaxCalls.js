@@ -10,7 +10,6 @@ function GetCityList() {
         success: function (data) {
             cityList = [];
             var scope = angular.element("#controlerIndex").scope();
-
             $.each(data, function (cityKey, cityValue) {
                 if (scope.VisitCityList.length > 0) {
                     if (cityValue["CountryId"] === scope.VisitCityList[0].countryId) {

@@ -172,14 +172,53 @@ BEGIN
 				AND ATTD.DestinationAttractionId = (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)
 				ORDER BY TravelTime
 
-				IF EXISTS( SELECT count(1) FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
 				BEGIN
 					SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				END
+				ELSE IF EXISTS 
+					(
+						SELECT 1
+							FROM AttractionXCategory AXM
+							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+							WHERE AXM.AttractionId = @NextAttractionId 
+							AND MG.ViewTime > CAST('00:01' AS TIME)
+					)
+				BEGIN
+					SET @ResTimeRequiredToView = 
+						(
+							SELECT MAX(ViewTime) 
+							FROM AttractionXCategory AXM
+							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+							WHERE AXM.AttractionId = @NextAttractionId 							
+						)
+							
+				END
+				ELSE IF EXISTS
+					(
+						SELECT 1 
+						FROM AttractionXCategory AXM WITH(NOLOCK)
+						JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+						JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
+						WHERE AXM.AttractionId = @NextAttractionId 	
+						AND MC.ViewTime > CAST('00:01' AS TIME)  							
+					)
+				BEGIN
+					SET @ResTimeRequiredToView = 
+							(
+								SELECT MAX(MC.ViewTime) 
+								FROM AttractionXCategory AXM WITH(NOLOCK)
+								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+								JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
+								WHERE AXM.AttractionId = @NextAttractionId 	
+								AND MC.ViewTime > CAST('00:01' AS TIME)   							
+							)
 				END
 				ELSE
 				BEGIN
 					SET @ResTimeRequiredToView = @AverageMinimumTime
 				END
+
 				SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
 
 				SET @ResDateAndtime  = @GetStartingTimeEvent
@@ -291,14 +330,54 @@ BEGIN
 				AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)											
 				ORDER BY TravelTime
 
-				IF EXISTS( SELECT * FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
 				BEGIN
 					SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+				END
+				ELSE IF EXISTS 
+					(
+						SELECT 1
+							FROM AttractionXCategory AXM
+							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+							WHERE AXM.AttractionId = @NextAttractionId 
+							AND MG.ViewTime > CAST('00:01' AS TIME)
+					)
+				BEGIN
+					SET @ResTimeRequiredToView = 
+						(
+							SELECT MAX(ViewTime) 
+							FROM AttractionXCategory AXM
+							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+							WHERE AXM.AttractionId = @NextAttractionId 							
+						)
+							
+				END
+				ELSE IF EXISTS
+					(
+						SELECT 1 
+						FROM AttractionXCategory AXM WITH(NOLOCK)
+						JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+						JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
+						WHERE AXM.AttractionId = @NextAttractionId 	
+						AND MC.ViewTime > CAST('00:01' AS TIME)  							
+					)
+				BEGIN
+					SET @ResTimeRequiredToView = 
+							(
+								SELECT MAX(MC.ViewTime) 
+								FROM AttractionXCategory AXM WITH(NOLOCK)
+								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+								JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
+								WHERE AXM.AttractionId = @NextAttractionId 	
+								AND MC.ViewTime > CAST('00:01' AS TIME)   							
+							)
 				END
 				ELSE
 				BEGIN
 					SET @ResTimeRequiredToView = @AverageMinimumTime
 				END
+
+				
 				SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
 
 				SET @ResDateAndtime  = @GetStartingTimeEvent
@@ -382,14 +461,54 @@ BEGIN
 					AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)												
 					ORDER BY TravelTime
 
-					IF EXISTS( SELECT * FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+					
+					IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
 					BEGIN
 						SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+					END
+					ELSE IF EXISTS 
+						(
+							SELECT 1
+								FROM AttractionXCategory AXM
+								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+								WHERE AXM.AttractionId = @NextAttractionId 
+								AND MG.ViewTime > CAST('00:01' AS TIME)
+						)
+					BEGIN
+						SET @ResTimeRequiredToView = 
+							(
+								SELECT MAX(ViewTime) 
+								FROM AttractionXCategory AXM
+								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+								WHERE AXM.AttractionId = @NextAttractionId 							
+							)
+							
+					END
+					ELSE IF EXISTS
+						(
+							SELECT 1 
+							FROM AttractionXCategory AXM WITH(NOLOCK)
+							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+							JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
+							WHERE AXM.AttractionId = @NextAttractionId 	
+							AND MC.ViewTime > CAST('00:01' AS TIME)  							
+						)
+					BEGIN
+						SET @ResTimeRequiredToView = 
+								(
+									SELECT MAX(MC.ViewTime) 
+									FROM AttractionXCategory AXM WITH(NOLOCK)
+									JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
+									JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
+									WHERE AXM.AttractionId = @NextAttractionId 	
+									AND MC.ViewTime > CAST('00:01' AS TIME)   							
+								)
 					END
 					ELSE
 					BEGIN
 						SET @ResTimeRequiredToView = @AverageMinimumTime
 					END
+
 					SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
 
 					SET @ResDateAndtime  = @GetStartingTimeEvent

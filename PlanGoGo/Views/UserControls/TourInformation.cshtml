@@ -158,7 +158,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                Close Event: @_attraction.EventEndTime hh
+                                                Complete Event: @_attraction.EventEndTime hh
                                             </td>
                                         </tr>
                                         @if (!_attraction.IsLunchDinnerBreakTime)
@@ -187,106 +187,119 @@
                     }
                 </table>            
             </td>
-            <td valign="top">
-                <table cellspacing="5" cellpadding="5" class="tableBreak">
-                    <tr>
-                        <td>
-                            Interested Day Break:
-                        </td>
-                        <td>
-                            <input type="checkbox" id="IsUserInterestedDayBreak"/>
-                        </td>
-                    </tr>                    
-                    <tr>
-                        <td>
-                            Update Day Start Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdateDayStartTime"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Update Day End Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdateDayEndTime" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Interested Lunch Break:
-                        </td>
-                        <td>
-                            <input type="checkbox" id="IsUserInterestedLunchBreak"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Lunch Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdatedLunchTime"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Lunch Minimum Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdatedLunchMinimumTime"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Interested Break:
-                        </td>
-                        <td>
-                            <input type="checkbox" id="IsUserInterestedBreak"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Break Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdatedBreakTime"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Break Minimum Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdatedBreakMinimumTime"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Interested Dinner Break:
-                        </td>
-                        <td>
-                            <input type="checkbox" id="IsUserInterestedDinnerBreak"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dinner Time
-                        </td>
-                        <td>
-                            <input type="text" id="UpdatedDinnerTime"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dinner Minimum Time:
-                        </td>
-                        <td>
-                            <input type="text" id="UpdateDinnerMinimumTime"/>
-                        </td>
-                    </tr>
-                </table>
-            </td>
+        <td valign="top">
+            @{ string strId = string.Empty;}
+            <table cellspacing="5" cellpadding="5" class="tableBreak">
+                <tr>
+                    <td>
+                        Day Start Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdateDayStartTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDayStartTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Day End Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdateDayEndTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDayEndTime" class="time" onchange="BreakInformationUpdate(''@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_IsUserInterestedLunchBreak_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Interested Lunch Break:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_IsUserInterestedLunchBreak";}
+                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedLunchBreak" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedLunchTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        This Is Lunch Break Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedLunchTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedLunchTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedLunchMinimumTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        How Much time spent on Lunch Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedLunchMinimumTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedLunchMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_IsUserInterestedBreak_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Interested Break:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_IsUserInterestedBreak";}
+                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedBreak" onclick="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedBreakTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        This Is Break Start Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedBreakTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedBreakMinimumTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Break Minimum Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedBreakMinimumTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_IsUserInterestedDinnerBreak_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Interested Dinner Break:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_IsUserInterestedDinnerBreak";}
+                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedDinnerBreak" onclick="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedDinnerTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        This Is Dinner Time
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedDinnerTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedDinnerTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdateDinnerMinimumTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Dinner Minimum Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdateDinnerMinimumTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDinnerMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
         </tr>
     </table>
     

@@ -8,14 +8,15 @@ using BusinessEntites;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Custom;
 using BusinessEntites.Users;
+using Interfaces;
 
 namespace PlanGoGo.Controllers
 {
     public class ScheduleController : Controller
     {
-        PlanGoGo.Repository.IGetListValues _IGetListValues;
+        IGetListValues _IGetListValues;
 
-        public ScheduleController(PlanGoGo.Repository.IGetListValues GetListValues)
+        public ScheduleController(IGetListValues GetListValues)
         {
             _IGetListValues = GetListValues;
         }
@@ -100,18 +101,7 @@ namespace PlanGoGo.Controllers
         [OutputCache(NoStore = true, Duration = 0)]
         public JsonResult Public_FilterAttractions(FilterLocations parameters)
         {
-            List<userTable_Category> categoryList = new List<userTable_Category>();
-            if (parameters.categoryList != null && parameters.categoryList.Count() > 0)
-            {
-                categoryList = parameters.categoryList.Split(',').Select(x => new userTable_Category
-                {
-                    CategoryID = x.Split('~')[0],
-                    CategoryName = x.Split('~')[1]
-                }
-                ).ToList();
-            }
-
-            List<public_FilterAttractions> _public_FilterAttractions = _IGetListValues.Public_FilterAttractions(parameters.enterLocationName, categoryList, parameters.countryId, parameters.cityVisitList);
+            List<public_FilterAttractions> _public_FilterAttractions = _IGetListValues.Public_FilterAttractions(parameters.countryId, parameters.cityVisitList);
             if (_public_FilterAttractions.Count() > 0)
             {
                 var jsonResults = Json(_public_FilterAttractions, JsonRequestBehavior.AllowGet);
@@ -157,7 +147,30 @@ namespace PlanGoGo.Controllers
                 }
             }
 
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks = new List<UserTable_UpdatedBreaks>();
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks = userTable_UpdatedBreaks = new List<UserTable_UpdatedBreaks>();
+
+            if (inputParameters.UpdatedBreaks != null)
+            {
+                userTable_UpdatedBreaks = inputParameters.UpdatedBreaks.Select(x => new UserTable_UpdatedBreaks
+                {
+                    IsUserInterestedBreak = x.IsUserInterestedBreak,
+                    IsUserInterestedDayBreak = x.IsUserInterestedDayBreak,
+                    UpdateDayStartTime = TimeSpan.Parse(x.UpdateDayStartTime),
+                    UpdatedDinnerTime = TimeSpan.Parse(x.UpdatedDinnerTime),
+                    UpdateDinnerMinimumTime = TimeSpan.Parse(x.UpdateDinnerMinimumTime),
+                    UpdatedBreakMinimumTime = TimeSpan.Parse(x.UpdatedBreakMinimumTime),
+                    UpdatedLunchTime = TimeSpan.Parse(x.UpdatedLunchTime),
+                    UpdatedLunchMinimumTime = TimeSpan.Parse(x.UpdatedLunchMinimumTime),
+                    IsUserInterestedLunchBreak = x.IsUserInterestedLunchBreak,
+                    UpdatedBreakTime = TimeSpan.Parse(x.UpdatedBreakTime),
+                    UpdateDayEndTime = TimeSpan.Parse(x.UpdateDayEndTime),
+                    IsUserInterestedDinnerBreak = x.IsUserInterestedDinnerBreak,
+                    RequestDate = x.RequestDate
+                }).ToList();
+                
+
+
+            }
             List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder = new List<UserTable_AttractionRequestOrder>();
 
 
@@ -185,24 +198,24 @@ namespace PlanGoGo.Controllers
                 {
                     _getOrderOfAttractionVisit = new GetOrderOfAttractionVisit();
                     _getOrderOfAttractionVisit.DateAndTime =
-                        Convert.ToDateTime(_internalObjects.DateAndTime).ToString("HH:MM");
+                        Convert.ToDateTime(_internalObjects.DateAndTime).ToString("hh:mm");
                     _getOrderOfAttractionVisit.DestinationAttractionId = _internalObjects.DestinationAttractionId;
                     _getOrderOfAttractionVisit.DestinationAttractionName = _internalObjects.DestinationAttractionName;
                     _getOrderOfAttractionVisit.DestinationIcon = _internalObjects.DestinationIcon;
                     _getOrderOfAttractionVisit.Distance = _internalObjects.Distance;
                     _getOrderOfAttractionVisit.ReachTime = Convert.ToDateTime(_internalObjects.ReachTime)
-                        .ToString("HH:MM");
+                        .ToString("hh:mm");
                     _getOrderOfAttractionVisit.SourceAttractionId = _internalObjects.SourceAttractionId;
                     _getOrderOfAttractionVisit.SourceAttractionName = _internalObjects.SourceAttractionName;
                     _getOrderOfAttractionVisit.SourceIcon = _internalObjects.SourceIcon;
-                    _getOrderOfAttractionVisit.TimeRequiredToView = _internalObjects.TimeRequiredToView;
+                    _getOrderOfAttractionVisit.TimeRequiredToView = Convert.ToDateTime(_internalObjects.TimeRequiredToView).ToString("hh:mm");
                     _getOrderOfAttractionVisit.TravelModeId = _internalObjects.TravelModeId;
                     _getOrderOfAttractionVisit.TravelTime =
                         TimeSpan.FromSeconds(Convert.ToInt32(_internalObjects.TravelTime)).Hours + ":" + TimeSpan
                             .FromSeconds(Convert.ToInt32(_internalObjects.TravelTime)).Minutes;
                     _getOrderOfAttractionVisit.TravelType = _internalObjects.TravelType;
                     _getOrderOfAttractionVisit.EventEndTime =
-                        Convert.ToDateTime(_internalObjects.EventEndTime).ToString("HH:MM");
+                        Convert.ToDateTime(_internalObjects.EventEndTime).ToString("hh:mm");
                     _getOrderOfAttractionVisit.RecordCount = _internalObjects.RecordCount;
                     _getOrderOfAttractionVisit.IsLunchDinnerBreakTime = _internalObjects.IsLunchDinnerBreakTime;
                     _getOrderOfAttractionVisit.IsDistanceCalculationMissing =

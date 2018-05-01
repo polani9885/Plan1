@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.MasterState;
 using System;
@@ -11,9 +12,9 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class MasterStateController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IMasterState _IMasterState;
+        IMasterState _IMasterState;
 
-        public MasterStateController(PlanGoGoAdmin.Repository.Interface.IMasterState masterState)
+        public MasterStateController(IMasterState masterState)
         {
             _IMasterState = masterState;
         }

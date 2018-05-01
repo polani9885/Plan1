@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoService.BaseClasses;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace PlanGoGoService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "User" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select User.svc or User.svc.cs at the Solution Explorer and start debugging.
-    public class User : BaseReference, IUser
+    public class User : BaseReference, IAdminUser
     {
         public AdminUser CheckUser(string userName, string password)
         {

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntites.Users;
+using Interfaces;
 
 namespace BusinessAccessLayer.Users
 {
-    public class UsersBAL : BaseBusinessClass, IDisposable, IUserBAL
+    public class UsersBAL : BaseBusinessClass, IDisposable, IUser
     {
         public void Dispose()
         {

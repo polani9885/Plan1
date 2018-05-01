@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Interface;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,11 @@ using BusinessEntites.Users;
 using Dapper;
 using HelperFunctions;
 using BusinessEntites;
+using Interfaces;
 
 namespace DataAccessLayer.User
 {
-    public class UserDAL : IUserDAL, IDisposable
+    public class UserDAL : IUser, IDisposable
     {
         public void Dispose()
         {

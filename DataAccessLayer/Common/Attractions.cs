@@ -1,6 +1,7 @@
 ﻿using BusinessEntites.Common;
 using Dapper;
-using DataAccessLayer.Interface;
+
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

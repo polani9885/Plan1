@@ -19,5 +19,9 @@ namespace BusinessEntites.EntityGoogleMaps.EntityNearBySearch
 
         public string[] types { get; set; }
 
+        public string place_id { get; set; }
+
+        public string formatted_address { get; set; }
+
     }
 }

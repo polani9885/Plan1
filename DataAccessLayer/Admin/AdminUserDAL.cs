@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using BusinessEntites.Admin;
 using Dapper;
 using BusinessEntites;
+using Interfaces;
 
 namespace DataAccessLayer
 {
-    public class AdminUserDAL : IUser,IDisposable
+    public class AdminUserDAL : IAdminUser,IDisposable
     {
         public AdminUser CheckUser(string userName, string password)
         {

@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Interface;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,7 @@ using Dapper;
 using HelperFunctions;
 using BusinessEntites.Scheduler;
 using BusinessEntites.Admin;
+using Interfaces;
 
 namespace DataAccessLayer.Schedulers
 {
@@ -170,7 +171,43 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_InsertGoogleSearchText(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId)
+        public List<GoogleTypes> GetCityCategoryPending(int countryId,int cityId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<GoogleTypes> _returnResult = SqlHelper.QuerySP<GoogleTypes>("GetCityCategoryPending", new
+                {
+                    cityId = cityId
+
+                }).ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void UpdateCityCategorySearch(int countryId,int cityId, int googleTypeId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP<RadiusInfo>("UpdateCityCategorySearch", new
+                {
+                    cityId = cityId,
+                    GoogleTypeID = googleTypeId
+
+                });
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_InsertGoogleSearchText(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId,int attractionId)
         {
             try
             {
@@ -179,6 +216,7 @@ namespace DataAccessLayer.Schedulers
                     new
                     {
                         NearBySearchData = DataTableFun.ToDataTable<NearByPlaceSearchEntity>(nearByPlaceSearchEntity)
+                        ,AttractionsId = attractionId
                     });
             }
             catch (Exception ex)
@@ -263,7 +301,7 @@ namespace DataAccessLayer.Schedulers
         }
 
 
-        public void Scheduler_InsertAttractionInfo(SchedulerInsertPlaceDetails schedulerInsertPlaceDetails,int countryId)
+        public void Scheduler_InsertAttractionInfo(SchedulerInsertPlaceDetails schedulerInsertPlaceDetails,int countryId, AttractionsDTO attractionsDTO)
         {
             try
             {
@@ -291,7 +329,20 @@ namespace DataAccessLayer.Schedulers
                         WeekDaysOpenClose = DataTableFun.ToDataTable<WeekDaysOpenClose>(schedulerInsertPlaceDetails.WeekDaysOpenClose),
                         GooglePhotos = DataTableFun.ToDataTable<GooglePhotos>(schedulerInsertPlaceDetails.GooglePhotos),
                         GoogleReview = DataTableFun.ToDataTable<GoogleReview>(schedulerInsertPlaceDetails.GoogleReview),
-                        Pricelevel = schedulerInsertPlaceDetails.Pricelevel
+                        Pricelevel = schedulerInsertPlaceDetails.Pricelevel,
+                        Latitude = attractionsDTO.Latitude,
+                        AddressOne = attractionsDTO.AddressOne,
+                        AddressTwo = attractionsDTO.AddressTwo,
+                        CityName = attractionsDTO.CityName,
+                        CreatedBy = attractionsDTO.CreatedBy,
+                        Longitude = attractionsDTO.Longitude,
+                        PlaceId = attractionsDTO.PlaceId,
+                        StateName = attractionsDTO.StateName,
+                        CountryId = attractionsDTO.CountryId,
+                        StateShortName = attractionsDTO.StateShortName,
+                        CityShortName = attractionsDTO.CityShortName,
+                        Utc_offset = schedulerInsertPlaceDetails.Utc_offset
+
                     });
             }
             catch (Exception ex)

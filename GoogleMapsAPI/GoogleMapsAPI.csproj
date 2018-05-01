@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExitCode.cs" />
+    <Compile Include="Features\CategorySearch.cs" />
     <Compile Include="Features\GetDistanceCalculation.cs" />
     <Compile Include="Features\GetGoogleSearchText.cs" />
     <Compile Include="Features\GetNearestInformation.cs" />

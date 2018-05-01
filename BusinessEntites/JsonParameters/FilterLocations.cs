@@ -12,15 +12,6 @@ namespace BusinessEntites.JsonParameters
     public class FilterLocations
     {
         [DataMember]
-        public string enterLocationName { get; set; }
-
-       // [DataMember]
-        //public List<int> categoryList { get; set; }
-
-        [DataMember]
-        public string categoryList { get; set; }
-
-        [DataMember]
         public int countryId { get; set; }
 
         [DataMember]

@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.Country;
 using System;
@@ -11,9 +12,9 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class CountryController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.ICountry _ICountry;
+        ICountry _ICountry;
 
-        public CountryController(PlanGoGoAdmin.Repository.Interface.ICountry country)
+        public CountryController(ICountry country)
         {
             _ICountry = country;
         }

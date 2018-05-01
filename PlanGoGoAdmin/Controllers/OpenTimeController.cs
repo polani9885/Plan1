@@ -1,4 +1,5 @@
 ﻿using BusinessEntites;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.OpenTime;
 using System;
@@ -11,12 +12,12 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class OpenTimeController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IGetListValues _IGetListValues;
-        PlanGoGoAdmin.Repository.Interface.IAttractionsActiveStatus _IAttractionsActiveStatus;
+        IGetListValues _IGetListValues;
+        IAttractionsActiveStatus _IAttractionsActiveStatus;
 
-        PlanGoGoAdmin.Repository.Interface.IMasterWeek _IMasterWeek;
+        IMasterWeek _IMasterWeek;
 
-        public OpenTimeController(PlanGoGoAdmin.Repository.Interface.IGetListValues getListValues, PlanGoGoAdmin.Repository.Interface.IAttractionsActiveStatus attractionsActiveStatus, PlanGoGoAdmin.Repository.Interface.IMasterWeek masterWeek)
+        public OpenTimeController(IGetListValues getListValues, IAttractionsActiveStatus attractionsActiveStatus, IMasterWeek masterWeek)
         {
             _IGetListValues = getListValues;
             _IAttractionsActiveStatus = attractionsActiveStatus;

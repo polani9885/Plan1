@@ -1,6 +1,7 @@
 ﻿using BusinessEntites;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Users;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web;
 
 namespace PlanGoGo.Repository
 {
-    public class GetListValues : PlanGoGo.Repository.IGetListValues
+    public class GetListValues : IGetListValues
     {
         PlanGoGo.GetListValues.GetListValuesClient _client = new PlanGoGo.GetListValues.GetListValuesClient();
  
@@ -27,9 +28,9 @@ namespace PlanGoGo.Repository
             return _client.Public_GetMasterCategory().ToList();
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
         {
-            return _client.Public_FilterAttractions(enterLocationName, categoryList, countryId, cityVisitList).ToList();
+            return _client.Public_FilterAttractions(countryId, cityVisitList).ToList();
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
@@ -42,5 +43,9 @@ namespace PlanGoGo.Repository
                 AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks, userTable_AttractionRequestOrder);
         }
 
+        public List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

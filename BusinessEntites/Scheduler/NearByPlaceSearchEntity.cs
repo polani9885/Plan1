@@ -11,5 +11,7 @@ namespace BusinessEntites.Scheduler
         public string AttractionName { get; set; }
 
         public string GoogleSearchText { get; set; }
+
+        public string PlaceId { get; set; }
     }
 }

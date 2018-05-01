@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace PlanGoGo.Controllers
 {
     public class HomeController : Controller
     {
-        PlanGoGo.Repository.Interface.ICountry _iCountry;
-        PlanGoGo.Repository.Interface.IMasterState _iState;
-        PlanGoGo.Repository.Interface.IMasterCity _iCity;
-        public HomeController(PlanGoGo.Repository.Interface.ICountry _ICountry, PlanGoGo.Repository.Interface.IMasterState _IState, PlanGoGo.Repository.Interface.IMasterCity _ICity)
+        ICountry _iCountry;
+        IMasterState _iState;
+        IMasterCity _iCity;
+        public HomeController(ICountry _ICountry, IMasterState _IState, IMasterCity _ICity)
         {
             _iCountry = _ICountry;
             _iState = _IState;

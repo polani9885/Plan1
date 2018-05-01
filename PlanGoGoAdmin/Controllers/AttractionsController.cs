@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Common;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.Attractions;
 using System;
@@ -11,9 +12,9 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class AttractionsController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IAttractions _IAttractions;
+        IAttractions _IAttractions;
 
-        public AttractionsController(PlanGoGoAdmin.Repository.Interface.IAttractions attractions)
+        public AttractionsController(IAttractions attractions)
         {
             _IAttractions = attractions;
         }

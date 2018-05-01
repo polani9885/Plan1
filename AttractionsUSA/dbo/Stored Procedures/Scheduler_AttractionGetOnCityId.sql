@@ -1,27 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[Scheduler_AttractionGetOnCityId]	
 AS
 BEGIN
-	DECLARE @Latitude AS Varchar(50)
-	,@Longitude AS Varchar(50)
-	,@AttractionsId As INT = 0
-	
-	SELECT  TOP 1 
-		@AttractionsId = AttractionsId
-		,@Latitude = Latitude
-		,@Longitude = Longitude
+	SELECT  
+		 AttractionsId
+		,Latitude
+		,Longitude
 	FROM Attractions
 	WHERE ISNULL(IsScannedNearBy,0) = 0	
 	AND Latitude IS NOt NULL
 	ANd Longitude Is NOt NULL
-	AND ISNULL(IsScannedNearBy,0) = 0
-
-	IF (@AttractionsId > 0)
-	BEGIN
-		UPDATE Attractions
-			SET IsScannedNearBy = 1
-		WHERE  AttractionsId = @AttractionsId
-		SELECT @Latitude Latitude, @Longitude Longitude
-	END
 	
 
 

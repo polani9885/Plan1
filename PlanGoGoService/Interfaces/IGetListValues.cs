@@ -22,7 +22,7 @@ namespace PlanGoGoService.Interfaces
         List<Public_GetMasterCategory> Public_GetMasterCategory();
 
         [OperationContract]
-        List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, List<CityVisitList> cityVisitList);
+        List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList);
 
         [OperationContract]
         List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,

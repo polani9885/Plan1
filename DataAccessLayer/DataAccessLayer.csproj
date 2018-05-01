@@ -58,19 +58,6 @@
     <Compile Include="Common\Attractions.cs" />
     <Compile Include="GetListValues.cs" />
     <Compile Include="Helper\SqlHelper.cs" />
-    <Compile Include="Interface\IAttractions.cs" />
-    <Compile Include="Interface\IAttractionsActiveStatus.cs" />
-    <Compile Include="Interface\IAttractionTravelTimeDistance.cs" />
-    <Compile Include="Interface\ICountry.cs" />
-    <Compile Include="Interface\IGetListValues.cs" />
-    <Compile Include="Interface\IMasterCategory.cs" />
-    <Compile Include="Interface\IMasterCity.cs" />
-    <Compile Include="Interface\IMasterState.cs" />
-    <Compile Include="Interface\IMasterWeek.cs" />
-    <Compile Include="Interface\IMissingDistanceAttractionsRecords.cs" />
-    <Compile Include="Interface\ISchedulers.cs" />
-    <Compile Include="Interface\IUser.cs" />
-    <Compile Include="Interface\IUserDAL.cs" />
     <Compile Include="LogException\ExceptionLogging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedulers\DALSchedulers.cs" />
@@ -91,6 +78,10 @@
     <ProjectReference Include="..\HelperFunctions\HelperFunctions.csproj">
       <Project>{48dbfb0d-7731-402d-b172-76ffa6251858}</Project>
       <Name>HelperFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

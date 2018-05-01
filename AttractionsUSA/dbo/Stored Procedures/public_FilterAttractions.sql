@@ -4,9 +4,7 @@
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[public_FilterAttractions]
-	@EnterLocationName Varchar(250),
-	@CityVisitList CityVisitList ReadOnly,
-	@CategoryID userTable_Category ReadOnly 
+	@CityVisitList CityVisitList ReadOnly	
 AS
 BEGIN
 
@@ -16,8 +14,11 @@ BEGIN
       ,[AttractionName]
       ,[AddressOne]
       ,[AddressTwo]
+	  ,A.GoogleInternational_phone_number
+	  ,A.GoogleRating
+	  ,A.PriceLevel
       ,A.[CityId]
-      ,[CategoryId]
+      ,AC.[CategoryId]
       ,[Longitude]
       ,[Latitude]
       ,[PlaceId]
@@ -29,15 +30,11 @@ BEGIN
 	  ,GoogleSearchText
 	  ,C.RecordIndex
   FROM [dbo].[Attractions] A
-  JOIN dbo.AttractionXMasterGoogleType AMGT ON AMGT.AttractionId = A.AttractionsId
-  JOIN Attractions.dbo.MasterGoogleType MGT ON MGT.GoogleTypeID = AMGT.GoogleTypeId
+  JOIN dbo.AttractionXCategory AC WITH(NOLOCK) ON AC.AttractionId = A.AttractionsId  
   JOIN @CityVisitList C ON C.CityId = A.CityId
   WHERE 
-  AMGT.GoogleTypeId NOT IN (SELECT CategoryID FROM @CategoryID)
-  AND 
   A.CityId = C.CityId
-  AND GoogleSearchText IS NOT NULL
-  AND MGT.IsNeeded = 1	
+  AND GoogleSearchText IS NOT NULL  
   ORDER BY C.RecordIndex
 
   

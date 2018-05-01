@@ -29,6 +29,7 @@ namespace GoogleMapsAPI
             GetPlaceInformation getPlaceInformation = new GetPlaceInformation();
             GetDistanceCalculation getDistanceCalculation = new GetDistanceCalculation();
             GetGoogleSearchText googleSearchText = new GetGoogleSearchText();
+            CategorySearch categorySearch = new CategorySearch();
 
 
 
@@ -59,6 +60,11 @@ namespace GoogleMapsAPI
                     {
                         getNearestInformation.GetRadiusInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         //getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        break;
+                    }
+                    case "SEARCHCATEGORY":
+                    {
+                        categorySearch.SearchByCategory(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
                     case "PLACEDETAILS":

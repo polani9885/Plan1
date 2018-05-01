@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace PlanGoGoAdmin.Controllers
     public class MissingDistanceAttractionsRecordsController : BaseController
     {
 
-        PlanGoGoAdmin.Repository.Interface.IMissingDistanceAttractionsRecords _IMissingDistanceAttractionsRecords;
-        public MissingDistanceAttractionsRecordsController(PlanGoGoAdmin.Repository.Interface.IMissingDistanceAttractionsRecords missingDistanceAttractionsRecords)
+        IMissingDistanceAttractionsRecords _IMissingDistanceAttractionsRecords;
+        public MissingDistanceAttractionsRecordsController(IMissingDistanceAttractionsRecords missingDistanceAttractionsRecords)
         {
             _IMissingDistanceAttractionsRecords = missingDistanceAttractionsRecords;
         }

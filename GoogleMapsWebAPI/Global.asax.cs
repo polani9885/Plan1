@@ -1,5 +1,6 @@
-﻿using GoogleMapsWebAPI.Repository.Interface;
+﻿
 using GoogleMapsWebAPI.Repository.References;
+using Interfaces;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
 using System;

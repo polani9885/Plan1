@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,31 +8,31 @@ namespace PlanGoGoService.BaseClasses
 {
     public class BaseReference
     {
-        public BusinessAccessLayer.IGetListValues _businessAccess;
+        public IGetListValues _businessAccess;
 
-        public BusinessAccessLayer.IAdminUser _businessUser;
+        public IAdminUser _businessUser;
 
-        public BusinessAccessLayer.Interfaces.ICountry _businessCountry;
+        public ICountry _businessCountry;
 
-        public BusinessAccessLayer.Interfaces.IMasterState _businessMasterState;
+        public IMasterState _businessMasterState;
 
-        public BusinessAccessLayer.Interfaces.IMasterCity _businessMasterCity;
+        public IMasterCity _businessMasterCity;
 
-        public BusinessAccessLayer.Interfaces.IMasterCategory _businessMasterCategory;
+        public IMasterCategory _businessMasterCategory;
 
-        public BusinessAccessLayer.Interfaces.IAttractions _businessAttractions;
+        public IAttractions _businessAttractions;
 
-        public BusinessAccessLayer.Interfaces.IAttractionsActiveStatus _businessAttractionsActiveStatus;
+        public IAttractionsActiveStatus _businessAttractionsActiveStatus;
 
-        public BusinessAccessLayer.Interfaces.IMasterWeek _businessMasterWeek;
+        public IMasterWeek _businessMasterWeek;
 
-        public BusinessAccessLayer.Interfaces.IAttractionTravelTimeDistance _businessAttractionTravelTimeDistance;
+        public IAttractionTravelTimeDistance _businessAttractionTravelTimeDistance;
 
-        public BusinessAccessLayer.Interfaces.IMissingDistanceAttractionsRecords _businessMissingDistanceAttractionsRecords;
+        public IMissingDistanceAttractionsRecords _businessMissingDistanceAttractionsRecords;
 
-        public BusinessAccessLayer.Interfaces.ISchedulers _businessSchedulers;
+        public ISchedulers _businessSchedulers;
 
-        public BusinessAccessLayer.IUserBAL _businessUserBAL;
+        public IUser _businessUserBAL;
 
         public BaseReference()
         {

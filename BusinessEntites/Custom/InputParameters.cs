@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntites.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,7 @@ namespace BusinessEntites.Custom
         public int CountryId { get; set; }
 
         public List<GroupWithDateAttractions> ListGroupWithDateAttractions { get; set; }
+
+        public List<UserTable_UpdatedBreaksTemp> UpdatedBreaks { get; set; }
     }
 }

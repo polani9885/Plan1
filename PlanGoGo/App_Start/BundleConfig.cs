@@ -36,7 +36,8 @@ namespace PlanGoGo
                         "~/Scripts/angular-sanitize.min.js",
                         //"~/Scripts/angular-scenario.js",
                         "~/Scripts/angular-touch.min.js",
-                        "~/Scripts/ng-table.js"
+                        "~/Scripts/ng-table.js",
+                        "~/Scripts/jquery.timepicker.js"
                         ));
 
 
@@ -56,7 +57,8 @@ namespace PlanGoGo
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/*.css",
-                        "~/Content/ng-table.css"
+                        "~/Content/ng-table.css",
+                        "~/Content/jquery.timepicker.css"
                         ));
 
             //Custom Script
@@ -64,9 +66,9 @@ namespace PlanGoGo
                         "~/CustomScripts/Common/*.js"));
 
             bundles.Add(new ScriptBundle("~/index").Include(
-                        "~/CustomScripts/index.js",
                         "~/CustomScripts/Controlers/controlerIndex.js",
-                        "~/CustomScripts/Common/commonFunctions.js"                        
+                        "~/CustomScripts/Common/commonFunctions.js",
+                        "~/CustomScripts/index.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/TourInformation").Include(

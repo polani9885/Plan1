@@ -1,4 +1,4 @@
-﻿using PlanGoGo.Repository.Interfaces;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +6,11 @@ using System.Web;
 using BusinessEntites;
 using BusinessEntites.Admin;
 using BusinessEntites.Users;
+using Interfaces;
 
 namespace PlanGoGo.Repository.References
 {
-    public class UserInfo : IUserInfo
+    public class UserInfo : IUser
     {
         PlanGoGo.UsersService.IUserServices _userService = new PlanGoGo.UsersService.UserServicesClient();
 

@@ -75,3 +75,24 @@ function loginControl() {
     $("#forgetController")
     .dialog("close");
 }
+
+
+function BreakInformationUpdate(divId) {
+    
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.BreakInformationUpdate(divId);
+    });
+    //alert(attractionId);
+}
+
+function convertTo24Hour(time) {
+    var hours = parseInt(time.substr(0, 2));
+    if (time.indexOf('AM') != -1 && hours == 12) {
+        time = time.replace('12', '0');
+    }
+    if (time.indexOf('PM') != -1 && hours < 12) {
+        time = time.replace(hours, (hours + 12));
+    }
+    return time.replace(/(AM|PM)/, '');
+}

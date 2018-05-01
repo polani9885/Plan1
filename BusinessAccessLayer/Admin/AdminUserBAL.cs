@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessEntites.Admin;
 using BusinessEntites;
+using Interfaces;
 
 namespace BusinessAccessLayer
 {

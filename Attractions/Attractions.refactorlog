@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="MasterCategoryId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4942d0a5-a177-4b7a-baa1-f6224279c7ec" ChangeDateTime="04/19/2018 17:01:32">
+    <Property Name="ElementName" Value="[dbo].[MasterCategory].[Viewtime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MasterCategory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ViewTime" />
+  </Operation>
 </Operations>

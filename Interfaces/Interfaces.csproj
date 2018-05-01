@@ -40,7 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAdminUser.cs" />
+    <Compile Include="IAttractions.cs" />
+    <Compile Include="IAttractionsActiveStatus.cs" />
+    <Compile Include="IAttractionTravelTimeDistance.cs" />
+    <Compile Include="ICountry.cs" />
+    <Compile Include="IGetListValues.cs" />
+    <Compile Include="IMasterCategory.cs" />
+    <Compile Include="IMasterCity.cs" />
+    <Compile Include="IMasterState.cs" />
+    <Compile Include="IMasterWeek.cs" />
+    <Compile Include="IMissingDistanceAttractionsRecords.cs" />
+    <Compile Include="ISchedulers.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
+      <Project>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</Project>
+      <Name>BusinessEntites</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

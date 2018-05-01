@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.MasterCategory;
 using System;
@@ -11,9 +12,9 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class MasterCategoryController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IMasterCategory _IMasterCategory;
+        IMasterCategory _IMasterCategory;
         // GET: MasterCategory
-        public MasterCategoryController(PlanGoGoAdmin.Repository.Interface.IMasterCategory masterCategory)
+        public MasterCategoryController(IMasterCategory masterCategory)
         {
             _IMasterCategory = masterCategory;
         }

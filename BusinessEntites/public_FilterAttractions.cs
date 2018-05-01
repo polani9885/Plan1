@@ -39,5 +39,11 @@ namespace BusinessEntites
         public string GoogleSearchText { get; set; }
 
         public int RecordIndex { get; set; }
+
+        public string GoogleInternational_phone_number { get; set; }
+
+        public string GoogleRating { get; set; }
+
+        public string PriceLevel { get; set; }
     }
 }

@@ -1,10 +1,11 @@
-﻿using GoogleMapsWebAPI.Repository.Interface;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BusinessEntites;
 using BusinessEntites.Common;
+using Interfaces;
 
 namespace GoogleMapsWebAPI.Repository.References
 {

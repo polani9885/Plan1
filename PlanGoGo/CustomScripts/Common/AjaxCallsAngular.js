@@ -12,6 +12,7 @@ function GetCategoryList(angularScope, http) {
             angularScope.$apply(function () {                
                 $(".ngCategorytable").show();
                 angularScope.CategoryList = data;
+                angularScope.ClickMainCategorySelected(angularScope.MainCategorySelected);
             });
 
             //inserting the categoryid into the global varaible
@@ -48,19 +49,8 @@ function GetMasterCategory(angularScope, http) {
         success: function (data) {
             angularScope.$apply(function () {
                 angularScope.MasterCategoryList = data;
+                angularScope.ClickMainCategorySelected(data[0].CategoryId);
             });
-
-            //inserting the categoryid into the global varaible
-            //$.each(data, function (categoryKey, categoryValue) {
-            //    item = [];
-            //    item.CategoryID = categoryValue["CategoryId"];
-            //    item.CategoryName = categoryValue.CategoryName;
-            //    selectedCategoryList.push(item);
-            //});
-
-            //It will get the all the attractions information
-            //PublicFilterAttractions(angularScope, http);
-
             GetCategoryList(angularScope, http);
 
         },
@@ -130,7 +120,7 @@ function PublicFilterAttractions(angularScope, http) {
     
 
 
-    var jsonObject = { "enterLocationName": $("#autoCityName").val(), "categoryList": newArr, "countryId": countryId, "cityVisitList": cityVisitList };
+    var jsonObject = { "countryId": countryId, "cityVisitList": cityVisitList };
 
     
    
@@ -146,7 +136,6 @@ function PublicFilterAttractions(angularScope, http) {
 
         },
         success: function (data) {
-            
             if (data.length > 0) {
                 angularScope.$apply(function() {
                     angularScope.CitySelected(data);
@@ -205,6 +194,29 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
             OrderOfAttractionListTemp.push(OrderOfAttractionListTempSub);
 
         });
+
+    var updatedBreaks = [];
+
+    $.each(angularScope.UpdatedBreaks,
+        function(key, value) {
+            var temp = {};
+            temp.RequestDate = value.RequestDate;
+            temp.UpdateDayEndTime = convertTo24Hour(value.UpdateDayEndTime);
+            temp.UpdateDayStartTime = convertTo24Hour(value.UpdateDayStartTime);
+            temp.IsUserInterestedLunchBreak = value.IsUserInterestedLunchBreak;
+            temp.UpdatedLunchTime = convertTo24Hour(value.UpdatedLunchTime);
+            temp.UpdatedLunchMinimumTime = value.UpdatedLunchMinimumTime;
+            temp.IsUserInterestedBreak = value.IsUserInterestedBreak;
+            temp.UpdatedBreakTime = convertTo24Hour(value.UpdatedBreakTime);
+            temp.UpdatedBreakMinimumTime = value.UpdatedBreakMinimumTime;
+            temp.IsUserInterestedDinnerBreak = value.IsUserInterestedDinnerBreak;
+            temp.UpdatedDinnerTime = convertTo24Hour(value.UpdatedDinnerTime);
+            temp.UpdateDinnerMinimumTime = value.UpdateDinnerMinimumTime;
+            updatedBreaks.push(temp);
+        });
+
+
+    debugger;
     
     var jsonObject = {
         "TravelModeId": angularScope.TravelModeId,
@@ -214,10 +226,11 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
         "StartDate": angularScope.StartDate,
         "StartTime": angularScope.StartTime,
         "ListGroupWithDateAttractions": OrderOfAttractionListTemp,
-        "CountryId": angularScope.countryId
+        "CountryId": angularScope.countryId,
+        "UpdatedBreaks": updatedBreaks
     };
     var parameter = JSON.stringify(jsonObject);
-
+    
      
     
     $.ajax({
@@ -248,9 +261,29 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
 
 
 //Gettigng the attraction information
-function TourInformation(divId,tourInformation) {
+function TourInformation(divId,tourInformation,breakInformation) {
     
-    var jsonObject = { "public_FilterAttractions": tourInformation };
+
+    var x = {
+        "RequestDate": breakInformation.RequestDate,
+        "IsUserInterestedDayBreak": breakInformation.IsUserInterestedDayBreak,
+        "UpdateDayEndTime": breakInformation.UpdateDayEndTime,
+        "UpdateDayStartTime": breakInformation.UpdateDayStartTime,
+        "IsUserInterestedLunchBreak": breakInformation.IsUserInterestedLunchBreak,
+        "UpdatedLunchTime": breakInformation.UpdatedLunchTime,
+        "UpdatedLunchMinimumTime": breakInformation.UpdatedLunchMinimumTime,
+        "IsUserInterestedBreak": breakInformation.IsUserInterestedBreak,
+        "UpdatedBreakTime": breakInformation.UpdatedBreakTime,
+        "UpdatedBreakMinimumTime": breakInformation.UpdatedBreakMinimumTime,
+        "IsUserInterestedDinnerBreak": breakInformation.IsUserInterestedDinnerBreak,
+        "UpdatedDinnerTime": breakInformation.UpdatedDinnerTime,
+        "UpdateDinnerMinimumTime": breakInformation.UpdateDinnerMinimumTime
+    };
+
+
+    
+    var jsonObject = { "public_FilterAttractions": tourInformation, "breakInformation": x, "divId": divId };
+    //var jsonBrak = ;
     $.ajax({
         type: "POST",
         url: '/UserControls/TourInformation',

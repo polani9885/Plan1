@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Unity.Mvc5;
 using PlanGoGo.Repository;
+using Interfaces;
 
 namespace PlanGoGo
 {
@@ -39,11 +40,11 @@ namespace PlanGoGo
         {
             //create unitycontainer          
             IUnityContainer container = new UnityContainer()
-                .RegisterType<PlanGoGo.Repository.IGetListValues, PlanGoGo.Repository.GetListValues>()
-                .RegisterType<PlanGoGo.Repository.Interface.ICountry, PlanGoGo.Repository.Reference.Country>()
-                .RegisterType<PlanGoGo.Repository.Interface.IMasterState, PlanGoGo.Repository.Reference.MasterState>()
-                .RegisterType<PlanGoGo.Repository.Interface.IMasterCity, PlanGoGo.Repository.Reference.MasterCity>()
-            .RegisterType<PlanGoGo.Repository.Interfaces.IUserInfo, PlanGoGo.Repository.References.UserInfo>();
+                .RegisterType<IGetListValues, PlanGoGo.Repository.GetListValues>()
+                .RegisterType<ICountry, PlanGoGo.Repository.Reference.Country>()
+                .RegisterType<IMasterState, PlanGoGo.Repository.Reference.MasterState>()
+                .RegisterType<IMasterCity, PlanGoGo.Repository.Reference.MasterCity>()
+            .RegisterType<IUser, PlanGoGo.Repository.References.UserInfo>();
             return container;
         }
     }

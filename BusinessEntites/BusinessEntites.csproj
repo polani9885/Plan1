@@ -74,7 +74,6 @@
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\NearBySearchEntity.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\ResultsList.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceDetails\EntityPlaceDetails.cs" />
-    <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityAddress_components.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityAspects.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityClose.cs" />
     <Compile Include="EntityGoogleMaps\EntityPlaceDetails\RefernceObjects\EntityDebug_log.cs" />
@@ -120,6 +119,7 @@
     <Compile Include="Users\UserAttractionEntity.cs" />
     <Compile Include="Users\UserEntity.cs" />
     <Compile Include="Users\UserTable_AttractionRequestOrder.cs" />
+    <Compile Include="Users\UserTable_UpdatedBreaksTemp.cs" />
     <Compile Include="Users\UserTable_UpdatedBreaks.cs" />
     <Compile Include="userTable_Category.cs" />
     <Compile Include="userTable_OnlyId.cs" />

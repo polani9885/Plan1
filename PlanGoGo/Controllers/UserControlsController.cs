@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.Users;
+using Interfaces;
 using PlanGoGo.Helper;
 using PlanGoGo.Models.UserControls;
 using System;
@@ -13,19 +14,22 @@ namespace PlanGoGo.Controllers
     public class UserControlsController : BaseControler
     {
 
-        PlanGoGo.Repository.Interfaces.IUserInfo _IUserInfo;
+        IUser _IUserInfo;
 
-        public UserControlsController(PlanGoGo.Repository.Interfaces.IUserInfo IUserInfo)
+        public UserControlsController(IUser IUserInfo)
         {
             _IUserInfo = IUserInfo;
         }
 
         // GET: UserControls
-        public ActionResult TourInformation(List<GetOrderOfAttractionVisit> public_FilterAttractions)
+        public ActionResult TourInformation(List<GetOrderOfAttractionVisit> public_FilterAttractions, UserTable_UpdatedBreaksTemp breakInformation, string divId)
         {
+            
             AttractionsInformation model = new AttractionsInformation()
             {
-                attractionsList = public_FilterAttractions
+                attractionsList = public_FilterAttractions,
+                updatedBreaks = breakInformation,
+                divId = divId
             };
             
             return View(model);

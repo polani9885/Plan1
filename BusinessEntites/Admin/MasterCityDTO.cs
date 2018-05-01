@@ -34,10 +34,16 @@ namespace BusinessEntites.Admin
         [DataMember]
         public string Longitude { get; set; }
 
+        [DataMember]
         public string CountryName { get; set; }
 
+        [DataMember]
         public string CountryShortName { get; set; }
 
+        [DataMember]
         public bool IsGettingNearLocationDone { get; set; }
+
+        [DataMember]
+        public string StateName { get; set; }
     }
 }

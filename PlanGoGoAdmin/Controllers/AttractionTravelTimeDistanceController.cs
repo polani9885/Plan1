@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class AttractionTravelTimeDistanceController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IAttractionTravelTimeDistance _IAttractionTravelTimeDistance;
+        IAttractionTravelTimeDistance _IAttractionTravelTimeDistance;
 
-        public AttractionTravelTimeDistanceController(PlanGoGoAdmin.Repository.Interface.IAttractionTravelTimeDistance attractionTravelTimeDistance)
+        public AttractionTravelTimeDistanceController(IAttractionTravelTimeDistance attractionTravelTimeDistance)
         {
             _IAttractionTravelTimeDistance = attractionTravelTimeDistance;
         }

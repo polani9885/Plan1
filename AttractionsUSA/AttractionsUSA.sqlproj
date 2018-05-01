@@ -114,6 +114,9 @@
     <Build Include="dbo\Stored Procedures\Scheduler_UpdateGoogleSearchText.sql" />
     <Build Include="dbo\Functions\Table-valued Functions\fun_BreakTimeCalculation.sql" />
     <Build Include="dbo\Functions\Scalar-valued Functions\fun_GetStartTime.sql" />
+    <Build Include="dbo\Tables\CityXGoogleType.sql" />
+    <Build Include="dbo\Stored Procedures\GetCityCategoryPending.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateCityCategorySearch.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />

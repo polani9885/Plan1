@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Interfaces;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace PlanGoGoService
         {
             //create unitycontainer          
             IUnityContainer container = new UnityContainer()
-                .RegisterType<BusinessAccessLayer.IGetListValues, BusinessAccessLayer.GetListValues>();
+                .RegisterType<IGetListValues, BusinessAccessLayer.GetListValues>();
             return container;
         }
 

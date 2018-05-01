@@ -12,9 +12,35 @@
 	,@GooglePhotos user_GooglePhotos ReadOnly
 	,@GoogleReview  User_GoogleReview ReadOnly
 	,@Pricelevel INT
+	,@AddressOne AS varchar(500)
+	,@AddressTwo AS varchar(500)
+	,@CityName AS Varchar(50)
+	,@Longitude AS varchar(250)
+	,@Latitude AS varchar(250)
+	,@PlaceId AS varchar(250)
+	,@CreatedBy AS varchar(50)	
+	,@StateName AS Varchar(50)
+	,@CountryId AS INT
+	,@StateShortName AS VARCHAR(50)
+	,@CityShortName AS VARCHAR(50)
+	,@Utc_offset AS INT
 )	
 AS
 BEGIN
+
+	EXEC [dbo].[Scheduler_InsertAttractionAuto]
+	@AddressOne = @AddressOne
+	,@AddressTwo  = @AddressTwo
+	,@CityName = @CityName
+	,@Longitude = @Longitude
+	,@Latitude = @Latitude
+	,@PlaceId = @PlaceId
+	,@CreatedBy = @CreatedBy
+	,@AttractionsId = @AttractionsId
+	,@StateName = @StateName
+	,@CountryId = @CountryId
+	,@StateShortName = @StateShortName
+	,@CityShortName = @CityShortName
 
 	UPDATE [dbo].[Attractions]
 	   SET [ModifiedDate] = getdate()
@@ -26,6 +52,7 @@ BEGIN
 		  ,[GoogleRating] = @GoogleRating		  	  
 		  ,[IsPlaceDetailsDone] = 1		  
 		  ,[PriceLevel] = @Pricelevel
+		  --,Utc_offset = @Utc_offset
 	 WHERE AttractionsId = @AttractionsId
 
 

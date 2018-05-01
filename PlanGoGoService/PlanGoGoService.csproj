@@ -165,8 +165,6 @@
     <Compile Include="Interfaces\IMasterState.cs" />
     <Compile Include="Interfaces\IMasterWeek.cs" />
     <Compile Include="Interfaces\IMissingDistanceAttractionsRecords.cs" />
-    <Compile Include="Interfaces\ISchedulers.cs" />
-    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Admin\User.svc.cs">
       <DependentUpon>User.svc</DependentUpon>
     </Compile>
@@ -208,6 +206,10 @@
     <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
       <Project>{59acb6f7-a5a2-4532-9296-e06804d0c7cf}</Project>
       <Name>BusinessEntites</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

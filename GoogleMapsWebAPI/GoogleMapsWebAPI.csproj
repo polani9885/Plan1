@@ -282,7 +282,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Repository\Interface\ISchedulers.cs" />
     <Compile Include="Repository\References\Schedulers.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Service References\Scheduler\Reference.cs">
@@ -405,6 +404,10 @@
     <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
       <Project>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</Project>
       <Name>BusinessEntites</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{228C6FFC-078F-482B-8B8C-CC8266D3FC3C}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

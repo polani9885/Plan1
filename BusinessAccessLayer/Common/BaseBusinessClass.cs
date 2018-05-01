@@ -7,24 +7,25 @@ using Microsoft.Practices.Unity;
 using DataAccessLayer;
 using System.Web.Mvc;
 using Unity.Mvc5;
+using Interfaces;
 
 namespace BusinessAccessLayer.Common
 {
     public class BaseBusinessClass
     {
-        public DataAccessLayer.IGetListValues _dataAccess;
-        public DataAccessLayer.IUser _dataAccessAdminUser;
-        public DataAccessLayer.Interface.ICountry _dataAccessCountry;
-        public DataAccessLayer.Interface.IMasterState _dataAccessMasterState;
-        public DataAccessLayer.Interface.IMasterCity _dataAccessMasterCity;
-        public DataAccessLayer.Interface.IMasterCategory _dataAccessMasterCategory;
-        public DataAccessLayer.Interface.IAttractions _dataAccessAttractions;
-        public DataAccessLayer.Interface.IAttractionsActiveStatus _dataAccessAttractionsActiveStatus;
-        public DataAccessLayer.Interface.IMasterWeek _dataAccessMasterWeek;
-        public DataAccessLayer.Interface.IAttractionTravelTimeDistance _dataAccessAttractionTravelTimeDistance;
-        public DataAccessLayer.Interface.IMissingDistanceAttractionsRecords _dataAccessMissingDistanceAttractionsRecords;
-        public DataAccessLayer.Interface.ISchedulers _dataAccessSchedulers;
-        public DataAccessLayer.Interface.IUserDAL _dataAccessUsers;
+        public IGetListValues _dataAccess;
+        public IAdminUser _dataAccessAdminUser;
+        public ICountry _dataAccessCountry;
+        public IMasterState _dataAccessMasterState;
+        public IMasterCity _dataAccessMasterCity;
+        public IMasterCategory _dataAccessMasterCategory;
+        public IAttractions _dataAccessAttractions;
+        public IAttractionsActiveStatus _dataAccessAttractionsActiveStatus;
+        public IMasterWeek _dataAccessMasterWeek;
+        public IAttractionTravelTimeDistance _dataAccessAttractionTravelTimeDistance;
+        public IMissingDistanceAttractionsRecords _dataAccessMissingDistanceAttractionsRecords;
+        public ISchedulers _dataAccessSchedulers;
+        public IUser _dataAccessUsers;
         
 
 
@@ -57,7 +58,7 @@ namespace BusinessAccessLayer.Common
         {
             //create unitycontainer          
             IUnityContainer container = new UnityContainer()
-                .RegisterType<DataAccessLayer.IGetListValues, DataAccessLayer.GetListValues>();
+                .RegisterType<IGetListValues, DataAccessLayer.GetListValues>();
             return container;
         }
     }

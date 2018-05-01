@@ -34,10 +34,10 @@ namespace PlanGoGo.GetListValues {
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Public_GetMasterCategory>> Public_GetMasterCategoryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_FilterAttractions", ReplyAction="http://tempuri.org/IGetListValues/Public_FilterAttractionsResponse")]
-        System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(string enterLocationName, System.Collections.Generic.List<BusinessEntites.userTable_Category> categoryList, int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList);
+        System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_FilterAttractions", ReplyAction="http://tempuri.org/IGetListValues/Public_FilterAttractionsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(string enterLocationName, System.Collections.Generic.List<BusinessEntites.userTable_Category> categoryList, int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit", ReplyAction="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisitResponse")]
         System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, string StartDate, string StartTime, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, System.Collections.Generic.List<BusinessEntites.Users.UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder);
@@ -103,12 +103,12 @@ namespace PlanGoGo.GetListValues {
             return base.Channel.Public_GetMasterCategoryAsync();
         }
         
-        public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(string enterLocationName, System.Collections.Generic.List<BusinessEntites.userTable_Category> categoryList, int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList) {
-            return base.Channel.Public_FilterAttractions(enterLocationName, categoryList, countryId, cityVisitList);
+        public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList) {
+            return base.Channel.Public_FilterAttractions(countryId, cityVisitList);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(string enterLocationName, System.Collections.Generic.List<BusinessEntites.userTable_Category> categoryList, int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList) {
-            return base.Channel.Public_FilterAttractionsAsync(enterLocationName, categoryList, countryId, cityVisitList);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList) {
+            return base.Channel.Public_FilterAttractionsAsync(countryId, cityVisitList);
         }
         
         public System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, string StartDate, string StartTime, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, System.Collections.Generic.List<BusinessEntites.Users.UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder) {

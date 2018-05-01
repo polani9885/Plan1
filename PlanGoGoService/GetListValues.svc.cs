@@ -63,11 +63,11 @@ namespace PlanGoGoService
             }
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(string enterLocationName, List<userTable_Category> categoryList, int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
         {
             try
             {
-                return _businessAccess.Public_FilterAttractions(enterLocationName, categoryList, countryId, cityVisitList);
+                return _businessAccess.Public_FilterAttractions(countryId, cityVisitList);
             }
             catch (Exception ex)
             {

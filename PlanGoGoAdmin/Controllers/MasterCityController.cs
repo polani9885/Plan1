@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.MasterCity;
 using System;
@@ -11,9 +12,9 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class MasterCityController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IMasterCity _IMasterCity;
+        IMasterCity _IMasterCity;
 
-        public MasterCityController(PlanGoGoAdmin.Repository.Interface.IMasterCity masterCity)
+        public MasterCityController(IMasterCity masterCity)
         {
             _IMasterCity = masterCity;
         }

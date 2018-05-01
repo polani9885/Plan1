@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntites.EntityGoogleMaps.EntityPlaceSearch.ReferenceObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace BusinessEntites.EntityPlaceDetails.RefernceObjects
 {
     public class EntityResult
     {
-        public List<EntityAddress_components> address_components { get; set; }
+        public List<address_components> address_components { get; set; }
 
         public string adr_address { get; set; }
 

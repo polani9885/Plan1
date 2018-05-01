@@ -1,5 +1,6 @@
 ﻿using BusinessEntites.Admin;
-using PlanGoGoAdmin.Repository.Interface;
+using Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

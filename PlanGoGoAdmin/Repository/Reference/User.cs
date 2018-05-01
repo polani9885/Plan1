@@ -6,10 +6,11 @@ using System.Web;
 using System.Threading.Tasks;
 using BusinessEntites.Admin;
 using BusinessEntites;
+using Interfaces;
 
 namespace PlanGoGoAdmin.Repository.Reference
 {
-    public class User: PlanGoGoAdmin.Repository.Interface.IUser
+    public class User: IAdminUser
     {
         PlanGoGoAdmin.AdminUser.UserClient _client = new PlanGoGoAdmin.AdminUser.UserClient();
 

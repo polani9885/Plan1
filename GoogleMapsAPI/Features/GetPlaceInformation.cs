@@ -37,7 +37,8 @@ namespace GoogleMapsAPI.Features
             {
                 try
                 {
-                    GetAutoCompleteInformation(countryId, details, countryInformation, details.AttractionsId);
+                    GetPlaceDetails(details.PlaceId, details.AttractionsId, countryId);
+                    //GetAutoCompleteInformation(countryId, details, countryInformation, details.AttractionsId);
                 }
                 catch (Exception ex)
                 {
@@ -52,7 +53,7 @@ namespace GoogleMapsAPI.Features
                     });
                 }
             }
-            getDistanceCalculation.CalculateDistance(countryId);
+            //getDistanceCalculation.CalculateDistance(countryId);
         }
 
         private void GetAutoCompleteInformation(int countryId, GetPlaceDetails details, MasterCountryScheduler masterCountryScheduler, int attractionsId)
@@ -264,75 +265,116 @@ namespace GoogleMapsAPI.Features
 
         private void GetPlaceDetails(string placeId, int attractionsId, int countryId)
         {
-            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
-            if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+            if (!string.IsNullOrEmpty(placeId))
             {
-                string retsult = string.Empty;
-                string googleUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId +
-                                   "&key=" +
-                                   ConfigurationManager.AppSettings["apiKey"];
-
-                retsult = webRequest.WebServiceInformation(googleUrl);
-
-                var placeDetailsInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<EntityPlaceDetails>(retsult);
-
-                if (placeDetailsInfo.result != null)
+                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                if (googleCounter == null || googleCounter.Counter <
+                    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                 {
-                    dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
-                        false);
-                }
-                else
-                {
-                    dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
-                        true);
-                }
+                    string retsult = string.Empty;
+                    string googleUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId +
+                                       "&key=" +
+                                       ConfigurationManager.AppSettings["apiKey"];
+
+                    retsult = webRequest.WebServiceInformation(googleUrl);
+
+                    var placeDetailsInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<EntityPlaceDetails>(retsult);
+
+                    if (placeDetailsInfo.result != null)
+                    {
+                        dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
+                            false);
+                    }
+                    else
+                    {
+                        dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
+                            true);
+                    }
 
 
-                if (placeDetailsInfo != null)
-                {
+                    if (placeDetailsInfo != null)
+                    {
 
 
-                    SchedulerInsertPlaceDetails schedulerInsertPlaceDetails = new SchedulerInsertPlaceDetails();
+                        SchedulerInsertPlaceDetails schedulerInsertPlaceDetails = new SchedulerInsertPlaceDetails();
 
-                    schedulerInsertPlaceDetails.AttractionsId = attractionsId;
-                    schedulerInsertPlaceDetails.Category = placeDetailsInfo.result.types;
-                    schedulerInsertPlaceDetails.GoogleWebSite = placeDetailsInfo.result.url;
-                    schedulerInsertPlaceDetails.GoogleICon = placeDetailsInfo.result.icon;
-                    schedulerInsertPlaceDetails.GoogleInternational_phone_number =
-                        placeDetailsInfo.result.international_phone_number;
-                    schedulerInsertPlaceDetails.Googleadr_address = placeDetailsInfo.result.formatted_address;
-                    schedulerInsertPlaceDetails.GoogleName = placeDetailsInfo.result.name;
-                    schedulerInsertPlaceDetails.GoogleRating = Convert.ToDecimal(placeDetailsInfo.result.rating);
-                    schedulerInsertPlaceDetails.WeekDaysOpenClose =
-                        SerilizeOpenCloseTime(placeDetailsInfo.result.opening_hours);
-                    schedulerInsertPlaceDetails.GoogleUser_ratings_total = placeDetailsInfo.result.rating;
-                    schedulerInsertPlaceDetails.Pricelevel = Convert.ToInt32(placeDetailsInfo.result.price_level);
-                    schedulerInsertPlaceDetails.GooglePhotos = (placeDetailsInfo.result.photos == null ||
-                                                                placeDetailsInfo.result.photos.Count == 0
-                        ? null
-                        : placeDetailsInfo.result.photos.Select(x => new GooglePhotos
-                        {
-                            Height = Convert.ToInt32(x.height),
-                            Html_attributions = x.html_attributions.FirstOrDefault(),
-                            Photo_reference = x.photo_reference,
-                            Width = Convert.ToInt32(x.width)
-                        }).ToList());
-                    schedulerInsertPlaceDetails.GoogleReview = placeDetailsInfo.result.reviews == null ||
-                                                               placeDetailsInfo.result.reviews.Count == 0
-                        ? null
-                        : placeDetailsInfo.result.reviews.Select(x => new GoogleReview
-                        {
+                        schedulerInsertPlaceDetails.AttractionsId = attractionsId;
+                        schedulerInsertPlaceDetails.Category = placeDetailsInfo.result.types;
+                        schedulerInsertPlaceDetails.GoogleWebSite = placeDetailsInfo.result.url;
+                        schedulerInsertPlaceDetails.GoogleICon = placeDetailsInfo.result.icon;
+                        schedulerInsertPlaceDetails.GoogleInternational_phone_number =
+                            placeDetailsInfo.result.international_phone_number;
+                        schedulerInsertPlaceDetails.Googleadr_address = placeDetailsInfo.result.formatted_address;
+                        schedulerInsertPlaceDetails.GoogleName = placeDetailsInfo.result.name;
+                        schedulerInsertPlaceDetails.GoogleRating = Convert.ToDecimal(placeDetailsInfo.result.rating);
+                        schedulerInsertPlaceDetails.WeekDaysOpenClose =
+                            SerilizeOpenCloseTime(placeDetailsInfo.result.opening_hours);
+                        schedulerInsertPlaceDetails.GoogleUser_ratings_total = placeDetailsInfo.result.rating;
+                        schedulerInsertPlaceDetails.Pricelevel = Convert.ToInt32(placeDetailsInfo.result.price_level);
+                        schedulerInsertPlaceDetails.GooglePhotos = (placeDetailsInfo.result.photos == null ||
+                                                                    placeDetailsInfo.result.photos.Count == 0
+                            ? null
+                            : placeDetailsInfo.result.photos.Select(x => new GooglePhotos
+                            {
+                                Height = Convert.ToInt32(x.height),
+                                Html_attributions = x.html_attributions.FirstOrDefault(),
+                                Photo_reference = x.photo_reference,
+                                Width = Convert.ToInt32(x.width)
+                            }).ToList());
+                        schedulerInsertPlaceDetails.GoogleReview = placeDetailsInfo.result.reviews == null ||
+                                                                   placeDetailsInfo.result.reviews.Count == 0
+                            ? null
+                            : placeDetailsInfo.result.reviews.Select(x => new GoogleReview
+                            {
 
-                            Rating = Convert.ToInt32(x.rating),
-                            Author_name = x.author_name,
-                            Author_url = x.author_url,
-                            //CreatedDate = new DateTime(Convert.ToInt64(x.time)*1000,DateTimeKind.Utc),
-                            Language = x.language,
-                            Profile_photo_url = x.author_url,
-                            Text = x.text
-                        }).ToList();
+                                Rating = Convert.ToInt32(x.rating),
+                                Author_name = x.author_name,
+                                Author_url = x.author_url,
+                                //CreatedDate = new DateTime(Convert.ToInt64(x.time)*1000,DateTimeKind.Utc),
+                                Language = x.language,
+                                Profile_photo_url = x.author_url,
+                                Text = x.text
+                            }).ToList();
 
-                    dALSchedulers.Scheduler_InsertAttractionInfo(schedulerInsertPlaceDetails, countryId);
+                        schedulerInsertPlaceDetails.Utc_offset =
+                            string.IsNullOrEmpty(placeDetailsInfo.result.utc_offset)
+                                ? 0
+                                : Convert.ToInt32(placeDetailsInfo.result.utc_offset);
+
+
+                        AttractionsDTO attractionDto = new AttractionsDTO();
+                        attractionDto.Latitude = placeDetailsInfo.result.geometry.location.lat;
+                        attractionDto.AddressOne =
+                            GetLongNameAddressElement(placeDetailsInfo.result.address_components, "street_number")
+                            + " "
+                            +
+                            GetLongNameAddressElement(placeDetailsInfo.result
+                                .address_components, "route");
+                        attractionDto.AddressTwo = GetLongNameAddressElement(placeDetailsInfo.result
+                            .address_components, "administrative_area_level_2");
+                        attractionDto.CityName = GetLongNameAddressElement(placeDetailsInfo.result
+                            .address_components, "locality");
+                        attractionDto.CreatedBy = "schedule";
+                        attractionDto.Longitude = placeDetailsInfo.result.geometry.location.lng;
+                        attractionDto.PlaceId = placeDetailsInfo.result.place_id;
+                        attractionDto.StateName = GetLongNameAddressElement(placeDetailsInfo.result
+                            .address_components, "administrative_area_level_1");
+                        attractionDto.CountryId = countryId;
+                        attractionDto.AttractionsId = attractionsId;
+                        attractionDto.StateShortName =
+                            GetShortNameAddressElement(placeDetailsInfo.result
+                                .address_components, "administrative_area_level_1");
+
+                        attractionDto.CityShortName =
+                            GetShortNameAddressElement(placeDetailsInfo.result
+                                .address_components, "locality");
+
+
+
+
+                        dALSchedulers.Scheduler_InsertAttractionInfo(schedulerInsertPlaceDetails, countryId,
+                            attractionDto);
+                    }
                 }
             }
         }

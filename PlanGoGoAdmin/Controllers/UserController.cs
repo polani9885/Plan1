@@ -1,4 +1,5 @@
 ﻿using BusinessEntites;
+using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Helper.Principal;
 using PlanGoGoAdmin.Models.User;
@@ -14,8 +15,8 @@ namespace PlanGoGoAdmin.Controllers
 {
     public class UserController : BaseController
     {
-        PlanGoGoAdmin.Repository.Interface.IUser _IUser;
-        public UserController(PlanGoGoAdmin.Repository.Interface.IUser User)
+        IAdminUser  _IUser;
+        public UserController(IAdminUser User)
         {
             _IUser = User;
         }

@@ -50,5 +50,8 @@ namespace BusinessEntites.Scheduler
         [DataMember]
         public int Pricelevel { get; set; }
 
+        [DataMember]
+        public int Utc_offset { get; set; }
+
     }
 }

@@ -16,6 +16,8 @@ BEGIN
 		  ,MCC.CountryName
 		  ,MCC.CountryShortName
 		  ,MC.IsGettingNearLocationDone
+		  ,MS.StateName
+		  ,MCC.CountryName
 	 FROM MasterCity MC
 		JOIN MasterState MS ON MS.StateId = Mc.StateId
 		JOIN MasterCountry MCC ON MCC.CountryId = Ms.CountryId
