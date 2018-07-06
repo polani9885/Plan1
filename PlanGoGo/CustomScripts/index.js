@@ -10,25 +10,46 @@ function init()
         GetCityList();
 
         $(function () {            
-            $("#tabs, #subtabs").tabs();        
+            $("#tabs, #subtabs").tabs();
+            GetCountry();
+            $("#editTour").dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Update": UpdateTourInformation,
+                    Cancel: function () {
+                        $("#editTour").dialog("close");
+                    }
+                },
+            });
+
+            $("#addingAttraction").dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Update": addingAttractionInformation,
+                    Cancel: function () {
+                        $("#addingAttraction").dialog("close");
+                    }
+                },
+            });
+            $("#addingBreak").dialog({
+                autoOpen: false,
+                height: 500,
+                width: 900,
+                modal: true,
+                buttons: {
+                    "Update": addingAttractionInformation,
+                    Cancel: function () {
+                        $("#addingBreak").dialog("close");
+                    }
+                },
+            });
         });
-
-        options = { now: "12:35", //hh:mm 24 hour format only, defaults to current time 
-            twentyFour: false, //Display 24 hour format, defaults to false 
-            upArrow: 'wickedpicker__controls__control-up', //The up arrow class selector to use, for custom CSS 
-            downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS 
-            close: 'wickedpicker__close', //The close class selector to use, for custom CSS 
-            hoverState: 'hover-state', //The hover state class to use, for custom CSS 
-            title: 'Timepicker', //The Wickedpicker's title, 
-            showSeconds: false, //Whether or not to show seconds, 
-            secondsInterval: 1, //Change interval for seconds, defaults to 1  , 
-            minutesInterval: 1, //Change interval for minutes, defaults to 1 
-            beforeShow: null, //A function to be called before the Wickedpicker is shown 
-            show: null, //A function to be called when the Wickedpicker is shown 
-            clearable: false, //Make the picker's input clearable (has clickable "x")  
-        };
-        
-
     }
     catch(e)
     {
@@ -71,78 +92,6 @@ function googleMapsData() {
     });
 }
 
-$(document).ready(function () {
-    $("#editTour").dialog({
-        autoOpen: false,
-        height: 400,
-        width: 350,
-        modal: true,
-        buttons: {
-            "Update": UpdateTourInformation,
-            Cancel: function () {
-                $("#editTour").dialog("close");
-            }
-        },        
-    });
-
-    $("#addingAttraction").dialog({
-        autoOpen: false,
-        height: 400,
-        width: 350,
-        modal: true,
-        buttons: {
-            "Update": addingAttractionInformation,
-            Cancel: function () {
-                $("#editTour").dialog("close");
-            }
-        },
-    });
-
-    $("#loginController").dialog({
-        autoOpen: false,
-        height: 400,
-        width: 350,
-        modal: true,
-        buttons: {
-            "Register": registerUser,
-            "Forget Password": forgetPassword,
-            Cancel: function () {
-                $("#loginController").dialog("close");
-            }
-        },
-    });
-
-    $("#registerController").dialog({
-        autoOpen: false,
-        height: 400,
-        width: 350,
-        modal: true,
-        buttons: {
-            "Login": loginControl,
-            "Forget Password": forgetPassword,
-            Cancel: function () {
-                $("#registerController").dialog("close");
-            }
-        },
-    });
-
-    $("#forgetController").dialog({
-        autoOpen: false,
-        height: 400,
-        width: 350,
-        modal: true,
-        buttons: {
-            "Login": loginControl,
-            "Register": registerUser,            
-            Cancel: function () {
-                $("#forgetController").dialog("close");
-            }
-        },
-    });
-
-    GetCountry();
-
-});
 
 
 function BindingCountryList(data) {
@@ -200,6 +149,7 @@ $(document).ready(function () {
         defaultTime: '',  // removes the highlighted time for when the input is empty.
         showCloseButton: true
     });
+
 });
 
 
@@ -207,118 +157,5 @@ $(document).ready(function () {
 
 function getAttractions() {    
     GetAddressInformation($("#autoAddAttraction").val());
-}
-
-function registerUser() {
-    $("#loginController")
-    .dialog("close");
-    $("#forgetController")
-    .dialog("close");
-    $("#registerController")
-    .dialog("open");
-}
-
-function forgetPassword() {
-    $("#loginController")
-    .dialog("close");
-    $("#registerController")
-   .dialog("close");
-    $("#forgetController")
-    .dialog("open");
-}
-
-function LoginValidation() {
-    var validationError = false;
-    if ($("#txtLoginUsername").val() == null || $("#txtLoginUsername").val()=="") {
-        $("#lblLoginUsernameError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblLoginUsernameError").hide();
-    }
-
-    if ($("#txtLoginPassword").val() == null || $("#txtLoginPassword").val() == "") {
-        $("#lblLoginPasswordError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblLoginPasswordError").hide();
-    }
-
-    if (!validationError) {
-        LoginCheck();
-    }
-}
-
-function RegisterValidation() {
-    var validationError = false;
-    if ($("#txtRegisterLogin").val() == null || $("#txtRegisterLogin").val() == "") {
-        $("#lblRegisterUsernameError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterUsernameError").hide();
-    }
-
-    if ($("#txtRegisterPassword").val() == null || $("#txtRegisterPassword").val() == "") {
-        $("#lblRegisterPasswordError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterPasswordError").hide();
-    }
-
-    if ($("#txtRegisterConfirmPassword").val() == null || $("#txtRegisterConfirmPassword").val() == "") {
-        $("#lblRegisterConfirmPasswordError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterConfirmPasswordError").hide();
-    }
-
-
-    if ($("#txtRegisterPassword").val() != $("#txtRegisterConfirmPassword").val()) {
-        $("#lblRegisterPasswordConfirmPasswordError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterPasswordConfirmPasswordError").hide();
-    }
-
-
-    if ($("#txtRegisterEmail").val() == null || $("#txtRegisterEmail").val() == "") {
-        $("#lblRegisterEmailError").show();
-        validationError = true;
-    }
-    else {
-        $("#lblRegisterEmailError").hide();
-    }
-      
-
-    if (!validationError) {
-        User_InsertingUserInfo();
-    }
-}
-
-function ForgetValidation() {
-    $("#lblForgetError").hide();
-    var validationError = false;
-    if ($("#txtForgetLogin").val() == null || $("#txtForgetLogin").val() == "") {        
-        validationError = true;
-    }    
-
-    if (validationError && ($("#txtForgetEmail").val() == null || $("#txtForgetEmail").val() == "")) {        
-        validationError = true;
-    }
-    else {
-        validationError = false;
-    }    
-
-    if (!validationError) {
-
-    }
-    else {
-        $("#lblForgetError").show();
-    }
 }
 

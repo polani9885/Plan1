@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.Admin;
+using BusinessEntites.Common;
 using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
 using BusinessEntites.Scheduler;
 using DataAccessLayer.LogException;
@@ -40,38 +41,10 @@ namespace GoogleMapsAPI.Features
 
                         foreach (GoogleTypes _googleTypes in googleType)
                         {
-                            googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
-                            if (googleCounter == null || googleCounter.Counter <
-                                Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
-                            {
-                                string radiusData = string.Empty;
-                                string url =
-                                    "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" +
-                                    _googleTypes.TypeName.Replace('_',' ') 
-                                    +"+in"
-                                    + "+" +_masterCityDTO.CityName
-                                    + "+" + _masterCityDTO.StateName
-                                    + "+" + _masterCityDTO.CountryName
-                                    +
-                                    "&key=" +
-                                    ConfigurationManager.AppSettings["apiKey"];
-                                radiusData = webRequest.WebServiceInformation(url);
-                                var returnsInformation =
-                                    Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(
-                                        radiusData);
-
-                                if (returnsInformation != null)
-                                {
-                                    dALSchedulers.UpdateCityCategorySearch(countryId, _masterCityDTO.CityId,
-                                        _googleTypes.GoogleTypeID);
-
-                                    InsertSearchResult(returnsInformation, googleType.ToArray(), countryId, url,
-                                        string.Empty,
-                                        string.Empty,
-                                        masterCityList.Select(x => x.CountryName).FirstOrDefault(), 0);
-                                }
-                            }
-                            getPlaceInformation.GetPlaceDetails(countryId);
+                            SearchByCategoryPlaceDetails(_googleTypes.TypeName, "+" + _masterCityDTO.CityName
+                                                                                + "+" + _masterCityDTO.StateName
+                                                                                + "+" + _masterCityDTO.CountryName,
+                                countryId, _masterCityDTO, _googleTypes, googleType, masterCityList);
                         }
 
                     }
@@ -91,7 +64,46 @@ namespace GoogleMapsAPI.Features
                 });
             }
         }
-        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType, int countryId, string url, string longitude, string latitude, string countryName, int attractionId)
+
+        private void SearchByCategoryPlaceDetails(string categoryName, string address, int countryId, MasterCityDTO _masterCityDTO = null, GoogleTypes _googleTypes = null, List<GoogleTypes>  googleType = null, List<MasterCityDTO>  masterCityList = null)
+        {
+            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+            if (googleCounter == null || googleCounter.Counter <
+                Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+            {
+                string radiusData = string.Empty;
+                string url =
+                    "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" +
+                    categoryName.Replace('_', ' ')
+                    + "+in"
+                    + address
+                    +
+                    "&key=" +
+                    ConfigurationManager.AppSettings["apiKey"];
+                radiusData = webRequest.WebServiceInformation(url);
+                var returnsInformation =
+                    Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(
+                        radiusData);
+                dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", string.Empty, string.Empty,
+                    false);
+
+
+                if (returnsInformation != null && returnsInformation.results.Count > 0)
+                {
+                    dALSchedulers.UpdateCityCategorySearch(countryId,
+                        (_masterCityDTO != null ? _masterCityDTO.CityId : 0),
+                        _googleTypes.GoogleTypeID);
+
+                    InsertSearchResult(returnsInformation, googleType.ToArray(), countryId, url,
+                        string.Empty,
+                        string.Empty,
+                        0);
+                }
+            }
+            getPlaceInformation.GetPlaceDetails(countryId);
+        }
+
+        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType, int countryId, string url, string longitude, string latitude, int attractionId)
         {
             string radiusData = string.Empty;
             string urlString = string.Empty;
@@ -131,7 +143,7 @@ namespace GoogleMapsAPI.Features
 
                     if (returnsInformation != null)
                     {
-                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude, countryName, attractionId);
+                        InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude, attractionId);
                     }
                 }
             }

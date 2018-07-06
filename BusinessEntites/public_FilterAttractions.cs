@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessEntites
 {
+    
     public class public_FilterAttractions
     {
         public int AttractionsId { get; set; }
@@ -45,5 +47,13 @@ namespace BusinessEntites
         public string GoogleRating { get; set; }
 
         public string PriceLevel { get; set; }
+
+        public string TravelTime { get; set; }
+
+        public string Distance { get; set; }
+
+        public List<int> AllCategoriesId { get; set; }
+        
+
     }
 }

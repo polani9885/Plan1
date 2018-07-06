@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.JsonParameters;
+using BusinessEntites.Scheduler;
 using BusinessEntites.Users;
 using Dapper;
 using Interfaces;
@@ -76,8 +77,6 @@ namespace DataAccessLayer
                         CityVisitList = CommonObjects.Convert.ToDataTable<CityVisitList>(cityVisitList)
                     }).ToList();
 
-
-
                 return _public_FilterAttractions;
             }
             catch (Exception ex)
@@ -138,6 +137,40 @@ namespace DataAccessLayer
                         
                     }).ToList();
                 return _result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+            try
+            {
+                List<GoogleTypes> _returnResult = SqlHelper.QuerySP<GoogleTypes>("Scheduler_GetExtraCategoryList").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+
+
+                List<AttractionPhotoReference> result = SqlHelper.QuerySP<AttractionPhotoReference>("public_AttractionsPhotoInfo",
+                    new
+                    {
+                        AttractionId = attractionId
+                    }).ToList();
+
+                return result;
             }
             catch (Exception ex)
             {

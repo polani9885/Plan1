@@ -37,7 +37,8 @@ namespace PlanGoGo
                         //"~/Scripts/angular-scenario.js",
                         "~/Scripts/angular-touch.min.js",
                         "~/Scripts/ng-table.js",
-                        "~/Scripts/jquery.timepicker.js"
+                        "~/Scripts/jquery.timepicker.js",
+                        "~/CustomScripts/Common/AjaxUserAccount.js"
                         ));
 
 
@@ -71,16 +72,23 @@ namespace PlanGoGo
                         "~/CustomScripts/index.js"
                         ));
 
+            
+
             bundles.Add(new ScriptBundle("~/TourInformation").Include(
                 "~/CustomScripts/Controlers/UserControls/controlerTourInformation.js"                
                 ));
 
-            bundles.Add(new ScriptBundle("~/Login").Include(
+            bundles.Add(new ScriptBundle("~/mainMenu").Include(
                 "~/CustomScripts/Controlers/UserControls/controlerLogin.js",
                 "~/CustomScripts/Controlers/UserControls/controlerUserAccount.js",
-                "~/CustomScripts/UserActions.js",
-               "~/CustomScripts/Common/AjaxUserAccount.js"
+                "~/CustomScripts/MainMenu.js",
+                "~/CustomScripts/Validations.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/plannedTour").Include(
+                "~/CustomScripts/PlannedTour.js",
+                "~/CustomScripts/Controlers/UserControls/controlerPlannedTour.js"
+            ));
         }
     }
 }

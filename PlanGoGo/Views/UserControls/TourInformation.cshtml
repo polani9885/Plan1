@@ -11,9 +11,12 @@
                 <table cellpadding="0" cellspacing="0" border="1">
                     @if (Model.attractionsList != null)
                     {
+
                         var isFirst = false;
+                        var destinationAttractionId = 0;
                         foreach (GetOrderOfAttractionVisit _attraction in Model.attractionsList)
                         {
+
                             if (!isFirst)
                             {
                                 <tr class="attractionInfo">
@@ -118,7 +121,23 @@
                                     <table cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td rowspan="7">
-                                                <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
+                                                @{
+                                                    if (_attraction.DestinationAttractionName == "Lunch Time" || _attraction.DestinationAttractionName == "Dinner Time" || _attraction.DestinationAttractionName == "Break Time")
+                                                    {
+                                                        <text>
+                                                            <img src="/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.DestinationAttractionName', @destinationAttractionId, '@Model.divId')"/>
+                                                        </text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>
+                                                            <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
+                                                        </text>
+                                                    }
+
+                                                }
+
+
                                             </td>
 
                                         </tr>
@@ -183,7 +202,9 @@
                                     </table>
                                 </td>
                             </tr>
+                            destinationAttractionId = _attraction.DestinationAttractionId;
                         }
+
                     }
                 </table>            
             </td>

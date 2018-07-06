@@ -32,5 +32,24 @@ namespace GoogleMapsAPI.Helper
                 throw ex;
             }
         }
+
+        public string RedirectedURL(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "GET";
+                String test = String.Empty;
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    return response.ResponseUri.AbsoluteUri;
+                }
+                return test;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

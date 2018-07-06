@@ -30,10 +30,12 @@ namespace GoogleMapsAPI
             GetDistanceCalculation getDistanceCalculation = new GetDistanceCalculation();
             GetGoogleSearchText googleSearchText = new GetGoogleSearchText();
             CategorySearch categorySearch = new CategorySearch();
+            RecalculateTourInfo recalculateTourInfo = new RecalculateTourInfo();
+            PhotoReferences photoReferences = new PhotoReferences();
 
 
 
-            string argMessage = "Please enter arguments in the following format /mode:NEARBYSEARCH~2 or /mode:PLACEDETAILS~2 or /mode:DISTANCECALCULATION~2";
+            string argMessage = "Please enter arguments in the following format /mode:NEARBYSEARCH~2 or /mode:PLACEDETAILS~2 or /mode:DISTANCECALCULATION~2 or /mode:USERFAILEDRECORDS~2";
 
             try
             {
@@ -85,6 +87,23 @@ namespace GoogleMapsAPI
                     case "GOOGLESEARCHTEXT":
                     {
                         googleSearchText.GoogleSearchText(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        break;
+                    }
+                    case "USERFAILEDRECORDS":
+                    {
+                        recalculateTourInfo.UpdateUserTourInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        //missing distance calcuation
+                        getDistanceCalculation.MissingDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
+                            .Split('~')[1]));
+                        getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        Main(args);
+                        break;
+                    }
+                    case "PHOTOREFERENCEUPDATE":
+                    {
+                        photoReferences.PhotoReference(Convert.ToInt32(argmentarray[1]
+                            .Split('~')[1]));
                         break;
                     }
                     default:

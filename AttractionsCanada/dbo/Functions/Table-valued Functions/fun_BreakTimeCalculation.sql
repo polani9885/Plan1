@@ -79,6 +79,8 @@ BEGIN
 	---------------------------------------------Start Break Time Calculation ----------------------------------------------------------------
 	DECLARE @BreakTime AS TIME = '17:00:00.0000000'
 	DECLARE @BreakMinimumTime AS TIME = '01:00:00.0000000'	
+
+	
 		
 	IF NOT Exists (
 				SELECT 1 FROM @OrderOfAttactionInfomration WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE) 
@@ -103,33 +105,40 @@ BEGIN
 			AND IsUserInterestedBreak = 1 AND UpdatedBreakMinimumTime IS Not NULL
 		END						
 	END
-	IF (CAST(@GetStartingTimeEvent AS TIME) Between @BreakTime AND DATEADD(hh,1,@BreakTime)) AND NOT EXISTS
-		(
-			SELECT * FROM @OrderOfAttactionInfomration 
-			WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE)
-			AND SourceAttractionName = 'Break Time'
-		)
+
+	IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+					AND IsUserInterestedBreak = 1 
+				)
 	BEGIN
+
+		IF (CAST(@GetStartingTimeEvent AS TIME) Between @BreakTime AND DATEADD(hh,1,@BreakTime)) AND NOT EXISTS
+			(
+				SELECT * FROM @OrderOfAttactionInfomration 
+				WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE)
+				AND SourceAttractionName = 'Break Time'
+			)
+		BEGIN
 				
-		SET @ResSourceAttractionId  = 0
-		SET @ResDestincationAttractionId  = 0
-		SET @ResDistance  = 0
-		SET @ResTravelTime  = 0
-		SET @ResTravelModeId = 0
-		SET @ResSourceAttractionName = 'Break Time'
-		SET @ResDestincationAttractionName  = 'Break Time'	
-		SET @ResDateAndtime  = @GetStartingTimeEvent
-		SET @ReachTime = @GetStartingTimeEvent
-		SET @ResTimeRequiredToView = @BreakMinimumTime
-		SET @EventEndTime  = @GetStartingTimeEvent + CAST(@BreakMinimumTime AS DATETIME)
-		SET @IsLunchDinnerBreakTime  = 1
+			SET @ResSourceAttractionId  = 0
+			SET @ResDestincationAttractionId  = 0
+			SET @ResDistance  = 0
+			SET @ResTravelTime  = 0
+			SET @ResTravelModeId = 0
+			SET @ResSourceAttractionName = 'Break Time'
+			SET @ResDestincationAttractionName  = 'Break Time'	
+			SET @ResDateAndtime  = @GetStartingTimeEvent
+			SET @ReachTime = @GetStartingTimeEvent
+			SET @ResTimeRequiredToView = @BreakMinimumTime
+			SET @EventEndTime  = @GetStartingTimeEvent + CAST(@BreakMinimumTime AS DATETIME)
+			SET @IsLunchDinnerBreakTime  = 1
 
-		SET @GetStartingTimeEvent = @EventEndTime
+			SET @GetStartingTimeEvent = @EventEndTime
 
-		SET @RecordUpdate = 1
+			SET @RecordUpdate = 1
 
 		
-	END		
+		END		
+	END
 
 	---------------------------------------------END Break Time Calculation ----------------------------------------------------------------
 
@@ -161,31 +170,37 @@ BEGIN
 			AND IsUserInterestedLunchBreak = 1 AND UpdatedLunchMinimumTime IS NOt NULL
 		END						
 	END
-	IF CAST(@GetStartingTimeEvent AS TIME) > @LunchTime AND NOT EXISTS
-		(
-			SELECT * FROM @OrderOfAttactionInfomration 
-			WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE)
-			AND SourceAttractionName = 'Lunch Time'
-		)
-	BEGIN				
-				
-		SET @ResSourceAttractionId  = 0
-		SET @ResDestincationAttractionId  = 0
-		SET @ResDistance  = 0
-		SET @ResTravelTime  = 0
-		SET @ResTravelModeId = 0
-		SET @ResSourceAttractionName = 'Lunch Time'
-		SET @ResDestincationAttractionName  = 'Lunch Time'	
-		SET @ResDateAndtime  = @GetStartingTimeEvent
-		SET @ReachTime = @GetStartingTimeEvent
-		SET @ResTimeRequiredToView = @LunchMinimumTime
-		SET @EventEndTime  = @GetStartingTimeEvent + CAST(@LunchMinimumTime AS DATETIME)
-		SET @IsLunchDinnerBreakTime  = 1
 
-		SET @GetStartingTimeEvent = @EventEndTime		
+	IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+					AND IsUserInterestedLunchBreak = 1 
+				)
+	BEGIN	
+		IF CAST(@GetStartingTimeEvent AS TIME) > @LunchTime AND NOT EXISTS
+			(
+				SELECT * FROM @OrderOfAttactionInfomration 
+				WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE)
+				AND SourceAttractionName = 'Lunch Time'
+			)
+		BEGIN				
+				
+			SET @ResSourceAttractionId  = 0
+			SET @ResDestincationAttractionId  = 0
+			SET @ResDistance  = 0
+			SET @ResTravelTime  = 0
+			SET @ResTravelModeId = 0
+			SET @ResSourceAttractionName = 'Lunch Time'
+			SET @ResDestincationAttractionName  = 'Lunch Time'	
+			SET @ResDateAndtime  = @GetStartingTimeEvent
+			SET @ReachTime = @GetStartingTimeEvent
+			SET @ResTimeRequiredToView = @LunchMinimumTime
+			SET @EventEndTime  = @GetStartingTimeEvent + CAST(@LunchMinimumTime AS DATETIME)
+			SET @IsLunchDinnerBreakTime  = 1
+
+			SET @GetStartingTimeEvent = @EventEndTime		
 		
-		SET @RecordUpdate = 1		
+			SET @RecordUpdate = 1		
 						
+		END
 	END
 	---------------------------------------------End Lunch Time Calculation ----------------------------------------------------------------
 
@@ -215,32 +230,37 @@ BEGIN
 			AND IsUserInterestedDinnerBreak = 1 AND UpdateDinnerMinimumTime IS Not NULL
 		END						
 	END
-	IF CAST(@GetStartingTimeEvent AS TIME) > @DinnerTime AND NOT EXISTS
-		(
-			SELECT * FROM @OrderOfAttactionInfomration 
-			WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE)
-			AND SourceAttractionName = 'Dinner Time'
-		)
+	IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+					AND IsUserInterestedDinnerBreak = 1 
+				)
 	BEGIN
+		IF CAST(@GetStartingTimeEvent AS TIME) > @DinnerTime AND NOT EXISTS
+			(
+				SELECT * FROM @OrderOfAttactionInfomration 
+				WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE)
+				AND SourceAttractionName = 'Dinner Time'
+			)
+		BEGIN
 				
-		SET @ResSourceAttractionId  = 0
-		SET @ResDestincationAttractionId  = 0
-		SET @ResDistance  = 0
-		SET @ResTravelTime  = 0
-		SET @ResTravelModeId = 0
-		SET @ResSourceAttractionName = 'Dinner Time'
-		SET @ResDestincationAttractionName  = 'Dinner Time'	
-		SET @ResDateAndtime  = @GetStartingTimeEvent
-		SET @ReachTime = @GetStartingTimeEvent
-		SET @ResTimeRequiredToView = @DinnerMinimumTime
-		SET @EventEndTime  = @GetStartingTimeEvent + CAST(@DinnerMinimumTime AS DATETIME)
-		SET @IsLunchDinnerBreakTime  = 1
+			SET @ResSourceAttractionId  = 0
+			SET @ResDestincationAttractionId  = 0
+			SET @ResDistance  = 0
+			SET @ResTravelTime  = 0
+			SET @ResTravelModeId = 0
+			SET @ResSourceAttractionName = 'Dinner Time'
+			SET @ResDestincationAttractionName  = 'Dinner Time'	
+			SET @ResDateAndtime  = @GetStartingTimeEvent
+			SET @ReachTime = @GetStartingTimeEvent
+			SET @ResTimeRequiredToView = @DinnerMinimumTime
+			SET @EventEndTime  = @GetStartingTimeEvent + CAST(@DinnerMinimumTime AS DATETIME)
+			SET @IsLunchDinnerBreakTime  = 1
 
-		SET @GetStartingTimeEvent = @EventEndTime
+			SET @GetStartingTimeEvent = @EventEndTime
 
-		SET @RecordUpdate = 1
+			SET @RecordUpdate = 1
 			
-	END	
+		END	
+	END
 	---------------------------------------------End Dinner Time Calculation ----------------------------------------------------------------
 
 	

@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.JsonParameters;
+using BusinessEntites.Scheduler;
 using BusinessEntites.Users;
 using System;
 using System.Collections.Generic;
@@ -33,5 +34,11 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId);
+
+        [OperationContract]
+        List<GoogleTypes> Scheduler_GetExtraCategoryList();
+
+        [OperationContract]
+        List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId);
     }
 }

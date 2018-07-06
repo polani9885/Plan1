@@ -20,7 +20,11 @@ namespace PlanGoGo.Controllers
             _iCity = _ICity;
         }
 
-        
+        public ActionResult Index()
+        {
+            return View();
+        }
+
 
         public JsonResult Admin_GetCountry()
         {

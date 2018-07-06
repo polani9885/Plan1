@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6ea3203b-af1b-4055-b4f0-242d6e2dd8e3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23457/Admin/Attractions.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Attractions.wsdl" MetadataType="Wsdl" ID="b362c977-ada3-42d3-80bf-701ef4a11d55" SourceId="1" SourceUrl="http://localhost:23457/Admin/Attractions.svc?wsdl" />
+    <MetadataFile FileName="Attractions.xsd" MetadataType="Schema" ID="b560def9-9055-4668-a9d0-0269b900bb84" SourceId="1" SourceUrl="http://localhost:23457/Admin/Attractions.svc?xsd=xsd0" />
+    <MetadataFile FileName="Attractions.disco" MetadataType="Disco" ID="3959d56f-5b1c-45ad-9165-844d134e78d6" SourceId="1" SourceUrl="http://localhost:23457/Admin/Attractions.svc?disco" />
+    <MetadataFile FileName="Attractions1.xsd" MetadataType="Schema" ID="50f73d15-5fc2-4b58-8e79-82d195cd2cc3" SourceId="1" SourceUrl="http://localhost:23457/Admin/Attractions.svc?xsd=xsd1" />
+    <MetadataFile FileName="Attractions2.xsd" MetadataType="Schema" ID="a955c5e5-325f-415b-a24b-73ba9c653e60" SourceId="1" SourceUrl="http://localhost:23457/Admin/Attractions.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

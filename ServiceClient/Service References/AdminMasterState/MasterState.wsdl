@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MasterState" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterState.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterState.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterState.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Admin" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMasterState_Admin_MasterStateUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateGet_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateGet" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateGet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateGetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateCheckExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateCheckExists" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateCheckExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateCheckExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateGetOnStateId_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateGetOnStateId" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateGetOnStateId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateGetOnStateIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateGetOnCountryId_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateGetOnCountryId" />
+  </wsdl:message>
+  <wsdl:message name="IMasterState_Admin_MasterStateGetOnCountryId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterStateGetOnCountryIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMasterState">
+    <wsdl:operation name="Admin_MasterStateUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateUpdate" message="tns:IMasterState_Admin_MasterStateUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateUpdateResponse" message="tns:IMasterState_Admin_MasterStateUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateGet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateGet" message="tns:IMasterState_Admin_MasterStateGet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateGetResponse" message="tns:IMasterState_Admin_MasterStateGet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateCheckExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateCheckExists" message="tns:IMasterState_Admin_MasterStateCheckExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateCheckExistsResponse" message="tns:IMasterState_Admin_MasterStateCheckExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateGetOnStateId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateGetOnStateId" message="tns:IMasterState_Admin_MasterStateGetOnStateId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateGetOnStateIdResponse" message="tns:IMasterState_Admin_MasterStateGetOnStateId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateGetOnCountryId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateGetOnCountryId" message="tns:IMasterState_Admin_MasterStateGetOnCountryId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterState/Admin_MasterStateGetOnCountryIdResponse" message="tns:IMasterState_Admin_MasterStateGetOnCountryId_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMasterState" type="tns:IMasterState">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Admin_MasterStateUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMasterState/Admin_MasterStateUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateGet">
+      <soap:operation soapAction="http://tempuri.org/IMasterState/Admin_MasterStateGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateCheckExists">
+      <soap:operation soapAction="http://tempuri.org/IMasterState/Admin_MasterStateCheckExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateGetOnStateId">
+      <soap:operation soapAction="http://tempuri.org/IMasterState/Admin_MasterStateGetOnStateId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterStateGetOnCountryId">
+      <soap:operation soapAction="http://tempuri.org/IMasterState/Admin_MasterStateGetOnCountryId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MasterState">
+    <wsdl:port name="BasicHttpBinding_IMasterState" binding="tns:BasicHttpBinding_IMasterState">
+      <soap:address location="http://localhost:23457/Admin/MasterState.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

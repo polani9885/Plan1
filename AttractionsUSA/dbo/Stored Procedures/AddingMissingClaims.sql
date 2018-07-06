@@ -7,8 +7,14 @@
 )	
 AS
 BEGIN
+
+	DECLARE @MissingAttractionUpdatedId AS userTable_OnlyId
+
+	INSERT INTO @MissingAttractionUpdatedId
+	SELECT * FROM @MissingAttractionID
+
 	DECLARE @MissingDistanceAttractionsRecordsID AS INT
-	IF EXISTS(SELECT * FROM [dbo].[MissingDistanceAttractionsRecords] WHERE AttractionsID = @AttractionId AND MasterTravelModeID = @TravelModeId)
+	IF EXISTS(SELECT 1 FROM [dbo].[MissingDistanceAttractionsRecords] WHERE AttractionsID = @AttractionId AND MasterTravelModeID = @TravelModeId)
 	BEGIN
 		SELECT @MissingDistanceAttractionsRecordsID = MissingDistanceAttractionsRecordsID 
 		FROM [dbo].[MissingDistanceAttractionsRecords] WHERE AttractionsID = @AttractionId
@@ -33,7 +39,23 @@ BEGIN
 
 	DELETE FROM	[dbo].[MissingDistanceAttractionsRecordsXAttractions]
 	WHERE MissingDistanceAttractionsRecordsID = @MissingDistanceAttractionsRecordsID
-	AND AttractionsID IN (SELECT ID FROM @MissingAttractionID) 					 
+	AND AttractionsID IN (SELECT ID FROM @MissingAttractionID)
+	
+	
+	DELETE FROM  @MissingAttractionUpdatedId
+	WHERE ID IN (
+		SELECT DestinationAttractionId FROM [dbo].[AttractionNoOfTimesDistanceCalcuated]  WITH(NOLOCK)
+		WHERE SourceAttractionId = @AttractionId
+		AND NoOfTimesTried >= 3
+		)	
+
+		DELETE FROM  @MissingAttractionUpdatedId
+	WHERE ID IN (
+		SELECT AttractionsID FROM [dbo].[MissingDistanceAttractionsRecordsXAttractions]
+		WHERE MissingDistanceAttractionsRecordsID IN (@MissingDistanceAttractionsRecordsID)
+	)
+
+
 
 	INSERT INTO [dbo].[MissingDistanceAttractionsRecordsXAttractions]
 				([AttractionsID]

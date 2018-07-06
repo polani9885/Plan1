@@ -1,6 +1,7 @@
 ﻿using BusinessAccessLayer.Common;
 using BusinessEntites;
 using BusinessEntites.JsonParameters;
+using BusinessEntites.Scheduler;
 using BusinessEntites.Users;
 using Interfaces;
 using System;
@@ -101,6 +102,30 @@ namespace BusinessAccessLayer
             try
             {
                 return _dataAccess.GetAttractionOpenTime(AttractionId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+            try
+            {
+                return _dataAccess.Scheduler_GetExtraCategoryList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId)
+        {
+            try
+            {
+                return _dataAccess.public_AttractionsPhotoInfo(countryId,attractionId);
             }
             catch (Exception ex)
             {

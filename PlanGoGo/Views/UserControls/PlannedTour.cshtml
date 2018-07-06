@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "PlannedTour";
+    Layout = "~/Views/Shared/_LayoutBeachResort.cshtml";
+}
+
+@Scripts.Render("~/plannedTour")
+
+<div ng-controller="controlerPlannedTour" id="divTourPlan">
+
+<table>
+    <tr>
+        <td>
+            <a href="javascript:void(0)" onclick="CreateNewTour()">Create New Tour</a>
+        </td>
+    </tr>
+    <tr ng-show="plannedTour.length">
+        <td>
+            Planned Tours
+        </td>
+    </tr>
+    <tr ng-show="plannedTour.length" >
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table colspan="15">
+                            <tbody>
+                            <th>
+                                Trip Name
+                            </th>
+                            <th>
+                                Created Date
+                            </th>
+                            <th>
+                                Edit Trip Name
+                            </th>
+                            <th>
+                                Edit Trip Info
+                            </th>
+                            <th>
+                                Delete Trip
+                            </th>
+                            </tbody>
+                            <tr ng-repeat="tourInfo in plannedTour">
+                                <td>
+                                    {{tourInfo.TripName}}
+                                </td>
+                                <td>
+                                    {{tourInfo.CreatedDate}}
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" ng-click="EditTripName(tourInfo)">
+                                        <img src="~/Images/User/UI/edit.png" alt="Edit Tour Name" class="iconWidhHeigh"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" ng-click="NavigateToSchedule(tourInfo.UserTripId)">
+                                        <img src="~/Images/User/UI/trip.png" alt="Edit Tour Info" class="iconWidhHeigh" />
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" onclick="EditTripName()">
+                                        <img src="~/Images/User/UI/wrong.png" alt="Delete trip" class="iconWidhHeigh" />
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+
+<div id="popCreateNewTour" title="Forget Password">
+    <p class="validateTips">All form fields are required.</p>
+    <form>
+        <fieldset>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td colspan="2">
+                        <label style="display: none" class="validationError" id="lblTourError">Tour Name should not be blank</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Trip Name:
+                    </td>
+                    <td>
+                        <input id="txtTripName" placeholder="Trip Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="btnAddTrip" type="button" value="Add" onclick="TripNameInfo()">
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+    
+</div>
+

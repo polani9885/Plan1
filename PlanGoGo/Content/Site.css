@@ -752,7 +752,7 @@ tr.pager td {
         }
 }
 .ui-dialog{
-    width:500px !important;
+    /*width:500px !important;*/
 }
 
 .cat_MainList {
@@ -807,3 +807,15 @@ tr.pager td {
     font-size: 15px;
 }
 /*********************************End Attraction Information *************************************************************/
+.iconWidhHeigh {
+    height: 50px;
+    width: 50px;   
+}
+
+.errorMessage {
+    color: red;
+}
+
+.warningMessage {
+    color: orange;
+}

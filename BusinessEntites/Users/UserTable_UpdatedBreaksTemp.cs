@@ -10,7 +10,7 @@ namespace BusinessEntites.Users
     public class UserTable_UpdatedBreaksTemp
     {
         [DataMember]
-        public DateTime RequestDate { get; set; }
+        public string RequestDate { get; set; }
 
         [DataMember]
         public bool IsUserInterestedDayBreak { get; set; }

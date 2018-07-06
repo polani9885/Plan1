@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MasterCity" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Admin" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMasterCity_Admin_MasterCityCheckExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityCheckExists" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityCheckExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityCheckExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityGet_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityGet" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityGet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityGetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityGetOnStateId_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityGetOnStateId" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityGetOnStateId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityGetOnStateIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityGetOnCityId_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityGetOnCityId" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityGetOnCityId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityGetOnCityIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMasterCity_Admin_MasterCityUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Admin_MasterCityUpdateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMasterCity">
+    <wsdl:operation name="Admin_MasterCityCheckExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityCheckExists" message="tns:IMasterCity_Admin_MasterCityCheckExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityCheckExistsResponse" message="tns:IMasterCity_Admin_MasterCityCheckExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityGet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityGet" message="tns:IMasterCity_Admin_MasterCityGet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityGetResponse" message="tns:IMasterCity_Admin_MasterCityGet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityGetOnStateId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityGetOnStateId" message="tns:IMasterCity_Admin_MasterCityGetOnStateId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityGetOnStateIdResponse" message="tns:IMasterCity_Admin_MasterCityGetOnStateId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityGetOnCityId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityGetOnCityId" message="tns:IMasterCity_Admin_MasterCityGetOnCityId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityGetOnCityIdResponse" message="tns:IMasterCity_Admin_MasterCityGetOnCityId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityUpdate" message="tns:IMasterCity_Admin_MasterCityUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterCity/Admin_MasterCityUpdateResponse" message="tns:IMasterCity_Admin_MasterCityUpdate_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMasterCity" type="tns:IMasterCity">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Admin_MasterCityCheckExists">
+      <soap:operation soapAction="http://tempuri.org/IMasterCity/Admin_MasterCityCheckExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityGet">
+      <soap:operation soapAction="http://tempuri.org/IMasterCity/Admin_MasterCityGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityGetOnStateId">
+      <soap:operation soapAction="http://tempuri.org/IMasterCity/Admin_MasterCityGetOnStateId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityGetOnCityId">
+      <soap:operation soapAction="http://tempuri.org/IMasterCity/Admin_MasterCityGetOnCityId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Admin_MasterCityUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMasterCity/Admin_MasterCityUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MasterCity">
+    <wsdl:port name="BasicHttpBinding_IMasterCity" binding="tns:BasicHttpBinding_IMasterCity">
+      <soap:address location="http://localhost:23457/Admin/MasterCity.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

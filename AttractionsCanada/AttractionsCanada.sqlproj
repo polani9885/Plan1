@@ -120,6 +120,16 @@
     <Build Include="dbo\Tables\CityXGoogleType.sql" />
     <Build Include="dbo\Stored Procedures\GetCityCategoryPending.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCityCategorySearch.sql" />
+    <Build Include="dbo\Tables\AttractionNoOfTimesDistanceCalcuated.sql" />
+    <Build Include="dbo\Tables\MissingAttractionRestarentSearch.sql" />
+    <Build Include="dbo\Stored Procedures\Service_GetAttractionRestarentMissing.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionRestarentSearch.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetNearestRestaruents.sql" />
+    <Build Include="dbo\Stored Procedures\User_UpdateFindNearestRestarent.sql" />
+    <Build Include="dbo\Stored Procedures\public_AttractionsPhotoInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferencePending.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferenceUrlUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferenceUrlAlreadyTried.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\CityVisitList.sql" />

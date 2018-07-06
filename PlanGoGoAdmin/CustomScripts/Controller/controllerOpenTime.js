@@ -4,7 +4,7 @@
 
 appPlanGoGo.controller('controllerOpenTime', function ($scope, $http, NgTableParams) {
     $scope.OpenTime = [];
-    debugger;
+    
     $scope.paramAttractionId = getUrlParameter("AttractionsId");
     $scope.AttractionId = 0;
 

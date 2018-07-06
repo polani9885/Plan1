@@ -5,6 +5,7 @@
     [MasterCategoryId] INT NULL, 
     [DisplayForUser] BIT NULL, 
     [ViewTime] TIME NULL, 
+    [ExtraSearch] BIT NULL, 
     CONSTRAINT [PK_MasterGoogleType] PRIMARY KEY CLUSTERED ([GoogleTypeID] ASC)
 );
 

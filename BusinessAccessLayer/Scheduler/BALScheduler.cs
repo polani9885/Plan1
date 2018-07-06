@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BusinessEntites;
 using BusinessEntites.Common;
 using Interfaces;
+using BusinessEntites.Scheduler;
 
 namespace BusinessAccessLayer.Scheduler
 {
@@ -71,6 +72,17 @@ namespace BusinessAccessLayer.Scheduler
             try
             {
                 return _dataAccessSchedulers.Service_GetSearchTextNotCorrect();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+            try
+            {
+                return _dataAccessSchedulers.Scheduler_GetExtraCategoryList();
             }
             catch (Exception ex)
             {

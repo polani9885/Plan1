@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="22c2bf31-b8c7-472a-bc8f-54bf38386caf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23457/Admin/MasterWeek.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MasterWeek.disco" MetadataType="Disco" ID="66798b82-e584-4938-b3ce-f669214a24b2" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?disco" />
+    <MetadataFile FileName="MasterWeek.wsdl" MetadataType="Wsdl" ID="5b32a703-a697-430a-8a40-21e41e4724f0" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?wsdl" />
+    <MetadataFile FileName="MasterWeek.xsd" MetadataType="Schema" ID="03bcbb94-5aae-4d46-8d8f-633c157587ff" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterWeek1.xsd" MetadataType="Schema" ID="de99dd58-9997-4f22-b58d-a8694dcddc73" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterWeek2.xsd" MetadataType="Schema" ID="eb48fd97-7084-4ebb-b28c-1ddc24eadb4c" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

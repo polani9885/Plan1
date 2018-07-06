@@ -15,5 +15,7 @@ namespace BusinessEntites.Common
         public string DestinationText { get; set; }
 
         public string SourceText { get; set; }
+
+        public int MasterTravelModeID { get; set; }
     }
 }

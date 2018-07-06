@@ -167,12 +167,14 @@ BEGIN
            ([AttractionId]
            ,[Height]
            ,[Html_attributions]
-           ,[Width])
+           ,[Width]
+		   ,Photo_reference)
 	SELECT 
 			@AttractionsId
 			,Height
 			,Html_attributions	
 			,Width
+			,Photo_reference
 	FROM @GooglePhotos
 
 	

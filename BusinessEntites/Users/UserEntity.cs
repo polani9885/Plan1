@@ -42,5 +42,8 @@ namespace BusinessEntites.Users
         public DateTime ModifiedUTCDate { get; set; }
         [DataMember]
         public string ModifiedBy { get; set; }
+
+        [DataMember]
+        public int UserTripId { get; set; }
     }
 }

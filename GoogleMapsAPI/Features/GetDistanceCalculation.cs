@@ -38,7 +38,9 @@ namespace GoogleMapsAPI.Features
 
                     foreach (MissingDataAttractionDTO _attractionsDTO in attractionInformation)
                     {
-                        foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode)
+                        foreach (MasterTravelModeDTO masterTravelModeDTO in _attractionsDTO.MasterTravelModeID > 0
+                            ? travelMode.Where(x => x.TravelModeId == _attractionsDTO.MasterTravelModeID)
+                            : travelMode)
                         {
                             DistanceGetting(masterTravelModeDTO.TravelType, _attractionsDTO.SourceText,
                                 _attractionsDTO.DestinationText, attractionsDTO.AttractionsId,

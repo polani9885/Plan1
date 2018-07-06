@@ -11,6 +11,7 @@ using HelperFunctions;
 using BusinessEntites.Scheduler;
 using BusinessEntites.Admin;
 using Interfaces;
+using BusinessEntites.Users;
 
 namespace DataAccessLayer.Schedulers
 {
@@ -151,6 +152,53 @@ namespace DataAccessLayer.Schedulers
                         CountryId = countryId
                     }).ToList();
                 return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionPhotoReference> Scheduler_PhotoReferencePending(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<AttractionPhotoReference> _returnResult = SqlHelper.QuerySP<AttractionPhotoReference>("Scheduler_PhotoReferencePending").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_PhotoReferenceUrlUpdate(int countryId, int attractionPhotosId, string url)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_PhotoReferenceUrlUpdate",new
+                {
+                    AttractionPhotosId = attractionPhotosId
+                    ,url = url
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_PhotoReferenceUrlAlreadyTried(int countryId, int attractionPhotosId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_PhotoReferenceUrlAlreadyTried", new
+                {
+                    AttractionPhotosId = attractionPhotosId
+                });
             }
             catch (Exception ex)
             {
@@ -562,6 +610,68 @@ namespace DataAccessLayer.Schedulers
                     {
                         AttractionsId = attractionsId,
                         GoogleSearchText = googleSearchText
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<UserTourInformation> Scheduler_RecalculateTourInfo(int countryId)
+        {
+            try
+            {
+                
+                var result = SqlHelper.QuerySP<UserTourInformation>("Scheduler_RecalculateTourInfo",
+                    new
+                    {
+                        CountryId = countryId
+                    }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionsDTO> Service_GetAttractionRestarentMissing(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<AttractionsDTO> _returnResult = SqlHelper.QuerySP<AttractionsDTO>("Service_GetAttractionRestarentMissing").ToList();
+
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+            try
+            {
+                List<GoogleTypes> _returnResult = SqlHelper.QuerySP<GoogleTypes>("Scheduler_GetExtraCategoryList").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Scheduler_UpdateAttractionRestarentSearch(int attractionsId, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_UpdateAttractionRestarentSearch",
+                    new
+                    {
+                        AttractionsId = attractionsId
                     });
             }
             catch (Exception ex)

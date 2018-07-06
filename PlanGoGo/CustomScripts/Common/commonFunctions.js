@@ -67,14 +67,7 @@ function addingAttractionInformation() {
 }
 
 
-function loginControl() {
-    $("#loginController")
-     .dialog("open");
-    $("#registerController")
-  .dialog("close");
-    $("#forgetController")
-    .dialog("close");
-}
+
 
 
 function BreakInformationUpdate(divId) {
@@ -95,4 +88,34 @@ function convertTo24Hour(time) {
         time = time.replace(hours, (hours + 12));
     }
     return time.replace(/(AM|PM)/, '');
+}
+
+
+function convertTo12Hour(time) {   // Take a time in 24 hour format and format it in 12 hour format
+    var time_part_array = time.split(":");
+    var ampm = 'AM';
+
+    if (time_part_array[0] >= 12) {
+        ampm = 'PM';
+    }
+
+    if (time_part_array[0] > 12) {
+        time_part_array[0] = time_part_array[0] - 12;
+    }
+
+    formatted_time = time_part_array[0] + ':' + time_part_array[1] + ':' + time_part_array[2] + ' ' + ampm;
+
+    return formatted_time;
+}
+
+function AddLunchDinnerBreak(breakType, attractionId, divId) {
+
+    $("#addingBreak")
+        .dialog("open");
+
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.AddLunchDinnerBreak(breakType, attractionId, divId);
+    });
+    
 }

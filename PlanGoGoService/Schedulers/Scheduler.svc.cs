@@ -9,6 +9,7 @@ using BusinessEntites;
 using BusinessEntites.Common;
 using PlanGoGoService.BaseClasses;
 using Interfaces;
+using BusinessEntites.Scheduler;
 
 namespace PlanGoGoService.Schedulers
 {
@@ -74,6 +75,12 @@ namespace PlanGoGoService.Schedulers
             {
                 throw ex;
             }
+        }
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+
+            return _businessSchedulers.Scheduler_GetExtraCategoryList();
+
         }
     }
 }

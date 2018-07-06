@@ -27,6 +27,26 @@ namespace PlanGoGo.Helper
             Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
         }
 
+        public void UpdateCookieInformation()
+        {
+            HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            var ticket = FormsAuthentication.Decrypt(cookie.Value);
+
+            FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version,
+                ticket.Name,
+                ticket.IssueDate,
+                ticket.Expiration,
+                true,
+                JsonConvert.SerializeObject(userEntity),
+                ticket.CookiePath);
+            // Encrypt the ticket.
+            string encTicket = FormsAuthentication.Encrypt(newTicket);
+
+            cookie.Value = encTicket;
+
+            HttpContext.Response.Cookies.Set(cookie);
+        }
+
         public bool IsUserAuthenticated()
         {
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];

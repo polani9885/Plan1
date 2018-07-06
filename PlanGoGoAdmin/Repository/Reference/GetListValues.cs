@@ -7,6 +7,7 @@ using BusinessEntites;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Users;
 using Interfaces;
+using BusinessEntites.Scheduler;
 
 namespace PlanGoGoAdmin.Repository.Reference
 {
@@ -51,6 +52,24 @@ namespace PlanGoGoAdmin.Repository.Reference
             {
                 throw ex;
             }
+        }
+
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+            try
+            {
+               // return _client.Scheduler_GetExtraCategoryList();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

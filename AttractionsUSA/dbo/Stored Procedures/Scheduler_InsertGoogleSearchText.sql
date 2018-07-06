@@ -9,13 +9,13 @@ BEGIN
 	DECLARE @NearBySearchDataInfo AS NearBySearch 
 
 	INSERt INTO @NearBySearchDataInfo
-	SELECT [AttractionName]           
-           ,[GoogleSearchText]
-		   ,PlaceId
-	FROM Attractions 
-	WHERE GoogleSearchText IN (
-		SELECT GoogleSearchText FROM @NearBySearchData
-	)
+	SELECT NS.[AttractionName]           
+           ,NS.[GoogleSearchText]
+		   ,NS.PlaceId
+	FROM @NearBySearchData NS
+	LEFT OUTER JOIN Attractions A WITH(NOLOCK) ON A.GoogleSearchText = NS.GoogleSearchText AND A.AttractionName = NS.AttractionName AND A.PlaceId = Ns.PlaceId
+	WHERE ISNULL(A.GoogleSearchText,'') =''
+
 
 	INSERT INTO [dbo].[Attractions]
            ([AttractionName]           
@@ -25,13 +25,25 @@ BEGIN
      SELECT AttractionName
 			,GoogleSearchText 
 			,PlaceId
-	 FROM @NearBySearchData
-	 WHERE GoogleSearchText NOt IN (
-		SELECT GoogleSearchText FROM @NearBySearchDataInfo 
-	 )
+	 FROM @NearBySearchDataInfo
+	 
 
 	 UPDATE Attractions
 			SET IsScannedNearBy = 1
 		WHERE  AttractionsId = @AttractionsId		
+
+
+
+	INSERT INTO [dbo].[AttractionsNextAttractions]
+           ([AttractionsId]
+           ,[NextAttractionsId])
+
+	SELECT 
+		@AttractionsId
+		,A.AttractionsId		 
+	FROM @NearBySearchData NS
+	JOIN Attractions A WITH(NOLOCK) ON A.GoogleSearchText = NS.GoogleSearchText AND A.AttractionName = NS.AttractionName
+	LEFT OUTER JOIN AttractionsNextAttractions ANS WITH(NOLOCK) ON ANS.AttractionsId = @AttractionsId AND ANS.NextAttractionsId = A.AttractionsId
+	WHERE ANS.NextAttractionsId IS NULL
 
 END

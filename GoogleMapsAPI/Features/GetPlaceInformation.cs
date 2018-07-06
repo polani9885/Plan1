@@ -292,7 +292,7 @@ namespace GoogleMapsAPI.Features
                     }
 
 
-                    if (placeDetailsInfo != null)
+                    if (placeDetailsInfo != null && placeDetailsInfo.result != null)
                     {
 
 

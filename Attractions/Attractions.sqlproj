@@ -137,6 +137,27 @@
     <Build Include="dbo\Stored Procedures\UpdateCityNearestLocationDont.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GoogleLogging.sql" />
     <Build Include="dbo\Tables\MasterCategoryXMasterGoogleType.sql" />
+    <Build Include="dbo\Tables\UserTrip.sql" />
+    <Build Include="dbo\Tables\UserTripDates.sql" />
+    <Build Include="dbo\Stored Procedures\User_AddUpdateTourName.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetTourInformation.sql" />
+    <Build Include="dbo\Tables\UserTripCities.sql" />
+    <Build Include="dbo\Stored Procedures\User_InsertUpdateTripCities.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetCityList.sql" />
+    <Build Include="dbo\Tables\UserTripCategory.sql" />
+    <Build Include="dbo\Stored Procedures\User_InsertCategoryInformation.sql" />
+    <Build Include="dbo\Tables\UserTripAttractionList.sql" />
+    <Build Include="dbo\Tables\UserTripRequestOrder.sql" />
+    <Build Include="dbo\Tables\UserTripAttractionOrderVisit.sql" />
+    <Build Include="dbo\Stored Procedures\USER_UserTripInformation.sql" />
+    <Build Include="dbo\Stored Procedures\User_UserTripGetAttractions.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetUserStoredAttractinInfo.sql" />
+    <Build Include="dbo\Stored Procedures\User_RequestedBreaks.sql" />
+    <Build Include="dbo\Tables\UserTripBuildMessage.sql" />
+    <Build Include="dbo\Tables\UserTripBuildStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_RecalculateTourInfo.sql" />
+    <Build Include="dbo\Stored Procedures\User_UserTripBuildStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetExtraCategoryList.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
@@ -151,6 +172,11 @@
     <None Include="dbo\Seeds\MasterTravelMode.sql" />
     <None Include="dbo\Seeds\MasterCategory.sql" />
     <None Include="dbo\Seeds\MasterCategoryXMasterGoogleType.sql" />
+    <Build Include="dbo\User Defined Types\CityVisitList.sql" />
+    <Build Include="dbo\User Defined Types\UserTable_UpdatedBreaks.sql" />
+    <Build Include="dbo\User Defined Types\UserTable_AttractionRequestOrder.sql" />
+    <Build Include="dbo\User Defined Types\UserTable_GetOrderOfAttractionVisit.sql" />
+    <None Include="dbo\Seeds\UserTripBuildMessage.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Attractions.refactorlog" />

@@ -51,5 +51,37 @@ BEGIN
 			   ,@Distance)
 	END
 
+	If EXISTS (
+		SELECT 1
+		  FROM [dbo].[AttractionNoOfTimesDistanceCalcuated] WITH(NOLOCK)
+		  WHERE SourceAttractionId = @SourceAttractionId AND DestinationAttractionId = @DestinationAttractionId AND TravelModeId = @TravelModeId
+	)
+	BEGIN
+
+		UPDATE [dbo].[AttractionNoOfTimesDistanceCalcuated]
+		   SET [NoOfTimesTried] = NoOfTimesTried + 1
+			  ,[ModifiedDate] = GETDATE()
+		 WHERE SourceAttractionId = @SourceAttractionId AND DestinationAttractionId = @DestinationAttractionId
+	END
+	ELSE
+	BEGIN
+		INSERT INTO [dbo].[AttractionNoOfTimesDistanceCalcuated]
+           ([SourceAttractionId]
+           ,[DestinationAttractionId]
+           ,[NoOfTimesTried]
+           ,[CreatedDate]
+		   ,TravelModeId
+           )
+		 VALUES
+			   (@SourceAttractionId
+			   ,@DestinationAttractionId
+			   ,1
+			   ,GETDATE()
+			   ,@TravelModeId
+			   )
+	END
+
+
+
 
 END

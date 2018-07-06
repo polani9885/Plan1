@@ -1,5 +1,6 @@
 ﻿using BusinessEntites;
 using BusinessEntites.JsonParameters;
+using BusinessEntites.Scheduler;
 using BusinessEntites.Users;
 using System;
 using System.Collections.Generic;
@@ -25,5 +26,8 @@ namespace Interfaces
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
             List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder);
         List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId);
+
+        List<GoogleTypes> Scheduler_GetExtraCategoryList();
+        List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId);
     }
 }

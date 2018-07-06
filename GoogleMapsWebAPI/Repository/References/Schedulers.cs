@@ -6,6 +6,7 @@ using System.Web;
 using BusinessEntites;
 using BusinessEntites.Common;
 using Interfaces;
+using BusinessEntites.Scheduler;
 
 namespace GoogleMapsWebAPI.Repository.References
 {
@@ -51,5 +52,20 @@ namespace GoogleMapsWebAPI.Repository.References
                 throw ex;
             }
         }
+
+        public List<GoogleTypes> Scheduler_GetExtraCategoryList()
+        {
+            try
+            {
+                //return _client.Scheduler_GetExtraCategoryList();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

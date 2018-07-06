@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PlanGoGo</RootNamespace>
     <AssemblyName>PlanGoGo</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -220,36 +220,6 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\UserControls\AttractionsInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\References\Country.cs" />
-    <Compile Include="Repository\References\GetListValues.cs" />
-    <Compile Include="Repository\References\MasterCity.cs" />
-    <Compile Include="Repository\References\MasterState.cs" />
-    <Compile Include="Repository\References\UserInfo.cs" />
-    <Compile Include="Service References\AdminCountry\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\GetListValues\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MasterCity\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MasterState\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\UsersService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AttractionsCategories.css" />
@@ -299,6 +269,8 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\wickedpicker.css" />
+    <Content Include="CustomScripts\Controlers\UserControls\controlerPlannedTour.js" />
+    <Content Include="CustomScripts\MainMenu.js" />
     <Content Include="CustomScripts\Common\AjaxCalls.js" />
     <Content Include="CustomScripts\Common\AjaxCallsAngular.js" />
     <Content Include="CustomScripts\Common\AjaxUserAccount.js" />
@@ -309,7 +281,8 @@
     <Content Include="CustomScripts\Controlers\UserControls\controlerTourInformation.js" />
     <Content Include="CustomScripts\Controlers\UserControls\controlerUserAccount.js" />
     <Content Include="CustomScripts\index.js" />
-    <Content Include="CustomScripts\UserActions.js" />
+    <Content Include="CustomScripts\PlannedTour.js" />
+    <Content Include="CustomScripts\Validations.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\Custome\add.png" />
@@ -1226,6 +1199,8 @@
     <Content Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime1.datasource" />
     <Content Include="Properties\DataSources\BusinessEntites.Public_GetMasterCategory.datasource" />
     <Content Include="Properties\DataSources\BusinessEntites.publicFilterAttractions.datasource" />
+    <Content Include="Properties\DataSources\BusinessEntites.Users.UserTourInformation.datasource" />
+    <Content Include="Properties\DataSources\BusinessEntites.Users.User_TripInfo.datasource" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -1252,67 +1227,6 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\ng-table.min.js.map" />
     <Content Include="Scripts\ng-table.js.map" />
-    <None Include="Service References\AdminCountry\Country.wsdl" />
-    <None Include="Service References\AdminCountry\Country.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminCountry\Country1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminCountry\Country2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues.disco" />
-    <None Include="Service References\GetListValues\configuration91.svcinfo" />
-    <None Include="Service References\GetListValues\configuration.svcinfo" />
-    <None Include="Service References\GetListValues\GetListValues3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\AdminCountry\Country.disco" />
-    <None Include="Service References\AdminCountry\configuration91.svcinfo" />
-    <None Include="Service References\AdminCountry\configuration.svcinfo" />
-    <None Include="Service References\AdminCountry\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity.wsdl" />
-    <None Include="Service References\MasterCity\MasterCity.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterState\MasterState.disco" />
-    <None Include="Service References\MasterState\configuration91.svcinfo" />
-    <None Include="Service References\MasterState\configuration.svcinfo" />
-    <None Include="Service References\MasterState\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity.disco" />
-    <None Include="Service References\MasterCity\configuration91.svcinfo" />
-    <None Include="Service References\MasterCity\configuration.svcinfo" />
-    <None Include="Service References\MasterCity\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\UsersService\UsersService.disco" />
-    <None Include="Service References\UsersService\configuration91.svcinfo" />
-    <None Include="Service References\UsersService\configuration.svcinfo" />
-    <None Include="Service References\UsersService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Scripts\wickedpicker.js" />
     <Content Include="Templates\BeachResort\Css\style.css" />
     <Content Include="Templates\BeachResort\images\bg-adbox.png" />
@@ -1383,40 +1297,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_LayoutBeachResort.cshtml" />
     <Content Include="Views\Schedule\index.cshtml" />
-    <None Include="Service References\GetListValues\GetListValues.wsdl" />
-    <None Include="Service References\GetListValues\GetListValues.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\UserControls\TourInformation.cshtml" />
-    <None Include="Service References\MasterState\MasterState.wsdl" />
-    <None Include="Service References\MasterState\MasterState.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterState\MasterState1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterState\MasterState2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UsersService\UsersService.wsdl" />
-    <None Include="Service References\UsersService\UsersService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UsersService\UsersService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UsersService\UsersService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UsersService\UsersService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="Views\UserControls\PlannedTour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1429,20 +1311,21 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\AdminCountry\" />
-    <WCFMetadataStorage Include="Service References\GetListValues\" />
-    <WCFMetadataStorage Include="Service References\MasterCity\" />
-    <WCFMetadataStorage Include="Service References\MasterState\" />
-    <WCFMetadataStorage Include="Service References\UsersService\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
       <Project>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</Project>
       <Name>BusinessEntites</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommonFunctions\CommonFunctions.csproj">
+      <Project>{21B5F30C-5A5E-4C8C-8A02-6C19A2426639}</Project>
+      <Name>CommonFunctions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>
       <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceClient\ServiceClient.csproj">
+      <Project>{9939494a-a7e1-473c-af0a-1a4851f21245}</Project>
+      <Name>ServiceClient</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

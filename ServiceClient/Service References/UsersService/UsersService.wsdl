@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UsersService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" />
+      <xsd:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUserServices_User_DeleteUserAttractions_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_DeleteUserAttractions" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_DeleteUserAttractions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_DeleteUserAttractionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetUserAttractionSaved_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetUserAttractionSaved" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetUserAttractionSaved_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetUserAttractionSavedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetUserInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetUserInformation" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetUserInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetUserInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_InsertingUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_InsertingUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_InsertingUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_InsertingUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserAttractionUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserAttractionUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserAttractionUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserAttractionUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserExistChecking_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserExistChecking" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserExistChecking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserExistCheckingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_AddUpdateTourName_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_AddUpdateTourName" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_AddUpdateTourName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_AddUpdateTourNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetTourInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetTourInformation" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetTourInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetTourInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_InsertUpdateTripCities_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_InsertUpdateTripCities" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_InsertUpdateTripCities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_InsertUpdateTripCitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetCityList_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetCityList" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetCityList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetCityListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_InsertCategoryInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_InsertCategoryInformation" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_InsertCategoryInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_InsertCategoryInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_LogUserTripInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_LogUserTripInformation" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_LogUserTripInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_LogUserTripInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserTripGetAttractions_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserTripGetAttractions" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserTripGetAttractions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserTripGetAttractionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetUserStoredAttractinInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetUserStoredAttractinInfo" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetUserStoredAttractinInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetUserStoredAttractinInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_RequestedBreaks_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_RequestedBreaks" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_RequestedBreaks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_RequestedBreaksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserTripBuildStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserTripBuildStatus" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_UserTripBuildStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_UserTripBuildStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetNearestRestaruents_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetNearestRestaruents" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetNearestRestaruents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetNearestRestaruentsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUserServices">
+    <wsdl:operation name="User_DeleteUserAttractions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_DeleteUserAttractions" message="tns:IUserServices_User_DeleteUserAttractions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_DeleteUserAttractionsResponse" message="tns:IUserServices_User_DeleteUserAttractions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserAttractionSaved">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetUserAttractionSaved" message="tns:IUserServices_User_GetUserAttractionSaved_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetUserAttractionSavedResponse" message="tns:IUserServices_User_GetUserAttractionSaved_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetUserInformation" message="tns:IUserServices_User_GetUserInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetUserInformationResponse" message="tns:IUserServices_User_GetUserInformation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertingUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_InsertingUserInfo" message="tns:IUserServices_User_InsertingUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_InsertingUserInfoResponse" message="tns:IUserServices_User_InsertingUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_UserAttractionUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_UserAttractionUpdate" message="tns:IUserServices_User_UserAttractionUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_UserAttractionUpdateResponse" message="tns:IUserServices_User_UserAttractionUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_UserExistChecking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_UserExistChecking" message="tns:IUserServices_User_UserExistChecking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_UserExistCheckingResponse" message="tns:IUserServices_User_UserExistChecking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_AddUpdateTourName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_AddUpdateTourName" message="tns:IUserServices_User_AddUpdateTourName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_AddUpdateTourNameResponse" message="tns:IUserServices_User_AddUpdateTourName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetTourInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetTourInformation" message="tns:IUserServices_User_GetTourInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetTourInformationResponse" message="tns:IUserServices_User_GetTourInformation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertUpdateTripCities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_InsertUpdateTripCities" message="tns:IUserServices_User_InsertUpdateTripCities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_InsertUpdateTripCitiesResponse" message="tns:IUserServices_User_InsertUpdateTripCities_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetCityList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetCityList" message="tns:IUserServices_User_GetCityList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetCityListResponse" message="tns:IUserServices_User_GetCityList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertCategoryInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_InsertCategoryInformation" message="tns:IUserServices_User_InsertCategoryInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_InsertCategoryInformationResponse" message="tns:IUserServices_User_InsertCategoryInformation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_LogUserTripInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_LogUserTripInformation" message="tns:IUserServices_User_LogUserTripInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_LogUserTripInformationResponse" message="tns:IUserServices_User_LogUserTripInformation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTripGetAttractions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_UserTripGetAttractions" message="tns:IUserServices_User_UserTripGetAttractions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_UserTripGetAttractionsResponse" message="tns:IUserServices_User_UserTripGetAttractions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserStoredAttractinInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetUserStoredAttractinInfo" message="tns:IUserServices_User_GetUserStoredAttractinInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetUserStoredAttractinInfoResponse" message="tns:IUserServices_User_GetUserStoredAttractinInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_RequestedBreaks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_RequestedBreaks" message="tns:IUserServices_User_RequestedBreaks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_RequestedBreaksResponse" message="tns:IUserServices_User_RequestedBreaks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTripBuildStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_UserTripBuildStatus" message="tns:IUserServices_User_UserTripBuildStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_UserTripBuildStatusResponse" message="tns:IUserServices_User_UserTripBuildStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetNearestRestaruents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetNearestRestaruents" message="tns:IUserServices_User_GetNearestRestaruents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetNearestRestaruentsResponse" message="tns:IUserServices_User_GetNearestRestaruents_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IUserServices" type="tns:IUserServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="User_DeleteUserAttractions">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_DeleteUserAttractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserAttractionSaved">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetUserAttractionSaved" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetUserInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertingUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertingUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserAttractionUpdate">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserAttractionUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserExistChecking">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserExistChecking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_AddUpdateTourName">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_AddUpdateTourName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetTourInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetTourInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertUpdateTripCities">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertUpdateTripCities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetCityList">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetCityList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertCategoryInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertCategoryInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_LogUserTripInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_LogUserTripInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTripGetAttractions">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserTripGetAttractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserStoredAttractinInfo">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetUserStoredAttractinInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_RequestedBreaks">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_RequestedBreaks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTripBuildStatus">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserTripBuildStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetNearestRestaruents">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetNearestRestaruents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UsersService">
+    <wsdl:port name="BasicHttpBinding_IUserServices" binding="tns:BasicHttpBinding_IUserServices">
+      <soap:address location="http://localhost:23457/Schedulers/UsersService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

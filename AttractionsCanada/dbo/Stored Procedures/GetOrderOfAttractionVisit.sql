@@ -15,9 +15,21 @@ CREATE PROCEDURE [dbo].[GetOrderOfAttractionVisit]
 AS
 BEGIN
 
-	DECLARE @GetStartingTimeEvent AS DATETIME = CAST(CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE) AS DATETIME) + CAST(CAST(ISNULL(@StartTime,'9:00 AM') AS TIME) AS DATETIME)	
+	DECLARE @GetStartingTimeEvent AS DATETIME 
 	
-	DECLARE @StartDateAndTime DATETIME = @GetStartingTimeEvent
+	IF EXISTS (SELECT 1 FROM @UserBreakTime WHERE RequestDate = CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE))
+	BEGIN
+		SELECT @StartTime = UpdateDayStartTime 
+		FROM @UserBreakTime WHERE RequestDate = CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE)
+
+		SET @GetStartingTimeEvent = CAST(CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE) AS DATETIME) + CAST(CAST(ISNULL(@StartTime,'9:00 AM') AS TIME) AS DATETIME)	
+	END
+	ELSE
+	BEGIN
+		SET @GetStartingTimeEvent = CAST(CAST(ISNULL(@StartDate,GetDATE()+1) AS DATE) AS DATETIME) + CAST(CAST(ISNULL(@StartTime,'9:00 AM') AS TIME) AS DATETIME)	
+	END
+	
+	
 	DECLARE @CurrentWeekDay As INT = DATEPART(weekday, @GetStartingTimeEvent) - 1	
 	DECLARE @NextAttractionId AS INT = @SourceAttractionID		
 	DECLARE @IsDayUpdated AS BIT  = 1
@@ -58,6 +70,8 @@ BEGIN
 	DECLARE @Counter INT = 0
 	DECLARE @LoopCounter INT = (SELECT Count(*) FROM @AttractionInfomation)
 
+	DECLARE @RestarentSearchDestinationId AS BIGINT
+
 	
 
 	WHILE @Counter <= @LoopCounter
@@ -73,6 +87,37 @@ BEGIN
 		SELECT * FROM @OrderOfAttactionInfomration
 		
 		DELETE FROM @OrderOfAttactionInfomration
+
+
+		--Checking the near resturant are searched or not
+		IF EXISTS (SELECT 1 FROM dbo.fun_BreakTimeCalculation(@GetStartingTimeEvent,@OrderOfAttactionInfomrationTemp,@UserBreakTime,@RecordOrder))
+		BEGIN
+			SELECT 
+				TOP 1 @RestarentSearchDestinationId = DestinationAttractionId
+			FROM @OrderOfAttactionInfomrationTemp
+			ORDER BY DateAndtime DESC
+
+			--Checking the Restarent search is done or not
+
+			IF NOT EXISTS (SELECT 1 FROM dbo.Attractions WITH(NOLOCK) WHERE AttractionsId = @RestarentSearchDestinationId AND ISNULL(IsNearRestarentDone,0) = 1)
+			BEGIN			
+				IF NOT EXISTS(SELECT 1 FROM [dbo].[MissingAttractionRestarentSearch] WHERE AttractionsId = @RestarentSearchDestinationId)
+				BEGIN			
+					IF @RestarentSearchDestinationId > 0
+					BEGIN
+						INSERT INTO [dbo].[MissingAttractionRestarentSearch]
+								   ([AttractionsId]
+								   ,[CreatedDate])
+							 VALUES
+								   (@RestarentSearchDestinationId
+								   ,GETDATE()
+								   )
+					END
+				END
+
+			END
+		END
+
 
 		INSERT INTO @OrderOfAttactionInfomration
 		(
@@ -125,8 +170,8 @@ BEGIN
 		--Checking the Day Brak
 		SET @GetStartingTimeEvent = dbo.fun_GetStartTime(@UserBreakTime,@GetStartingTimeEvent)	
 		
-		SET @CurrentWeekDay = DATEPART(weekday, @GetStartingTimeEvent) - 1			
-
+		SET @CurrentWeekDay = DATEPART(weekday, @GetStartingTimeEvent) - 1					
+		
 		--End Day Break
 
 		------------------------------------------------------------------------------------------------------
@@ -641,6 +686,10 @@ BEGIN
 		,CAST(DAAS.CloseTime AS VARCHAR(50)) DestinationCloseTime
 		,(SELECT TOP 1 Html_attributions FROM AttractionPhotos SAP WITH(NOLOCK) WHERE SAP.AttractionId = OAI.SourceAttractionId) SourcePhoto
 		,(SELECT TOP 1 Html_attributions FROM AttractionPhotos DAP WITH(NOLOCK) WHERE DAP.AttractionId = OAI.DestinationAttractionId) DestinationPhoto
+		,SA.Longitude SourceLongitude
+		,SA.Latitude SourceLatitude
+		,DA.Longitude DestinationLongitude
+		,DA.Latitude DestinationLatitude
 	FROM @OrderOfAttactionInfomration OAI
 	LEFT JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = OAI.SourceAttractionId
 	LEFT JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = OAI.DestinationAttractionId

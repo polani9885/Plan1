@@ -10,6 +10,7 @@ BEGIN
 		,A.GoogleSearchText AS DestinationText
 		,AA.GoogleSearchText AS SourceText
 		,MDARXA.AttractionsID
+		,MAR.MasterTravelModeID
 	FROM MissingDistanceAttractionsRecords MAR
 	JOIN MissingDistanceAttractionsRecordsXAttractions MDARXA ON MDARXA.MissingDistanceAttractionsRecordsID =  MAR.MissingDistanceAttractionsRecordsID	
 	JOIN Attractions A ON A.AttractionsId = MDARXA.AttractionsID

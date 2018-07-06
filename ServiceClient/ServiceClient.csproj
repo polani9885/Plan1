@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9939494A-A7E1-473C-AF0A-1A4851F21245}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceClient</RootNamespace>
+    <AssemblyName>ServiceClient</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AdminAttractionsActiveStatus\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminAttractions\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminAttractionTravelTime\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminCountry\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminMasterCategory\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminMasterCity\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminMasterState\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminMasterWeek\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AdminMissingDistanceAttractionsRecords\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GetListValues\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\UsersService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Country.cs" />
+    <Compile Include="Services\GetListValues.cs" />
+    <Compile Include="Services\MasterCity.cs" />
+    <Compile Include="Services\MasterState.cs" />
+    <Compile Include="Services\UserInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.AttractionTravelTimeDistanceDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.AttractionTravelTimeDistanceDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCategoryDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCategoryDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCityDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCityDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCountryDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCountryDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterStateDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterStateDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterWeekDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MasterWeekDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Common.AttractionsDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Common.AttractionsDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime2.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.GetOrderOfAttractionVisit.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.GetOrderOfAttractionVisit1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.public_FilterAttractions.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.public_FilterAttractions1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Public_GetCategory.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Public_GetCategory1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.public_GetCityList.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.public_GetCityList1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Public_GetMasterCategory.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Public_GetMasterCategory1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Scheduler.GoogleTypes.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Scheduler.GoogleTypes1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.AttractionPhotoReference.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.UserAttractionEntity.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.UserEntity.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.UserTable_AttractionRequestOrder.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.UserTable_UpdatedBreaksTemp.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.UserTourInformation.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.UserTripBuildStatus.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.User_TripInfo.datasource" />
+    <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus.wsdl" />
+    <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractions\Attractions.wsdl" />
+    <None Include="Service References\AdminAttractions\Attractions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractions\Attractions1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractions\Attractions2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractionTravelTime\AttractionTravelTimeDistance.wsdl" />
+    <None Include="Service References\AdminAttractionTravelTime\AttractionTravelTimeDistance.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractionTravelTime\AttractionTravelTimeDistance1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminAttractionTravelTime\AttractionTravelTimeDistance2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminCountry\Country.wsdl" />
+    <None Include="Service References\AdminCountry\Country.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminCountry\Country1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminCountry\Country2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCategory\MasterCategory.wsdl" />
+    <None Include="Service References\AdminMasterCategory\MasterCategory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCategory\MasterCategory1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCategory\MasterCategory2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCity\MasterCity.wsdl" />
+    <None Include="Service References\AdminMasterCity\MasterCity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCity\MasterCity1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCity\MasterCity2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterState\MasterState.wsdl" />
+    <None Include="Service References\AdminMasterState\MasterState.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterState\MasterState1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterState\MasterState2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterWeek\MasterWeek.wsdl" />
+    <None Include="Service References\AdminMasterWeek\MasterWeek.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterWeek\MasterWeek1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterWeek\MasterWeek2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.wsdl" />
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues.wsdl" />
+    <None Include="Service References\GetListValues\GetListValues.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService.wsdl" />
+    <None Include="Service References\UsersService\UsersService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AdminAttractionsActiveStatus\" />
+    <WCFMetadataStorage Include="Service References\AdminAttractions\" />
+    <WCFMetadataStorage Include="Service References\AdminAttractionTravelTime\" />
+    <WCFMetadataStorage Include="Service References\AdminCountry\" />
+    <WCFMetadataStorage Include="Service References\AdminMasterCategory\" />
+    <WCFMetadataStorage Include="Service References\AdminMasterCity\" />
+    <WCFMetadataStorage Include="Service References\AdminMasterState\" />
+    <WCFMetadataStorage Include="Service References\AdminMasterWeek\" />
+    <WCFMetadataStorage Include="Service References\AdminMissingDistanceAttractionsRecords\" />
+    <WCFMetadataStorage Include="Service References\GetListValues\" />
+    <WCFMetadataStorage Include="Service References\UsersService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
+      <Project>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</Project>
+      <Name>BusinessEntites</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{228C6FFC-078F-482B-8B8C-CC8266D3FC3C}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetListValues\GetListValues.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetListValues\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetListValues\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetListValues\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractions\Attractions.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractions\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractions\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractions\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionsActiveStatus\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionsActiveStatus\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionsActiveStatus\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionTravelTime\AttractionTravelTimeDistance.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionTravelTime\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionTravelTime\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminAttractionTravelTime\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminCountry\Country.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminCountry\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminCountry\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminCountry\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCategory\MasterCategory.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCategory\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCategory\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCategory\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCity\MasterCity.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCity\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCity\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterCity\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterState\MasterState.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterState\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterState\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterState\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterWeek\MasterWeek.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterWeek\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterWeek\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMasterWeek\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AdminMissingDistanceAttractionsRecords\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UsersService\UsersService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UsersService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UsersService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UsersService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

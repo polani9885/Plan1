@@ -28,16 +28,14 @@ BEGIN
       ,[ModifiedDate]
       ,[ModifiedBy]
 	  ,GoogleSearchText
-	  ,C.RecordIndex
+	  ,C.RecordIndex	  
   FROM [dbo].[Attractions] A
-  JOIN dbo.AttractionXCategory AC WITH(NOLOCK) ON AC.AttractionId = A.AttractionsId  
+  JOIN dbo.AttractionXCategory AC WITH(NOLOCK) ON AC.AttractionId = A.AttractionsId    
   JOIN @CityVisitList C ON C.CityId = A.CityId
   WHERE 
   A.CityId = C.CityId
   AND GoogleSearchText IS NOT NULL  
   ORDER BY C.RecordIndex
-
-  
 
 
 

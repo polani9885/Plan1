@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:23457/Admin/Attractions.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" />
+  <xs:element name="AttractionsUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="attractionsDTO" nillable="true" type="q1:AttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsUpdateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsCheckExists">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="attractionsDTO" nillable="true" type="q2:AttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsCheckExistsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="AttractionsCheckExistsResult" nillable="true" type="q3:ArrayOfAttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsOnCityId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="attractionsDTO" nillable="true" type="q4:AttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsOnCityIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="AttractionsOnCityIdResult" nillable="true" type="q5:ArrayOfAttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsOnAttractionsId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="attractionsDTO" nillable="true" type="q6:AttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttractionsOnAttractionsIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessEntites.Common" minOccurs="0" name="AttractionsOnAttractionsIdResult" nillable="true" type="q7:AttractionsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -27,6 +27,7 @@
 	[GoogleUser_ratings_total] [int] NULL,
 	[IsGoogleSearchTextDone] [bit] NULL,
  [Utc_offset] INT NULL, 
+    [IsNearRestarentDone] INT NULL, 
     CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED 
 (
 	[AttractionsId] ASC

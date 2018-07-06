@@ -8,6 +8,9 @@ using System.ServiceModel;
 using System.Text;
 using PlanGoGoService.Interfaces;
 using BusinessEntites.Users;
+using BusinessEntites.JsonParameters;
+using BusinessEntites;
+using BusinessEntites.Scheduler;
 
 namespace PlanGoGoService.Schedulers
 {
@@ -44,5 +47,73 @@ namespace PlanGoGoService.Schedulers
         {
             return _businessUserBAL.User_UserExistChecking(userName);
         }
+
+        public UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId)
+        {
+            return _businessUserBAL.User_AddUpdateTourName(tourName, userTripId, userId);
+        }
+
+        public  List<UserTourInformation> User_GetTourInformation(int userId)
+        {
+            return _businessUserBAL.User_GetTourInformation(userId);
+        }
+
+        public void User_InsertUpdateTripCities(int userTripId, int countryId, List<CityVisitList> cityVisitList)
+        {
+            _businessUserBAL.User_InsertUpdateTripCities(userTripId,countryId,cityVisitList);
+        }
+
+        public List<public_GetCityList> User_GetCityList(int userTripId)
+        {
+            return _businessUserBAL.User_GetCityList(userTripId);
+        }
+
+        
+
+        public void User_InsertCategoryInformation(int userTripId, List<userTable_Category> category)
+        {
+            _businessUserBAL.User_InsertCategoryInformation(userTripId,category);
+        }
+
+        public void User_LogUserTripInformation(int travelModeId,
+            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionID, string startDate,
+            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
+            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder, int userTripId)
+        {
+            _businessUserBAL.User_LogUserTripInformation(travelModeId, sourceAttractionID, destinationAttractionID,
+                attractionID, startDate, startTime, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,
+                userTable_AttractionRequestOrder, userTripId);
+        }
+
+        public List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId)
+        {
+            return _businessUserBAL.User_UserTripGetAttractions(userTripId);
+        }
+
+
+        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId)
+        {
+            return _businessUserBAL.User_GetUserStoredAttractinInfo(userTripId);
+        }
+
+        public List<UserTable_UpdatedBreaksTemp> User_RequestedBreaks(int userTripId)
+        {
+            return _businessUserBAL.User_RequestedBreaks(userTripId);
+        }
+
+        public List<UserTripBuildStatus> User_UserTripBuildStatus(int userTripId)
+        {
+            return _businessUserBAL.User_UserTripBuildStatus(userTripId);
+        }
+
+        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId,
+            int countryId)
+        {
+            return _businessUserBAL.User_GetNearestRestaruents(attractionsId, travelModeId, countryId);
+        }
+
+
+
     }
 }

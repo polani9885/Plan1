@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfUserAttractionEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserAttractionEntity" nillable="true" type="tns:UserAttractionEntity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserAttractionEntity" nillable="true" type="tns:ArrayOfUserAttractionEntity" />
+  <xs:complexType name="UserAttractionEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedUTCDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EndLocationId" type="xs:int" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedUTCDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NoOfBreakFeastSlots" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfDinnerSlots" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfHotelsVisited" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfHours" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfLunchSlots" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfNights" type="xs:int" />
+      <xs:element minOccurs="0" name="StartLocationId" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalDistance" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalExpenditure" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TourName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TravelDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="userTable_OrderAttraction" nillable="true" type="q1:ArrayOfuserTable_OrderAttraction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserAttractionEntity" nillable="true" type="tns:UserAttractionEntity" />
+  <xs:complexType name="UserEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressOne" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AddressTwo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedUTCDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FaceBookId" type="xs:int" />
+      <xs:element minOccurs="0" name="GooglePlusId" type="xs:int" />
+      <xs:element minOccurs="0" name="MasterCityId" type="xs:int" />
+      <xs:element minOccurs="0" name="MasterCountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="MasterStateId" type="xs:int" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedUTCDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserTripId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserEntity" nillable="true" type="tns:UserEntity" />
+  <xs:complexType name="UserTourInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsTripDone" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SourceAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
+      <xs:element minOccurs="0" name="TripName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserTripId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserTourInformation" nillable="true" type="tns:UserTourInformation" />
+  <xs:complexType name="ArrayOfUserTourInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserTourInformation" nillable="true" type="tns:UserTourInformation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserTourInformation" nillable="true" type="tns:ArrayOfUserTourInformation" />
+  <xs:complexType name="ArrayOfUserTable_UpdatedBreaks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserTable_UpdatedBreaks" nillable="true" type="tns:UserTable_UpdatedBreaks" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserTable_UpdatedBreaks" nillable="true" type="tns:ArrayOfUserTable_UpdatedBreaks" />
+  <xs:complexType name="UserTable_UpdatedBreaks">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsUserInterestedBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUserInterestedDayBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUserInterestedDinnerBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUserInterestedLunchBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RequestDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateDayEndTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdateDayStartTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdateDinnerMinimumTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdatedBreakMinimumTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdatedBreakTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdatedDinnerTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdatedLunchMinimumTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdatedLunchTime" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserTable_UpdatedBreaks" nillable="true" type="tns:UserTable_UpdatedBreaks" />
+  <xs:complexType name="ArrayOfUserTable_AttractionRequestOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserTable_AttractionRequestOrder" nillable="true" type="tns:UserTable_AttractionRequestOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserTable_AttractionRequestOrder" nillable="true" type="tns:ArrayOfUserTable_AttractionRequestOrder" />
+  <xs:complexType name="UserTable_AttractionRequestOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserTable_AttractionRequestOrder" nillable="true" type="tns:UserTable_AttractionRequestOrder" />
+  <xs:complexType name="ArrayOfUserTable_UpdatedBreaksTemp">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserTable_UpdatedBreaksTemp" nillable="true" type="tns:UserTable_UpdatedBreaksTemp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserTable_UpdatedBreaksTemp" nillable="true" type="tns:ArrayOfUserTable_UpdatedBreaksTemp" />
+  <xs:complexType name="UserTable_UpdatedBreaksTemp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsUserInterestedBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUserInterestedDayBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUserInterestedDinnerBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsUserInterestedLunchBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RequestDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDayEndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDayStartTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDinnerMinimumTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedBreakMinimumTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedBreakTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedDinnerTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedLunchMinimumTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedLunchTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserTable_UpdatedBreaksTemp" nillable="true" type="tns:UserTable_UpdatedBreaksTemp" />
+  <xs:complexType name="ArrayOfUserTripBuildStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserTripBuildStatus" nillable="true" type="tns:UserTripBuildStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserTripBuildStatus" nillable="true" type="tns:ArrayOfUserTripBuildStatus" />
+  <xs:complexType name="UserTripBuildStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormattedMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsError" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UserTripBuildMessageId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserTripBuildStatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserTripId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserTripBuildStatus" nillable="true" type="tns:UserTripBuildStatus" />
+</xs:schema>
