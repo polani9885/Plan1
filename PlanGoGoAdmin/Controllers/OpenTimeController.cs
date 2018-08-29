@@ -29,17 +29,8 @@ namespace PlanGoGoAdmin.Controllers
             List<GetAttractionOpenTime> getResult;
             
                 getResult = _IGetListValues.GetAttractionOpenTime(AttractionId);
+            return base.jsonReturn.JsonResult<GetAttractionOpenTime>(getResult);
             
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<GetAttractionOpenTime>(), JsonRequestBehavior.AllowGet);
-            }
         }
 
         public ActionResult ManageOpenTime()

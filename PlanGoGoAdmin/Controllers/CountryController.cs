@@ -26,16 +26,8 @@ namespace PlanGoGoAdmin.Controllers
         public JsonResult Admin_GetCountry()
         {
             List<MasterCountryDTO> getResult = _ICountry.Admin_GetCountry();
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MasterCountryDTO>(), JsonRequestBehavior.AllowGet);
-            }
+            return base.jsonReturn.JsonResult<MasterCountryDTO>(getResult);
+            
         }
 
         public ActionResult ManageCountry()

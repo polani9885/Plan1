@@ -118,6 +118,8 @@ BEGIN
 			END
 		END
 
+		
+		
 
 		INSERT INTO @OrderOfAttactionInfomration
 		(
@@ -642,6 +644,17 @@ BEGIN
 	--End Get next attraction Information
 	-------------------------------------------------------------------------------------------------------------------------------------------
 
+	--If the First record is a break event then we are adding the destination points to the break information
+	IF EXISTS(SELECT 1 FROM @OrderOfAttactionInfomration WHERE RecordCount = 1 AND IsLunchDinnerBreakTime = 1)
+	BEGIN
+		UPDATE @OrderOfAttactionInfomration 
+			SET SourceAttractionId = (SELECT SourceAttractionId FROM @OrderOfAttactionInfomration WHERE RecordCount = 2)
+		WHERE RecordCount = 1
+
+	END
+
+
+	
 	SELECT 
 		OAI.[RecordCount]
 		,OAI.[SourceAttractionId]
@@ -690,6 +703,8 @@ BEGIN
 		,SA.Latitude SourceLatitude
 		,DA.Longitude DestinationLongitude
 		,DA.Latitude DestinationLatitude
+		,SA.PhotoUrl SourcePhotoUrl
+		,DA.PhotoUrl DestinationPhotoUrl
 	FROM @OrderOfAttactionInfomration OAI
 	LEFT JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = OAI.SourceAttractionId
 	LEFT JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = OAI.DestinationAttractionId
@@ -698,5 +713,8 @@ BEGIN
 	LEFT JOIN AttractionsActiveStatus DAAS WITH(NOLOCK) ON DAAS.AttractionsId = OAI.DestinationAttractionId AND DAAS.MasterWeekId = OAI.WeekDayId
 	
 END
+
+
+
 
 

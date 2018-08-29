@@ -21,6 +21,19 @@ BEGIN
       ,[IsUserInterestedDinnerBreak]
       ,CAST([UpdatedDinnerTime] AS VARCHAR(8)) UpdatedDinnerTime
       ,CAST([UpdateDinnerMinimumTime] AS VARCHAR(8)) UpdateDinnerMinimumTime
+	  ,IsUserInterestedBreakFast
+	  ,CAST(UpdatedBreakFastTime AS VARCHAR(8)) UpdatedBreakFastTime
+	  ,CAST(UpdatedBreakFastMinimumTime AS VARCHAR(8)) UpdatedBreakFastMinimumTime
+	  ,[IsBreakAdded]
+      ,[BreakAttractionId]
+      ,[IsLunchAdded]
+      ,[LunchAttractionId]
+      ,[IsDinnerAdded]
+      ,[DinnerAttractionId]
+	  ,IsBreakFastAdded
+	  ,BreakFastAttractionId
+	  ,IsDayBreakAdded
+	  ,DayBreakAttractionId
   FROM [dbo].[UserTripDates] WITH(NOLOCK)
   WHERE UserTripId = @UserTripId
 END

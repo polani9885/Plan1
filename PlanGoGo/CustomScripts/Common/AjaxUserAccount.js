@@ -1,5 +1,5 @@
 ﻿function CheckUserNameExisted(username) {
-    if (username!=null && username!="") {
+    if (username!==null && username!=="") {
         $.ajax({
             type: "GET",
             url: '/UserControls/UserExistChecking',
@@ -28,7 +28,7 @@
 }
 
 function LoginCheck() {
-    if ($("#txtLoginUsername").val() != null && $("#txtLoginUsername").val() != "") {
+    if ($("#txtLoginUsername").val() !== null && $("#txtLoginUsername").val() !== "") {
         $.ajax({
             type: "GET",
             url: '/UserControls/User_GetUserInformation',
@@ -38,7 +38,8 @@ function LoginCheck() {
                 $(".blockPage").show();
             },
             success: function (data) {
-                if (data != null) {
+                
+                if (data !== null) {
                     $("#lblLoginUsernameCheckError").hide();
                     $("#loginController").dialog("close");
                     IsUserLoggedIn();
@@ -392,7 +393,7 @@ function User_GetNearestRestaruents(angularScope, http) {
     $.ajax({
         type: "GET",
         url: '/UserControls/User_GetNearestRestaruents',
-        data: { attractionsId: angularScope.breakValue.attractionId, travelModeId: angularScope.TravelModeId, countryId: angularScope.countryId },
+        data: { attractionsId: angularScope.breakValue.attractionId, travelModeId: angularScope.TravelModeId, countryId: angularScope.countryId, distance: angularScope.breakValue.distance, sourceLongitude: angularScope.breakValue.sourceLongitude, sourceLatitude: angularScope.breakValue.sourceLatitude },
         dataType: "json",
         beforeSend: function () {
         },
@@ -401,6 +402,8 @@ function User_GetNearestRestaruents(angularScope, http) {
             angularScope.$apply(function () {
 
                 angularScope.NearLocations = data;
+                angularScope.FilterNearLocations = data;
+                angularScope.ExtraCategorySelectedAttractionFilter();
             });
 
         },

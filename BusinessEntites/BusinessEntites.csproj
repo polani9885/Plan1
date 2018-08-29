@@ -51,12 +51,14 @@
     <Compile Include="Admin\MissingDistanceAttractionsRecordsDTO.cs" />
     <Compile Include="Admin_GetCountryList.cs" />
     <Compile Include="Admin_GetUser.cs" />
+    <Compile Include="BreakInformation.cs" />
     <Compile Include="Common\AttractionsDTO.cs" />
     <Compile Include="Common\AttractionTravelTimeDistanceDTO.cs" />
     <Compile Include="Common\GoogleMapsLoggingDTO.cs" />
     <Compile Include="Common\GoogleSearchTextDTO.cs" />
     <Compile Include="Common\MasterTravelModeDTO.cs" />
     <Compile Include="Common\MissingDataAttractionDTO.cs" />
+    <Compile Include="Coordinate.cs" />
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
     <Compile Include="Custom\InputParameters.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />

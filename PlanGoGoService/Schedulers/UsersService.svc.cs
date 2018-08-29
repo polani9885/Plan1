@@ -108,9 +108,9 @@ namespace PlanGoGoService.Schedulers
         }
 
         public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId,
-            int countryId)
+            int countryId, List<Coordinate> coodinate)
         {
-            return _businessUserBAL.User_GetNearestRestaruents(attractionsId, travelModeId, countryId);
+            return _businessUserBAL.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate);
         }
 
 

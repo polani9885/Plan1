@@ -4,6 +4,7 @@
 }
 @Scripts.Render("~/index")
 <link href="~/Content/AttractionsCategories.css" rel="stylesheet" />
+
 <div id="main" ng-controller="controlerIndex">
 <table cellpadding="0" cellspacing="0" border="0">
 <tr>
@@ -12,7 +13,7 @@
 <div id="tabs" style="width:1200px;" class="avoidBorder">
 <ul>
     <li><a href="#tab_Filter">Filter</a></li>
-    <li><a href="#tab_Categories">Categories</a></li>
+    <li><a href="#tab_Categories" ng-click="CategoriesTabClick()">Categories</a></li>
     <li><a href="#tab_TourPlan" ng-click="TourTabClick()">Tour Plan</a></li>
     <li><a href="#tab_TourMap">Tour Map</a></li>
     <li><a href="#tab_SuggestedAttractions">Suggested Attractions</a></li>
@@ -77,7 +78,7 @@
                 <table>
                     <tr>
                         <td valign="top">
-                            <ul class="Catnav" ng-repeat="mainCategoryList in MasterCategoryList">
+                            <ul class="Catnav" id="mainCategory" ng-repeat="mainCategoryList in MasterCategoryList">
                                 <li ng-class="{'CatNavSelected':CssMainCategory(mainCategoryList.CategoryId)}">
                                     <a href="JavaScript:Void(0)" ng-click="ClickMainCategorySelected(mainCategoryList.CategoryId)">
                                         {{mainCategoryList.CategoryName}}
@@ -103,8 +104,9 @@
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+1]">
-                                            <img src="/Images/User/Category/{{filterCategoryList[$index+1].TypeName}}.png" alt="{{filterCategoryList[$index+1].TypeName}}" width="50px" height="50px" />
-                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+1])" />
+                                            
+                                            <img src="/Images/User/Category/{{filterCategoryList[$index+1].TypeName}}.png" alt="{{filterCategoryList[$index+1].TypeName}}" width="50px" height="50px"/>
+                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+1])"/>
                                             {{filterCategoryList[$index+1].TypeName}}
                                         </div>
                                     </td>
@@ -144,25 +146,40 @@
                             <table>
                                 <tr ng-repeat="attraction in filterAttractionList" ng-switch on="$index % 2">
                                     <td ng-switch-when="0" valign="top">
-                                        <table ng-show="filterAttractionList[$index]" class="attractionInfo">
+                                        <table ng-show="filterAttractionList[$index]" class="attractionInfo" colspan="10">
                                             <tr>
-                                                <td rowspan="6">
-                                                    <a herf="javascript:void(0)" style="cursor:pointer">
-                                                        <img src="~/Images/Custome/intersted.png" alt="Interested" width="100px" height="100px"
-                                                             ng-click="Interested(filterAttractionList[$index])" />
-                                                    </a>
+                                                <td rowspan="6" valign="top">
+                                                    <div ng-if="filterAttractionList[$index].PhotoURL">
+                                                        <a herf="javascript:void(0)" style="cursor: pointer">
+                                                            <img src="{{filterAttractionList[$index].PhotoURL}}" alt="{{filterAttractionList[$index].AttractionName}} Photo" 
+                                                                 width="300px" height="300px" 
+                                                                 ng-click="imageSlideShow(filterAttractionList[$index].AttractionsId,filterAttractionList[$index].AttractionName)"/>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" class="attractionName">
-                                                    {{filterAttractionList[$index].AttractionName}}
+                                                <td colspan="2" class="attractionName" valign="top">
+                                                    <table>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                {{filterAttractionList[$index].AttractionName}}            
+                                                            </td>
+                                                            <td valign="top">
+                                                                <a herf="javascript:void(0)" style="cursor: pointer">
+                                                                    <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                                         ng-click="Interested(filterAttractionList[$index])"/>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <span class="columnHeading">Address: </span>
                                                     <span calss="columnValue">
-                                                        {{filterAttractionList[$index].AddressOne}}, {{filterAttractionList[$index].AddressTwo}}
+                                                        {{filterAttractionList[$index].GoogleSearchText}}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -203,22 +220,38 @@
                                         <table ng-show="filterAttractionList[$index+1]" class="attractionInfo">
                                             <tr>
                                                 <td rowspan="6">
-                                                    <a herf="javascript:void(0)" style="cursor:pointer">
-                                                        <img src="~/Images/Custome/intersted.png" alt="Interested" width="100px" height="100px"
-                                                             ng-click="Interested(filterAttractionList[$index+1])"/>
-                                                    </a>
+                                                    
+                                                    <div ng-if="filterAttractionList[$index+1].PhotoURL">
+                                                        <a herf="javascript:void(0)" style="cursor: pointer">
+                                                            <img src="{{filterAttractionList[$index+1].PhotoURL}}" alt="{{filterAttractionList[$index+1].AttractionName}} Photo"
+                                                                 width="300px" height="300px" 
+                                                                 ng-click="imageSlideShow(filterAttractionList[$index+1].AttractionsId,filterAttractionList[$index+1].AttractionName)"/>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" class="attractionName">
-                                                    {{filterAttractionList[$index+1].AttractionName}}
+                                                <td colspan="2" class="attractionName" valign="top">
+                                                    <table>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                {{filterAttractionList[$index+1].AttractionName}}
+                                                            </td>
+                                                            <td valign="top">
+                                                                <a herf="javascript:void(0)" style="cursor: pointer">
+                                                                    <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                                         ng-click="Interested(filterAttractionList[$index+1])" />
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <span class="columnHeading">Address: </span>
                                                     <span calss="columnValue">
-                                                        {{filterAttractionList[$index+1].AddressOne}}, {{filterAttractionList[$index+1].AddressTwo}}
+                                                        {{filterAttractionList[$index+1].GoogleSearchText}}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -340,14 +373,32 @@
             <td>
                 <form>
                     <fieldset>
+                        <input type="hidden" id="hdSelectedDivId"/>
+                        <input type="hidden" id="hdSelectedBreakType" />
                         <input id="autoAddAttraction" placeholder="Location" onKeyUp="getAttractions()">
+                        <br/>
+                        Distance from <span id="breakPreviousAttractionName" style="color: orange; font-weight: bold"></span>:
+
+                        <select id="breakDistance" onchange="BreakAttractionCalling()">
+                            <option value="5">5Miles</option>
+                            <option value="10">10Miles</option>
+                            <option value="20">20Miles</option>
+                            <option value="30">30Miles</option>
+                            <option value="40">40Miles</option>
+                            <option value="50">50Miles</option>
+                            <option value="60">60Miles</option>
+                            <option value="70">70Miles</option>
+                            <option value="80">80Miles</option>
+                            <option value="90">90Miles</option>
+                            <option value="100">100Miles</option>
+                        </select>
                     </fieldset>
                 </form>    
             </td>
         </tr>
         <tr>
             <td>
-                <table>
+                <table id="chkExtraCategory">
                     <tr ng-repeat="categoryList in ExtraCategoryList" ng-switch on="$index % 5">
                         <td ng-switch-when="0" valign="top">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index]">
@@ -391,27 +442,42 @@
         <tr>
             <td>
                 <table>
-                    <tr ng-repeat="attraction in NearLocations" ng-switch on="$index % 2">
+                    <tr ng-repeat="attraction in FilterNearLocations" ng-switch on="$index % 2">
                         <td ng-switch-when="0" valign="top">
-                            <table ng-show="NearLocations[$index]" class="attractionInfo">
+                            <table ng-show="FilterNearLocations[$index]" class="attractionInfo">
                                 <tr>
                                     <td rowspan="7">
-                                        <a herf="javascript:void(0)" style="cursor:pointer">
-                                            <img src="~/Images/Custome/intersted.png" alt="Interested" width="100px" height="100px"
-                                                 ng-click="Interested(NearLocations[$index])" />
-                                        </a>
+                                        <div ng-if="FilterNearLocations[$index].PhotoURL">
+                                            <a herf="javascript:void(0)" style="cursor: pointer">
+                                                <img src="{{FilterNearLocations[$index].PhotoURL}}" alt="{{FilterNearLocations[$index].AttractionName}} Photo"
+                                                     width="300px" height="300px" 
+                                                     ng-click="imageSlideShow(FilterNearLocations[$index].AttractionsId,FilterNearLocations[$index].AttractionName)"/>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="attractionName">
-                                        {{NearLocations[$index].AttractionName}}
+                                        <table>
+                                            <tr>
+                                                <td valign="top">
+                                                    {{FilterNearLocations[$index].AttractionName}}
+                                                </td>
+                                                <td valign="top">
+                                                    <a herf="javascript:void(0)" style="cursor: pointer">
+                                                        <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                             ng-click="InsertBreakInformation(FilterNearLocations[$index])" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <span class="columnHeading">Address: </span>
                                         <span calss="columnValue">
-                                            {{NearLocations[$index].AddressOne}}, {{NearLocations[$index].AddressTwo}}
+                                            {{FilterNearLocations[$index].AddressOne}}, {{FilterNearLocations[$index].AddressTwo}}
                                         </span>
                                     </td>
                                 </tr>
@@ -419,7 +485,7 @@
                                     <td colspan="2">
                                         <span class="columnHeading">Phone: </span>
                                         <span calss="columnValue">
-                                            {{NearLocations[$index].GoogleInternational_phone_number}}
+                                            {{FilterNearLocations[$index].GoogleInternational_phone_number}}
                                         </span>
                                     </td>
                                 </tr>
@@ -427,17 +493,17 @@
                                     <td colspan="2">
                                         <span class="columnHeading">Google Rating:</span>
                                         <span calss="columnValue">
-                                            {{NearLocations[$index].GoogleRating}}
+                                            {{FilterNearLocations[$index].GoogleRating}}
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="columnHeading">Travel Time:{{NearLocations[$index].TravelTime}}</span> 
+                                        <span class="columnHeading">Travel Time:{{FilterNearLocations[$index].TravelTime}}</span> 
                                     </td>
                                     <td>
                                         <span class="columnHeading">
-                                            Distance:{{NearLocations[$index].Distance}}
+                                            Distance:{{FilterNearLocations[$index].Distance}}
                                         </span>
                                     </td>
                                 </tr>
@@ -450,34 +516,49 @@
                                             Price Level:
                                         </span>
                                         <span calss="columnValue">
-                                            <span ng-if="NearLocations[$index].PriceLevel<2">Normal</span>
-                                            <span ng-if="NearLocations[$index].PriceLevel===2">Medium</span>
-                                            <span ng-if="NearLocations[$index].PriceLevel>2">Expensive</span>
+                                            <span ng-if="FilterNearLocations[$index].PriceLevel<2">Normal</span>
+                                            <span ng-if="FilterNearLocations[$index].PriceLevel===2">Medium</span>
+                                            <span ng-if="FilterNearLocations[$index].PriceLevel>2">Expensive</span>
                                         </span>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                         <td ng-switch-when="0">
-                            <table ng-show="NearLocations[$index+1]" class="attractionInfo">
+                            <table ng-show="FilterNearLocations[$index+1]" class="attractionInfo">
                                 <tr>
                                     <td rowspan="7">
-                                        <a herf="javascript:void(0)" style="cursor:pointer">
-                                            <img src="~/Images/Custome/intersted.png" alt="Interested" width="100px" height="100px"
-                                                 ng-click="Interested(NearLocations[$index+1])"/>
-                                        </a>
+                                        <div ng-if="FilterNearLocations[$index+1].PhotoURL">
+                                            <a herf="javascript:void(0)" style="cursor: pointer">
+                                                <img src="{{FilterNearLocations[$index+1].PhotoURL}}" alt="{{FilterNearLocations[$index+1].AttractionName}} Photo"
+                                                     width="300px" height="300px" 
+                                                     ng-click="imageSlideShow(FilterNearLocations[$index+1].AttractionsId,FilterNearLocations[$index+1].AttractionName)"/>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="attractionName">
-                                        {{NearLocations[$index+1].AttractionName}}
+                                        <table>
+                                            <tr>
+                                                <td valign="top">
+                                                    {{FilterNearLocations[$index+1].AttractionName}}
+                                                </td>
+                                                <td valign="top">
+                                                    <a herf="javascript:void(0)" style="cursor: pointer">
+                                                        <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                             ng-click="InsertBreakInformation(FilterNearLocations[$index+1])" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <span class="columnHeading">Address: </span>
                                         <span calss="columnValue">
-                                            {{NearLocations[$index+1].AddressOne}}, {{NearLocations[$index+1].AddressTwo}}
+                                            {{FilterNearLocations[$index+1].AddressOne}}, {{FilterNearLocations[$index+1].AddressTwo}}
                                         </span>
                                     </td>
                                 </tr>
@@ -485,7 +566,7 @@
                                     <td colspan="2">
                                         <span class="columnHeading">Phone:</span>
                                         <span calss="columnValue">
-                                            {{NearLocations[$index+1].GoogleInternational_phone_number}}
+                                            {{FilterNearLocations[$index+1].GoogleInternational_phone_number}}
                                         </span>
                                     </td>
                                 </tr>
@@ -493,17 +574,17 @@
                                     <td colspan="2">
                                         <span class="columnHeading">Google Rating:</span>
                                         <span calss="columnValue">
-                                            {{NearLocations[$index+1].GoogleRating}}
+                                            {{FilterNearLocations[$index+1].GoogleRating}}
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="columnHeading">Travel Time:{{NearLocations[$index].TravelTime}}</span>
+                                        <span class="columnHeading">Travel Time:{{FilterNearLocations[$index].TravelTime}}</span>
                                     </td>
                                     <td>
                                         <span class="columnHeading">
-                                            Distance:{{NearLocations[$index].Distance}}
+                                            Distance:{{FilterNearLocations[$index].Distance}}
                                         </span>
                                     </td>
                                 </tr>
@@ -516,11 +597,11 @@
                                         <span class="columnHeading">
                                             Price Level:
                                         </span>
-                                        <span calss="columnValue" ng-show="NearLocations[$index+1].PriceLevel>0">
+                                        <span calss="columnValue" ng-show="FilterNearLocations[$index+1].PriceLevel>0">
 
-                                            <span ng-if="NearLocations[$index+1].PriceLevel<2">Normal</span>
-                                            <span ng-if="NearLocations[$index+1].PriceLevel===2">Medium</span>
-                                            <span ng-if="NearLocations[$index+1].PriceLevel>2">Expensive</span>
+                                            <span ng-if="FilterNearLocations[$index+1].PriceLevel<2">Normal</span>
+                                            <span ng-if="FilterNearLocations[$index+1].PriceLevel===2">Medium</span>
+                                            <span ng-if="FilterNearLocations[$index+1].PriceLevel>2">Expensive</span>
                                         </span>
                                     </td>
                                 </tr>
@@ -531,6 +612,11 @@
             </td>
         </tr>
     </table>
+</div>
+    
+    
+<div id="photoSlideShow">
+    
 </div>
 
 </div>

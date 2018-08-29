@@ -112,10 +112,10 @@ namespace ServiceClient.UsersService {
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Users.UserTripBuildStatus>> User_UserTripBuildStatusAsync(int userTripId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_GetNearestRestaruents", ReplyAction="http://tempuri.org/IUserServices/User_GetNearestRestaruentsResponse")]
-        System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId);
+        System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, System.Collections.Generic.List<BusinessEntites.Coordinate> coodinate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_GetNearestRestaruents", ReplyAction="http://tempuri.org/IUserServices/User_GetNearestRestaruentsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> User_GetNearestRestaruentsAsync(int attractionsId, int travelModeId, int countryId);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> User_GetNearestRestaruentsAsync(int attractionsId, int travelModeId, int countryId, System.Collections.Generic.List<BusinessEntites.Coordinate> coodinate);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -273,12 +273,12 @@ namespace ServiceClient.UsersService {
             return base.Channel.User_UserTripBuildStatusAsync(userTripId);
         }
         
-        public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId) {
-            return base.Channel.User_GetNearestRestaruents(attractionsId, travelModeId, countryId);
+        public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, System.Collections.Generic.List<BusinessEntites.Coordinate> coodinate) {
+            return base.Channel.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> User_GetNearestRestaruentsAsync(int attractionsId, int travelModeId, int countryId) {
-            return base.Channel.User_GetNearestRestaruentsAsync(attractionsId, travelModeId, countryId);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> User_GetNearestRestaruentsAsync(int attractionsId, int travelModeId, int countryId, System.Collections.Generic.List<BusinessEntites.Coordinate> coodinate) {
+            return base.Channel.User_GetNearestRestaruentsAsync(attractionsId, travelModeId, countryId, coodinate);
         }
     }
 }

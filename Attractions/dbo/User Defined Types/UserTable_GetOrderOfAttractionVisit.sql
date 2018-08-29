@@ -38,5 +38,7 @@
 	SourceLongitude Varchar(50),
 	SourceLatitude Varchar(50),
 	DestinationLongitude Varchar(50),
-	DestinationLatitude Varchar(50)
+	DestinationLatitude Varchar(50),
+	SourcePhotoUrl Varchar(1000) NULL,
+	DestinationPhotoUrl Varchar(1000) NULL
 )

@@ -334,7 +334,7 @@ namespace DataAccessLayer.User
             }
         }
 
-        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId)
+        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate)
         {
             try
             {
@@ -343,7 +343,11 @@ namespace DataAccessLayer.User
                     new
                     {
                         AttractionsId = attractionsId,
-                        TravelModeId = travelModeId
+                        TravelModeId = travelModeId,
+                        sourceBeginLongitude = coodinate.Where(x=>x.Least==true).Select(y=>y.Longitude).FirstOrDefault(),
+                        sourceBeginLatitude = coodinate.Where(x => x.Least == true).Select(y => y.Latitude).FirstOrDefault(),
+                        sourceEndLongitude = coodinate.Where(x => x.Least == false).Select(y => y.Longitude).FirstOrDefault(),
+                        sourceEndLatitude = coodinate.Where(x => x.Least == false).Select(y => y.Latitude).FirstOrDefault(),
                     }).ToList();
 
 

@@ -24,7 +24,16 @@
                                         <table cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td rowspan="2">
-                                                    <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="100px" height="100px"/>
+                                                    @{
+                                                        if (string.IsNullOrEmpty(_attraction.SourcePhotoUrl))
+                                                        {
+                                                            <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="100px" height="100px"/>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="@_attraction.SourcePhotoUrl" alt="@_attraction.SourceAttractionName" class="attractionImage"/>
+                                                        }
+                                                    }
                                                 </td>
                                             </tr>
                                             <tr>
@@ -122,17 +131,27 @@
                                         <tr>
                                             <td rowspan="7">
                                                 @{
-                                                    if (_attraction.DestinationAttractionName == "Lunch Time" || _attraction.DestinationAttractionName == "Dinner Time" || _attraction.DestinationAttractionName == "Break Time")
+                                                    if (_attraction.IsLunchDinnerBreakTime)
                                                     {
                                                         <text>
-                                                            <img src="/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.DestinationAttractionName', @destinationAttractionId, '@Model.divId')"/>
+                                                            <img src="/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName','@_attraction.DestinationAttractionName', @destinationAttractionId, '@Model.divId','@_attraction.SourceLongitude','@_attraction.SourceLatitude')"/>
                                                         </text>
                                                     }
                                                     else
                                                     {
-                                                        <text>
-                                                            <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
-                                                        </text>
+                                                        
+                                                             if (string.IsNullOrEmpty(_attraction.DestinationPhotoUrl))
+                                                             {
+                                                                 <text>
+                                                                     <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
+                                                                 </text>
+                                                             }
+                                                             else
+                                                             {
+                                                                 <text>
+                                                                     <img src="@_attraction.DestinationPhotoUrl" alt="@_attraction.DestinationPhotoUrl" class="attractionImage"/>
+                                                                 </text>
+                                                             }
                                                     }
 
                                                 }
@@ -226,7 +245,37 @@
                     </td>
                     <td>
                         @{ strId = Model.divId + "_UpdateDayEndTime";}
-                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDayEndTime" class="time" onchange="BreakInformationUpdate(''@Model.divId')"/>
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDayEndTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_IsUserInterestedBreakFast_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Interested Break Fast:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_IsUserInterestedBreakFast";}
+                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedBreakFast" onchange="BreakInformationUpdate('@Model.divId')" />
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedBreakFast_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Break Fast Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedBreakFast";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakTime" class="time" onchange="BreakInformationUpdate('@Model.divId')" />
+                    </td>
+                </tr>
+                @{ strId = Model.divId + "_UpdatedBreakFastMinimumTime_tr";}
+                <tr id='@strId'>
+                    <td>
+                        Break Fast Minimum Time:
+                    </td>
+                    <td>
+                        @{ strId = Model.divId + "_UpdatedBreakFastMinimumTime";}
+                        <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')" />
                     </td>
                 </tr>
                 @{ strId = Model.divId + "_IsUserInterestedLunchBreak_tr";}
@@ -242,7 +291,7 @@
                 @{ strId = Model.divId + "_UpdatedLunchTime_tr";}
                 <tr id='@strId'>
                     <td>
-                        This Is Lunch Break Time:
+                        Lunch Break Time:
                     </td>
                     <td>
                         @{ strId = Model.divId + "_UpdatedLunchTime";}
@@ -252,7 +301,7 @@
                 @{ strId = Model.divId + "_UpdatedLunchMinimumTime_tr";}
                 <tr id='@strId'>
                     <td>
-                        How Much time spent on Lunch Time:
+                        Lunch Minimum Time:
                     </td>
                     <td>
                         @{ strId = Model.divId + "_UpdatedLunchMinimumTime";}
@@ -272,7 +321,7 @@
                 @{ strId = Model.divId + "_UpdatedBreakTime_tr";}
                 <tr id='@strId'>
                     <td>
-                        This Is Break Start Time:
+                        Break Start Time:
                     </td>
                     <td>
                         @{ strId = Model.divId + "_UpdatedBreakTime";}
@@ -302,7 +351,7 @@
                 @{ strId = Model.divId + "_UpdatedDinnerTime_tr";}
                 <tr id='@strId'>
                     <td>
-                        This Is Dinner Time
+                        Dinner Time
                     </td>
                     <td>
                         @{ strId = Model.divId + "_UpdatedDinnerTime";}

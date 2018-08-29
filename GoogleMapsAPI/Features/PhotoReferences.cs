@@ -35,7 +35,7 @@ namespace GoogleMapsAPI.Features
 
                             radiusData = string.Empty;
                             url =
-                                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" +
+                                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=4000&photoreference=" +
                                 attractionPhotoReference.Photo_reference + "&key=" +
                                 ConfigurationManager.AppSettings["apiKey"];
                             radiusData = webRequest.RedirectedURL(url);
@@ -54,7 +54,12 @@ namespace GoogleMapsAPI.Features
 
                         dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", string.Empty, string.Empty,
                             false);
-                        break;
+                        googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                        if (googleCounter == null || googleCounter.Counter >
+                            Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                        {
+                            break;
+                        }
                     }
                 }
             }

@@ -34,16 +34,9 @@ namespace PlanGoGoAdmin.Controllers
             {
                 getResult = _IMasterCity.Admin_MasterCityGet();
             }
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MasterCityDTO>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return base.jsonReturn.JsonResult<MasterCityDTO>(getResult);
+            
         }
 
         public ActionResult ManageCity()

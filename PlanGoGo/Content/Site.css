@@ -819,3 +819,8 @@ tr.pager td {
 .warningMessage {
     color: orange;
 }
+
+.attractionImage {
+    width: 200px;
+    height: 200px;
+}

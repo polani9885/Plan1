@@ -31,31 +31,15 @@ namespace PlanGoGoAdmin.Controllers
         public JsonResult MissingDistanceAttractionsRecordsGet()
         {
             List<MissingDistanceAttractionsRecordsDTO> getResult = _IMissingDistanceAttractionsRecords.Admin_MissingDistanceAttractionsRecordsGet();
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MissingDistanceAttractionsRecordsDTO>(), JsonRequestBehavior.AllowGet);
-            }
+            return base.jsonReturn.JsonResult<MissingDistanceAttractionsRecordsDTO>(getResult);
+            
         }
 
         public JsonResult MissingDistanceAttractionsRecordsXAttractionsGet(int MissingDistanceAttractionsRecordsID)
         {
             List<MissingDistanceAttractionsRecordsDTO> getResult = _IMissingDistanceAttractionsRecords.Admin_MissingDistanceAttractionsRecordsXAttractionsGet(MissingDistanceAttractionsRecordsID);
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MissingDistanceAttractionsRecordsDTO>(), JsonRequestBehavior.AllowGet);
-            }
+            return base.jsonReturn.JsonResult<MissingDistanceAttractionsRecordsDTO>(getResult);
+            
         }
 
 

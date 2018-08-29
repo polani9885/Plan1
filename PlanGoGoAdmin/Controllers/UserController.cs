@@ -75,16 +75,8 @@ namespace PlanGoGoAdmin.Controllers
         public JsonResult Admin_GetUser()
         {
             List<Admin_GetUser> getResult = _IUser.Admin_GetUser();
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<Admin_GetUser>(), JsonRequestBehavior.AllowGet);
-            }
+            return base.jsonReturn.JsonResult<Admin_GetUser>(getResult);
+            
         }
 
         public ActionResult ManageUser()

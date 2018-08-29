@@ -34,16 +34,8 @@ namespace PlanGoGoAdmin.Controllers
             {
                 getResult = _IMasterState.Admin_MasterStateGet();
             }
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MasterStateDTO>(), JsonRequestBehavior.AllowGet);
-            }
+            return base.jsonReturn.JsonResult<MasterStateDTO>(getResult);
+
         }
 
         public ActionResult ManageState()

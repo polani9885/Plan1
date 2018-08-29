@@ -47,5 +47,45 @@ namespace BusinessEntites.Users
 
         [DataMember]
         public TimeSpan UpdateDinnerMinimumTime { get; set; }
+
+        [DataMember]
+        public bool IsBreakAdded { get; set; }
+
+        [DataMember]
+        public int BreakAttractionId { get; set; }
+
+
+        [DataMember]
+        public bool IsLunchAdded { get; set; }
+
+        [DataMember]
+        public int LunchAttractionId { get; set; }
+
+        [DataMember]
+        public bool IsDinnerAdded { get; set; }
+
+        [DataMember]
+        public int DinnerAttractionId { get; set; }
+
+        [DataMember]
+        public bool IsUserInterestedBreakFast { get; set; }
+
+        [DataMember]
+        public TimeSpan UpdatedBreakFastTime { get; set; }
+
+        [DataMember]
+        public TimeSpan UpdatedBreakFastMinimumTime { get; set; }
+
+        [DataMember]
+        public bool IsBreakFastAdded { get; set; }
+
+        [DataMember]
+        public int BreakFastAttractionId { get; set; }
+
+        [DataMember]
+        public bool IsDayBreakAdded { get; set; }
+
+        [DataMember]
+        public int DayBreakAttractionId { get; set; }
     }
 }

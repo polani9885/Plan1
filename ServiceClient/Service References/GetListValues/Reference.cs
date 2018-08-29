@@ -34,10 +34,10 @@ namespace ServiceClient.GetListValues {
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Public_GetMasterCategory>> Public_GetMasterCategoryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_FilterAttractions", ReplyAction="http://tempuri.org/IGetListValues/Public_FilterAttractionsResponse")]
-        System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList);
+        System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList, int mainCategorySelected);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_FilterAttractions", ReplyAction="http://tempuri.org/IGetListValues/Public_FilterAttractionsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList, int mainCategorySelected);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit", ReplyAction="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisitResponse")]
         System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, string StartDate, string StartTime, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, System.Collections.Generic.List<BusinessEntites.Users.UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder);
@@ -62,6 +62,12 @@ namespace ServiceClient.GetListValues {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/public_AttractionsPhotoInfo", ReplyAction="http://tempuri.org/IGetListValues/public_AttractionsPhotoInfoResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Users.AttractionPhotoReference>> public_AttractionsPhotoInfoAsync(int countryId, int attractionId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/GetBreakInformation", ReplyAction="http://tempuri.org/IGetListValues/GetBreakInformationResponse")]
+        System.Collections.Generic.List<BusinessEntites.BreakInformation> GetBreakInformation();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/GetBreakInformation", ReplyAction="http://tempuri.org/IGetListValues/GetBreakInformationResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.BreakInformation>> GetBreakInformationAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -115,12 +121,12 @@ namespace ServiceClient.GetListValues {
             return base.Channel.Public_GetMasterCategoryAsync();
         }
         
-        public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList) {
-            return base.Channel.Public_FilterAttractions(countryId, cityVisitList);
+        public System.Collections.Generic.List<BusinessEntites.public_FilterAttractions> Public_FilterAttractions(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList, int mainCategorySelected) {
+            return base.Channel.Public_FilterAttractions(countryId, cityVisitList, mainCategorySelected);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList) {
-            return base.Channel.Public_FilterAttractionsAsync(countryId, cityVisitList);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList, int mainCategorySelected) {
+            return base.Channel.Public_FilterAttractionsAsync(countryId, cityVisitList, mainCategorySelected);
         }
         
         public System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, string StartDate, string StartTime, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, System.Collections.Generic.List<BusinessEntites.Users.UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder) {
@@ -153,6 +159,14 @@ namespace ServiceClient.GetListValues {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Users.AttractionPhotoReference>> public_AttractionsPhotoInfoAsync(int countryId, int attractionId) {
             return base.Channel.public_AttractionsPhotoInfoAsync(countryId, attractionId);
+        }
+        
+        public System.Collections.Generic.List<BusinessEntites.BreakInformation> GetBreakInformation() {
+            return base.Channel.GetBreakInformation();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.BreakInformation>> GetBreakInformationAsync() {
+            return base.Channel.GetBreakInformationAsync();
         }
     }
 }

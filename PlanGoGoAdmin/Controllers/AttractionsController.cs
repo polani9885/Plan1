@@ -22,16 +22,7 @@ namespace PlanGoGoAdmin.Controllers
         public JsonResult AttractionsOnCityId(int cityId)
         {
             List<AttractionsDTO> getResult = _IAttractions.AttractionsOnCityId(new AttractionsDTO { CityId = cityId });
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<AttractionsDTO>(), JsonRequestBehavior.AllowGet);
-            }
+            return base.jsonReturn.JsonResult<AttractionsDTO>(getResult);
         }
 
         public ActionResult ManageAttractions()

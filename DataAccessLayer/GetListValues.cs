@@ -65,7 +65,7 @@ namespace DataAccessLayer
         /// If we select or unselect any category this method will resturn the result
         /// </summary>
         /// <returns></returns>
-        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList, int mainCategorySelected)
         {
             try
             {
@@ -74,7 +74,8 @@ namespace DataAccessLayer
 
                 List<public_FilterAttractions> _public_FilterAttractions = SqlHelper.QuerySP<public_FilterAttractions>("public_FilterAttractions",
                     new {
-                        CityVisitList = CommonObjects.Convert.ToDataTable<CityVisitList>(cityVisitList)
+                        CityVisitList = CommonObjects.Convert.ToDataTable<CityVisitList>(cityVisitList),
+                        MainCategorySelected = mainCategorySelected
                     }).ToList();
 
                 return _public_FilterAttractions;
@@ -171,6 +172,18 @@ namespace DataAccessLayer
                     }).ToList();
 
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<BreakInformation> GetBreakInformation()
+        {
+            try
+            {
+                List<BreakInformation> _returnResult = SqlHelper.QuerySP<BreakInformation>("Common_GetBreakInformation").ToList();
+                return _returnResult;
             }
             catch (Exception ex)
             {

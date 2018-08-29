@@ -14,7 +14,7 @@ function editTourInformation(timeRequiredToView, recordCounter) {
         .data("recordCounter",recordCounter)
         .dialog("open");
     
-    if (timeRequiredToView.toString().indexOf(':') == -1)
+    if (timeRequiredToView.toString().indexOf(':') === -1)
     {
         timeRequiredToView = timeRequiredToView + ":00";
     }
@@ -70,6 +70,9 @@ function addingAttractionInformation() {
 
 
 
+
+
+
 function BreakInformationUpdate(divId) {
     
     var angularScope = angular.element(document.getElementById('main')).scope();
@@ -81,10 +84,10 @@ function BreakInformationUpdate(divId) {
 
 function convertTo24Hour(time) {
     var hours = parseInt(time.substr(0, 2));
-    if (time.indexOf('AM') != -1 && hours == 12) {
+    if (time.indexOf('AM') !== -1 && hours === 12) {
         time = time.replace('12', '0');
     }
-    if (time.indexOf('PM') != -1 && hours < 12) {
+    if (time.indexOf('PM') !== -1 && hours < 12) {
         time = time.replace(hours, (hours + 12));
     }
     return time.replace(/(AM|PM)/, '');
@@ -94,6 +97,7 @@ function convertTo24Hour(time) {
 function convertTo12Hour(time) {   // Take a time in 24 hour format and format it in 12 hour format
     var time_part_array = time.split(":");
     var ampm = 'AM';
+    
 
     if (time_part_array[0] >= 12) {
         ampm = 'PM';
@@ -108,14 +112,43 @@ function convertTo12Hour(time) {   // Take a time in 24 hour format and format i
     return formatted_time;
 }
 
-function AddLunchDinnerBreak(breakType, attractionId, divId) {
+function AddLunchDinnerBreak(sourceAttractionName, breakType, attractionId, divId, sourceLongitude, sourceLatitude) {
 
     $("#addingBreak")
         .dialog("open");
 
+    $("#breakPreviousAttractionName").text(sourceAttractionName);
+
+    $("#breakDistance").val('5');
+
+    $("#hdSelectedDivId").val(divId);
+    $("#hdSelectedBreakType").val(breakType);
+
+    $("#chkExtraCategory input:checkbox").each(function () {
+        $(this).prop('checked', true);
+    });
+
     var angularScope = angular.element(document.getElementById('main')).scope();
     angularScope.$apply(function () {
-        angularScope.AddLunchDinnerBreak(breakType, attractionId, divId);
+
+        //Extra category by default making it is selected
+        angularScope.selectedExtraCategoryList = [];
+        $.each(angularScope.ExtraCategoryList,
+            function(categoryKey, categoryValue) {
+                var item = [];
+                item.GoogleTypeID = categoryValue.GoogleTypeID;
+                item.CategoryName = categoryValue.TypeName;
+                angularScope.selectedExtraCategoryList.push(item);
+            });
+        
+        angularScope.AddLunchDinnerBreak(breakType, attractionId, divId, sourceLongitude, sourceLatitude);
     });
     
+}
+
+function BreakAttractionCalling() {
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.BreakAttractionCalling();
+    });
 }

@@ -158,6 +158,8 @@
     <Build Include="dbo\Stored Procedures\Scheduler_RecalculateTourInfo.sql" />
     <Build Include="dbo\Stored Procedures\User_UserTripBuildStatus.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetExtraCategoryList.sql" />
+    <Build Include="dbo\Tables\BreakInformation.sql" />
+    <Build Include="dbo\Stored Procedures\Common_GetBreakInformation.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
@@ -177,6 +179,7 @@
     <Build Include="dbo\User Defined Types\UserTable_AttractionRequestOrder.sql" />
     <Build Include="dbo\User Defined Types\UserTable_GetOrderOfAttractionVisit.sql" />
     <None Include="dbo\Seeds\UserTripBuildMessage.sql" />
+    <None Include="dbo\Seeds\BreakInformation.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Attractions.refactorlog" />

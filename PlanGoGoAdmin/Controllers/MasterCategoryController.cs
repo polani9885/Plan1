@@ -26,16 +26,9 @@ namespace PlanGoGoAdmin.Controllers
         public JsonResult Admin_MasterCategoryGet()
         {
             List<MasterCategoryDTO> getResult = _IMasterCategory.Admin_MasterCategoryGet();
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MasterCountryDTO>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return base.jsonReturn.JsonResult<MasterCategoryDTO>(getResult);
+            
         }
 
         public ActionResult ManageMasterCategory()

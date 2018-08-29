@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head >
-	<meta charset="UTF-8">
-	<title>Plan Go Go</title>    
+    <meta charset="UTF-8">
+    <title>Plan Go Go</title>    
     @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui","~/bundles/jqueryval", "~/customScript")  
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularSupport")
@@ -13,204 +13,205 @@
     
 
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Styles.Render("~/bundles/pluginsCSS")
 
     <link rel="stylesheet" href="/Templates/BeachResort/css/style.css" type="text/css">
-    <link href='//fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' />  
+    <link href='//fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' />
 </head>
 <body ng-app="AppPlanGoGo">
-    <div class="blockPage" style="display:none">
-        <img class="Centered" src="/Images/ApplicationImages/LoadingImages/InternetSlowdown_Day.gif" width="300" height="300" />
+<div class="blockPage" style="display:none">
+    <img class="Centered" src="/Images/ApplicationImages/LoadingImages/InternetSlowdown_Day.gif" width="300" height="300" />
+</div>
+<div id="background">
+    <div id="page">
+        <div id="header">
+            <div id="logo">
+                @*<a href="index.html"><img src="/Images/Logos/logo.png" alt="LOGO" height="112" width="118"></a>*@
+            </div>
+            <div id="navigation">
+                <ul>
+                    <li class="selected">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html" >About</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="loginControl()" id="linkLogin">Login</a>
+                        <a href="javascript:void(0)" onclick="UserLogOut()" id="linkLogOut" style="display: none">Log Out</a>
+                    </li>
+                    <li>
+                        <a href="UserControls/PlannedTour">Planned Tour</a>
+                    </li>
+                    <li>
+                        <a href="foods.html">Food</a>
+                    </li>
+                    <li>
+                        <a href="news.html">News</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                    <li id="linkMyAccount" style="display: none">
+                        <a href="contact.html">My Account</a>
+                    </li>
+                    <li id="linkMyPlans" style="display: none">
+                        <a href="contact.html">My Plans</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="contents">
+            @RenderBody()		
+        </div>
     </div>
-	<div id="background">
-		<div id="page">
-			<div id="header">
-				<div id="logo">
-					@*<a href="index.html"><img src="/Images/Logos/logo.png" alt="LOGO" height="112" width="118"></a>*@
-				</div>
-				<div id="navigation">
-					<ul>
-						<li class="selected">
-							<a href="index.html">Home</a>
-						</li>
-						<li>
-							<a href="about.html" >About</a>
-						</li>
-						<li>
-						    <a href="javascript:void(0)" onclick="loginControl()" id="linkLogin">Login</a>
-                            <a href="javascript:void(0)" onclick="UserLogOut()" id="linkLogOut" style="display: none">Log Out</a>
-						</li>
-						<li>
-							<a href="UserControls/PlannedTour">Planned Tour</a>
-						</li>
-						<li>
-							<a href="foods.html">Food</a>
-						</li>
-						<li>
-							<a href="news.html">News</a>
-						</li>
-					    <li>
-					        <a href="contact.html">Contact</a>
-					    </li>
-					    <li id="linkMyAccount" style="display: none">
-					        <a href="contact.html">My Account</a>
-					    </li>
-                        <li id="linkMyPlans" style="display: none">
-                            <a href="contact.html">My Plans</a>
-                        </li>
-					</ul>
-				</div>
-			</div>
-			<div id="contents">
-                @RenderBody()		
-			</div>
-		</div>
-		<div id="footer">			
-			<p>
-				© 2016 by PlanGoGo. All Rights Reserved
-			</p>
-		</div>
+    <div id="footer">			
+        <p>
+            © 2016 by PlanGoGo. All Rights Reserved
+        </p>
+    </div>
         
-            <div id="loginController" title="Login" class="loginController">
-                <p class="validateTips">All form fields are required.</p>
-                <form>
-                    <fieldset>
+    <div id="loginController" title="Login" class="loginController">
+        <p class="validateTips">All form fields are required.</p>
+        <form>
+            <fieldset>
                             
-                        <table cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                <td colspan="2">
-                                    <label style="display: none" class="validationError" id="lblUserRegisterError">User name and Password is not correct</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    User Name:
-                                </td>
-                                <td>
-                                    <input id="txtLoginUsername" placeholder="User Name">
-                                    <label style="display: none" class="validationError" id="lblLoginUsernameError">User name should not be blank</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Password:
-                                </td>
-                                <td>
-                                    <input id="txtLoginPassword" placeholder="Password">
-                                    <label style="display: none" class="validationError" id="lblLoginPasswordError">Password should not be blank</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input id="btnLogin" type="button" value="Login" onclick="LoginValidation()">
-                                </td>
-                            </tr>
-                        </table>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td colspan="2">
+                            <label style="display: none" class="validationError" id="lblUserRegisterError">User name and Password is not correct</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            User Name:
+                        </td>
+                        <td>
+                            <input id="txtLoginUsername" placeholder="User Name">
+                            <label style="display: none" class="validationError" id="lblLoginUsernameError">User name should not be blank</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Password:
+                        </td>
+                        <td>
+                            <input id="txtLoginPassword" placeholder="Password">
+                            <label style="display: none" class="validationError" id="lblLoginPasswordError">Password should not be blank</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input id="btnLogin" type="button" value="Login" onclick="LoginValidation()">
+                        </td>
+                    </tr>
+                </table>
                             
-</fieldset>
-                </form>
-            </div>
+            </fieldset>
+        </form>
+    </div>
 
-            <div id="registerController" title="Register" class="loginController">
-                <p class="validateTips">All form fields are required.</p>
-                <form>
-                    <fieldset>                        
-                        <table cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                <td colspan="2">
-                                    <label style="display: none" class="validationError" id="lblLoginUsernameCheckError">Because of Some error, user not registered</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    User Name:
-                                </td>
-                                <td>
-                                    <input id="txtRegisterLogin" placeholder="User Name" onblur="UserCheckUserNameExisted()" onkeydown="UserCheckUserNameExisted()">
-                                    <img id="imgCheckUserNameExisted" src="" style="display: none" />
-                                    <label style="display: none" class="validationError" id="lblRegisterUsernameError">User name should not be blank</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Password:
-                                </td>
-                                <td>
-                                    <input id="txtRegisterPassword" placeholder="Password">
-                                    <label style="display: none" class="validationError" id="lblRegisterPasswordError">Password should not be blank</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Confirm Password:
-                                </td>
-                                <td>
-                                    <input id="txtRegisterConfirmPassword" placeholder="Confirm Password">
-                                    <label style="display: none" class="validationError" id="lblRegisterConfirmPasswordError">Confirm Password should not be blank</label>
-                                    <label style="display: none" class="validationError" id="lblRegisterPasswordConfirmPasswordError">Password and Confirm Password should be same</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Email:
-                                </td>
-                                <td>
-                                    <input id="txtRegisterEmail" placeholder="Email">
-                                    <label style="display: none" class="validationError" id="lblRegisterEmailError">Email should not be blank</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input id="btnRegisterRegister" type="button" value="Register" onclick="RegisterValidation()">
-                                </td>
-                            </tr>
-                        </table>
+    <div id="registerController" title="Register" class="loginController">
+        <p class="validateTips">All form fields are required.</p>
+        <form>
+            <fieldset>                        
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td colspan="2">
+                            <label style="display: none" class="validationError" id="lblLoginUsernameCheckError">Because of Some error, user not registered</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            User Name:
+                        </td>
+                        <td>
+                            <input id="txtRegisterLogin" placeholder="User Name" onblur="UserCheckUserNameExisted()" onkeydown="UserCheckUserNameExisted()">
+                            <img id="imgCheckUserNameExisted" src="" style="display: none" />
+                            <label style="display: none" class="validationError" id="lblRegisterUsernameError">User name should not be blank</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Password:
+                        </td>
+                        <td>
+                            <input id="txtRegisterPassword" placeholder="Password">
+                            <label style="display: none" class="validationError" id="lblRegisterPasswordError">Password should not be blank</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Confirm Password:
+                        </td>
+                        <td>
+                            <input id="txtRegisterConfirmPassword" placeholder="Confirm Password">
+                            <label style="display: none" class="validationError" id="lblRegisterConfirmPasswordError">Confirm Password should not be blank</label>
+                            <label style="display: none" class="validationError" id="lblRegisterPasswordConfirmPasswordError">Password and Confirm Password should be same</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email:
+                        </td>
+                        <td>
+                            <input id="txtRegisterEmail" placeholder="Email">
+                            <label style="display: none" class="validationError" id="lblRegisterEmailError">Email should not be blank</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input id="btnRegisterRegister" type="button" value="Register" onclick="RegisterValidation()">
+                        </td>
+                    </tr>
+                </table>
                            
-</fieldset>
-                </form>
-            </div>
+            </fieldset>
+        </form>
+    </div>
 
-            <div id="forgetController" title="Forget Password" class="loginController">
-                <p class="validateTips">All form fields are required.</p>
-                <form>
-                    <fieldset>
-                        <table cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                <td>
-                                    User Name:
-                                </td>
-                                <td>
-                                    <input id="txtForgetLogin" placeholder="User Name">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    OR
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Email:
-                                </td>
-                                <td>
-                                    <input id="txtForgetEmail" placeholder="Email">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label style="display:none" class="validationError" id="lblForgetError">Please enter User name or Forget password</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input id="btnForgetPassword" type="button" value="Forget Password" onclick="ForgetValidation()">
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                </form>
-            </div>
+    <div id="forgetController" title="Forget Password" class="loginController">
+        <p class="validateTips">All form fields are required.</p>
+        <form>
+            <fieldset>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                            User Name:
+                        </td>
+                        <td>
+                            <input id="txtForgetLogin" placeholder="User Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            OR
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email:
+                        </td>
+                        <td>
+                            <input id="txtForgetEmail" placeholder="Email">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label style="display:none" class="validationError" id="lblForgetError">Please enter User name or Forget password</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input id="btnForgetPassword" type="button" value="Forget Password" onclick="ForgetValidation()">
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
         
         
-	</div>
+</div>
 </body>
 </html>

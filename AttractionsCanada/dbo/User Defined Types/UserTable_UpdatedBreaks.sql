@@ -11,6 +11,18 @@
 	[UpdatedBreakMinimumTime] [time](7) NULL,
 	[IsUserInterestedDinnerBreak] [bit] NULL,
 	[UpdatedDinnerTime] [time](7) NULL,
-	[UpdateDinnerMinimumTime] [time](7) NULL
+	[UpdateDinnerMinimumTime] [time](7) NULL,
+	[IsBreakAdded] [bit] NULL,
+	[BreakAttractionId] [int] NULL,
+	[IsLunchAdded] [bit] NULL,
+	[LunchAttractionId] [int] NULL,
+	[IsDinnerAdded] [bit] NULL,
+	[DinnerAttractionId] [int] NULL,
+	[IsUserInterestedBreakFast] [bit] NULL,
+	[UpdatedBreakFastTime] [time](7) NULL,
+	[UpdatedBreakFastMinimumTime] [time](7) NULL,
+	[IsBreakFastAdded] [bit] NULL,
+	[BreakFastAttractionId] [int] NULL,
+	IsDayBreakAdded bit,
+	DayBreakAttractionId int
 )
-GO

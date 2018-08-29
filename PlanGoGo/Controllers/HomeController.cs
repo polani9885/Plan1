@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using CommonFunctions;
 using Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace PlanGoGo.Controllers
         ICountry _iCountry;
         IMasterState _iState;
         IMasterCity _iCity;
+
+        private readonly JsonReturn jsonReturn = new JsonReturn();
         public HomeController(ICountry _ICountry, IMasterState _IState, IMasterCity _ICity)
         {
             _iCountry = _ICountry;
@@ -29,16 +32,8 @@ namespace PlanGoGo.Controllers
         public JsonResult Admin_GetCountry()
         {
             List<MasterCountryDTO> getResult = _iCountry.Admin_GetCountry();
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<MasterCountryDTO>(), JsonRequestBehavior.AllowGet);
-            }
+            return jsonReturn.JsonResult<MasterCountryDTO>(getResult);
+            
         }
 
         public JsonResult Admin_MasterCityGetOnStateId(int stateId)
@@ -46,16 +41,8 @@ namespace PlanGoGo.Controllers
             try
             {
                 List<MasterCityDTO> getResult = _iCity.Admin_MasterCityGetOnStateId(stateId);
-                if (getResult.Count() > 0)
-                {
-                    var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                    jsonResults.MaxJsonLength = int.MaxValue;
-                    return jsonResults;
-                }
-                else
-                {
-                    return Json(new List<MasterCityDTO>(), JsonRequestBehavior.AllowGet);
-                }                
+                return jsonReturn.JsonResult<MasterCityDTO>(getResult);
+                                
             }
             catch (Exception ex)
             {
@@ -68,16 +55,7 @@ namespace PlanGoGo.Controllers
             try
             {
                 List<MasterStateDTO> getResult = _iState.Admin_MasterStateGetOnCountryId(countryId);
-                if (getResult.Count() > 0)
-                {
-                    var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                    jsonResults.MaxJsonLength = int.MaxValue;
-                    return jsonResults;
-                }
-                else
-                {
-                    return Json(new List<MasterStateDTO>(), JsonRequestBehavior.AllowGet);
-                }
+                return jsonReturn.JsonResult<MasterStateDTO>(getResult);
             }
             catch (Exception ex)
             {

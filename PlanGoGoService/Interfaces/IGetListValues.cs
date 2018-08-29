@@ -23,7 +23,7 @@ namespace PlanGoGoService.Interfaces
         List<Public_GetMasterCategory> Public_GetMasterCategory();
 
         [OperationContract]
-        List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList);
+        List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList, int mainCategorySelected);
 
         [OperationContract]
         List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
@@ -40,5 +40,8 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId);
+
+        [OperationContract]
+        List<BreakInformation> GetBreakInformation();
     }
 }

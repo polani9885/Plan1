@@ -177,14 +177,14 @@ namespace ServiceClient.Services
             }
         }
 
-        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId)
+        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate)
         {
             try
             {
 
                 var returnResult = new List<public_FilterAttractions>();
 
-                var result = _userService.User_GetNearestRestaruents(attractionsId, travelModeId, countryId);
+                var result = _userService.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate);
 
                 var groupResult = result.GroupBy(x => x.AttractionsId);
 
@@ -210,21 +210,18 @@ namespace ServiceClient.Services
                             item.Latitude = att.Latitude;
                             item.PlaceId = att.PlaceId;
                             item.RankId = att.RankId;
-                            item.CreatedDate = att.CreatedDate;
-                            item.CreatedBy = att.CreatedBy;
-                            item.ModifiedDate = att.ModifiedDate;
-                            item.ModifiedBy = att.ModifiedBy;
                             item.GoogleSearchText = att.GoogleSearchText;
                             item.RecordIndex = att.RecordIndex;
                             item.GoogleInternational_phone_number = att.GoogleInternational_phone_number;
                             item.GoogleRating = att.GoogleRating;
                             item.PriceLevel = att.PriceLevel;
-                            item.TravelTime =
+                            item.TravelTime = string.IsNullOrEmpty(item.TravelTime) ? string.Empty :
                                 TimeSpan.FromSeconds(Convert.ToInt32(att.TravelTime)).Hours + ":" + TimeSpan
                                     .FromSeconds(Convert.ToInt32(att.TravelTime)).Minutes;
                             item.Distance = att.Distance;
                             item.AllCategoriesId = new List<int>();
                             item.AllCategoriesId.Add(att.CategoryId);
+                            item.PhotoURL = att.PhotoURL;
                         }
                         item.AllCategoriesId.Add(att.CategoryId);
                         isFirst = true;

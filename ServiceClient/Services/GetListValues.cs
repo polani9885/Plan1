@@ -30,11 +30,11 @@ namespace ServiceClient.Services
             return _client.Public_GetMasterCategory().ToList();
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList, int mainCategorySelected)
         {
             try
             {
-                return _client.Public_FilterAttractions(countryId, cityVisitList).ToList();
+                return _client.Public_FilterAttractions(countryId, cityVisitList,mainCategorySelected).ToList();
             }
             catch (Exception ex)
             {
@@ -78,6 +78,19 @@ namespace ServiceClient.Services
             try
             {
                 return _client.public_AttractionsPhotoInfo(countryId, attractionId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public List<BreakInformation> GetBreakInformation()
+        {
+            try
+            {
+                return _client.GetBreakInformation();
             }
             catch (Exception e)
             {

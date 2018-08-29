@@ -11,6 +11,8 @@ namespace BusinessEntites.Users
     public class AttractionPhotoReference
     {
         [DataMember]
+        public string PhotoURL { get; set; }
+        [DataMember]
         public int AttractionPhotosId { get; set; }
         [DataMember]
         public string Photo_reference { get; set; }

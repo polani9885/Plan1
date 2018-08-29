@@ -16,5 +16,8 @@ namespace BusinessEntites.JsonParameters
 
         [DataMember]
         public List<CityVisitList> cityVisitList { get; set; }
+
+        [DataMember]
+        public int MainCategorySelected { get; set; }
     }
 }

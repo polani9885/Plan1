@@ -53,7 +53,10 @@ namespace BusinessEntites
         public string Distance { get; set; }
 
         public List<int> AllCategoriesId { get; set; }
-        
+
+        public string PhotoURL { get; set; }
+
+
 
     }
 }

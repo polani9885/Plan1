@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[USER_UserTripInformation]
+﻿CREATE PROCEDURE [dbo].[USER_UserTripInformation]	
 (
 	@AttractionID userTable_OnlyId ReadOnly 
 	,@TravelModeId INT
@@ -63,7 +63,6 @@ BEGIN
 
 
 	
-		
 	INSERT INTO [dbo].[UserTripDates]
            ([UserTripId]
            ,[TripDate]
@@ -72,6 +71,7 @@ BEGIN
 			,[IsUserInterestedLunchBreak]      
 			,[IsUserInterestedBreak]      
 			,[IsUserInterestedDinnerBreak]
+			,IsUserInterestedBreakFast
            )
 	SELECT DISTINCT 
 			@UserTripId
@@ -81,7 +81,13 @@ BEGIN
 			,1
 			,1
 			,1
+			,1
 	FROM @AttractionOrder
+
+
+	
+
+
     
 
 
@@ -100,6 +106,19 @@ BEGIN
 		  ,UTD.[IsUserInterestedDinnerBreak] = ISNULL(UBT.IsUserInterestedDinnerBreak,1)
 		  ,UTD.[UpdatedDinnerTime] = UBT.UpdatedDinnerTime
 		  ,UTD.[UpdateDinnerMinimumTime] = UBT.UpdateDinnerMinimumTime
+		  ,UTD.IsBreakAdded = UBT.IsBreakAdded
+		  ,UTD.BreakAttractionId = UBT.BreakAttractionId
+		  ,UTD.IsLunchAdded = UBT.IsLunchAdded
+		  ,UTD.LunchAttractionId = UBT.LunchAttractionId
+		  ,UTD.IsDinnerAdded = UBT.IsDinnerAdded
+		  ,UTD.DinnerAttractionId = UBT.DinnerAttractionId
+		  ,UTD.IsUserInterestedBreakFast = ISNULL(UBT.IsUserInterestedBreakFast,1)
+		  ,UTD.UpdatedBreakFastTime = UBT.UpdatedBreakFastTime
+		  ,UTD.UpdatedBreakFastMinimumTime = UBT.UpdatedBreakFastMinimumTime
+		  ,UTD.IsBreakFastAdded = UBT.IsBreakFastAdded
+		  ,UTD.BreakFastAttractionId = UBT.BreakFastAttractionId
+		  ,UTD.IsDayBreakAdded = UBT.IsDayBreakAdded
+		  ,UTD.DayBreakAttractionId = UBT.DayBreakAttractionId
 	FROM [dbo].[UserTripDates] UTD	
 	JOIN @UserBreakTime UBT ON CAST(UBT.RequestDate As DATE) = CAST(UTD.TripDate AS DATE)
 	 WHERE UTD.[UserTripId] = @UserTripId
@@ -150,7 +169,9 @@ BEGIN
            ,[SourceLatitude]
            ,[DestinationLongitude]
            ,[DestinationLatitude]
-           ,[CreatedDate])
+           ,[CreatedDate]
+		   ,SourcePhotoUrl
+		   ,DestinationPhotoUrl)
 	SELECT @UserTripId
 		  ,[SourceAttractionId]
 		  ,[DestinationAttractionId]
@@ -193,6 +214,8 @@ BEGIN
 		  ,[DestinationLongitude]
 		  ,[DestinationLatitude]
 		  ,GETDATE()
+		  ,SourcePhotoUrl
+		  ,DestinationPhotoUrl
 	  FROM @AttractionOrder
 
 
@@ -247,10 +270,12 @@ BEGIN
 			[IsUserInterestedDinnerBreak] [bit] NULL,
 			[UpdatedDinnerTime] [time](7) NULL,
 			[UpdateDinnerMinimumTime] [time](7) NULL,
-			[DayBreakAttractionId] [bigint] NULL,
-			[LunchBreakAttractionId] [bigint] NULL,
-			[BreakAttractionId] [bigint] NULL,
-			[DinnerAttractionId] [bigint] NULL,
+			IsBreakAdded BIT NULL,
+			BreakAttractionId [bigint] NULL,
+			IsLunchAdded BIT NULL,
+			LunchAttractionId [bigint] NULL,
+			IsDinnerAdded BIT NULL,
+			DinnerAttractionId BIGINT NULL,
 			RowNumber INT
 		)	
 		INSERT INTO @DayBreakData
@@ -270,10 +295,12 @@ BEGIN
 			,[IsUserInterestedDinnerBreak]
 			,[UpdatedDinnerTime]
 			,[UpdateDinnerMinimumTime]
-			,[DayBreakAttractionId]
-			,[LunchBreakAttractionId]
-			,[BreakAttractionId]
-			,[DinnerAttractionId]
+			,IsBreakAdded
+			,BreakAttractionId
+			,IsLunchAdded
+			,LunchAttractionId
+			,IsDinnerAdded
+			,DinnerAttractionId
 			,ROW_NUMBER() OVER(ORDER BY CAST(TripDate AS DATE) DESC)  
 		FROM [dbo].[UserTripDates] WITH(NOLOCK)
 		WHERE UserTripId = @UserTripId
@@ -285,7 +312,7 @@ BEGIN
 			
 			SET @TripDate = (SELECT TripDate FROM @DayBreakData WHERE RowNumber = @DayCount) 
 
-			IF EXISTS (SELECT 1 FROM @DayBreakData WHERE RowNumber = @DayCount AND ISNULL(IsUserInterestedLunchBreak,0) = 1 AND ISNULL(LunchBreakAttractionId,0) = 0)
+			IF EXISTS (SELECT 1 FROM @DayBreakData WHERE RowNumber = @DayCount AND ISNULL(IsUserInterestedLunchBreak,0) = 1 AND ISNULL(IsLunchAdded,0) = 0)
 			BEGIN
 				--Missing Day Lunch selected
 				INSERT INTO [dbo].[UserTripBuildStatus]
@@ -305,7 +332,7 @@ BEGIN
 					UserTripBuildMessageId = 2
 			END
 
-			IF EXISTS (SELECT 1 FROM @DayBreakData WHERE RowNumber = @DayCount AND ISNULL(IsUserInterestedDinnerBreak,0) = 1 AND ISNULL(DinnerAttractionId,0) = 0)
+			IF EXISTS (SELECT 1 FROM @DayBreakData WHERE RowNumber = @DayCount AND ISNULL(IsUserInterestedDinnerBreak,0) = 1 AND ISNULL(IsDinnerAdded,0) = 0)
 			BEGIN
 				--Missing Day Lunch selected
 				INSERT INTO [dbo].[UserTripBuildStatus]
@@ -325,7 +352,7 @@ BEGIN
 					UserTripBuildMessageId = 3
 			END
 
-			IF EXISTS (SELECT 1 FROM @DayBreakData WHERE RowNumber = @DayCount AND ISNULL(IsUserInterestedDayBreak,0) = 1 AND ISNULL(DayBreakAttractionId,0) = 0)
+			IF EXISTS (SELECT 1 FROM @DayBreakData WHERE RowNumber = @DayCount AND ISNULL(IsUserInterestedDayBreak,0) = 1 AND ISNULL(IsBreakAdded,0) = 0)
 			BEGIN
 				--Missing Day Lunch selected
 				INSERT INTO [dbo].[UserTripBuildStatus]

@@ -47,6 +47,8 @@ BEGIN
       ,[DestinationLongitude]
       ,[DestinationLatitude]
       ,[CreatedDate]
+	  ,SourcePhotoUrl
+	  ,DestinationPhotoUrl
   FROM [dbo].[UserTripAttractionOrderVisit]
   WHERE UserTripId = @UserTripId
 END

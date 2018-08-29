@@ -124,6 +124,7 @@
     <None Include="Properties\DataSources\BusinessEntites.Admin.MasterWeekDTO1.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.BreakInformation.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Common.AttractionsDTO.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Common.AttractionsDTO1.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime.datasource" />
@@ -256,6 +257,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\GetListValues\GetListValues5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GetListValues\GetListValues6.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UsersService\UsersService.wsdl" />

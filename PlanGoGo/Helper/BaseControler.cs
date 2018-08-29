@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Users;
+using CommonFunctions;
 using Newtonsoft.Json;
 using System;
 using System.Web;
@@ -10,7 +11,7 @@ namespace PlanGoGo.Helper
     public class BaseControler: Controller
     {
         private string _cookieName = "planGoGo";
-
+        public readonly JsonReturn jsonReturn = new JsonReturn();
         public static UserEntity userEntity { get; set; }
         public void CreateCookie()
         {

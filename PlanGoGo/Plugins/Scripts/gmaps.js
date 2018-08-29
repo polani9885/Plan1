@@ -1873,7 +1873,7 @@
         var parameters = [],
             data,
             static_root = (location.protocol === 'file:' ? 'http:' : location.protocol) + '//maps.googleapis.com/maps/api/staticmap';
-
+        
         if (options.url) {
             static_root = options.url;
             delete options.url;

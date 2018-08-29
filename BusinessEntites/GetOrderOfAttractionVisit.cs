@@ -87,6 +87,10 @@ namespace BusinessEntites
 
         public string DestinationLatitude { get; set; }
 
+        public string SourcePhotoUrl { get; set; }
+
+        public string DestinationPhotoUrl { get; set; }
+
         //public List<userTable_Category> userTable_Category { get; set; }
     }
 }

@@ -21,16 +21,9 @@ namespace PlanGoGoAdmin.Controllers
         public JsonResult AttractionTravelTimeDistanceGet(int attractionId)
         {
             List<AttractionTravelTimeDistanceDTO> getResult = _IAttractionTravelTimeDistance.Admin_AttractionTravelTimeDistanceGet(attractionId);
-            if (getResult.Count() > 0)
-            {
-                var jsonResults = Json(getResult, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<AttractionTravelTimeDistanceDTO>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return base.jsonReturn.JsonResult<AttractionTravelTimeDistanceDTO>(getResult);
+            
         }
 
         public ActionResult ManageAttractionTravelTimeDistance()

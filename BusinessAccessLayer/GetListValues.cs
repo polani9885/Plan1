@@ -67,11 +67,11 @@ namespace BusinessAccessLayer
             }
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList, int mainCategorySelected)
         {
             try
             {
-                return _dataAccess.Public_FilterAttractions(countryId, cityVisitList);
+                return _dataAccess.Public_FilterAttractions(countryId, cityVisitList,mainCategorySelected);
             }
             catch (Exception ex)
             {
@@ -126,6 +126,18 @@ namespace BusinessAccessLayer
             try
             {
                 return _dataAccess.public_AttractionsPhotoInfo(countryId,attractionId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<BreakInformation> GetBreakInformation()
+        {
+            try
+            {
+                return _dataAccess.GetBreakInformation();
             }
             catch (Exception ex)
             {

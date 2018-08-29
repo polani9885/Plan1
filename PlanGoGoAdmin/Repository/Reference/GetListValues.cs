@@ -30,7 +30,7 @@ namespace PlanGoGoAdmin.Repository.Reference
             throw new NotImplementedException();
         }
 
-        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList)
+        public List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList, int mainCategorySelected)
         {
             throw new NotImplementedException();
         }
@@ -68,6 +68,11 @@ namespace PlanGoGoAdmin.Repository.Reference
         }
 
         public List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BreakInformation> GetBreakInformation()
         {
             throw new NotImplementedException();
         }

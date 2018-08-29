@@ -18,7 +18,8 @@ namespace Interfaces
 
         List<Public_GetMasterCategory> Public_GetMasterCategory();
 
-        List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList);
+        List<public_FilterAttractions> Public_FilterAttractions(int countryId, List<CityVisitList> cityVisitList,
+            int mainCategorySelected);
 
         List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
             int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
@@ -29,5 +30,7 @@ namespace Interfaces
 
         List<GoogleTypes> Scheduler_GetExtraCategoryList();
         List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId);
+
+        List<BreakInformation> GetBreakInformation();
     }
 }

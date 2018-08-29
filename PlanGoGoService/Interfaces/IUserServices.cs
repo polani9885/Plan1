@@ -70,7 +70,7 @@ namespace PlanGoGoService.Interfaces
         List<UserTripBuildStatus> User_UserTripBuildStatus(int userTripId);
 
         [OperationContract]
-        List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId);
+        List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate);
 
 
 

@@ -397,6 +397,10 @@
     <Content Include="Images\User\UI\Correct.png" />
     <Content Include="Images\User\UI\DifferentIcons.jpg" />
     <Content Include="Images\User\UI\Wrong.png" />
+    <Content Include="Plugins\gallerybox\gallerybox.css" />
+    <Content Include="Plugins\gallerybox\jquery.gallerybox.js" />
+    <Content Include="Plugins\prettyPhoto\jquery.prettyPhoto.js" />
+    <Content Include="Plugins\prettyPhoto\prettyPhoto.css" />
     <Content Include="Plugins\Scripts\gmaps.js" />
     <Content Include="Properties\DataSources\BusinessEntites.Public_GetCategory.datasource" />
     <Content Include="Properties\DataSources\BusinessEntites.public_GetCityList.datasource" />

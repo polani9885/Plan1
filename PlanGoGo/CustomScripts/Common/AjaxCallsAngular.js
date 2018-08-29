@@ -12,19 +12,7 @@ function GetCategoryList(angularScope, http) {
             angularScope.$apply(function () {                
                 $(".ngCategorytable").show();
                 angularScope.CategoryList = data;
-                angularScope.ClickMainCategorySelected(angularScope.MainCategorySelected);
             });
-
-            //inserting the categoryid into the global varaible
-            //$.each(data, function (categoryKey, categoryValue) {
-            //    item = [];
-            //    item.CategoryID = categoryValue["CategoryId"];
-            //    item.CategoryName = categoryValue.CategoryName;
-            //    selectedCategoryList.push(item);
-            //});
-
-            //It will get the all the attractions information
-            PublicFilterAttractions(angularScope, http);
             
         },
         error: function (result) {
@@ -118,15 +106,18 @@ function PublicFilterAttractions(angularScope, http) {
     }
     if (!isCityFount && cityId > 0) {
         var subListValue = {};
-        subListValue.RecordIndex = (angularScope.VisitCityList.length == null ? 0 : angularScope.VisitCityList.length) +
+        subListValue.RecordIndex = (angularScope.VisitCityList.length === null ? 0 : angularScope.VisitCityList.length) +
             1;
         subListValue.CityId = cityId;
         cityVisitList.push(subListValue);
-    } 
-    
+    }
 
 
-    var jsonObject = { "countryId": countryId, "cityVisitList": cityVisitList };
+    var jsonObject = {
+        "countryId": countryId,
+        "cityVisitList": cityVisitList,
+        "MainCategorySelected": angularScope.MainCategorySelected
+    };
 
     
    
@@ -218,6 +209,18 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
             temp.IsUserInterestedDinnerBreak = value.IsUserInterestedDinnerBreak;
             temp.UpdatedDinnerTime = convertTo24Hour(value.UpdatedDinnerTime);
             temp.UpdateDinnerMinimumTime = convertTo24Hour(value.UpdateDinnerMinimumTime);
+            temp.IsBreakAdded = value.IsBreakAdded;
+            temp.BreakAttractionId = value.BreakAttractionId;
+            temp.IsLunchAdded = value.IsLunchAdded;
+            temp.LunchAttractionId = value.LunchAttractionId;
+            temp.IsDinnerAdded = value.IsDinnerAdded;
+            temp.DinnerAttractionId = value.DinnerAttractionId;
+            temp.IsUserInterestedBreakFast = value.IsUserInterestedBreakFast;
+            temp.UpdatedBreakFastTime = convertTo24Hour(value.UpdatedBreakFastTime);
+            temp.UpdatedBreakFastMinimumTime = convertTo24Hour(value.UpdatedBreakFastMinimumTime);
+            temp.IsBreakFastAdded = value.IsBreakFastAdded;
+            temp.BreakFastAttractionId = value.BreakFastAttractionId;
+
             updatedBreaks.push(temp);
         });
 
@@ -336,7 +339,7 @@ function GetExtraCategoryList(angularScope, http) {
 }
 
 
-function AttractionsPhotoInfo(angularScope, http, attractionId) {
+function AttractionsPhotoInfo(angularScope, http, attractionId, attractionName) {
 
     $.ajax({
         type: "GET",
@@ -346,10 +349,59 @@ function AttractionsPhotoInfo(angularScope, http, attractionId) {
         beforeSend: function () {
 
         },
+        aync:false,
         success: function (data) {
             
             angularScope.$apply(function () {
-                angularScope.PhotoInfo(attractionId, data);
+                angularScope.PhotoInfo(attractionId, data, attractionName);
+            });
+        },
+        error: function (result) {
+            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function GetBreakInformation(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: '/Schedule/GetBreakInformation',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        aync: false,
+        success: function (data) {
+            
+            
+            angularScope.$apply(function () {
+                angularScope.UpdateDayEndTime = convertTo12Hour("22:00:00");
+                angularScope.UpdateDayStartTime = convertTo12Hour("09:00:00");
+
+                $.each(data,
+                    function (key, value) {
+                        
+                        if (value.Display === "Break Fast") {
+                            angularScope.UpdatedBreakFastTime = convertTo12Hour(value.StartTime);
+                            angularScope.UpdatedBreakFastMinimumTime = convertTo12Hour(value.MinimumTime);
+                        }
+                        if (value.Display === "Lunch Time") {
+                            angularScope.UpdatedLunchTime = convertTo12Hour(value.StartTime);
+                            angularScope.UpdatedLunchMinimumTime = convertTo12Hour(value.MinimumTime);
+                        }
+                        if (value.Display === "Break Time") {
+                            angularScope.UpdatedBreakTime = convertTo12Hour(value.StartTime);
+                            angularScope.UpdatedBreakMinimumTime = convertTo12Hour(value.MinimumTime);
+                        }
+                        if (value.Display === "Dinner Time") {
+                            angularScope.UpdatedDinnerTime = convertTo12Hour(value.StartTime);
+                            angularScope.UpdateDinnerMinimumTime = convertTo12Hour(value.MinimumTime);
+                        }
+                    });
             });
         },
         error: function (result) {

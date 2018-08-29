@@ -28,6 +28,7 @@
 	[IsGoogleSearchTextDone] [bit] NULL,
  [Utc_offset] INT NULL, 
     [IsNearRestarentDone] INT NULL, 
+    [PhotoUrl] VARCHAR(1000) NULL, 
     CONSTRAINT [PK_Attractions] PRIMARY KEY CLUSTERED 
 (
 	[AttractionsId] ASC

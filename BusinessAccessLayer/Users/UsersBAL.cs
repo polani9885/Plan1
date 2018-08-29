@@ -108,9 +108,9 @@ namespace BusinessAccessLayer.Users
         }
 
         public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId,
-            int countryId)
+            int countryId, List<Coordinate> coodinate)
         {
-            return _dataAccessUsers.User_GetNearestRestaruents(attractionsId, travelModeId, countryId);
+            return _dataAccessUsers.User_GetNearestRestaruents(attractionsId, travelModeId, countryId,coodinate);
         }
     }
 }

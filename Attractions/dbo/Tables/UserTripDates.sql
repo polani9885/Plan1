@@ -1,5 +1,4 @@
-﻿
-CREATE TABLE [dbo].[UserTripDates](
+﻿CREATE TABLE [dbo].[UserTripDates](
 	[UserTripDatesId] [int] IDENTITY(1,1) NOT NULL,
 	[UserTripId] [int] NULL,
 	[TripDate] [date] NULL,
@@ -17,10 +16,19 @@ CREATE TABLE [dbo].[UserTripDates](
 	[IsUserInterestedDinnerBreak] [bit] NULL,
 	[UpdatedDinnerTime] [time](7) NULL,
 	[UpdateDinnerMinimumTime] [time](7) NULL,
-	[DayBreakAttractionId] [bigint] NULL,
-	[LunchBreakAttractionId] [bigint] NULL,
+	[IsBreakAdded] [bit] NULL,
 	[BreakAttractionId] [bigint] NULL,
+	[IsLunchAdded] [bit] NULL,
+	[LunchAttractionId] [bigint] NULL,
+	[IsDinnerAdded] [bit] NULL,
 	[DinnerAttractionId] [bigint] NULL,
+	[IsUserInterestedBreakFast] [bit] NULL,
+	[UpdatedBreakFastTime] [time](7) NULL,
+	[UpdatedBreakFastMinimumTime] [time](7) NULL,
+	[IsBreakFastAdded] [bit] NULL,
+	[BreakFastAttractionId] [bigint] NULL,
+	[IsDayBreakAdded] [bit] NULL,
+	[DayBreakAttractionId] [bigint] NULL,
  CONSTRAINT [PK_UserTripDates] PRIMARY KEY CLUSTERED 
 (
 	[UserTripDatesId] ASC
@@ -35,4 +43,3 @@ GO
 
 ALTER TABLE [dbo].[UserTripDates] CHECK CONSTRAINT [FK_UserTripDates_UserTrip]
 GO
-

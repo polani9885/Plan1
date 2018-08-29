@@ -20,6 +20,8 @@ namespace PlanGoGo.Controllers
 
         private IUser _iUser;
 
+        
+
         public ScheduleController(IGetListValues GetListValues,IUser iUser)
         {
             _IGetListValues = GetListValues;
@@ -53,16 +55,9 @@ namespace PlanGoGo.Controllers
         public JsonResult GetCityList()
         {
             List<public_GetCityList> getCityList = _IGetListValues.Public_GetCityList();
-            if (getCityList.Count() > 0)
-            {
-                var jsonResults = Json(getCityList, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<public_GetCityList>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return jsonReturn.JsonResult<public_GetCityList>(getCityList);
+            
         }        
 
         /// <summary>
@@ -74,16 +69,9 @@ namespace PlanGoGo.Controllers
         public JsonResult GetCategoryList()
         {
             List<Public_GetCategory> getCategroyList = _IGetListValues.Public_GetCategory();
-            if (getCategroyList.Count() > 0)
-            {
-                var jsonResults = Json(getCategroyList, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<Public_GetCategory>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return jsonReturn.JsonResult<Public_GetCategory>(getCategroyList);
+            
         }
 
 
@@ -92,16 +80,9 @@ namespace PlanGoGo.Controllers
         public JsonResult GetMasterCategory()
         {
             List<Public_GetMasterCategory> getMasterCategory = _IGetListValues.Public_GetMasterCategory();
-            if (getMasterCategory.Count() > 0)
-            {
-                var jsonResults = Json(getMasterCategory, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<Public_GetCategory>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return jsonReturn.JsonResult<Public_GetMasterCategory>(getMasterCategory);
+            
         }
 
         /// <summary>
@@ -121,21 +102,14 @@ namespace PlanGoGo.Controllers
             if (parameters.cityVisitList != null)
             {
                 _public_FilterAttractions =
-                    _IGetListValues.Public_FilterAttractions(parameters.countryId, parameters.cityVisitList);
+                    _IGetListValues.Public_FilterAttractions(parameters.countryId, parameters.cityVisitList,parameters.MainCategorySelected);
                 _iUser.User_InsertUpdateTripCities(userEntity.UserTripId, parameters.countryId,
                     parameters.cityVisitList);
             }
 
-            if (_public_FilterAttractions.Count() > 0)
-            {
-                var jsonResults = Json(_public_FilterAttractions, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<public_FilterAttractions>(), JsonRequestBehavior.AllowGet);
-            }
+            return jsonReturn.JsonResult<public_FilterAttractions>(_public_FilterAttractions);
+
+            
         }
 
 
@@ -189,7 +163,21 @@ namespace PlanGoGo.Controllers
                     UpdatedBreakTime = TimeSpan.Parse(x.UpdatedBreakTime),
                     UpdateDayEndTime = TimeSpan.Parse(x.UpdateDayEndTime),
                     IsUserInterestedDinnerBreak = x.IsUserInterestedDinnerBreak,
-                    RequestDate = Convert.ToDateTime(x.RequestDate)
+                    RequestDate = Convert.ToDateTime(x.RequestDate),
+                    IsBreakAdded =  x.IsBreakAdded,
+                    BreakAttractionId = x.BreakAttractionId,
+                    IsLunchAdded = x.IsLunchAdded,
+                    LunchAttractionId = x.LunchAttractionId,
+                    IsDinnerAdded = x.IsDinnerAdded,
+                    DinnerAttractionId = x.DinnerAttractionId,
+                    IsUserInterestedBreakFast = x.IsUserInterestedBreakFast,
+                    UpdatedBreakFastTime = TimeSpan.Parse(x.UpdatedBreakFastTime),
+                    UpdatedBreakFastMinimumTime = TimeSpan.Parse(x.UpdatedBreakFastMinimumTime),
+                    IsBreakFastAdded = x.IsBreakFastAdded,
+                    BreakFastAttractionId = x.BreakFastAttractionId,
+                    IsDayBreakAdded = x.IsDayBreakAdded,
+                    DayBreakAttractionId =  x.DayBreakAttractionId
+                    
                 }).ToList();
                 
 
@@ -212,17 +200,9 @@ namespace PlanGoGo.Controllers
 
             }
 
+            return jsonReturn.JsonResult<GroupWithDateAttractions>(listGroupWithDateAttractions);
 
-            if (listGroupWithDateAttractions.Any())
-            {
-                var jsonResults = Json(listGroupWithDateAttractions, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<GroupWithDateAttractions>(), JsonRequestBehavior.AllowGet);
-            }
+            
         }
 
 
@@ -231,16 +211,9 @@ namespace PlanGoGo.Controllers
         public JsonResult GetExtraCategoryList()
         {
             List<GoogleTypes> result = _IGetListValues.Scheduler_GetExtraCategoryList();
-            if (result.Count() > 0)
-            {
-                var jsonResults = Json(result, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<Public_GetCategory>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return jsonReturn.JsonResult<GoogleTypes>(result);
+            
         }
 
 
@@ -249,16 +222,18 @@ namespace PlanGoGo.Controllers
         public JsonResult AttractionsPhotoInfo(int attractionId, int countryId)
         {
             List<AttractionPhotoReference> result = _IGetListValues.public_AttractionsPhotoInfo(countryId, attractionId);
-            if (result.Count() > 0)
-            {
-                var jsonResults = Json(result, JsonRequestBehavior.AllowGet);
-                jsonResults.MaxJsonLength = int.MaxValue;
-                return jsonResults;
-            }
-            else
-            {
-                return Json(new List<AttractionPhotoReference>(), JsonRequestBehavior.AllowGet);
-            }
+
+            return jsonReturn.JsonResult<AttractionPhotoReference>(result);
+            
+        }
+
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0)]
+        public JsonResult GetBreakInformation()
+        {
+            List<BreakInformation> result = _IGetListValues.GetBreakInformation();
+
+            return jsonReturn.JsonResult<BreakInformation>(result);
         }
 
     }

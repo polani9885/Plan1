@@ -6,8 +6,9 @@
       <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
       <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" />
-      <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" />
-      <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Scheduler" />
+      <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" />
+      <xsd:import schemaLocation="http://localhost:23457/GetListValues.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Scheduler" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGetListValues_Public_GetCityList_InputMessage">
@@ -58,6 +59,12 @@
   <wsdl:message name="IGetListValues_public_AttractionsPhotoInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:public_AttractionsPhotoInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IGetListValues_GetBreakInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBreakInformation" />
+  </wsdl:message>
+  <wsdl:message name="IGetListValues_GetBreakInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBreakInformationResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGetListValues">
     <wsdl:operation name="Public_GetCityList">
       <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/Public_GetCityList" message="tns:IGetListValues_Public_GetCityList_InputMessage" />
@@ -90,6 +97,10 @@
     <wsdl:operation name="public_AttractionsPhotoInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/public_AttractionsPhotoInfo" message="tns:IGetListValues_public_AttractionsPhotoInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/public_AttractionsPhotoInfoResponse" message="tns:IGetListValues_public_AttractionsPhotoInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBreakInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetListValues/GetBreakInformation" message="tns:IGetListValues_GetBreakInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetListValues/GetBreakInformationResponse" message="tns:IGetListValues_GetBreakInformation_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGetListValues" type="tns:IGetListValues">
@@ -159,6 +170,15 @@
     </wsdl:operation>
     <wsdl:operation name="public_AttractionsPhotoInfo">
       <soap:operation soapAction="http://tempuri.org/IGetListValues/public_AttractionsPhotoInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBreakInformation">
+      <soap:operation soapAction="http://tempuri.org/IGetListValues/GetBreakInformation" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,4 +1,5 @@
-﻿using PlanGoGoAdmin.Helper.Principal;
+﻿using CommonFunctions;
+using PlanGoGoAdmin.Helper.Principal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace PlanGoGoAdmin.Helper
 {
     public class BaseController : Controller
     {
+        public readonly JsonReturn jsonReturn = new JsonReturn();
         public CustomPrincipal CurrentUser
         {
             get { return (HttpContext.Application["LoggedInformation"] as CustomPrincipal); }
