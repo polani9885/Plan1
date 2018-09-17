@@ -248,4 +248,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="User_UserTrip_Update">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTourInformation" nillable="true" type="q20:UserTourInformation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_UserTrip_UpdateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

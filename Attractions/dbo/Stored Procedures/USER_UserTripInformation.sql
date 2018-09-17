@@ -119,6 +119,36 @@ BEGIN
 		  ,UTD.BreakFastAttractionId = UBT.BreakFastAttractionId
 		  ,UTD.IsDayBreakAdded = UBT.IsDayBreakAdded
 		  ,UTD.DayBreakAttractionId = UBT.DayBreakAttractionId
+			,UTD.NoOfCars           = UBT.NoOfCars
+			,UTD.AverageMileage		= UBT.AverageMileage
+			,UTD.NoOfRooms			= UBT.NoOfRooms
+			,UTD.BreakFastExpense	= CASE WHEN UBT.IsBreakFastAdded = 1 AND  UBT.BreakFastAttractionId > 0 AND ISNULL(UBT.IsBreakFastExpenseUserUpdated,0) = 0  THEN 
+										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.BreakFastAttractionId) 
+										ELSE UBT.BreakFastExpense END 
+			,UTD.LunchExpense		= CASE WHEN UBT.IsLunchAdded = 1 AND  UBT.LunchAttractionId > 0  AND ISNULL(UBT.IsLunchExpenseUserUpdated,0) = 0 THEN 
+										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.LunchAttractionId) 
+										ELSE UBT.LunchExpense END
+			,UTD.BreakExpense		= CASE WHEN UBT.IsBreakAdded = 1 AND  UBT.BreakAttractionId > 0   AND ISNULL(UBT.IsBreakExpenseUserUpdated,0) = 0 THEN 
+										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.BreakAttractionId) 
+										ELSE UBT.BreakExpense END 
+			,UTD.DayBreakExpense	= CASE WHEN UBT.IsDayBreakAdded = 1 AND  UBT.DayBreakAttractionId > 0 AND ISNULL(UBT.IsDayBreakExpenseUserUpdated,0) = 0 THEN 
+										(SELECT StayExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.DayBreakAttractionId) 
+										ELSE UBT.DayBreakExpense END 
+			,UTD.DinnerExpense		= CASE WHEN UBT.IsDinnerAdded = 1 AND  UBT.DinnerAttractionId > 0  AND ISNULL(UBT.IsDinnerExpenseUserUpdated,0) = 0 THEN 
+										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.DinnerAttractionId) 
+										ELSE UBT.DinnerExpense END
+			,UTD.CarRentalExpense	= UBT.CarRentalExpense
+			,UTD.NoOfAttractions	= (SELECT COUNT(*) FROM @AttractionOrder WHERE CAST(DateAndTime AS DATE) = CAST(UBT.RequestDate As DATE) AND ISNULL(IsLunchDinnerBreakTime,0) = 0)
+			,UTD.Distance		= (SELECT SUM(CAST(ISNULL(RTRIM(REPLACE(Distance,'Miles','')),0) AS DECIMAL(18,2))) FROM @AttractionOrder WHERE CAST(DateAndTime AS DATE) = CAST(UBT.RequestDate As DATE)) 
+			,UTD.IsNoOfCarsUserUpdated  = UBT.IsNoOfCarsUserUpdated
+			,UTD.IsAverageMileageUserUpdated = UBT.IsAverageMileageUserUpdated
+			,UTD.IsCarRentalExpenseUserUpdated = UBT.IsCarRentalExpenseUserUpdated
+			,UTD.IsBreakFastExpenseUserUpdated = UBT.IsBreakFastExpenseUserUpdated
+			,UTD.IsLunchExpenseUserUpdated = UBT.IsLunchExpenseUserUpdated
+			,UTD.IsBreakExpenseUserUpdated = UBT.IsBreakExpenseUserUpdated
+			,UTD.IsDinnerExpenseUserUpdated = UBT.IsDinnerExpenseUserUpdated
+			,UTD.IsDayBreakExpenseUserUpdated = UBT.IsDayBreakExpenseUserUpdated
+			,UTD.IsNoOfRoomsUserUpdated = UBT.IsNoOfRoomsUserUpdated
 	FROM [dbo].[UserTripDates] UTD	
 	JOIN @UserBreakTime UBT ON CAST(UBT.RequestDate As DATE) = CAST(UTD.TripDate AS DATE)
 	 WHERE UTD.[UserTripId] = @UserTripId
@@ -171,7 +201,9 @@ BEGIN
            ,[DestinationLatitude]
            ,[CreatedDate]
 		   ,SourcePhotoUrl
-		   ,DestinationPhotoUrl)
+		   ,DestinationPhotoUrl
+		   ,BreakInformationId
+		  )
 	SELECT @UserTripId
 		  ,[SourceAttractionId]
 		  ,[DestinationAttractionId]
@@ -216,6 +248,7 @@ BEGIN
 		  ,GETDATE()
 		  ,SourcePhotoUrl
 		  ,DestinationPhotoUrl
+		  ,BreakInformationId		  
 	  FROM @AttractionOrder
 
 

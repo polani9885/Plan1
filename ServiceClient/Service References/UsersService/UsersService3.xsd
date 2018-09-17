@@ -73,6 +73,7 @@
   <xs:element name="ArrayOfGetOrderOfAttractionVisit" nillable="true" type="tns:ArrayOfGetOrderOfAttractionVisit" />
   <xs:complexType name="GetOrderOfAttractionVisit">
     <xs:sequence>
+      <xs:element minOccurs="0" name="BreakInformationId" type="xs:int" />
       <xs:element minOccurs="0" name="DateAndTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
       <xs:element minOccurs="0" name="DestinationAttractionName" nillable="true" type="xs:string" />
@@ -89,6 +90,7 @@
       <xs:element minOccurs="0" name="DestinationSearchText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Distance" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EventEndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FoodExpense" type="xs:decimal" />
       <xs:element minOccurs="0" name="IsDistanceCalculationMissing" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsLunchDinnerBreakTime" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsOrderUpdated" type="xs:boolean" />
@@ -109,6 +111,7 @@
       <xs:element minOccurs="0" name="SourceRating" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SourceRatingTotal" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SourceSearchText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StayExpense" type="xs:decimal" />
       <xs:element minOccurs="0" name="TimeRequiredToView" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
       <xs:element minOccurs="0" name="TravelTime" nillable="true" type="xs:string" />

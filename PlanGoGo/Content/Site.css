@@ -824,3 +824,38 @@ tr.pager td {
     width: 200px;
     height: 200px;
 }
+
+/**************Expense Info******************/
+.paddingLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.border {
+    border: 1px black solid;
+    padding: 10px;
+}
+
+.txtBoxSize {
+    width: 100px;
+}
+
+.infoMessage {
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+}
+.dateFormat {
+    color: white;
+    background-color: green;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+
+.expenseMainInfo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/**************End Expense Info*************/

@@ -113,6 +113,11 @@ namespace PlanGoGoService.Schedulers
             return _businessUserBAL.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate);
         }
 
+        public void User_UserTrip_Update(UserTourInformation userTourInformation)
+        {
+            _businessUserBAL.User_UserTrip_Update(userTourInformation);
+        }
+
 
 
     }

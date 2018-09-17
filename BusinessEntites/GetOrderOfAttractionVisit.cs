@@ -91,6 +91,12 @@ namespace BusinessEntites
 
         public string DestinationPhotoUrl { get; set; }
 
+        public int BreakInformationId { get; set; }
+
+        public decimal FoodExpense { get; set; }
+
+        public decimal StayExpense { get; set; }
+
         //public List<userTable_Category> userTable_Category { get; set; }
     }
 }

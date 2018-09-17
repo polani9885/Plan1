@@ -17,7 +17,7 @@
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -26,6 +26,7 @@
     <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
     <GenerateCreateScript>True</GenerateCreateScript>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -160,6 +161,7 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetExtraCategoryList.sql" />
     <Build Include="dbo\Tables\BreakInformation.sql" />
     <Build Include="dbo\Stored Procedures\Common_GetBreakInformation.sql" />
+    <Build Include="dbo\Stored Procedures\User_UserTrip_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
@@ -180,6 +182,7 @@
     <Build Include="dbo\User Defined Types\UserTable_GetOrderOfAttractionVisit.sql" />
     <None Include="dbo\Seeds\UserTripBuildMessage.sql" />
     <None Include="dbo\Seeds\BreakInformation.sql" />
+    <None Include="dbo\Seeds\MasterPriceInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Attractions.refactorlog" />

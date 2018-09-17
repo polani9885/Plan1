@@ -23,6 +23,25 @@
 	[UpdatedBreakFastMinimumTime] [time](7) NULL,
 	[IsBreakFastAdded] [bit] NULL,
 	[BreakFastAttractionId] [int] NULL,
-	IsDayBreakAdded bit,
-	DayBreakAttractionId int
+	[IsDayBreakAdded] [bit] NULL,
+	[DayBreakAttractionId] [int] NULL,
+	[NoOfCars] [int] NULL,
+	[AverageMileage] [int] NULL,
+	[NoOfRooms] [int] NULL,
+	[BreakFastExpense] [decimal](18, 2) NULL,
+	[LunchExpense] [decimal](18, 2) NULL,
+	[BreakExpense] [decimal](18, 2) NULL,
+	[DayBreakExpense] [decimal](18, 2) NULL,
+	[DinnerExpense] [decimal](18, 2) NULL,
+	[CarRentalExpense] [decimal](18, 2) NULL,
+	IsNoOfCarsUserUpdated  BIT,
+	IsAverageMileageUserUpdated BIT,
+	IsCarRentalExpenseUserUpdated BIT,
+	IsBreakFastExpenseUserUpdated BIT,
+	IsLunchExpenseUserUpdated BIT,
+	IsBreakExpenseUserUpdated BIT,
+	IsDinnerExpenseUserUpdated BIT,
+	IsDayBreakExpenseUserUpdated BIT,
+	IsNoOfRoomsUserUpdated BIT
 )
+GO

@@ -238,6 +238,18 @@ namespace ServiceClient.Services
             }
         }
 
+        public void User_UserTrip_Update(UserTourInformation userTourInformation)
+        {
+            try
+            {
+                _userService.User_UserTrip_Update(userTourInformation);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
 
 
 

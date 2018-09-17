@@ -9,27 +9,45 @@
   <xs:element name="ArrayOfUserTable_UpdatedBreaks" nillable="true" type="tns:ArrayOfUserTable_UpdatedBreaks" />
   <xs:complexType name="UserTable_UpdatedBreaks">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AverageMileage" type="xs:int" />
       <xs:element minOccurs="0" name="BreakAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="BreakExpense" type="xs:decimal" />
       <xs:element minOccurs="0" name="BreakFastAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="BreakFastExpense" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CarRentalExpense" type="xs:decimal" />
       <xs:element minOccurs="0" name="DayBreakAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="DayBreakExpense" type="xs:decimal" />
       <xs:element minOccurs="0" name="DinnerAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="DinnerExpense" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IsAverageMileageUserUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsBreakAdded" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsBreakExpenseUserUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsBreakFastAdded" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsBreakFastExpenseUserUpdated" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsCarRentalExpenseUserUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsDayBreakAdded" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDayBreakExpenseUserUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsDinnerAdded" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDinnerExpenseUserUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsLunchAdded" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsLunchExpenseUserUpdated" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsNoOfCarsUserUpdated" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsNoOfRoomsUserUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUserInterestedBreak" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUserInterestedBreakFast" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUserInterestedDayBreak" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUserInterestedDinnerBreak" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUserInterestedLunchBreak" type="xs:boolean" />
       <xs:element minOccurs="0" name="LunchAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="LunchExpense" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NoOfCars" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfRooms" type="xs:int" />
       <xs:element minOccurs="0" name="RequestDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="UpdateDayEndTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdateDayStartTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdateDinnerMinimumTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedBreakFastMinimumTime" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UpdatedBreakFastTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedBreakFastMinimumTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="UpdatedBreakFastTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedBreakMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedBreakTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedDinnerTime" type="ser:duration" />

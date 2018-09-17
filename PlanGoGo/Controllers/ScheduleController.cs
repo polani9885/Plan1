@@ -176,8 +176,25 @@ namespace PlanGoGo.Controllers
                     IsBreakFastAdded = x.IsBreakFastAdded,
                     BreakFastAttractionId = x.BreakFastAttractionId,
                     IsDayBreakAdded = x.IsDayBreakAdded,
-                    DayBreakAttractionId =  x.DayBreakAttractionId
-                    
+                    DayBreakAttractionId =  x.DayBreakAttractionId,
+                    NoOfCars  = x.NoOfCars,
+                    AverageMileage = x.AverageMileage,
+                    BreakExpense = x.BreakExpense,
+                    BreakFastExpense = x.BreakFastExpense,
+                    CarRentalExpense = x.CarRentalExpense,
+                    DayBreakExpense = x.DayBreakExpense,
+                    LunchExpense = x.LunchExpense,
+                    NoOfRooms = x.NoOfRooms,
+                    DinnerExpense = x.DinnerExpense,
+                    IsNoOfCarsUserUpdated = x.IsNoOfCarsUserUpdated,
+                    IsAverageMileageUserUpdated = x.IsAverageMileageUserUpdated,
+                    IsCarRentalExpenseUserUpdated = x.IsCarRentalExpenseUserUpdated,
+                    IsBreakFastExpenseUserUpdated = x.IsBreakFastExpenseUserUpdated,
+                    IsLunchExpenseUserUpdated = x.IsLunchExpenseUserUpdated,
+                    IsBreakExpenseUserUpdated = x.IsBreakExpenseUserUpdated,
+                    IsDinnerExpenseUserUpdated = x.IsDinnerExpenseUserUpdated,
+                    IsDayBreakExpenseUserUpdated = x.IsDayBreakExpenseUserUpdated,
+                    IsNoOfRoomsUserUpdated = x.IsNoOfRoomsUserUpdated
                 }).ToList();
                 
 

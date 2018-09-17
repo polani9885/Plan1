@@ -29,5 +29,13 @@ namespace BusinessEntites.Users
         public int SourceAttractionId { get; set; }
 
         public int DestinationAttractionId { get; set; }
+
+        public int NoOfPersons { get; set; }
+
+        public int NoOfCars { get; set; }
+
+        public decimal CarMileage { get; set; }
+
+        public decimal FuelPrice { get; set; }
     }
 }

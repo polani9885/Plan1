@@ -35,6 +35,7 @@ BEGIN
 	DECLARE @IsDayUpdated AS BIT  = 1
 	DECLARE @RecordOrder AS INT = 1
 	DECLARE @IsSequenceRecordDone AS BIT = 0
+	DECLARE @ResDestinationAttractionId AS INt = 0
 
 
 	
@@ -55,7 +56,7 @@ BEGIN
 
 	DECLARE @OrderOfAttactionInfomrationTemp AS user_OrderOfAttractionVisit	
 	
-	DECLARE @AverageMinimumTime AS TIME = '02:00:00.0000000'
+	
 		
 	DECLARE @AttractionInfomation AS TABLE(AttractionId INT, RowNumber INT)
 
@@ -74,113 +75,129 @@ BEGIN
 
 	
 
+	
+
 	WHILE @Counter <= @LoopCounter
 	BEGIN
-		SET @IsSequenceRecordDone = 0			
+		
+		SET @IsSequenceRecordDone = 0	
 
+
+		SELECT @RecordOrder = MAX(ISNULL(RecordCount,0)) + 1 FROM @OrderOfAttactionInfomration
+		
+		SET @RecordOrder = ISNULL(@RecordOrder,1)  	
+		
+		
+		SELECT TOP 1 @GetStartingTimeEvent = EventEndTime				
+		FROM @OrderOfAttactionInfomration
+		ORDER BY RecordCount DESC
+			
+		
 		-----------------------------------------------------------------------------------------------------------------------------
-		--Start Break Time Logic
-
-		DELETE FROM @OrderOfAttactionInfomrationTemp
+		--Start Break Time Logic		
+			
+			DELETE FROM @OrderOfAttactionInfomrationTemp
 		
-		INSERt INTO @OrderOfAttactionInfomrationTemp		
-		SELECT * FROM @OrderOfAttactionInfomration
+			INSERt INTO @OrderOfAttactionInfomrationTemp		
+			SELECT * FROM @OrderOfAttactionInfomration
 		
-		DELETE FROM @OrderOfAttactionInfomration
+			DELETE FROM @OrderOfAttactionInfomration		
 
+			INSERT INTO @OrderOfAttactionInfomration
+			(
+				RecordCount,
+				[SourceAttractionId],
+				[DestinationAttractionId],
+				[Distance],
+				[TravelTime],
+				[TravelModeId],
+				[SourceAttractionName],
+				[DestinationAttractionName],
+				[DateAndtime],
+				[ReachTime],
+				[TimeRequiredToView],
+				[EventEndTime],
+				[IsLunchDinnerBreakTime],
+				[IsDistanceCalculationMissing],
+				WeekDayId,
+				BreakInformationId
+			)		
+			EXEC BreakInformationUpdate 
+			@GetStartingTimeEvent = @GetStartingTimeEvent
+			,@OrderOfAttactionInfomration = @OrderOfAttactionInfomrationTemp
+			,@UserBreakTime = @UserBreakTime
+			,@RecordOrder = @RecordOrder		
 
-		--Checking the near resturant are searched or not
-		IF EXISTS (SELECT 1 FROM dbo.fun_BreakTimeCalculation(@GetStartingTimeEvent,@OrderOfAttactionInfomrationTemp,@UserBreakTime,@RecordOrder))
-		BEGIN
-			SELECT 
-				TOP 1 @RestarentSearchDestinationId = DestinationAttractionId
-			FROM @OrderOfAttactionInfomrationTemp
-			ORDER BY DateAndtime DESC
+			
 
-			--Checking the Restarent search is done or not
-
-			IF NOT EXISTS (SELECT 1 FROM dbo.Attractions WITH(NOLOCK) WHERE AttractionsId = @RestarentSearchDestinationId AND ISNULL(IsNearRestarentDone,0) = 1)
-			BEGIN			
-				IF NOT EXISTS(SELECT 1 FROM [dbo].[MissingAttractionRestarentSearch] WHERE AttractionsId = @RestarentSearchDestinationId)
-				BEGIN			
-					IF @RestarentSearchDestinationId > 0
-					BEGIN
-						INSERT INTO [dbo].[MissingAttractionRestarentSearch]
-								   ([AttractionsId]
-								   ,[CreatedDate])
-							 VALUES
-								   (@RestarentSearchDestinationId
-								   ,GETDATE()
-								   )
-					END
-				END
-
+		
+			IF EXISTS (SELECT 1 FROM @OrderOfAttactionInfomration
+			WHERE BreakInformationId IS NOT NULL 
+			AND  IsLunchDinnerBreakTime  = 1
+			AND RecordCount = (SELECT MAX(RecordCount) FROM @OrderOfAttactionInfomration))
+			BEGIN
+				SELECT @NextAttractionId = DestinationAttractionId 						
+				FROM @OrderOfAttactionInfomration
+				WHERE BreakInformationId IS NOT NULL 
+				AND  IsLunchDinnerBreakTime  = 1
+				AND RecordCount = (SELECT MAX(RecordCount) FROM @OrderOfAttactionInfomration)
 			END
-		END
 
-		
-		
+			SELECT @RecordOrder = MAX(ISNULL(RecordCount,0)) + 1 FROM @OrderOfAttactionInfomration
 
-		INSERT INTO @OrderOfAttactionInfomration
-		(
-		RecordCount,
-		[SourceAttractionId],
-		[DestinationAttractionId],
-		[Distance],
-		[TravelTime],
-		[TravelModeId],
-		[SourceAttractionName],
-		[DestinationAttractionName],
-		[DateAndtime],
-		[ReachTime],
-		[TimeRequiredToView],
-		[EventEndTime],
-		[IsLunchDinnerBreakTime],
-		[IsDistanceCalculationMissing],
-		WeekDayId
-		)
-		SELECT 
-			RecordCount
-			,SourceAttractionId 
-			,DestinationAttractionId 
-			,Distance 
-			,TravelTime
-			,TravelModeId 
-			,SourceAttractionName 
-			,DestinationAttractionName 
-			,DateAndtime 
-			,ReachTime 
-			,TimeRequiredToView 
-			,EventEndTime  
-			,IsLunchDinnerBreakTime  
-			,@IsDistanceCalculationMissing 
-			,WeekDayId
-		FROM dbo.fun_BreakTimeCalculation(@GetStartingTimeEvent,@OrderOfAttactionInfomrationTemp,@UserBreakTime,@RecordOrder)
-
-		SELECT TOP 1 @GetStartingTimeEvent = EventEndTime
+			
+		--End break information missing adding
+		---------------------------------------------------------------------------------------------------------
+		SELECT TOP 1 @GetStartingTimeEvent = EventEndTime					
 		FROM @OrderOfAttactionInfomration
 		ORDER BY RecordCount DESC
 		
-		IF((SELECT Count(*) FROM @OrderOfAttactionInfomrationTemp) < (SELECT Count(*) FROM @OrderOfAttactionInfomration))
-		BEGIN
-			SET @RecordOrder = @RecordOrder + 1
-		END
+
 		
-		--End Break Time Logic
+
+		--SELECT @OldRecordCount, @NewRecordCount, @GetStartingTimeEvent, @RecordLoopCounter
 
 		------------------------------------------------------------------------------------------------------------------------------
 		--Checking the Day Brak
+		
+		--SELECT @GetStartingTimeEvent
+
+		
+
 		SET @GetStartingTimeEvent = dbo.fun_GetStartTime(@UserBreakTime,@GetStartingTimeEvent)	
+
+		
 		
 		SET @CurrentWeekDay = DATEPART(weekday, @GetStartingTimeEvent) - 1					
 		
 		--End Day Break
 
-		------------------------------------------------------------------------------------------------------
-		--Start Getting Record As User Requested Order
+		------------------------------------------------------------------------------------------------------	
 		
 		
-		IF Exists (SELECT * FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)
+		
+		
+		--End Break Time Logic
+
+		--if the attraction is empty then we will get the privous attraction information
+		IF (@NextAttractionId <= 0)
+		BEGIN
+			SELECT TOP 1 @NextAttractionId = DestinationAttractionId FROM @OrderOfAttactionInfomration
+			WHERE DestinationAttractionId  > 0
+			ORDER BY RecordCount DESC
+		END
+
+
+		SET @RecordOrder = ISNULL(@RecordOrder,1)  			
+		
+
+		
+
+		
+			--Start Getting Record As User Requested Order
+		
+		
+	IF Exists (SELECT 1 FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)
 		BEGIN
 			IF Exists ( 
 				SELECT 1
@@ -219,52 +236,11 @@ BEGIN
 				AND ATTD.DestinationAttractionId = (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)
 				ORDER BY TravelTime
 
-				IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
-				BEGIN
-					SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
-				END
-				ELSE IF EXISTS 
-					(
-						SELECT 1
-							FROM AttractionXCategory AXM
-							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-							WHERE AXM.AttractionId = @NextAttractionId 
-							AND MG.ViewTime > CAST('00:01' AS TIME)
-					)
-				BEGIN
-					SET @ResTimeRequiredToView = 
-						(
-							SELECT MAX(ViewTime) 
-							FROM AttractionXCategory AXM
-							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-							WHERE AXM.AttractionId = @NextAttractionId 							
-						)
-							
-				END
-				ELSE IF EXISTS
-					(
-						SELECT 1 
-						FROM AttractionXCategory AXM WITH(NOLOCK)
-						JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-						JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
-						WHERE AXM.AttractionId = @NextAttractionId 	
-						AND MC.ViewTime > CAST('00:01' AS TIME)  							
-					)
-				BEGIN
-					SET @ResTimeRequiredToView = 
-							(
-								SELECT MAX(MC.ViewTime) 
-								FROM AttractionXCategory AXM WITH(NOLOCK)
-								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-								JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
-								WHERE AXM.AttractionId = @NextAttractionId 	
-								AND MC.ViewTime > CAST('00:01' AS TIME)   							
-							)
-				END
-				ELSE
-				BEGIN
-					SET @ResTimeRequiredToView = @AverageMinimumTime
-				END
+				--Below logic we are using to get the minium time to required to view
+
+				SET @ResTimeRequiredToView = dbo.[fun_GetViewTime](@NextAttractionId)
+
+				--End minium required time 
 
 				SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
 
@@ -272,7 +248,7 @@ BEGIN
 				SET @GetStartingTimeEvent = @EventEndTime
 				SET @NextAttractionId = @ResDestincationAttractionId
 				
-
+				
 
 				INSERT INTO @OrderOfAttactionInfomration(
 					RecordCount
@@ -319,25 +295,28 @@ BEGIN
 				INSERT INTO @MissingAttractionID(ID)
 				SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder
 
-				EXEC AddingMissingClaims				
-					@AttractionId = @NextAttractionId
-					,@TravelModeId  = @ResTravelModeId
-					,@MissingAttractionID  = @MissingAttractionID
-					,@CreatedBy = 'User Requested Order'	
-						
-									
+				IF @NextAttractionId > 0 
+				BEGIN
+					EXEC AddingMissingClaims				
+						@AttractionId = @NextAttractionId
+						,@TravelModeId  = @ResTravelModeId
+						,@MissingAttractionID  = @MissingAttractionID
+						,@CreatedBy = 'User Requested Order'	
+				END		
+				
 
 				SET @IsDistanceCalculationMissing = 1
 
 				SET @IsSequenceRecordDone = 1
 			END
 		END
-		--End Getting Record As User Requested Order
-		-------------------------------------------------------------------------------------------------------
-		--Start Get next attraction Information
+			--End Getting Record As User Requested Order
+			-------------------------------------------------------------------------------------------------------
+			--Start Get next attraction Information
 		
-		IF @IsSequenceRecordDone = 0
-		BEGIN			
+		
+																																																																																																																																																																																																																																																																																							IF @IsSequenceRecordDone = 0
+				
 			IF Exists ( 
 				SELECT 1 
 				FROM @AttractionInfomation A 
@@ -377,52 +356,7 @@ BEGIN
 				AND ATTD.DestinationAttractionId NOT IN (SELECT AttractionId FROM @AttractionReqOrder WHERE OrderNumber = @RecordOrder)											
 				ORDER BY TravelTime
 
-				IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
-				BEGIN
-					SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
-				END
-				ELSE IF EXISTS 
-					(
-						SELECT 1
-							FROM AttractionXCategory AXM
-							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-							WHERE AXM.AttractionId = @NextAttractionId 
-							AND MG.ViewTime > CAST('00:01' AS TIME)
-					)
-				BEGIN
-					SET @ResTimeRequiredToView = 
-						(
-							SELECT MAX(ViewTime) 
-							FROM AttractionXCategory AXM
-							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-							WHERE AXM.AttractionId = @NextAttractionId 							
-						)
-							
-				END
-				ELSE IF EXISTS
-					(
-						SELECT 1 
-						FROM AttractionXCategory AXM WITH(NOLOCK)
-						JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-						JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
-						WHERE AXM.AttractionId = @NextAttractionId 	
-						AND MC.ViewTime > CAST('00:01' AS TIME)  							
-					)
-				BEGIN
-					SET @ResTimeRequiredToView = 
-							(
-								SELECT MAX(MC.ViewTime) 
-								FROM AttractionXCategory AXM WITH(NOLOCK)
-								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-								JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
-								WHERE AXM.AttractionId = @NextAttractionId 	
-								AND MC.ViewTime > CAST('00:01' AS TIME)   							
-							)
-				END
-				ELSE
-				BEGIN
-					SET @ResTimeRequiredToView = @AverageMinimumTime
-				END
+				SET @ResTimeRequiredToView = dbo.[fun_GetViewTime](@NextAttractionId)
 
 				
 				SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
@@ -431,8 +365,8 @@ BEGIN
 				SET @GetStartingTimeEvent = @EventEndTime
 				SET @NextAttractionId = @ResDestincationAttractionId
 				
-
-
+				
+				
 				INSERT INTO @OrderOfAttactionInfomration(
 					RecordCount
 					,SourceAttractionId 
@@ -473,8 +407,11 @@ BEGIN
 			END
 			ELSE
 			BEGIN
+
+				
+
 				---start Getting the not specific open time records
-				IF Exists ( 
+				IF  Exists ( 
 					SELECT 1
 					FROM @AttractionInfomation A 
 					JOIN AttractionTravelTimeDistance ATTD WITH(NOLOCK) ON ATTD.DestinationAttractionId = A.AttractionId 
@@ -487,8 +424,8 @@ BEGIN
 					AND AAS.AttractionsActiveStatusId IS NULL
 					
 				)
-				BEGIN		
-					
+				BEGIN	
+									
 							
 					SELECT TOP 1 
 						@ResSourceAttractionId = ATTD.SourceAttractionId
@@ -509,52 +446,7 @@ BEGIN
 					ORDER BY TravelTime
 
 					
-					IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
-					BEGIN
-						SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
-					END
-					ELSE IF EXISTS 
-						(
-							SELECT 1
-								FROM AttractionXCategory AXM
-								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-								WHERE AXM.AttractionId = @NextAttractionId 
-								AND MG.ViewTime > CAST('00:01' AS TIME)
-						)
-					BEGIN
-						SET @ResTimeRequiredToView = 
-							(
-								SELECT MAX(ViewTime) 
-								FROM AttractionXCategory AXM
-								JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-								WHERE AXM.AttractionId = @NextAttractionId 							
-							)
-							
-					END
-					ELSE IF EXISTS
-						(
-							SELECT 1 
-							FROM AttractionXCategory AXM WITH(NOLOCK)
-							JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-							JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
-							WHERE AXM.AttractionId = @NextAttractionId 	
-							AND MC.ViewTime > CAST('00:01' AS TIME)  							
-						)
-					BEGIN
-						SET @ResTimeRequiredToView = 
-								(
-									SELECT MAX(MC.ViewTime) 
-									FROM AttractionXCategory AXM WITH(NOLOCK)
-									JOIN Attractions..MasterGoogleType MG WITH(NOLOCK) ON MG.GoogleTypeID = AXM.CategoryId
-									JOIN Attractions..MasterCategory MC WITH(NOLOCK) ON MC.CategoryId = MG.MasterCategoryId
-									WHERE AXM.AttractionId = @NextAttractionId 	
-									AND MC.ViewTime > CAST('00:01' AS TIME)   							
-								)
-					END
-					ELSE
-					BEGIN
-						SET @ResTimeRequiredToView = @AverageMinimumTime
-					END
+					SET @ResTimeRequiredToView = dbo.[fun_GetViewTime](@NextAttractionId)
 
 					SET @EventEndTime = @ReachTime + CAST(@ResTimeRequiredToView AS DATETIME)
 
@@ -562,7 +454,7 @@ BEGIN
 					SET @GetStartingTimeEvent = @EventEndTime
 					SET @NextAttractionId = @ResDestincationAttractionId
 					
-
+					
 
 					INSERT INTO @OrderOfAttactionInfomration(
 						RecordCount
@@ -599,45 +491,55 @@ BEGIN
 
 					---End Getting the not specific open time records
 					END
-					ELSE
+				ELSE
+				BEGIN
+					--Adding missing Attraction				
+					DELETE FROM @MissingAttractionID
+
+					INSERT INTO @MissingAttractionID(ID)
+					SELECT AttractionId FROM @AttractionInfomation
+
+					IF @NextAttractionId > 0 
 					BEGIN
-						--Adding missing Attraction				
-						DELETE FROM @MissingAttractionID
-
-						INSERT INTO @MissingAttractionID(ID)
-						SELECT AttractionId FROM @AttractionInfomation
-
 						EXEC AddingMissingClaims				
 							@AttractionId = @NextAttractionId
 							,@TravelModeId  = @ResTravelModeId
 							,@MissingAttractionID  = @MissingAttractionID
 							,@CreatedBy = 'Missing Record'				
+					END
 
+						
 				
-						SET @IsDistanceCalculationMissing = 1
-					END					
+					SET @IsDistanceCalculationMissing = 1
+				END					
 									
 			END		
 				
-			SET @Counter = @Counter + 1	
-		END		
-		ELSE
-		BEGIN
-			SET @Counter = @Counter + 1	
-		END	
+
+	
+
+			
+			
+				SET @Counter = @Counter + 1	
+			
+		
+		
 			
 		
 
-		--SELECT @ResDestincationAttractionId		
-		DELETE FROM @AttractionInfomation
-		WHERE AttractionId = @ResDestincationAttractionId
-		--SELECT * FROM @AttractionInfomation
-		--ORDER BY 1 DESC
+			--SELECT @ResDestincationAttractionId		
+			DELETE FROM @AttractionInfomation
+			WHERE AttractionId = @ResDestincationAttractionId
+			--SELECT * FROM @AttractionInfomation
+			--ORDER BY 1 DESC
 
-		SET @RecordOrder = @RecordOrder + 1
-		
-
-
+			
+			
+			
+			
+			
+			
+			--SET @RecordOrder = @RecordOrder + 1
 
 		
 	END
@@ -705,14 +607,19 @@ BEGIN
 		,DA.Latitude DestinationLatitude
 		,SA.PhotoUrl SourcePhotoUrl
 		,DA.PhotoUrl DestinationPhotoUrl
+		,OAI.BreakInformationId
+		,(SELECT Food FROM [dbo].[MasterPriceInfo] WITH(NOLOCK) WHERE PriveLevel = DA.PriceLevel) AS FoodExpense
+		,(SELECT Stay FROM [dbo].[MasterPriceInfo] WITH(NOLOCK) WHERE PriveLevel = DA.PriceLevel) AS StayExpense
 	FROM @OrderOfAttactionInfomration OAI
 	LEFT JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = OAI.SourceAttractionId
 	LEFT JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = OAI.DestinationAttractionId
 	LEFT JOIN Attractions..MasterTravelMode MTW WITH(NOLOCK) ON MTW.TravelModeId = OAI.TravelModeId
 	LEFT JOIN AttractionsActiveStatus SAAS WITH(NOLOCK) ON SAAS.AttractionsId = OAI.SourceAttractionId AND SAAS.MasterWeekId = OAI.WeekDayId
 	LEFT JOIN AttractionsActiveStatus DAAS WITH(NOLOCK) ON DAAS.AttractionsId = OAI.DestinationAttractionId AND DAAS.MasterWeekId = OAI.WeekDayId
-	
+	ORDER BY CAST(DateAndtime AS DATETIME)
 END
+
+
 
 
 

@@ -11,5 +11,7 @@ namespace BusinessEntites.EntityGoogleMaps.EntityNearBySearch.Distance
         public Distance distance { get; set; }
 
         public Duration duration { get; set; }
+
+        public List<Steps> steps { get; set; }
     }
 }

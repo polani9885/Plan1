@@ -72,7 +72,8 @@ namespace PlanGoGoService.Interfaces
         [OperationContract]
         List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate);
 
-
+        [OperationContract]
+        void User_UserTrip_Update(UserTourInformation userTourInformation);
 
 
     }

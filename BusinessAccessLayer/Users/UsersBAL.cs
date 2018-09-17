@@ -112,5 +112,10 @@ namespace BusinessAccessLayer.Users
         {
             return _dataAccessUsers.User_GetNearestRestaruents(attractionsId, travelModeId, countryId,coodinate);
         }
+
+        public void User_UserTrip_Update(UserTourInformation userTourInformation)
+        {
+            _dataAccessUsers.User_UserTrip_Update(userTourInformation);
+        }
     }
 }

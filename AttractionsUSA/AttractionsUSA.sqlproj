@@ -17,7 +17,7 @@
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -25,6 +25,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -66,6 +67,7 @@
     <Folder Include="dbo\Functions" />
     <Folder Include="dbo\Functions\Scalar-valued Functions" />
     <Folder Include="dbo\Functions\Table-valued Functions" />
+    <Folder Include="dbo\Seeds" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\AttractionAverageTime.sql" />
@@ -112,7 +114,6 @@
     <Build Include="dbo\Stored Procedures\GetOrderOfAttractionVisit_Back.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetNoGoogleSearchText.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_UpdateGoogleSearchText.sql" />
-    <Build Include="dbo\Functions\Table-valued Functions\fun_BreakTimeCalculation.sql" />
     <Build Include="dbo\Functions\Scalar-valued Functions\fun_GetStartTime.sql" />
     <Build Include="dbo\Tables\CityXGoogleType.sql" />
     <Build Include="dbo\Stored Procedures\GetCityCategoryPending.sql" />
@@ -127,6 +128,8 @@
     <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferencePending.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferenceUrlUpdate.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferenceUrlAlreadyTried.sql" />
+    <Build Include="dbo\Tables\AttractionTravelSteps.sql" />
+    <Build Include="dbo\Tables\MasterPriceInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\NearBySearch.sql" />
@@ -148,5 +151,17 @@
     <Build Include="dbo\User Defined Types\user_OrderOfAttractionVisit.sql" />
     <Build Include="dbo\User Defined Types\UserTable_AttractionRequestOrder.sql" />
     <Build Include="dbo\User Defined Types\UserTable_UpdatedBreaks.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Functions\Scalar-valued Functions\fun_GetViewTime.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Stored Procedures\BreakInformationUpdate.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\User Defined Types\User_StepsConsolidated.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Seeds\MasterPriceInfo.sql" />
   </ItemGroup>
 </Project>

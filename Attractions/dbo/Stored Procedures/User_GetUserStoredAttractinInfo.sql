@@ -49,6 +49,7 @@ BEGIN
       ,[CreatedDate]
 	  ,SourcePhotoUrl
 	  ,DestinationPhotoUrl
+	  ,BreakInformationId
   FROM [dbo].[UserTripAttractionOrderVisit]
   WHERE UserTripId = @UserTripId
 END

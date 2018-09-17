@@ -14,10 +14,10 @@
 }(this, function () {
 
     /*!
-     * GMaps.js v0.4.24
+     * GMaps.js v0.4.25
      * http://hpneo.github.com/gmaps/
      *
-     * Copyright 2016, Gustavo Leon
+     * Copyright 2017, Gustavo Leon
      * Released under the MIT License.
      */
 
@@ -133,7 +133,7 @@
 
     var getElementById = function (id, context) {
         var element,
-        id = id.replace('#', '');
+            id = id.replace('#', '');
 
         if ('jQuery' in window && context) {
             element = $('#' + id, context)[0];
@@ -147,6 +147,14 @@
     var findAbsolutePosition = function (obj) {
         var curleft = 0,
             curtop = 0;
+
+        if (obj.getBoundingClientRect) {
+            var rect = obj.getBoundingClientRect();
+            var sx = -(window.scrollX ? window.scrollX : window.pageXOffset);
+            var sy = -(window.scrollY ? window.scrollY : window.pageYOffset);
+
+            return [(rect.left - sx), (rect.top - sy)];
+        }
 
         if (obj.offsetParent) {
             do {
@@ -194,9 +202,9 @@
             var self = this,
                 i,
                 events_that_hide_context_menu = [
-                  'bounds_changed', 'center_changed', 'click', 'dblclick', 'drag',
-                  'dragend', 'dragstart', 'idle', 'maptypeid_changed', 'projection_changed',
-                  'resize', 'tilesloaded', 'zoom_changed'
+                    'bounds_changed', 'center_changed', 'click', 'dblclick', 'drag',
+                    'dragend', 'dragstart', 'idle', 'maptypeid_changed', 'projection_changed',
+                    'resize', 'tilesloaded', 'zoom_changed'
                 ],
                 events_that_doesnt_hide_context_menu = ['mousemove', 'mouseout', 'mouseover'],
                 options_to_be_deleted = ['el', 'lat', 'lng', 'mapType', 'width', 'height', 'markerClusterer', 'enableNewStyle'],
@@ -1026,29 +1034,29 @@
                 content_width = content.clientWidth;
 
             switch (options.verticalAlign) {
-                case 'top':
-                    el.style.top = (pixel.y - content_height + options.verticalOffset) + 'px';
-                    break;
-                default:
-                case 'middle':
-                    el.style.top = (pixel.y - (content_height / 2) + options.verticalOffset) + 'px';
-                    break;
-                case 'bottom':
-                    el.style.top = (pixel.y + options.verticalOffset) + 'px';
-                    break;
+            case 'top':
+                el.style.top = (pixel.y - content_height + options.verticalOffset) + 'px';
+                break;
+            default:
+            case 'middle':
+                el.style.top = (pixel.y - (content_height / 2) + options.verticalOffset) + 'px';
+                break;
+            case 'bottom':
+                el.style.top = (pixel.y + options.verticalOffset) + 'px';
+                break;
             }
 
             switch (options.horizontalAlign) {
-                case 'left':
-                    el.style.left = (pixel.x - content_width + options.horizontalOffset) + 'px';
-                    break;
-                default:
-                case 'center':
-                    el.style.left = (pixel.x - (content_width / 2) + options.horizontalOffset) + 'px';
-                    break;
-                case 'right':
-                    el.style.left = (pixel.x + options.horizontalOffset) + 'px';
-                    break;
+            case 'left':
+                el.style.left = (pixel.x - content_width + options.horizontalOffset) + 'px';
+                break;
+            default:
+            case 'center':
+                el.style.left = (pixel.x - (content_width / 2) + options.horizontalOffset) + 'px';
+                break;
+            case 'right':
+                el.style.left = (pixel.x + options.horizontalOffset) + 'px';
+                break;
             }
 
             el.style.display = auto_show ? 'block' : 'none';
@@ -1211,8 +1219,8 @@
         }, options);
 
         var latLngBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(options.bounds[0][0], options.bounds[0][1]),
-          new google.maps.LatLng(options.bounds[1][0], options.bounds[1][1])
+            new google.maps.LatLng(options.bounds[0][0], options.bounds[0][1]),
+            new google.maps.LatLng(options.bounds[1][0], options.bounds[1][1])
         );
 
         options.bounds = latLngBounds;
@@ -1363,69 +1371,69 @@
         var layer;
 
         switch (layerName) {
-            case 'weather': this.singleLayers.weather = layer = new google.maps.weather.WeatherLayer();
-                break;
-            case 'clouds': this.singleLayers.clouds = layer = new google.maps.weather.CloudLayer();
-                break;
-            case 'traffic': this.singleLayers.traffic = layer = new google.maps.TrafficLayer();
-                break;
-            case 'transit': this.singleLayers.transit = layer = new google.maps.TransitLayer();
-                break;
-            case 'bicycling': this.singleLayers.bicycling = layer = new google.maps.BicyclingLayer();
-                break;
-            case 'panoramio':
-                this.singleLayers.panoramio = layer = new google.maps.panoramio.PanoramioLayer();
-                layer.setTag(options.filter);
-                delete options.filter;
+        case 'weather': this.singleLayers.weather = layer = new google.maps.weather.WeatherLayer();
+            break;
+        case 'clouds': this.singleLayers.clouds = layer = new google.maps.weather.CloudLayer();
+            break;
+        case 'traffic': this.singleLayers.traffic = layer = new google.maps.TrafficLayer();
+            break;
+        case 'transit': this.singleLayers.transit = layer = new google.maps.TransitLayer();
+            break;
+        case 'bicycling': this.singleLayers.bicycling = layer = new google.maps.BicyclingLayer();
+            break;
+        case 'panoramio':
+            this.singleLayers.panoramio = layer = new google.maps.panoramio.PanoramioLayer();
+            layer.setTag(options.filter);
+            delete options.filter;
 
-                //click event
-                if (options.click) {
-                    google.maps.event.addListener(layer, 'click', function (event) {
-                        options.click(event);
-                        delete options.click;
-                    });
-                }
-                break;
-            case 'places':
-                this.singleLayers.places = layer = new google.maps.places.PlacesService(this.map);
+            //click event
+            if (options.click) {
+                google.maps.event.addListener(layer, 'click', function (event) {
+                    options.click(event);
+                    delete options.click;
+                });
+            }
+            break;
+        case 'places':
+            this.singleLayers.places = layer = new google.maps.places.PlacesService(this.map);
 
-                //search, nearbySearch, radarSearch callback, Both are the same
-                if (options.search || options.nearbySearch || options.radarSearch) {
-                    var placeSearchRequest = {
-                        bounds: options.bounds || null,
-                        keyword: options.keyword || null,
-                        location: options.location || null,
-                        name: options.name || null,
-                        radius: options.radius || null,
-                        rankBy: options.rankBy || null,
-                        types: options.types || null
-                    };
+            //search, nearbySearch, radarSearch callback, Both are the same
+            if (options.search || options.nearbySearch || options.radarSearch) {
+                var placeSearchRequest = {
+                    bounds: options.bounds || null,
+                    keyword: options.keyword || null,
+                    location: options.location || null,
+                    name: options.name || null,
+                    radius: options.radius || null,
+                    rankBy: options.rankBy || null,
+                    types: options.types || null
+                };
 
-                    if (options.radarSearch) {
-                        layer.radarSearch(placeSearchRequest, options.radarSearch);
-                    }
-
-                    if (options.search) {
-                        layer.search(placeSearchRequest, options.search);
-                    }
-
-                    if (options.nearbySearch) {
-                        layer.nearbySearch(placeSearchRequest, options.nearbySearch);
-                    }
+                if (options.radarSearch) {
+                    layer.radarSearch(placeSearchRequest, options.radarSearch);
                 }
 
-                //textSearch callback
-                if (options.textSearch) {
-                    var textSearchRequest = {
-                        bounds: options.bounds || null,
-                        location: options.location || null,
-                        query: options.query || null,
-                        radius: options.radius || null
-                    };
-
-                    layer.textSearch(textSearchRequest, options.textSearch);
+                if (options.search) {
+                    layer.search(placeSearchRequest, options.search);
                 }
-                break;
+
+                if (options.nearbySearch) {
+                    layer.nearbySearch(placeSearchRequest, options.nearbySearch);
+                }
+            }
+
+            //textSearch callback
+            if (options.textSearch) {
+                var textSearchRequest = {
+                    bounds: options.bounds || null,
+                    location: options.location || null,
+                    query: options.query || null,
+                    radius: options.radius || null
+                };
+
+                layer.textSearch(textSearchRequest, options.textSearch);
+            }
+            break;
         }
 
         if (layer !== undefined) {
@@ -1462,18 +1470,18 @@
 
     GMaps.prototype.getRoutes = function (options) {
         switch (options.travelMode) {
-            case 'bicycling':
-                travelMode = google.maps.TravelMode.BICYCLING;
-                break;
-            case 'transit':
-                travelMode = google.maps.TravelMode.TRANSIT;
-                break;
-            case 'driving':
-                travelMode = google.maps.TravelMode.DRIVING;
-                break;
-            default:
-                travelMode = google.maps.TravelMode.WALKING;
-                break;
+        case 'bicycling':
+            travelMode = google.maps.TravelMode.BICYCLING;
+            break;
+        case 'transit':
+            travelMode = google.maps.TravelMode.TRANSIT;
+            break;
+        case 'driving':
+            travelMode = google.maps.TravelMode.DRIVING;
+            break;
+        default:
+            travelMode = google.maps.TravelMode.WALKING;
+            break;
         }
 
         if (options.unitSystem === 'imperial') {
@@ -1484,11 +1492,11 @@
         }
 
         var base_options = {
-            avoidHighways: false,
-            avoidTolls: false,
-            optimizeWaypoints: false,
-            waypoints: []
-        },
+                avoidHighways: false,
+                avoidTolls: false,
+                optimizeWaypoints: false,
+                waypoints: []
+            },
             request_options = extend_object(base_options, options);
 
         request_options.origin = /string/.test(typeof options.origin) ? options.origin : new google.maps.LatLng(options.origin[0], options.origin[1]);
@@ -1873,7 +1881,7 @@
         var parameters = [],
             data,
             static_root = (location.protocol === 'file:' ? 'http:' : location.protocol) + '//maps.googleapis.com/maps/api/staticmap';
-        
+
         if (options.url) {
             static_root = options.url;
             delete options.url;
@@ -1984,7 +1992,7 @@
                     marker = marker.join('|');
                     parameters.push('markers=' + encodeURI(marker));
                 }
-                    // New marker without styles
+                // New marker without styles
                 else {
                     marker = parameters.pop() + encodeURI('|' + loc);
                     parameters.push(marker);

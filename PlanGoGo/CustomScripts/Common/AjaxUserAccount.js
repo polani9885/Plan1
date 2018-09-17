@@ -342,6 +342,7 @@ function User_RequestedBreaks(angularScope, http) {
         type: "GET",
         url: '/UserControls/User_RequestedBreaks',
         dataType: "json",
+        async:false,
         beforeSend: function () {
         },
         success: function (data) {
@@ -405,6 +406,27 @@ function User_GetNearestRestaruents(angularScope, http) {
                 angularScope.FilterNearLocations = data;
                 angularScope.ExtraCategorySelectedAttractionFilter();
             });
+
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function User_UserTrip_Update(angularScope, http, data) {
+
+    $.ajax({
+        type: "GET",
+        url: '/UserControls/User_UserTrip_Update',
+        data: { noOfPersons: data.NoOfPersons, noOfCars: data.NoOfCars, carMileage: data.CarMileage, fuelPrice: data.FuelPrice },
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
 
         },
         error: function (result) {

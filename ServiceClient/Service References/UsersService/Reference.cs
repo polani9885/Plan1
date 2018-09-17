@@ -116,6 +116,12 @@ namespace ServiceClient.UsersService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_GetNearestRestaruents", ReplyAction="http://tempuri.org/IUserServices/User_GetNearestRestaruentsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> User_GetNearestRestaruentsAsync(int attractionsId, int travelModeId, int countryId, System.Collections.Generic.List<BusinessEntites.Coordinate> coodinate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_UserTrip_Update", ReplyAction="http://tempuri.org/IUserServices/User_UserTrip_UpdateResponse")]
+        void User_UserTrip_Update(BusinessEntites.Users.UserTourInformation userTourInformation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_UserTrip_Update", ReplyAction="http://tempuri.org/IUserServices/User_UserTrip_UpdateResponse")]
+        System.Threading.Tasks.Task User_UserTrip_UpdateAsync(BusinessEntites.Users.UserTourInformation userTourInformation);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -279,6 +285,14 @@ namespace ServiceClient.UsersService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> User_GetNearestRestaruentsAsync(int attractionsId, int travelModeId, int countryId, System.Collections.Generic.List<BusinessEntites.Coordinate> coodinate) {
             return base.Channel.User_GetNearestRestaruentsAsync(attractionsId, travelModeId, countryId, coodinate);
+        }
+        
+        public void User_UserTrip_Update(BusinessEntites.Users.UserTourInformation userTourInformation) {
+            base.Channel.User_UserTrip_Update(userTourInformation);
+        }
+        
+        public System.Threading.Tasks.Task User_UserTrip_UpdateAsync(BusinessEntites.Users.UserTourInformation userTourInformation) {
+            return base.Channel.User_UserTrip_UpdateAsync(userTourInformation);
         }
     }
 }

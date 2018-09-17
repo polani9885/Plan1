@@ -10,6 +10,10 @@
 	[TravelModeId] [int] NULL,
 	[SourceAttractionId] [int] NULL,
 	[DestinationAttractionId] [int] NULL,
+	[NoOfPersons] [int] NULL,
+	[NoOfCars] [int] NULL,
+	[CarMileage] [decimal](18, 2) NULL,
+	[FuelPrice] [decimal](18, 2) NULL,
  CONSTRAINT [PK_UserTrip] PRIMARY KEY CLUSTERED 
 (
 	[UserTripId] ASC

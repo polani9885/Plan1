@@ -29,6 +29,26 @@
 	[BreakFastAttractionId] [bigint] NULL,
 	[IsDayBreakAdded] [bit] NULL,
 	[DayBreakAttractionId] [bigint] NULL,
+	[NoOfCars] [int] NULL,
+	[AverageMileage] [int] NULL,
+	[NoOfRooms] [int] NULL,
+	[BreakFastExpense] [decimal](18, 2) NULL,
+	[LunchExpense] [decimal](18, 2) NULL,
+	[BreakExpense] [decimal](18, 2) NULL,
+	[DayBreakExpense] [decimal](18, 2) NULL,
+	[CarRentalExpense] [decimal](18, 2) NULL,
+	[NoOfAttractions] [int] NULL,
+	[Distance] [varchar](50) NULL,
+	[DinnerExpense] [decimal](18, 2) NULL,
+	[IsNoOfCarsUserUpdated] [bit] NULL,
+	[IsAverageMileageUserUpdated] [bit] NULL,
+	[IsCarRentalExpenseUserUpdated] [bit] NULL,
+	[IsBreakFastExpenseUserUpdated] [bit] NULL,
+	[IsLunchExpenseUserUpdated] [bit] NULL,
+	[IsBreakExpenseUserUpdated] [bit] NULL,
+	[IsDinnerExpenseUserUpdated] [bit] NULL,
+	[IsDayBreakExpenseUserUpdated] [bit] NULL,
+	[IsNoOfRoomsUserUpdated] [bit] NULL,
  CONSTRAINT [PK_UserTripDates] PRIMARY KEY CLUSTERED 
 (
 	[UserTripDatesId] ASC
@@ -36,6 +56,8 @@
 ) ON [PRIMARY]
 
 GO
+
+
 
 ALTER TABLE [dbo].[UserTripDates]  WITH CHECK ADD  CONSTRAINT [FK_UserTripDates_UserTrip] FOREIGN KEY([UserTripId])
 REFERENCES [dbo].[UserTrip] ([UserTripId])

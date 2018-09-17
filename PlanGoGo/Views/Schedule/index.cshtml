@@ -18,7 +18,7 @@
     <li><a href="#tab_TourMap">Tour Map</a></li>
     <li><a href="#tab_SuggestedAttractions">Suggested Attractions</a></li>
     <li><a href="#tab_BuildStatus">Tour Build Status</a></li>
-    <li><a href="#tab_TourAnalysis">Tour Analysis</a></li>
+    <li><a href="#tab_TourExpenses" ng-clic="BuildExpenseInfo()">Tour Expenses & Information</a></li>
 </ul>
 <div id="tab_Filter">
     <table border="0">
@@ -333,10 +333,596 @@
         </table>
     </div>
 </div>
-<div id="tab_TourAnalysis">
-    <p>
-        UP Comming
-    </p>
+<div id="tab_TourExpenses">
+    <table>
+        <tr>
+            <td>
+                <table class="border expenseMainInfo">
+                    <tr>
+                        <td class="paddingLeft">
+                            Total Expense: <span id="expense_Expense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            No Of Days: <span id="expense_Days"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            No Of Attractions: <span id="expense_AttractionsList"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Distance: <span id="expense_Distance"></span> Miles
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="border">
+                    <tr>
+                        <td class="paddingLeft">
+                            Total Break Fast Expense: <span id="expense_BreakFastExpense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Lunch Expense: <span id="expense_LunchExpense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Break Expense: <span id="expense_BreakExpense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Dinner Expense: <span id="expense_DinnerExpense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Day Expense: <span id="expense_DayExpense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Car Rental Expense: <span id="expense_RentalExpense"></span>
+                        </td>
+                        <td class="paddingLeft">
+                            Total Fuel Expense: <span id="expense_FuelExpense"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    <tr>
+        <td>
+            <table class="border">
+                <tr>
+                    <td class="paddingLeft infoMessage" colspan="3">
+                        <span>This No of cars will update to all the Day's No of cars</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="paddingLeft">
+                        <table>
+                            <tr>
+                                <td>
+                                    No Of Persons: <select id="expense_Persons" onchange="TripInfoUpdate()">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        <option value="32">32</option>
+                                        <option value="33">33</option>
+                                        <option value="34">34</option>
+                                        <option value="35">35</option>
+                                        <option value="36">36</option>
+                                        <option value="37">37</option>
+                                        <option value="38">38</option>
+                                        <option value="39">39</option>
+                                        <option value="40">40</option>
+                                        <option value="41">41</option>
+                                        <option value="42">42</option>
+                                        <option value="43">43</option>
+                                        <option value="44">44</option>
+                                        <option value="45">45</option>
+                                        <option value="46">46</option>
+                                        <option value="47">47</option>
+                                        <option value="48">48</option>
+                                        <option value="49">49</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="paddingLeft">
+                        <table>
+                            <tr>
+                                <td>
+                                    No Of Cars: <select id="expense_Cars" onchange="TripInfoUpdate()">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="paddingLeft">
+                        Average Car Mileage Per Gallon: <select id="expense_PerGallon" onchange="TripInfoUpdate()">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                        </select>
+                    </td>
+                    <td class="paddingLeft">
+                        Per Gallon Fuel Average Price: <input type="text" id="expense_PerGallonPrice" class="txtBoxSize" onkeyup="TripInfoUpdate()"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr ng-repeat="dayBreak in UpdatedBreaks" ng-switch on="$index % 5">
+                        <td ng-switch-when="0" valign="top">
+                            <table class="border">
+                            <tr>
+                                <td class="dateFormat">
+                                    {{UpdatedBreaks[$index].RequestDate}}
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td>
+                                        Attractions: {{UpdatedBreaks[$index].NoOfAttractions}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Distance: {{UpdatedBreaks[$index].Distance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Cars: {{UpdatedBreaks[$index].NoOfCars}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mileage: {{UpdatedBreaks[$index].AverageMileage}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Rental Expense:{{UpdatedBreaks[$index].CarRentalExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index].BreakFastAttractionId>0">
+                                        Break Fast Expense: {{UpdatedBreaks[$index].BreakFastExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index].LunchAttractionId>0">
+                                        Lunch Expense: {{UpdatedBreaks[$index].LunchExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index].BreakAttractionId>0">
+                                        Break Expense: {{UpdatedBreaks[$index].BreakExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index].DinnerAttractionId>0">
+                                        Dinner Expense: {{UpdatedBreaks[$index].DinnerExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index].DayBreakAttractionId>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    No Of Rooms: {{UpdatedBreaks[$index].NoOfRooms}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Day Break Expense: {{UpdatedBreaks[$index].DayBreakExpense}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td ng-switch-when="0" valign="top">
+                            <table class="border">
+                                <tr>
+                                    <td class="dateFormat">
+                                        {{UpdatedBreaks[$index+1].RequestDate}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Attractions: {{UpdatedBreaks[$index+1].NoOfAttractions}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Distance: {{UpdatedBreaks[$index+1].Distance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Cars: {{UpdatedBreaks[$index+1].NoOfCars}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mileage: {{UpdatedBreaks[$index+1].AverageMileage}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Rental Expense:{{UpdatedBreaks[$index+1].CarRentalExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+1].BreakFastAttractionId>0">
+                                        Break Fast Expense: {{UpdatedBreaks[$index+1].BreakFastExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+1].LunchAttractionId>0">
+                                        Lunch Expense: {{UpdatedBreaks[$index+1].LunchExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+1].BreakAttractionId>0">
+                                        Break Expense: {{UpdatedBreaks[$index+1].BreakExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+1].DinnerAttractionId>0">
+                                        Dinner Expense: {{UpdatedBreaks[$index+1].DinnerExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+1].DayBreakAttractionId>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    No Of Rooms: {{UpdatedBreaks[$index+1].NoOfRooms}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Day Break Expense: {{UpdatedBreaks[$index+1].DayBreakExpense}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td ng-switch-when="0" valign="top">
+                            <table class="border">
+                                <tr>
+                                    <td class="dateFormat">
+                                        {{UpdatedBreaks[$index+2].RequestDate}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Attractions: {{UpdatedBreaks[$index+2].NoOfAttractions}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Distance: {{UpdatedBreaks[$index+2].Distance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Cars: {{UpdatedBreaks[$index+2].NoOfCars}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mileage: {{UpdatedBreaks[$index+2].AverageMileage}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Rental Expense:{{UpdatedBreaks[$index+2].CarRentalExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+2].BreakFastAttractionId>0">
+                                        Break Fast Expense: {{UpdatedBreaks[$index+2].BreakFastExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+2].LunchAttractionId>0">
+                                        Lunch Expense: {{UpdatedBreaks[$index+2].LunchExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+2].BreakAttractionId>0">
+                                        Break Expense: {{UpdatedBreaks[$index+2].BreakExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+2].DinnerAttractionId>0">
+                                        Dinner Expense: {{UpdatedBreaks[$index+2].DinnerExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+2].DayBreakAttractionId>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    No Of Rooms: {{UpdatedBreaks[$index+2].NoOfRooms}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Day Break Expense: {{UpdatedBreaks[$index+2].DayBreakExpense}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td ng-switch-when="0" valign="top">
+                            <table class="border">
+                                <tr>
+                                    <td class="dateFormat">
+                                        {{UpdatedBreaks[$index+3].RequestDate}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Attractions: {{UpdatedBreaks[$index+3].NoOfAttractions}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Distance: {{UpdatedBreaks[$index+3].Distance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Cars: {{UpdatedBreaks[$index+3].NoOfCars}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mileage: {{UpdatedBreaks[$index+3].AverageMileage}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Rental Expense:{{UpdatedBreaks[$index+3].CarRentalExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+3].BreakFastAttractionId>0">
+                                        Break Fast Expense: {{UpdatedBreaks[$index+3].BreakFastExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+3].LunchAttractionId>0">
+                                        Lunch Expense: {{UpdatedBreaks[$index+3].LunchExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+3].BreakAttractionId>0">
+                                        Break Expense: {{UpdatedBreaks[$index+3].BreakExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+3].DinnerAttractionId>0">
+                                        Dinner Expense: {{UpdatedBreaks[$index+3].DinnerExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+3].DayBreakAttractionId>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    No Of Rooms: {{UpdatedBreaks[$index+3].NoOfRooms}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Day Break Expense: {{UpdatedBreaks[$index+3].DayBreakExpense}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td ng-switch-when="0" valign="top">
+                            <table class="border">
+                                <tr>
+                                    <td class="dateFormat">
+                                        {{UpdatedBreaks[$index+4].RequestDate}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Attractions: {{UpdatedBreaks[$index+4].NoOfAttractions}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Distance: {{UpdatedBreaks[$index+4].Distance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Cars: {{UpdatedBreaks[$index+4].NoOfCars}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mileage: {{UpdatedBreaks[$index+4].AverageMileage}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Rental Expense:{{UpdatedBreaks[$index+4].CarRentalExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+4].BreakFastAttractionId>0">
+                                        Break Fast Expense: {{UpdatedBreaks[$index+4].BreakFastExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+4].LunchAttractionId>0">
+                                        Lunch Expense: {{UpdatedBreaks[$index+4].LunchExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+4].BreakAttractionId>0">
+                                        Break Expense: {{UpdatedBreaks[$index+4].BreakExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+4].DinnerAttractionId>0">
+                                        Dinner Expense: {{UpdatedBreaks[$index+4].DinnerExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+4].DayBreakAttractionId>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    No Of Rooms: {{UpdatedBreaks[$index+4].NoOfRooms}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Day Break Expense: {{UpdatedBreaks[$index+4].DayBreakExpense}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td ng-switch-when="0" valign="top">
+                            <table class="border">
+                                <tr>
+                                    <td class="dateFormat">
+                                        {{UpdatedBreaks[$index+5].RequestDate}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Attractions: {{UpdatedBreaks[$index+5].NoOfAttractions}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Distance: {{UpdatedBreaks[$index+5].Distance}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Cars: {{UpdatedBreaks[$index+5].NoOfCars}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mileage: {{UpdatedBreaks[$index+5].AverageMileage}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Rental Expense:{{UpdatedBreaks[$index+5].CarRentalExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+5].BreakFastAttractionId>0">
+                                        Break Fast Expense: {{UpdatedBreaks[$index+5].BreakFastExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+5].LunchAttractionId>0">
+                                        Lunch Expense: {{UpdatedBreaks[$index+5].LunchExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+5].BreakAttractionId>0">
+                                        Break Expense: {{UpdatedBreaks[$index+5].BreakExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+5].DinnerAttractionId>0">
+                                        Dinner Expense: {{UpdatedBreaks[$index+5].DinnerExpense}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ng-show="UpdatedBreaks[$index+5].DayBreakAttractionId>0">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    No Of Rooms: {{UpdatedBreaks[$index+5].NoOfRooms}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Day Break Expense: {{UpdatedBreaks[$index+5].DayBreakExpense}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </div>
 </div>
 </div>

@@ -379,5 +379,32 @@ namespace DataAccessLayer.User
                 throw ex;
             }
         }
+
+
+        public void User_UserTrip_Update(UserTourInformation userTourInformation)
+        {
+            try
+            {
+                var result = SqlHelper.QuerySP("User_UserTrip_Update",
+                    new
+                    {
+                        UserTripId = userTourInformation.UserTripId
+                        ,CountryId = userTourInformation.CountryId
+                        ,StartDate = userTourInformation.StartDate
+                        ,EndDate = userTourInformation.EndDate
+                        ,TravelModeId = userTourInformation.TravelModeId
+                        ,SourceAttractionId = userTourInformation.SourceAttractionId
+                        ,DestinationAttractionId = userTourInformation.DestinationAttractionId
+                        ,NoOfPersons = userTourInformation.NoOfPersons
+                        ,NoOfCars = userTourInformation.NoOfCars
+                        ,CarMileage = userTourInformation.CarMileage
+                        ,FuelPrice = userTourInformation.FuelPrice
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

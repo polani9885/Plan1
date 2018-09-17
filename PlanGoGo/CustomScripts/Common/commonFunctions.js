@@ -152,3 +152,24 @@ function BreakAttractionCalling() {
         angularScope.BreakAttractionCalling();
     });
 }
+
+function TripInfoUpdate() {
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.TripInfoUpdate();
+    });
+}
+
+function DayExpenseInformationUpdate(divId, strId) {
+    
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.DayExpenseInformationUpdate(divId, strId);
+    });
+}
+function IgnoreMyExpenseChanges() {
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.IgnoreMyExpenseChanges();
+    });
+}

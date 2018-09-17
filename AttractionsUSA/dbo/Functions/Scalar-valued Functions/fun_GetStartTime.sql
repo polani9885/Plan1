@@ -13,25 +13,22 @@ BEGIN
 
 	IF Exists (
 				SELECT 1 FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-				AND IsUserInterestedDayBreak = 1
+				AND IsUserInterestedDayBreak = 1 AND UpdateDayEndTime IS NOt NULL
 			)
 	BEGIN
-	--Getting the user Requested Day Break time
-		IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-					AND IsUserInterestedDayBreak = 1 AND UpdateDayEndTime IS NOt NULL
-				)
-		BEGIN
-			SELECT @DayEnd = UpdateDayEndTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-			AND IsUserInterestedDayBreak = 1 AND UpdateDayEndTime IS NOt NULL
-		END				
+	--Getting the user Requested Day Break time		
+		SELECT @DayEnd = DATEADD(MINUTE,60,UpdateDayEndTime)   FROM @UserBreakTime 
+		WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+		AND IsUserInterestedDayBreak = 1 AND UpdateDayEndTime IS NOt NULL		
 	END
 	ELSE
 	BEGIN
-		SET @DayEnd = '21:00:00.0000000'
+		SET @DayEnd = '22:00:00.0000000'
 	END					
 							 			
 	IF CAST(@GetStartingTimeEvent AS TIME) > @DayEnd
-	BEGIN			
+	BEGIN		
+		
 		SET @GetStartingTimeEvent = CAST(CAST(DateADD(day, 1 , @GetStartingTimeEvent) AS DATE) AS DATETIME) 
 
 		IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
@@ -49,3 +46,5 @@ BEGIN
 	SET @StartTime = @GetStartingTimeEvent
 	RETURN @StartTime
 END
+
+

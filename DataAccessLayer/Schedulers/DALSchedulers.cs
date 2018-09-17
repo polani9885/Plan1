@@ -12,6 +12,7 @@ using BusinessEntites.Scheduler;
 using BusinessEntites.Admin;
 using Interfaces;
 using BusinessEntites.Users;
+using BusinessEntites.Custom;
 
 namespace DataAccessLayer.Schedulers
 {
@@ -509,7 +510,7 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_InsertAttractionTravelTimeDistance(BusinessEntites.Common.AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO, int countryId)
+        public void Scheduler_InsertAttractionTravelTimeDistance(BusinessEntites.Common.AttractionTravelTimeDistanceDTO attractionTravelTimeDistanceDTO, int countryId, List<StepsConsolidated> stepsConsolidated)
         {
             try
             {
@@ -521,7 +522,8 @@ namespace DataAccessLayer.Schedulers
                         DestinationAttractionId = attractionTravelTimeDistanceDTO.DestinationAttractionId,
                         TravelModeId = attractionTravelTimeDistanceDTO.TravelModeId,
                         TravelTime = attractionTravelTimeDistanceDTO.TravelTime,
-                        Distance = attractionTravelTimeDistanceDTO.Distance
+                        Distance = attractionTravelTimeDistanceDTO.Distance,
+                        StepsConsolidated = DataTableFun.ToDataTable<StepsConsolidated>(stepsConsolidated),
 
                     });
             }

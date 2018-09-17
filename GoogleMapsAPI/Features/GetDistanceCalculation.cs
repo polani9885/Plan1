@@ -1,6 +1,8 @@
 ﻿using BusinessEntites;
 using BusinessEntites.Common;
+using BusinessEntites.Custom;
 using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
+using BusinessEntites.EntityGoogleMaps.EntityNearBySearch.Distance;
 using DataAccessLayer.LogException;
 using DataAccessLayer.Schedulers;
 using GoogleMapsAPI.Helper;
@@ -74,7 +76,7 @@ namespace GoogleMapsAPI.Features
 
                     foreach (AttractionsDTO _attractionsDTO in attractionInformation)
                     {
-                        foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode)
+                        foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode.Where(x=>x.TravelModeId == 1))
                         {
                             googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
                             if (googleCounter == null || googleCounter.Counter <
@@ -136,9 +138,34 @@ namespace GoogleMapsAPI.Features
                     Convert.ToInt32(
                         returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().duration.value);
 
+                
+
+                List<StepsConsolidated> stepsConsolidated = new List<StepsConsolidated>();
+
+                StepsConsolidated _stepsConsolidated = new StepsConsolidated();
+                int OrderId = 1;
+
+                foreach (Steps _steps in returnsInformation.routes.FirstOrDefault().legs.FirstOrDefault().steps
+                    .ToList())
+                {
+                    _stepsConsolidated = new StepsConsolidated()
+                    {
+                        distance_Value = Convert.ToInt32(_steps.distance.value),
+                        duration_Value = Convert.ToInt32(_steps.duration.value),
+                        end_location_lat = _steps.end_location.lat,
+                        end_location_lng = _steps.end_location.lng,
+                        start_location_lat = _steps.start_location.lat,
+                        start_location_lng = _steps.start_location.lng,
+                        travel_mode =  _steps.travel_mode,
+                        OrderId = OrderId++
+                    };
+                    stepsConsolidated.Add(_stepsConsolidated);
+
+                }
+
                 dALSchedulers.Scheduler_InsertAttractionTravelTimeDistance(
                     attractionTravelTimeDistanceDTO,
-                    countryId);
+                    countryId, stepsConsolidated);
 
             }
             catch (Exception ex)

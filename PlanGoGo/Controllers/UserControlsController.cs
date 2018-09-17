@@ -230,6 +230,21 @@ namespace PlanGoGo.Controllers
             
         }
 
+        [HttpGet]
+        public JsonResult User_UserTrip_Update(int noOfPersons, int noOfCars, decimal carMileage, decimal fuelPrice)
+        {
+            UserTourInformation result = new UserTourInformation();
+            result.UserTripId = userEntity.UserTripId;
+            result.NoOfPersons = noOfPersons;
+            result.NoOfCars = noOfCars;
+            result.CarMileage = carMileage;
+            result.FuelPrice = fuelPrice;
+
+            _IUserInfo.User_UserTrip_Update(result);
+
+            return jsonReturn.JsonResult<UserTourInformation>(result);
+        }
+
 
 
     }

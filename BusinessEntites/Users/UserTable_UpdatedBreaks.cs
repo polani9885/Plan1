@@ -87,5 +87,59 @@ namespace BusinessEntites.Users
 
         [DataMember]
         public int DayBreakAttractionId { get; set; }
+
+        [DataMember]
+        public int NoOfCars { get; set; }
+
+        [DataMember]
+        public int AverageMileage { get; set; }
+
+        [DataMember]
+        public int NoOfRooms { get; set; }
+
+        [DataMember]
+        public decimal BreakFastExpense { get; set; }
+
+        [DataMember]
+        public decimal LunchExpense { get; set; }
+
+        [DataMember]
+        public decimal BreakExpense { get; set; }
+
+        [DataMember]
+        public decimal DayBreakExpense { get; set; }
+
+        [DataMember]
+        public decimal DinnerExpense { get; set; }
+
+        [DataMember]
+        public decimal CarRentalExpense { get; set; }
+
+        [DataMember]
+        public bool IsNoOfCarsUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsAverageMileageUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsCarRentalExpenseUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsBreakFastExpenseUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsLunchExpenseUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsBreakExpenseUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsDinnerExpenseUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsDayBreakExpenseUserUpdated { get; set; }
+
+        [DataMember]
+        public bool IsNoOfRoomsUserUpdated { get; set; }
     }
 }

@@ -149,7 +149,7 @@ function PublicFilterAttractions(angularScope, http) {
 }
 
 function Public_GetOrderOfAttractionVisit(angularScope, http) {
-
+    
     
     var OrderOfAttractionListTemp = [];
     var OrderOfAttractionListTempSub = {};
@@ -197,18 +197,19 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
     $.each(angularScope.UpdatedBreaks,
         function(key, value) {
             var temp = {};
-            temp.RequestDate = value.RequestDate;
-            temp.UpdateDayEndTime = convertTo24Hour(value.UpdateDayEndTime);
-            temp.UpdateDayStartTime = convertTo24Hour(value.UpdateDayStartTime);
-            temp.IsUserInterestedLunchBreak = value.IsUserInterestedLunchBreak;
-            temp.UpdatedLunchTime = convertTo24Hour(value.UpdatedLunchTime);
-            temp.UpdatedLunchMinimumTime = convertTo24Hour(value.UpdatedLunchMinimumTime);
             temp.IsUserInterestedBreak = value.IsUserInterestedBreak;
-            temp.UpdatedBreakTime = convertTo24Hour(value.UpdatedBreakTime);
-            temp.UpdatedBreakMinimumTime = convertTo24Hour(value.UpdatedBreakMinimumTime);
-            temp.IsUserInterestedDinnerBreak = value.IsUserInterestedDinnerBreak;
+            temp.IsUserInterestedDayBreak = value.IsUserInterestedDayBreak;
+            temp.UpdateDayStartTime = convertTo24Hour(value.UpdateDayStartTime);
             temp.UpdatedDinnerTime = convertTo24Hour(value.UpdatedDinnerTime);
             temp.UpdateDinnerMinimumTime = convertTo24Hour(value.UpdateDinnerMinimumTime);
+            temp.UpdatedBreakMinimumTime = convertTo24Hour(value.UpdatedBreakMinimumTime);
+            temp.UpdatedLunchTime = convertTo24Hour(value.UpdatedLunchTime);
+            temp.UpdatedLunchMinimumTime = convertTo24Hour(value.UpdatedLunchMinimumTime);
+            temp.IsUserInterestedLunchBreak = value.IsUserInterestedLunchBreak;
+            temp.UpdatedBreakTime = convertTo24Hour(value.UpdatedBreakTime);
+            temp.UpdateDayEndTime = convertTo24Hour(value.UpdateDayEndTime);
+            temp.IsUserInterestedDinnerBreak = value.IsUserInterestedDinnerBreak;
+            temp.RequestDate = value.RequestDate;
             temp.IsBreakAdded = value.IsBreakAdded;
             temp.BreakAttractionId = value.BreakAttractionId;
             temp.IsLunchAdded = value.IsLunchAdded;
@@ -220,6 +221,26 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
             temp.UpdatedBreakFastMinimumTime = convertTo24Hour(value.UpdatedBreakFastMinimumTime);
             temp.IsBreakFastAdded = value.IsBreakFastAdded;
             temp.BreakFastAttractionId = value.BreakFastAttractionId;
+            temp.IsDayBreakAdded = value.IsDayBreakAdded;
+            temp.DayBreakAttractionId = value.DayBreakAttractionId;
+            temp.NoOfCars = value.NoOfCars;
+            temp.AverageMileage = value.AverageMileage;
+            temp.BreakExpense = value.BreakExpense;
+            temp.BreakFastExpense = value.BreakFastExpense;
+            temp.CarRentalExpense = value.CarRentalExpense;
+            temp.DayBreakExpense = value.DayBreakExpense;
+            temp.LunchExpense = value.LunchExpense;
+            temp.NoOfRooms = value.NoOfRooms;
+            temp.DinnerExpense = value.DinnerExpense;
+            temp.IsNoOfCarsUserUpdated = value.IsNoOfCarsUserUpdated;
+            temp.IsAverageMileageUserUpdated = value.IsAverageMileageUserUpdated;
+            temp.IsCarRentalExpenseUserUpdated = value.IsCarRentalExpenseUserUpdated;
+            temp.IsBreakFastExpenseUserUpdated = value.IsBreakFastExpenseUserUpdated;
+            temp.IsLunchExpenseUserUpdated = value.IsLunchExpenseUserUpdated;
+            temp.IsBreakExpenseUserUpdated = value.IsBreakExpenseUserUpdated;
+            temp.IsDinnerExpenseUserUpdated = value.IsDinnerExpenseUserUpdated;
+            temp.IsDayBreakExpenseUserUpdated = value.IsDayBreakExpenseUserUpdated;
+            temp.IsNoOfRoomsUserUpdated = value.IsNoOfRoomsUserUpdated;
 
             updatedBreaks.push(temp);
         });
@@ -270,26 +291,58 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
 
 
 //Gettigng the attraction information
-function TourInformation(divId,tourInformation,breakInformation) {
-    
+function TourInformation(divId, tourInformation, breakInformation) {
+
 
     var x = {
-        "RequestDate": breakInformation.RequestDate,
-        "IsUserInterestedDayBreak": breakInformation.IsUserInterestedDayBreak,
-        "UpdateDayEndTime": breakInformation.UpdateDayEndTime,
-        "UpdateDayStartTime": breakInformation.UpdateDayStartTime,
-        "IsUserInterestedLunchBreak": breakInformation.IsUserInterestedLunchBreak,
-        "UpdatedLunchTime": breakInformation.UpdatedLunchTime,
-        "UpdatedLunchMinimumTime": breakInformation.UpdatedLunchMinimumTime,
-        "IsUserInterestedBreak": breakInformation.IsUserInterestedBreak,
-        "UpdatedBreakTime": breakInformation.UpdatedBreakTime,
-        "UpdatedBreakMinimumTime": breakInformation.UpdatedBreakMinimumTime,
-        "IsUserInterestedDinnerBreak": breakInformation.IsUserInterestedDinnerBreak,
-        "UpdatedDinnerTime": breakInformation.UpdatedDinnerTime,
-        "UpdateDinnerMinimumTime": breakInformation.UpdateDinnerMinimumTime
+        "IsUserInterestedBreak" : breakInformation.IsUserInterestedBreak,
+    "IsUserInterestedDayBreak" : breakInformation.IsUserInterestedDayBreak,
+    "UpdateDayStartTime" : breakInformation.UpdateDayStartTime,
+    "UpdatedDinnerTime" : breakInformation.UpdatedDinnerTime,
+    "UpdateDinnerMinimumTime" : breakInformation.UpdateDinnerMinimumTime,
+    "UpdatedBreakMinimumTime" : breakInformation.UpdatedBreakMinimumTime,
+    "UpdatedLunchTime" : breakInformation.UpdatedLunchTime,
+    "UpdatedLunchMinimumTime" : breakInformation.UpdatedLunchMinimumTime,
+    "IsUserInterestedLunchBreak" : breakInformation.IsUserInterestedLunchBreak,
+    "UpdatedBreakTime" : breakInformation.UpdatedBreakTime,
+    "UpdateDayEndTime" : breakInformation.UpdateDayEndTime,
+    "IsUserInterestedDinnerBreak" : breakInformation.IsUserInterestedDinnerBreak,
+    "RequestDate" : breakInformation.RequestDate,
+    "IsBreakAdded" : breakInformation.IsBreakAdded,
+    "BreakAttractionId" : breakInformation.BreakAttractionId,
+    "IsLunchAdded" : breakInformation.IsLunchAdded,
+    "LunchAttractionId" : breakInformation.LunchAttractionId,
+    "IsDinnerAdded" : breakInformation.IsDinnerAdded,
+    "DinnerAttractionId" : breakInformation.DinnerAttractionId,
+    "IsUserInterestedBreakFast" : breakInformation.IsUserInterestedBreakFast,
+    "UpdatedBreakFastTime" : breakInformation.UpdatedBreakFastTime,
+    "UpdatedBreakFastMinimumTime" : breakInformation.UpdatedBreakFastMinimumTime,
+    "IsBreakFastAdded" : breakInformation.IsBreakFastAdded,
+    "BreakFastAttractionId" : breakInformation.BreakFastAttractionId,
+    "IsDayBreakAdded" : breakInformation.IsDayBreakAdded,
+    "DayBreakAttractionId" : breakInformation.DayBreakAttractionId,
+    "NoOfCars" : breakInformation.NoOfCars,
+    "AverageMileage" : breakInformation.AverageMileage,
+    "BreakExpense" : breakInformation.BreakExpense,
+    "BreakFastExpense" : breakInformation.BreakFastExpense,
+    "CarRentalExpense" : breakInformation.CarRentalExpense,
+    "DayBreakExpense" : breakInformation.DayBreakExpense,
+    "LunchExpense" : breakInformation.LunchExpense,
+    "NoOfRooms" : breakInformation.NoOfRooms,
+    "DinnerExpense" : breakInformation.DinnerExpense,
+    "IsNoOfCarsUserUpdated" : breakInformation.IsNoOfCarsUserUpdated,
+    "IsAverageMileageUserUpdated" : breakInformation.IsAverageMileageUserUpdated,
+    "IsCarRentalExpenseUserUpdated" : breakInformation.IsCarRentalExpenseUserUpdated,
+    "IsBreakFastExpenseUserUpdated" : breakInformation.IsBreakFastExpenseUserUpdated,
+    "IsLunchExpenseUserUpdated" : breakInformation.IsLunchExpenseUserUpdated,
+    "IsBreakExpenseUserUpdated" : breakInformation.IsBreakExpenseUserUpdated,
+    "IsDinnerExpenseUserUpdated" : breakInformation.IsDinnerExpenseUserUpdated,
+    "IsDayBreakExpenseUserUpdated" : breakInformation.IsDayBreakExpenseUserUpdated,
+    "IsNoOfRoomsUserUpdated" : breakInformation.IsNoOfRoomsUserUpdated
+
     };
 
-
+    
     
     var jsonObject = { "public_FilterAttractions": tourInformation, "breakInformation": x, "divId": divId };
     //var jsonBrak = ;

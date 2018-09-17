@@ -34,6 +34,26 @@ BEGIN
 	  ,BreakFastAttractionId
 	  ,IsDayBreakAdded
 	  ,DayBreakAttractionId
+	  ,NoOfCars        
+	  ,AverageMileage	
+	  ,NoOfRooms		
+	  ,BreakFastExpense
+	  ,LunchExpense	
+	  ,BreakExpense	
+	  ,DayBreakExpense
+	  ,CarRentalExpense
+	  ,NoOfAttractions
+	  ,Distance
+	  ,DinnerExpense
+	  ,IsNoOfCarsUserUpdated  
+	,IsAverageMileageUserUpdated 
+	,IsCarRentalExpenseUserUpdated 
+	,IsBreakFastExpenseUserUpdated 
+	,IsLunchExpenseUserUpdated 
+	,IsBreakExpenseUserUpdated 
+	,IsDinnerExpenseUserUpdated 
+	,IsDayBreakExpenseUserUpdated 
+	,IsNoOfRoomsUserUpdated 
   FROM [dbo].[UserTripDates] WITH(NOLOCK)
   WHERE UserTripId = @UserTripId
 END

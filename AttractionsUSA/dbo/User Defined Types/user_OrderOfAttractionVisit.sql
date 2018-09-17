@@ -13,6 +13,7 @@
 	[EventEndTime] [datetime] NULL,
 	[IsLunchDinnerBreakTime] [int] NULL,
 	[IsDistanceCalculationMissing] [bit] NULL,
-	[WeekDayId] [int] NULL
+	[WeekDayId] [int] NULL,
+	[BreakInformationId] [int] NULL
 )
 GO

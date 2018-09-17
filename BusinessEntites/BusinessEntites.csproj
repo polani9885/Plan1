@@ -61,6 +61,7 @@
     <Compile Include="Coordinate.cs" />
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
     <Compile Include="Custom\InputParameters.cs" />
+    <Compile Include="Custom\StepsConsolidated.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\Entitydebug_log.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityMatched_substrings.cs" />
@@ -70,7 +71,9 @@
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Distance.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Duration.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Legs.cs" />
+    <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Location.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Routes.cs" />
+    <Compile Include="EntityGoogleMaps\EntityNearBySearch\Distance\Steps.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\geometryList.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\locationList.cs" />
     <Compile Include="EntityGoogleMaps\EntityNearBySearch\NearBySearchEntity.cs" />

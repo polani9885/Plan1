@@ -34,6 +34,10 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.FilterNearLocations = [];
     $scope.AttractionPhotoReference = [];
 
+    $scope.OneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    
+
 
 
     
@@ -322,6 +326,9 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     //Ajax return data for the order of attractions
     $scope.AttractionInformationRendaring = function (data) {
         
+        //Break information is updating because for Expense calculation
+        User_RequestedBreaks($scope, $http);
+
         //Google Maps data binding
         $scope.GoogleMapMarks(data);
         
@@ -347,12 +354,15 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     if (!jQuery.isEmptyObject(value.ListGetOrderOfAttractionVisit)) {
                         $.each(value.ListGetOrderOfAttractionVisit,
                             function (googleKey, googleValue) {
+
+                                
                                 
                                 if (googleValue.SourceLatitude !== null &&
                                     googleValue.SourceLongitude !== null && googleValue.DestinationLatitude!== null && 
                                     googleValue.DestinationLongitude !== null
                                 ) {
 
+                                    
                                     if (isFirst) {
                                         isFirst = false;
                                         googleMaps = new GMaps({
@@ -408,6 +418,9 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
                                     }
                                 }
+
+                                
+                               
                             });
 
                         googleMaps.drawPolyline({
@@ -650,33 +663,43 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     return false;
                 }
             });
+        
 
         switch ($("#hdSelectedBreakType").val()) {
-        case "Break Time":
-        {
-            $scope.UpdatedBreaks[indexCounter].IsBreakAdded = true;
-            $scope.UpdatedBreaks[indexCounter].BreakAttractionId = attractionInfo.AttractionsId;
-            break;
-        }
-        case "Lunch Time":
-        {
-            $scope.UpdatedBreaks[indexCounter].IsLunchAdded = true;
-            $scope.UpdatedBreaks[indexCounter].LunchAttractionId = attractionInfo.AttractionsId;
-            break;
-        }
-        case "Dinner Time":
-        {
-            $scope.UpdatedBreaks[indexCounter].IsDinnerAdded = true;
-            $scope.UpdatedBreaks[indexCounter].DinnerAttractionId = attractionInfo.AttractionsId;
-            break;
-        }
-        case "Break Fast":
+        case "1":
         {
             $scope.UpdatedBreaks[indexCounter].IsBreakFastAdded = true;
             $scope.UpdatedBreaks[indexCounter].BreakFastAttractionId = attractionInfo.AttractionsId;
             break;
         }
+        case "2":
+        {
+            $scope.UpdatedBreaks[indexCounter].IsLunchAdded = true;
+            $scope.UpdatedBreaks[indexCounter].LunchAttractionId = attractionInfo.AttractionsId;
+            break;
         }
+        case "3":
+        {
+            $scope.UpdatedBreaks[indexCounter].IsBreakAdded = true;
+            $scope.UpdatedBreaks[indexCounter].BreakAttractionId = attractionInfo.AttractionsId;
+            break;
+        }
+        case "4":
+        {
+            $scope.UpdatedBreaks[indexCounter].IsDinnerAdded = true;
+            $scope.UpdatedBreaks[indexCounter].DinnerAttractionId = attractionInfo.AttractionsId;
+            break;
+        }
+        case "5":
+        {
+            $scope.UpdatedBreaks[indexCounter].IsDayBreakAdded = true;
+            $scope.UpdatedBreaks[indexCounter].DayBreakAttractionId = attractionInfo.AttractionsId;
+            break;
+        }
+        }
+
+        $("#addingBreak")
+            .dialog("close");
 
         Public_GetOrderOfAttractionVisit($scope, $http);
 
@@ -708,7 +731,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $scope.UpdatedBreaks[indexCounter].IsUserInterestedDinnerBreak = $("#" + divId + "_IsUserInterestedDinnerBreak").prop('checked');
         $scope.UpdatedBreaks[indexCounter].UpdatedDinnerTime = $("#" + divId + "_UpdatedDinnerTime").val();
         $scope.UpdatedBreaks[indexCounter].UpdateDinnerMinimumTime = $("#" + divId + "_UpdateDinnerMinimumTime").val();
-        $scope.UpdatedBreaks[indexCounter].IsUserInterestedBreakFast = $("#" + divId + "_IsUserInterestedBreakFast").val();
+        $scope.UpdatedBreaks[indexCounter].IsUserInterestedBreakFast = $("#" + divId + "_IsUserInterestedBreakFast").prop('checked');
         $scope.UpdatedBreaks[indexCounter].UpdatedBreakFastTime = $("#" + divId + "_UpdatedBreakFast").val();
         $scope.UpdatedBreaks[indexCounter].UpdatedBreakFastMinimumTime = $("#" + divId + "_UpdatedBreakFastMinimumTime").val();
 
@@ -754,6 +777,83 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     };
 
 
+    $scope.DayExpenseInformationUpdate = function (divId,strId) {
+
+        var indexCounter = 0;
+        $.each($scope.UpdatedBreaks,
+            function (key, value) {
+
+                if (divId === value.divId) {
+                    indexCounter = key;
+                    return false;
+                }
+            });
+
+        switch (strId) {
+        case divId + "_NoOfCars":
+        {
+            $scope.UpdatedBreaks[indexCounter].NoOfCars = $("#" + divId + "_NoOfCars").val();
+            $scope.UpdatedBreaks[indexCounter].IsNoOfCarsUserUpdated = true;
+            break;
+        }
+        case divId + "_AverageMileage":
+        {
+            $scope.UpdatedBreaks[indexCounter].AverageMileage = $("#" + divId + "_AverageMileage").val();
+            $scope.UpdatedBreaks[indexCounter].IsAverageMileageUserUpdated = true;
+
+
+            break;
+        }
+        case divId + "_CarRentalExpense":
+        {
+            $scope.UpdatedBreaks[indexCounter].CarRentalExpense = $("#" + divId + "_CarRentalExpense").val();
+            $scope.UpdatedBreaks[indexCounter].IsCarRentalExpenseUserUpdated = true;
+            break;
+        }
+        case divId + "_NoOfRooms":
+        {
+            $scope.UpdatedBreaks[indexCounter].NoOfRooms = $("#" + divId + "_NoOfRooms").val();
+            $scope.UpdatedBreaks[indexCounter].IsNoOfRoomsUserUpdated = true;
+            break;
+        }
+        case divId + "_DayBreakExpense":
+        {
+            $scope.UpdatedBreaks[indexCounter].DayBreakExpense = $("#" + divId + "_DayBreakExpense").val();
+            $scope.UpdatedBreaks[indexCounter].IsDayBreakExpenseUserUpdated = true;
+            break;
+        }
+        case divId + "_BreakFastExpense":
+        {
+            $scope.UpdatedBreaks[indexCounter].BreakFastExpense = $("#" + divId + "_BreakFastExpense").val();
+            $scope.UpdatedBreaks[indexCounter].IsBreakFastExpenseUserUpdated = true;
+            break;
+        }
+        case divId + "_LunchExpense":
+        {
+            $scope.UpdatedBreaks[indexCounter].LunchExpense = $("#" + divId + "_LunchExpense").val();
+            $scope.UpdatedBreaks[indexCounter].IsLunchExpenseUserUpdated = true;
+            break;
+        }
+        case divId + "_BreakExpense":
+        {
+            $scope.UpdatedBreaks[indexCounter].BreakExpense = $("#" + divId + "_BreakExpense").val();
+            $scope.UpdatedBreaks[indexCounter].IsBreakExpenseUserUpdated = true;
+            break;
+        }
+        case divId + "_DinnerExpense":
+        {
+            $scope.UpdatedBreaks[indexCounter].DinnerExpense = $("#" + divId + "_DinnerExpense").val();
+            $scope.UpdatedBreaks[indexCounter].IsDinnerExpenseUserUpdated = true;
+            break;
+        }
+        }
+
+        
+        Public_GetOrderOfAttractionVisit($scope, $http);
+
+    };
+
+
     $scope.PlannedTours = function(data) {
         
 
@@ -764,6 +864,11 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 $scope.StartDate = value.StartDate;
                 $scope.SourceAttractionID = value.SourceAttractionID;
                 $scope.DestinationAttractionID = value.DestinationAttractionID;
+                $("#expense_Persons").val(value.NoOfPersons);
+                $("#expense_Cars").val(value.NoOfCars);
+                $("#expense_PerGallon").val(value.CarMileage);
+                $("#expense_PerGallonPrice").val(value.FuelPrice);
+
                 return false;
             });
         UserGetCityList($scope, $http);
@@ -782,6 +887,12 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
             });
         $scope.FilterInterestedAttraction();
         User_RequestedBreaks($scope, $http);
+
+        $scope.UpdateUserReqestOrder();
+        User_GetUserStoredAttractinInfo($scope, $http);
+        User_UserTripBuildStatus($scope, $http);
+
+        $scope.BuildExpenseInfo();
     };
 
     $scope.FilterInterestedAttraction = function() {
@@ -875,13 +986,32 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 temp.LunchAttractionId = value.LunchAttractionId;
                 temp.IsDinnerAdded = value.IsDinnerAdded;
                 temp.DinnerAttractionId = value.DinnerAttractionId;
+                temp.IsDayBreakAdded = value.IsDayBreakAdded;
+                temp.DayBreakAttractionId = value.DayBreakAttractionId;
+                temp.NoOfCars = value.NoOfCars;
+                temp.AverageMileage = value.AverageMileage;
+                temp.NoOfRooms = value.NoOfRooms;
+                temp.BreakFastExpense = value.BreakFastExpense;
+                temp.LunchExpense = value.LunchExpense;
+                temp.BreakExpense = value.BreakExpense;
+                temp.DayBreakExpense = value.DayBreakExpense;
+                temp.CarRentalExpense = value.CarRentalExpense;
+                temp.NoOfAttractions = value.NoOfAttractions;
+                temp.Distance = value.Distance;
+                temp.DinnerExpense = value.DinnerExpense;
+                temp.IsNoOfCarsUserUpdated = value.IsNoOfCarsUserUpdated;
+                temp.IsAverageMileageUserUpdated = value.IsAverageMileageUserUpdated;
+                temp.IsCarRentalExpenseUserUpdated = value.IsCarRentalExpenseUserUpdated;
+                temp.IsBreakFastExpenseUserUpdated = value.IsBreakFastExpenseUserUpdated;
+                temp.IsLunchExpenseUserUpdated = value.IsLunchExpenseUserUpdated;
+                temp.IsBreakExpenseUserUpdated = value.IsBreakExpenseUserUpdated;
+                temp.IsDinnerExpenseUserUpdated = value.IsDinnerExpenseUserUpdated;
+                temp.IsDayBreakExpenseUserUpdated = value.IsDayBreakExpenseUserUpdated;
+                temp.IsNoOfRoomsUserUpdated = value.IsNoOfRoomsUserUpdated;
+
                 temp.divId = "tab_" + value.RequestDate.replace("/", "_").replace("/", "_");
                 $scope.UpdatedBreaks.push(temp);
             });
-        
-        $scope.UpdateUserReqestOrder();
-        User_GetUserStoredAttractinInfo($scope, $http);
-        User_UserTripBuildStatus($scope, $http);
     }
 
 
@@ -979,6 +1109,96 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         //debugger;
         $scope.ClickMainCategorySelected($scope.MasterCategoryList[0].CategoryId);
     }
+
+
+    $scope.BuildExpenseInfo = function () {
+        
+        var attractionCount = 0;
+        var distance = 0;
+        var BreakFastExpense = 0;
+        var LunchExpense = 0;
+        var BreakExpense = 0;
+        var DayBreakExpense = 0;
+        var CarRentalExpense = 0;
+        var DinnerExpense = 0;
+        var FuelExpense = 0;
+        var TotalExpense = 0;
+
+        $.each($scope.UpdatedBreaks,
+            function(key, value) {
+                attractionCount = attractionCount + value.NoOfAttractions;
+                distance = distance + parseFloat(value.Distance);
+                BreakFastExpense = BreakFastExpense + (value.BreakFastExpense * $("#expense_Persons").val());
+                LunchExpense = LunchExpense +
+                    (value.LunchExpense * ($("#expense_Persons").val() <= 0 ? 1 : $("#expense_Persons").val()));
+                BreakExpense = BreakExpense + (value.BreakExpense * $("#expense_Persons").val());
+                DayBreakExpense = DayBreakExpense + (value.DayBreakExpense * value.NoOfRooms);
+                CarRentalExpense = CarRentalExpense + value.CarRentalExpense;
+                DinnerExpense = DinnerExpense + (value.DinnerExpense * $("#expense_Persons").val());
+            });
+
+        FuelExpense = (distance * $("#expense_PerGallonPrice").val()) * $("#expense_Cars").val();
+
+        TotalExpense = BreakFastExpense +
+            LunchExpense +
+            BreakExpense +
+            DayBreakExpense +
+            CarRentalExpense +
+            DinnerExpense + FuelExpense;
+        
+
+        $("#expense_Days").html($scope.UpdatedBreaks.length);
+        $("#expense_AttractionsList").html(attractionCount);
+        $("#expense_Distance").html(parseFloat(distance).toFixed(2));
+        $("#expense_BreakFastExpense").html(BreakFastExpense);
+        $("#expense_LunchExpense").html(LunchExpense);
+        $("#expense_BreakExpense").html(BreakExpense);
+        $("#expense_DinnerExpense").html(DinnerExpense);
+        $("#expense_DayExpense").html(DayBreakExpense);
+        $("#expense_RentalExpense").html(CarRentalExpense);
+        $("#expense_FuelExpense").html(FuelExpense.toFixed(2));
+        $("#expense_Expense").html(TotalExpense.toFixed(2));
+
+
+    };
+
+    $scope.TripInfoUpdate = function() {
+        var temp = {
+            NoOfPersons: $("#expense_Persons").val(),
+            NoOfCars: $("#expense_Cars").val(),
+            CarMileage: $("#expense_PerGallon").val(),
+            FuelPrice: $("#expense_PerGallonPrice").val()
+        };
+
+        
+        User_UserTrip_Update($scope, $http, temp);
+
+        $scope.BuildExpenseInfo();
+    };
+
+    $scope.IgnoreMyExpenseChanges = function (divId) {
+        var indexCounter = 0;
+        $.each($scope.UpdatedBreaks,
+            function (key, value) {
+
+                if (divId === value.divId) {
+                    indexCounter = key;
+                    return false;
+                }
+            });
+
+        $scope.UpdatedBreaks[indexCounter].IsNoOfCarsUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsAverageMileageUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsCarRentalExpenseUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsBreakFastExpenseUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsLunchExpenseUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsBreakExpenseUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsDinnerExpenseUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsDayBreakExpenseUserUpdated = false;
+        $scope.UpdatedBreaks[indexCounter].IsNoOfRoomsUserUpdated = false;
+
+        Public_GetOrderOfAttractionVisit($scope, $http);
+    };
 
     $scope.init();
 });

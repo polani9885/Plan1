@@ -109,7 +109,9 @@ namespace CommonFunctions
                     getOrderOfAttractionVisit.DestinationSearchText = internalObjects.DestinationSearchText;
                     getOrderOfAttractionVisit.SourcePhotoUrl = internalObjects.SourcePhotoUrl;
                     getOrderOfAttractionVisit.DestinationPhotoUrl = internalObjects.DestinationPhotoUrl;
+                    getOrderOfAttractionVisit.BreakInformationId = internalObjects.BreakInformationId;
                     listGetOrderOfAttractionVisit.Add(getOrderOfAttractionVisit);
+                    
                 }
                 groupWithDateAttractions.ListGetOrderOfAttractionVisit = listGetOrderOfAttractionVisit;
                 listGroupWithDateAttractions.Add(groupWithDateAttractions);

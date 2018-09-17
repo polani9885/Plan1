@@ -15,6 +15,10 @@ BEGIN
       ,[TravelModeId]
       ,[SourceAttractionId]
       ,[DestinationAttractionId]
+	  ,NoOfPersons
+	  ,NoOfCars
+	  ,CarMileage
+	  ,FuelPrice
   FROM [dbo].[UserTrip]
   WHERE UserId = @UserId
 END

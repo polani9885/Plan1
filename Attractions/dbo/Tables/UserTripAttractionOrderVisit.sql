@@ -45,6 +45,7 @@ CREATE TABLE [dbo].[UserTripAttractionOrderVisit](
 	[CreatedDate] [datetime] NULL,
  [SourcePhotoUrl] VARCHAR(1000) NULL, 
     [DestinationPhotoUrl] VARCHAR(1000) NULL, 
+    [BreakInformationId] INT NULL, 
     CONSTRAINT [PK_UserTripAttractionOrderVisit] PRIMARY KEY CLUSTERED 
 (
 	[UserTripAttractionOrderVisitId] ASC

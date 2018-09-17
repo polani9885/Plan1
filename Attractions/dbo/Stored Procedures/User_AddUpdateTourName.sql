@@ -13,11 +13,19 @@ BEGIN
 			   ([UserId]
 			   ,[TripName]
 			   ,[CreatedDate]
+			   ,NoOfPersons
+			   ,NoOfCars
+			   ,CarMileage
+			   ,FuelPrice
 			   )
 		 VALUES
 			   (@UserId
 			   ,@TripName
 			   ,GETDATE()
+			   ,1
+			   ,1
+			   ,20
+			   ,2.5
 			   )	
 	END
 	ELSE

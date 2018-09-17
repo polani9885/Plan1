@@ -48,5 +48,7 @@ namespace Interfaces
         List<UserTripBuildStatus> User_UserTripBuildStatus(int userTripId);
 
         List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate);
+
+        void User_UserTrip_Update(UserTourInformation userTourInformation);
     }
 }
