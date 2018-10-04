@@ -52,13 +52,15 @@ namespace PlanGoGo.Controllers
         /// <returns></returns>
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0)]
-        public JsonResult GetCityList()
+        public JsonResult GetCityOnCountryId(int countryId)
         {
-            List<public_GetCityList> getCityList = _IGetListValues.Public_GetCityList();
+            List<public_GetCityList> getCityList = _IGetListValues.GetCityOnCountryId(countryId);
 
             return jsonReturn.JsonResult<public_GetCityList>(getCityList);
             
-        }        
+        }
+
+        
 
         /// <summary>
         /// Getting the Category List
@@ -200,8 +202,6 @@ namespace PlanGoGo.Controllers
 
 
             }
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder = new List<UserTable_AttractionRequestOrder>();
-
 
 
             var listGroupWithDateAttractions = new List<GroupWithDateAttractions>();
@@ -211,9 +211,9 @@ namespace PlanGoGo.Controllers
 
                 listGroupWithDateAttractions =
                     attractionInformationBinding.UserRequestedAttractionInformation(inputParameters.TravelModeId,
-                        inputParameters.SourceAttractionID, inputParameters.DestinationAttractionID, attractionList,
-                        inputParameters.StartDate, inputParameters.StartTime, listGetOrderOfAttractionVisit,
-                        inputParameters.CountryId, userTable_UpdatedBreaks, userTable_AttractionRequestOrder,userEntity.UserTripId);
+                         attractionList,
+                         listGetOrderOfAttractionVisit,
+                        inputParameters.CountryId, userTable_UpdatedBreaks, userEntity.UserTripId);
 
             }
 

@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MissingDistanceAttractionsRecords.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MissingDistanceAttractionsRecords.xsd" MetadataType="Schema" ID="4bf31f4d-38ee-460c-bb5d-296cc20137cd" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd1" />
-    <MetadataFile FileName="MissingDistanceAttractionsRecords.disco" MetadataType="Disco" ID="bbc469a9-a014-4fb0-8624-a369591cd416" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?disco" />
-    <MetadataFile FileName="MissingDistanceAttractionsRecords1.xsd" MetadataType="Schema" ID="a4cab6d0-e2e0-466c-8d02-2a6a2b1623a6" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd2" />
-    <MetadataFile FileName="MissingDistanceAttractionsRecords.wsdl" MetadataType="Wsdl" ID="811bd6cf-5535-4b70-9cf3-dd31f4baddb6" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?wsdl" />
-    <MetadataFile FileName="MissingDistanceAttractionsRecords2.xsd" MetadataType="Schema" ID="1b422855-4273-4d5e-a778-b557accf492f" SourceId="1" SourceUrl="http://localhost:23457/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd0" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords.xsd" MetadataType="Schema" ID="4bf31f4d-38ee-460c-bb5d-296cc20137cd" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd1" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords.disco" MetadataType="Disco" ID="bbc469a9-a014-4fb0-8624-a369591cd416" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MissingDistanceAttractionsRecords.svc?disco" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords1.xsd" MetadataType="Schema" ID="a4cab6d0-e2e0-466c-8d02-2a6a2b1623a6" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd2" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords.wsdl" MetadataType="Wsdl" ID="811bd6cf-5535-4b70-9cf3-dd31f4baddb6" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MissingDistanceAttractionsRecords.svc?wsdl" />
+    <MetadataFile FileName="MissingDistanceAttractionsRecords2.xsd" MetadataType="Schema" ID="1b422855-4273-4d5e-a778-b557accf492f" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MissingDistanceAttractionsRecords.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

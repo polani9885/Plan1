@@ -114,7 +114,8 @@ function TripNameInfo() {
             userTripId = 0;
         }
         
-        User_AddUpdateTourName($("#txtTripName").val(), userTripId);
+
+        User_AddUpdateTourName($("#txtTripName").val(), userTripId, $("#ddlCountry").val());
     }
     else {
         $("#lblTourError").show();

@@ -1,7 +1,10 @@
 ﻿using BusinessEntites;
+using BusinessEntites.Admin;
 using BusinessEntites.Custom;
+using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 using BusinessEntites.Users;
 using CommonFunctions;
+using GoogleMapsAPI.Features;
 using Interfaces;
 using PlanGoGo.Helper;
 using PlanGoGo.Models.UserControls;
@@ -10,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
+using BusinessEntites.JsonParameters;
 
 namespace PlanGoGo.Controllers
 {
@@ -17,11 +22,14 @@ namespace PlanGoGo.Controllers
     {
 
         IUser _IUserInfo;
-        
+        private ICountry _ICountry;
+        private readonly AutoCompleteFeature autoCompleteFeature = new AutoCompleteFeature();
+        private readonly GetNearestInformation getNearestInformation = new GetNearestInformation();
 
-        public UserControlsController(IUser IUserInfo)
+        public UserControlsController(IUser IUserInfo, ICountry iCountry)
         {
             _IUserInfo = IUserInfo;
+            _ICountry = iCountry;
         }
 
         // GET: UserControls
@@ -150,9 +158,9 @@ namespace PlanGoGo.Controllers
         }
 
         [HttpGet]
-        public JsonResult User_AddUpdateTourName(string tourName, int userTripId)
+        public JsonResult User_AddUpdateTourName(string tourName, int userTripId,int countryId)
         {
-            UserTourInformation result = _IUserInfo.User_AddUpdateTourName(tourName,userTripId,userEntity.UserId);
+            UserTourInformation result = _IUserInfo.User_AddUpdateTourName(tourName,userTripId,userEntity.UserId, countryId);
 
             return jsonReturn.JsonResult<UserTourInformation>(result);
         }
@@ -244,6 +252,89 @@ namespace PlanGoGo.Controllers
 
             return jsonReturn.JsonResult<UserTourInformation>(result);
         }
+
+
+        [HttpGet]
+        public JsonResult AutoComplte(string address,int countryId)
+        {
+            List<EntityPredictions> result = new List<EntityPredictions>();
+
+            result = autoCompleteFeature.SearchString(address,
+                _ICountry.Admin_GetCountry().Where(x => x.CountryId == countryId).Select(y => y.CountryShortName)
+                    .FirstOrDefault());
+
+            return jsonReturn.JsonResult<EntityPredictions>(result);
+        }
+
+
+        [HttpGet]
+        public JsonResult AutoComplteBreakInfo(string address, int countryId,string latitude,string longitude,int distance)
+        {
+            List<ResultsList> result = new List<ResultsList>();
+
+            result = getNearestInformation.NearestLocationAutocomplete(latitude, longitude,
+                Convert.ToInt32(distance / 0.00062137).ToString(), address);
+
+            return jsonReturn.JsonResult<ResultsList>(result);
+        }
+
+        [HttpGet]
+        public JsonResult GetCountry()
+        {
+            List<MasterCountryDTO> result = new List<MasterCountryDTO>();
+
+            result = _ICountry.Admin_GetCountry();
+
+            return jsonReturn.JsonResult<MasterCountryDTO>(result);
+        }
+
+        [HttpGet]
+        public JsonResult UserRequestedAttraction(string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        {
+            List<MasterCountryDTO> result = new List<MasterCountryDTO>();
+            if (!string.IsNullOrEmpty(breakDate.Trim()))
+            {
+                breakDate = breakDate.Replace("tab_", string.Empty).Replace('_', '-').Trim();
+            }
+            
+
+            _IUserInfo.User_UserRequestedAttraction(userEntity.UserTripId,address,countryId, isSource, startDate,googleSearchText,breakType,breakDate);
+
+            return jsonReturn.JsonResult<MasterCountryDTO>(result);
+        }
+
+        [HttpGet]
+        public JsonResult GetTourInformationOnTripId()
+        {
+            UserTourInformation result = new UserTourInformation();
+
+            result = _IUserInfo.User_GetTourInformationOnTripId(userEntity.UserTripId, userEntity.UserId);
+
+            return jsonReturn.JsonResult<UserTourInformation>(result);
+        }
+
+
+        [HttpGet]
+        public JsonResult GetOrderOfRequest(int countryId)
+        {
+            List<UserTable_AttractionRequestOrder> result = new List<UserTable_AttractionRequestOrder>();
+
+            result = _IUserInfo.User_GetOrderOfRequest(userEntity.UserTripId, countryId );
+
+            return jsonReturn.JsonResult<UserTable_AttractionRequestOrder>(result);
+        }
+
+
+        [HttpPost]
+        public JsonResult InsertUserRequested(RequestOrder requestOrder)
+        {
+            List<UserTable_AttractionRequestOrder> result = new List<UserTable_AttractionRequestOrder>();
+
+            _IUserInfo.User_InsertUserRequested(userEntity.UserTripId, requestOrder.attractionRequestOrder);
+
+            return jsonReturn.JsonResult<UserTable_AttractionRequestOrder>(result);
+        }
+
 
 
 

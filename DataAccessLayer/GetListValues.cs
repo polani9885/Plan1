@@ -31,6 +31,27 @@ namespace DataAccessLayer
             }
         }
 
+
+
+        public List<public_GetCityList> GetCityOnCountryId(int countryId)
+        {
+            try
+            {
+                List<public_GetCityList> _public_GetCityList = SqlHelper.QuerySP<public_GetCityList>(
+                    "public_GetCityListOnCountryId", new
+                    {
+                        CountryId = countryId
+                    }).ToList();
+                return _public_GetCityList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
         /// <summary>
         /// Getting the category information
         /// </summary>
@@ -87,10 +108,8 @@ namespace DataAccessLayer
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
-            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder)
+            List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
         {
             try
             {
@@ -105,16 +124,10 @@ namespace DataAccessLayer
                         new
                         {
                             TravelModeId = TravelModeId,
-                            SourceAttractionID = SourceAttractionID,
-                            DestinationAttractionID = DestinationAttractionID,
                             AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(AttractionID),
-                            StartDate = StartDate == string.Empty ? null : StartDate,
-                            StartTime = StartTime == string.Empty ? null : StartTime,
                             UserBreakTime =
                             CommonObjects.Convert.ToDataTable<UserTable_UpdatedBreaks>(userTable_UpdatedBreaks),
-                            AttractionReqOrder =
-                            CommonObjects.Convert.ToDataTable<UserTable_AttractionRequestOrder>(
-                                userTable_AttractionRequestOrder),
+                            UserTripId= userTripId
                             //UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit)
                         }).ToList();
                 return _public_GetOrderOfAttractionVisit;

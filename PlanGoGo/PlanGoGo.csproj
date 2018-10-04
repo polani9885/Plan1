@@ -15,7 +15,7 @@
     <AssemblyName>PlanGoGo</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1323,6 +1323,10 @@
       <Project>{21B5F30C-5A5E-4C8C-8A02-6C19A2426639}</Project>
       <Name>CommonFunctions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoogleMapsAPI\GoogleMapsAPI.csproj">
+      <Project>{f3dfcacc-3110-4d28-9344-2c47923da332}</Project>
+      <Name>GoogleMapsAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>
       <Name>Interfaces</Name>
@@ -1350,7 +1354,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52263/</IISUrl>
+          <IISUrl>http://localhost/PlanGoGo</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -87,11 +87,11 @@ namespace ServiceClient.Services
             }
         }
 
-        public UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId)
+        public UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId,int countryId)
         {
             try
             {
-                return _userService.User_AddUpdateTourName(tourName, userTripId, userId);
+                return _userService.User_AddUpdateTourName(tourName, userTripId, userId, countryId);
 
             }
             catch (Exception ex)
@@ -130,14 +130,11 @@ namespace ServiceClient.Services
         }
 
         public void User_LogUserTripInformation(int travelModeId,
-            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionID, string startDate,
-            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder, int userTripId)
+            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
-            _userService.User_LogUserTripInformation(travelModeId, sourceAttractionID, destinationAttractionID,
-                attractionID, startDate, startTime, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,
-                userTable_AttractionRequestOrder, userTripId);
+            _userService.User_LogUserTripInformation(travelModeId,
+                attractionID, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,userTripId);
         }
 
         public List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId)
@@ -246,11 +243,63 @@ namespace ServiceClient.Services
             }
             catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        {
+            try
+            {
+                _userService.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate, googleSearchText, breakType, breakDate);
 
+            }
+            catch (Exception e)
+            {
+                throw e;
+                
+            }
+        }
+
+        public UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId)
+        {
+            try
+            {
+                return _userService.User_GetTourInformationOnTripId(userTripId, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+        }
+
+        public List<UserTable_AttractionRequestOrder> User_GetOrderOfRequest(int userTripId, int countryId)
+        {
+            try
+            {
+                return _userService.User_GetOrderOfRequest(userTripId, countryId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+        }
+
+        public void User_InsertUserRequested(int userTripId,
+            List<UserTable_AttractionRequestOrder> attractionRequestOrder)
+        {
+            try
+            {
+                _userService.User_InsertUserRequested(userTripId, attractionRequestOrder);
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+        }
 
 
     }

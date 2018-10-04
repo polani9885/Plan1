@@ -56,7 +56,7 @@ namespace GoogleMapsAPI.Features
             //getDistanceCalculation.CalculateDistance(countryId);
         }
 
-        private void GetAutoCompleteInformation(int countryId, GetPlaceDetails details, MasterCountryScheduler masterCountryScheduler, int attractionsId)
+        public void GetAutoCompleteInformation(int countryId, GetPlaceDetails details, MasterCountryScheduler masterCountryScheduler, int attractionsId,int userTripId = 0)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace GoogleMapsAPI.Features
                             attractionDto.CityShortName =
                                 GetShortNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
                                     .address_components, "locality");
-                            dALSchedulers.Scheduler_InsertAttractionAuto(attractionDto, countryId);
+                            dALSchedulers.Scheduler_InsertAttractionAuto(attractionDto, countryId, userTripId);
 
                             GetPlaceDetails(attractionDto.PlaceId, attractionsId, countryId);
                         }
@@ -369,6 +369,7 @@ namespace GoogleMapsAPI.Features
                             GetShortNameAddressElement(placeDetailsInfo.result
                                 .address_components, "locality");
 
+                        attractionDto.AttractionName = placeDetailsInfo.result.name;
 
 
 

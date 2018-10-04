@@ -29,8 +29,7 @@ namespace GoogleMapsAPI.Features
                 List<UserTable_UpdatedBreaksTemp> breakInformation = userDal.User_RequestedBreaks(tourdata.UserTripId);
 
                 List<userTable_OnlyId> userattraction = new List<userTable_OnlyId>();
-
-                List<UserTable_AttractionRequestOrder>  requestOrder = new List<UserTable_AttractionRequestOrder>();
+                
 
                 List<UserTable_UpdatedBreaks> breakInfo = breakInformation
                     .Where(y => !string.IsNullOrEmpty(y.UpdateDayEndTime)
@@ -44,9 +43,7 @@ namespace GoogleMapsAPI.Features
                     ).Select(x => new UserTable_UpdatedBreaks
                     {
 
-                        RequestDate = Convert.ToDateTime(x.RequestDate),
                         IsUserInterestedBreak = x.IsUserInterestedBreak,
-                        UpdateDayEndTime = TimeSpan.Parse(x.UpdateDayEndTime),
                         IsUserInterestedDayBreak = x.IsUserInterestedDayBreak,
                         UpdateDayStartTime = TimeSpan.Parse(x.UpdateDayStartTime),
                         UpdatedDinnerTime = TimeSpan.Parse(x.UpdatedDinnerTime),
@@ -56,7 +53,41 @@ namespace GoogleMapsAPI.Features
                         UpdatedLunchMinimumTime = TimeSpan.Parse(x.UpdatedLunchMinimumTime),
                         IsUserInterestedLunchBreak = x.IsUserInterestedLunchBreak,
                         UpdatedBreakTime = TimeSpan.Parse(x.UpdatedBreakTime),
-                        IsUserInterestedDinnerBreak = x.IsUserInterestedDinnerBreak
+                        UpdateDayEndTime = TimeSpan.Parse(x.UpdateDayEndTime),
+                        IsUserInterestedDinnerBreak = x.IsUserInterestedDinnerBreak,
+                        RequestDate = Convert.ToDateTime(x.RequestDate),
+                        IsBreakAdded = x.IsBreakAdded,
+                        BreakAttractionId = x.BreakAttractionId,
+                        IsLunchAdded = x.IsLunchAdded,
+                        LunchAttractionId = x.LunchAttractionId,
+                        IsDinnerAdded = x.IsDinnerAdded,
+                        DinnerAttractionId = x.DinnerAttractionId,
+                        IsUserInterestedBreakFast = x.IsUserInterestedBreakFast,
+                        UpdatedBreakFastTime = TimeSpan.Parse(x.UpdatedBreakFastTime),
+                        UpdatedBreakFastMinimumTime = TimeSpan.Parse(x.UpdatedBreakFastMinimumTime),
+                        IsBreakFastAdded = x.IsBreakFastAdded,
+                        BreakFastAttractionId = x.BreakFastAttractionId,
+                        IsDayBreakAdded = x.IsDayBreakAdded,
+                        DayBreakAttractionId = x.DayBreakAttractionId,
+                        NoOfCars = x.NoOfCars,
+                        AverageMileage = x.AverageMileage,
+                        BreakExpense = x.BreakExpense,
+                        BreakFastExpense = x.BreakFastExpense,
+                        CarRentalExpense = x.CarRentalExpense,
+                        DayBreakExpense = x.DayBreakExpense,
+                        LunchExpense = x.LunchExpense,
+                        NoOfRooms = x.NoOfRooms,
+                        DinnerExpense = x.DinnerExpense,
+                        IsNoOfCarsUserUpdated = x.IsNoOfCarsUserUpdated,
+                        IsAverageMileageUserUpdated = x.IsAverageMileageUserUpdated,
+                        IsCarRentalExpenseUserUpdated = x.IsCarRentalExpenseUserUpdated,
+                        IsBreakFastExpenseUserUpdated = x.IsBreakFastExpenseUserUpdated,
+                        IsLunchExpenseUserUpdated = x.IsLunchExpenseUserUpdated,
+                        IsBreakExpenseUserUpdated = x.IsBreakExpenseUserUpdated,
+                        IsDinnerExpenseUserUpdated = x.IsDinnerExpenseUserUpdated,
+                        IsDayBreakExpenseUserUpdated = x.IsDayBreakExpenseUserUpdated,
+                        IsNoOfRoomsUserUpdated = x.IsNoOfRoomsUserUpdated
+
                     }).ToList();
 
 
@@ -69,11 +100,10 @@ namespace GoogleMapsAPI.Features
                 using (AttractionInformationBinding attractionInformation = new AttractionInformationBinding())
                 {
                     attractionInformation.UserRequestedAttractionInformation(tourdata.TravelModeId,
-                        tourdata.SourceAttractionId, tourdata.DestinationAttractionId, userattraction,
-                        tourdata.StartDate,
-                        string.Empty, storedAttractinInfo, tourdata.CountryId,
+                         userattraction,
+                        storedAttractinInfo, tourdata.CountryId,
                         breakInfo,
-                        requestOrder, tourdata.UserTripId);
+                         tourdata.UserTripId);
                 }
 
             }

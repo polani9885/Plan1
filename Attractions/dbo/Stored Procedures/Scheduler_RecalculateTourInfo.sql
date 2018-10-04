@@ -15,8 +15,7 @@ BEGIN
       ,UT.[TravelModeId]
       ,UT.[SourceAttractionId]
       ,UT.[DestinationAttractionId]
-  FROM [dbo].[UserTrip] UT WITH(NOLOCK)
-  JOIN [dbo].[UserTripAttractionOrderVisit] UTAOV WITH(NOLOCK) ON UTAOV.UserTripId = UT.UserTripId
+  FROM [dbo].[UserTrip] UT WITH(NOLOCK)  
   WHERE StartDate IS NOT NULL
   AND CAST(StartDate AS DATE) >= CAST(GETDATE() AS DATE)
   AND CountryId = @CountryId

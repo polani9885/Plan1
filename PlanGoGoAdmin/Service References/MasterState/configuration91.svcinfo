@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IMasterState" contract="MasterState.IMasterState" bindingType="basicHttpBinding" address="http://localhost:23457/Admin/MasterState.svc" bindingConfiguration="BasicHttpBinding_IMasterState">
+    <endpoint name="BasicHttpBinding_IMasterState" contract="MasterState.IMasterState" bindingType="basicHttpBinding" address="http://localhost/PlanGoGoService/Admin/MasterState.svc" bindingConfiguration="BasicHttpBinding_IMasterState">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:23457/Admin/MasterState.svc</serializedValue>
+          <serializedValue>http://localhost/PlanGoGoService/Admin/MasterState.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

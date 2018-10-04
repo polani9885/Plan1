@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/Country.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/Country.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Country.xsd" MetadataType="Schema" ID="3c6dcb59-6458-4e7b-94a3-adf0d32f8c37" SourceId="1" SourceUrl="http://localhost:23457/Admin/Country.svc?xsd=xsd2" />
-    <MetadataFile FileName="Country1.xsd" MetadataType="Schema" ID="dbac355c-736d-4a60-ae5d-d99c9185b29a" SourceId="1" SourceUrl="http://localhost:23457/Admin/Country.svc?xsd=xsd0" />
-    <MetadataFile FileName="Country2.xsd" MetadataType="Schema" ID="95a59918-c52e-4e94-9d91-e155e5cb853e" SourceId="1" SourceUrl="http://localhost:23457/Admin/Country.svc?xsd=xsd1" />
-    <MetadataFile FileName="Country.wsdl" MetadataType="Wsdl" ID="3e40f37b-a00f-4a7e-ad1c-9a88aeb26ca0" SourceId="1" SourceUrl="http://localhost:23457/Admin/Country.svc?wsdl" />
-    <MetadataFile FileName="Country.disco" MetadataType="Disco" ID="6eba9da4-a9aa-4fda-9f99-acb107e67a45" SourceId="1" SourceUrl="http://localhost:23457/Admin/Country.svc?disco" />
+    <MetadataFile FileName="Country.xsd" MetadataType="Schema" ID="3c6dcb59-6458-4e7b-94a3-adf0d32f8c37" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Country.svc?xsd=xsd2" />
+    <MetadataFile FileName="Country1.xsd" MetadataType="Schema" ID="dbac355c-736d-4a60-ae5d-d99c9185b29a" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Country.svc?xsd=xsd0" />
+    <MetadataFile FileName="Country2.xsd" MetadataType="Schema" ID="95a59918-c52e-4e94-9d91-e155e5cb853e" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Country.svc?xsd=xsd1" />
+    <MetadataFile FileName="Country.wsdl" MetadataType="Wsdl" ID="3e40f37b-a00f-4a7e-ad1c-9a88aeb26ca0" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Country.svc?wsdl" />
+    <MetadataFile FileName="Country.disco" MetadataType="Disco" ID="6eba9da4-a9aa-4fda-9f99-acb107e67a45" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Country.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

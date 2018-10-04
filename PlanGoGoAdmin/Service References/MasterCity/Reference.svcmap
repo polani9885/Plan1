@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/MasterCity.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MasterCity.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MasterCity.xsd" MetadataType="Schema" ID="901e3ff3-e3aa-4944-bcea-f1ae20d370cc" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd1" />
-    <MetadataFile FileName="MasterCity1.xsd" MetadataType="Schema" ID="e786e9bd-afa6-4ad7-8bf1-d437800aba93" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd2" />
-    <MetadataFile FileName="MasterCity.wsdl" MetadataType="Wsdl" ID="a12eb442-3940-424f-b1ff-38f9ebed9bca" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?wsdl" />
-    <MetadataFile FileName="MasterCity.disco" MetadataType="Disco" ID="280f279b-b4ec-4741-8bf8-8fa048742222" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?disco" />
-    <MetadataFile FileName="MasterCity2.xsd" MetadataType="Schema" ID="9b0928ad-e278-4535-8681-1a8d9b29890b" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCity.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterCity.xsd" MetadataType="Schema" ID="901e3ff3-e3aa-4944-bcea-f1ae20d370cc" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterCity1.xsd" MetadataType="Schema" ID="e786e9bd-afa6-4ad7-8bf1-d437800aba93" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterCity.wsdl" MetadataType="Wsdl" ID="a12eb442-3940-424f-b1ff-38f9ebed9bca" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?wsdl" />
+    <MetadataFile FileName="MasterCity.disco" MetadataType="Disco" ID="280f279b-b4ec-4741-8bf8-8fa048742222" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?disco" />
+    <MetadataFile FileName="MasterCity2.xsd" MetadataType="Schema" ID="9b0928ad-e278-4535-8681-1a8d9b29890b" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

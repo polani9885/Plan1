@@ -21,17 +21,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Schedulers/UsersService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Schedulers/UsersService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UsersService1.xsd" MetadataType="Schema" ID="1f0b8e9e-50c4-49c3-8629-033defb14fb3" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UsersService5.xsd" MetadataType="Schema" ID="ed637d14-0811-4520-a8fe-e7da9db21b2b" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd5" />
-    <MetadataFile FileName="UsersService2.xsd" MetadataType="Schema" ID="738b916e-7dd9-498e-826e-99bb6c4dba9d" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UsersService3.xsd" MetadataType="Schema" ID="2706ddff-f8a3-492b-ae55-d5eb86e51e47" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UsersService4.xsd" MetadataType="Schema" ID="8ec47a09-690a-4bd1-8018-988602770578" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd0" />
-    <MetadataFile FileName="UsersService.wsdl" MetadataType="Wsdl" ID="d4bc32ff-ce36-428f-a44b-d40e685ca557" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?wsdl" />
-    <MetadataFile FileName="UsersService.xsd" MetadataType="Schema" ID="99c08c7c-7262-4b38-86e1-2619ce607836" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd4" />
-    <MetadataFile FileName="UsersService.disco" MetadataType="Disco" ID="28c8e5c4-6ff2-4cf9-9313-65231ea944f9" SourceId="1" SourceUrl="http://localhost:23457/Schedulers/UsersService.svc?disco" />
+    <MetadataFile FileName="UsersService2.xsd" MetadataType="Schema" ID="738b916e-7dd9-498e-826e-99bb6c4dba9d" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UsersService.disco" MetadataType="Disco" ID="28c8e5c4-6ff2-4cf9-9313-65231ea944f9" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?disco" />
+    <MetadataFile FileName="UsersService.wsdl" MetadataType="Wsdl" ID="d4bc32ff-ce36-428f-a44b-d40e685ca557" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?wsdl" />
+    <MetadataFile FileName="UsersService5.xsd" MetadataType="Schema" ID="ed637d14-0811-4520-a8fe-e7da9db21b2b" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd5" />
+    <MetadataFile FileName="UsersService.xsd" MetadataType="Schema" ID="99c08c7c-7262-4b38-86e1-2619ce607836" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd4" />
+    <MetadataFile FileName="UsersService1.xsd" MetadataType="Schema" ID="1f0b8e9e-50c4-49c3-8629-033defb14fb3" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UsersService4.xsd" MetadataType="Schema" ID="8ec47a09-690a-4bd1-8018-988602770578" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UsersService3.xsd" MetadataType="Schema" ID="2706ddff-f8a3-492b-ae55-d5eb86e51e47" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

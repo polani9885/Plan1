@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="+LtY/7Gag0i51bp7EZsejxZPEaQ=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="w0GqE9NyT3gcwo8q0zNhPwaaqeU=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IUserServices">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IUserServices" contract="UsersService.IUserServices" bindingType="basicHttpBinding" address="http://localhost:23457/Schedulers/UsersService.svc" bindingConfiguration="BasicHttpBinding_IUserServices">
+    <endpoint name="BasicHttpBinding_IUserServices" contract="UsersService.IUserServices" bindingType="basicHttpBinding" address="http://localhost/PlanGoGoService/Schedulers/UsersService.svc" bindingConfiguration="BasicHttpBinding_IUserServices">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:23457/Schedulers/UsersService.svc</serializedValue>
+          <serializedValue>http://localhost/PlanGoGoService/Schedulers/UsersService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

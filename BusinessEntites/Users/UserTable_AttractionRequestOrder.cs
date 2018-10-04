@@ -14,5 +14,20 @@ namespace BusinessEntites.Users
 
         [DataMember]
         public int OrderNumber { get; set; }
+
+        [DataMember]
+        public string StayTime { get; set; }
+
+        [DataMember]
+        public bool IsRequestedAfterBreakFast { get; set; }
+
+        [DataMember]
+        public bool IsRequestedAfterLunch { get; set; }
+
+        [DataMember]
+        public bool IsRequestedAfterBreak { get; set; }
+
+        [DataMember]
+        public bool IsRequestedAfterDinner { get; set; }
     }
 }

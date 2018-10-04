@@ -35,9 +35,9 @@ namespace PlanGoGoAdmin.Repository.Reference
             throw new NotImplementedException();
         }
 
-        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, int SourceAttractionID, int DestinationAttractionID,
-            List<userTable_OnlyId> AttractionID, string StartDate, string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder)
+        public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, 
+            List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
         {
             throw new NotImplementedException();
         }
@@ -73,6 +73,11 @@ namespace PlanGoGoAdmin.Repository.Reference
         }
 
         public List<BreakInformation> GetBreakInformation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<public_GetCityList> GetCityOnCountryId(int countryId)
         {
             throw new NotImplementedException();
         }

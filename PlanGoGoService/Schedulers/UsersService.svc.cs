@@ -48,9 +48,9 @@ namespace PlanGoGoService.Schedulers
             return _businessUserBAL.User_UserExistChecking(userName);
         }
 
-        public UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId)
+        public UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId,int countryId)
         {
-            return _businessUserBAL.User_AddUpdateTourName(tourName, userTripId, userId);
+            return _businessUserBAL.User_AddUpdateTourName(tourName, userTripId, userId, countryId);
         }
 
         public  List<UserTourInformation> User_GetTourInformation(int userId)
@@ -76,14 +76,11 @@ namespace PlanGoGoService.Schedulers
         }
 
         public void User_LogUserTripInformation(int travelModeId,
-            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionID, string startDate,
-            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder, int userTripId)
+            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
-            _businessUserBAL.User_LogUserTripInformation(travelModeId, sourceAttractionID, destinationAttractionID,
-                attractionID, startDate, startTime, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,
-                userTable_AttractionRequestOrder, userTripId);
+            _businessUserBAL.User_LogUserTripInformation(travelModeId,
+                attractionID, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,userTripId);
         }
 
         public List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId)
@@ -118,6 +115,26 @@ namespace PlanGoGoService.Schedulers
             _businessUserBAL.User_UserTrip_Update(userTourInformation);
         }
 
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        {
+            _businessUserBAL.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate, googleSearchText, breakType, breakDate);
+        }
+
+        public UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId)
+        {
+            return _businessUserBAL.User_GetTourInformationOnTripId(userTripId, userId);
+        }
+
+        public List<UserTable_AttractionRequestOrder> User_GetOrderOfRequest(int userTripId, int countryId)
+        {
+            return _businessUserBAL.User_GetOrderOfRequest(userTripId, countryId);
+        }
+
+        public void User_InsertUserRequested(int userTripId,
+            List<UserTable_AttractionRequestOrder> attractionRequestOrder)
+        {
+            _businessUserBAL.User_InsertUserRequested(userTripId, attractionRequestOrder);
+        }
 
 
     }

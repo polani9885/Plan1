@@ -162,6 +162,10 @@
     <Build Include="dbo\Tables\BreakInformation.sql" />
     <Build Include="dbo\Stored Procedures\Common_GetBreakInformation.sql" />
     <Build Include="dbo\Stored Procedures\User_UserTrip_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_DeleteUserRequested.sql" />
+    <Build Include="dbo\Stored Procedures\public_GetCityListOnCountryId.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetOrderOfRequest.sql" />
+    <Build Include="dbo\Stored Procedures\User_InsertUserRequested.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />

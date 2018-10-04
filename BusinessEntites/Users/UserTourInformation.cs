@@ -37,5 +37,13 @@ namespace BusinessEntites.Users
         public decimal CarMileage { get; set; }
 
         public decimal FuelPrice { get; set; }
+
+
+        public string SourceAttractionName { get; set; }
+
+        public string DestinationAttractionName { get; set; }
+
+
+
     }
 }

@@ -94,6 +94,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        Visiting Country:
+                    </td>
+                    <td>
+                        <select id="ddlCountry">
+                            <option ng-repeat="country in CountryList" value="{{country.value}}">{{country.data}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2">
                         <input id="btnAddTrip" type="button" value="Add" onclick="TripNameInfo()">
                     </td>

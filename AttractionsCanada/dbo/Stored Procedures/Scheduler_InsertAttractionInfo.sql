@@ -24,6 +24,7 @@
 	,@StateShortName AS VARCHAR(50)
 	,@CityShortName AS VARCHAR(50)
 	,@Utc_offset AS INT
+	,@AttractionName Varchar(2000)
 )	
 AS
 BEGIN
@@ -48,11 +49,12 @@ BEGIN
 		  ,[GoogleWebSite] = @GoogleWebSite
 		  ,[GoogleICon] = @GoogleICon
 		  ,[GoogleInternational_phone_number] = @GoogleInternational_phone_number		  
-		  ,[GoogleName] = @GoogleName
+		  ,[GoogleName] = @GoogleName		 
 		  ,[GoogleRating] = @GoogleRating		  	  
 		  ,[IsPlaceDetailsDone] = 1		  
 		  ,[PriceLevel] = @Pricelevel
-		  --,Utc_offset = @Utc_offset
+		  ,Utc_offset = @Utc_offset
+		  ,AttractionName = CASE WHEN ISNULL(AttractionName,'') = '' THEN @AttractionName ELSE AttractionName END
 	 WHERE AttractionsId = @AttractionsId
 
 

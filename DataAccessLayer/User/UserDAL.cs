@@ -137,7 +137,7 @@ namespace DataAccessLayer.User
             }
         }
 
-        public UserTourInformation User_AddUpdateTourName(string tripName, int userTripId, int userId)
+        public UserTourInformation User_AddUpdateTourName(string tripName, int userTripId, int userId, int countryId)
         {
             try
             {
@@ -146,7 +146,8 @@ namespace DataAccessLayer.User
                     {
                         tripName = tripName,
                         UserTripId = userTripId,
-                        UserId = userId
+                        UserId = userId,
+                        CountryId = countryId
                     }).ToList();
 
                 return _returnResult.FirstOrDefault();
@@ -229,10 +230,8 @@ namespace DataAccessLayer.User
 
 
         public void User_LogUserTripInformation(int travelModeId,
-            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionID, string startDate,
-            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder,int userTripId)
+            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             try
             {
@@ -241,15 +240,9 @@ namespace DataAccessLayer.User
                         new
                         {
                             TravelModeId = travelModeId,
-                            SourceAttractionID = sourceAttractionID,
-                            DestinationAttractionID = destinationAttractionID,
                             AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(attractionID),
-                            StartDate = startDate == string.Empty ? DateTime.Now.ToString() : startDate,
                             UserBreakTime =
                             CommonObjects.Convert.ToDataTable<UserTable_UpdatedBreaks>(userTable_UpdatedBreaks),
-                            AttractionReqOrder =
-                            CommonObjects.Convert.ToDataTable<UserTable_AttractionRequestOrder>(
-                                userTable_AttractionRequestOrder),
                             //UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit),
                             UserTripId = userTripId,
                             CountryId = @countryId,
@@ -406,5 +399,88 @@ namespace DataAccessLayer.User
                 throw ex;
             }
         }
+
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate,string googleSearchText,int breakType,string breakDate)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                var result = SqlHelper.QuerySP("User_UserRequestedAttraction",
+                    new
+                    {
+                        UserTripId = userTripId,
+                        Address= address,
+                        IsSource = isSource,
+                        StartDate = (string.IsNullOrEmpty(startDate) ? DateTime.Now : Convert.ToDateTime(startDate)),
+                        GoogleSearchText = googleSearchText,
+                        BreakType = breakType,
+                        breakDate = (string.IsNullOrEmpty(breakDate.Trim()) ? DateTime.Now : Convert.ToDateTime(breakDate))
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public UserTourInformation User_GetTourInformationOnTripId(int userTripId,int userId)
+        {
+            try
+            {
+                SqlHelper.countryId = User_GetTourInformation(userId).Where(x=>x.UserTripId == userTripId).Select(y=>y.CountryId).FirstOrDefault();
+                UserTourInformation _returnResult = SqlHelper.QuerySP<UserTourInformation>("User_GetTourInformationOnTripId",
+                    new
+                    {
+                        UserTripId = userTripId
+                    }).ToList().FirstOrDefault();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<UserTable_AttractionRequestOrder> User_GetOrderOfRequest(int userTripId, int countryId)
+        {
+            try
+            {
+                
+                List<UserTable_AttractionRequestOrder> _returnResult = SqlHelper
+                    .QuerySP<UserTable_AttractionRequestOrder>("User_GetOrderOfRequest",
+                        new
+                        {
+                            UserTripId = userTripId
+                        }).ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void User_InsertUserRequested(int userTripId,List<UserTable_AttractionRequestOrder> attractionRequestOrder)
+        {
+            try
+            {
+
+                SqlHelper
+                    .QuerySP("User_InsertUserRequested",
+                        new
+                        {
+                            UserTripId = userTripId,
+                            AttractionRequestOrder = CommonObjects.Convert.ToDataTable<UserTable_AttractionRequestOrder>(attractionRequestOrder)
+
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
     }
 }

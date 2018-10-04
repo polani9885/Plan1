@@ -33,7 +33,7 @@ namespace PlanGoGoService.Interfaces
         bool User_UserExistChecking(string userName);
 
         [OperationContract]
-        UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId);
+        UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId,int countryId);
 
         [OperationContract]
         List<UserTourInformation> User_GetTourInformation(int userId);
@@ -51,10 +51,8 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         void User_LogUserTripInformation(int travelModeId,
-            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionID, string startDate,
-            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder, int userTripId);
+            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId);
 
 
         [OperationContract]
@@ -74,6 +72,19 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         void User_UserTrip_Update(UserTourInformation userTourInformation);
+
+        [OperationContract]
+        void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate);
+
+        [OperationContract]
+        UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId);
+
+        [OperationContract]
+        List<UserTable_AttractionRequestOrder> User_GetOrderOfRequest(int userTripId, int countryId);
+
+        [OperationContract]
+        void User_InsertUserRequested(int userTripId, List<UserTable_AttractionRequestOrder> attractionRequestOrder);
+
 
 
     }

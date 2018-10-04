@@ -44,13 +44,12 @@ namespace ServiceClient.Services
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
-            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder)
+             List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
-            return _client.Public_GetOrderOfAttractionVisit(TravelModeId, SourceAttractionID, DestinationAttractionID,
-                AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks, userTable_AttractionRequestOrder);
+            return _client.Public_GetOrderOfAttractionVisit(TravelModeId,
+                AttractionID, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks,userTripId);
+
         }
 
         public List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId)
@@ -91,6 +90,20 @@ namespace ServiceClient.Services
             try
             {
                 return _client.GetBreakInformation();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public List<public_GetCityList> GetCityOnCountryId(int countryId)
+        {
+            try
+            {
+                return _client.GetCityOnCountryId(countryId);
+                
             }
             catch (Exception e)
             {

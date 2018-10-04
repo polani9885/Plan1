@@ -104,6 +104,7 @@
     <Compile Include="GetOrderOfAttractionVisit.cs" />
     <Compile Include="JsonParameters\CityVisitList.cs" />
     <Compile Include="JsonParameters\FilterLocations.cs" />
+    <Compile Include="JsonParameters\RequestOrder.cs" />
     <Compile Include="JsonResultReturn.cs" />
     <Compile Include="LoggingEntity.cs" />
     <Compile Include="MasterCity.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="public_GetCityList.cs" />
     <Compile Include="Public_GetMasterCategory.cs" />
     <Compile Include="Scheduler\GetPlaceDetails.cs" />
+    <Compile Include="Scheduler\GetUserRequested.cs" />
     <Compile Include="Scheduler\GooglePhotos.cs" />
     <Compile Include="Scheduler\GoogleReview.cs" />
     <Compile Include="Scheduler\GoogleTypes.cs" />

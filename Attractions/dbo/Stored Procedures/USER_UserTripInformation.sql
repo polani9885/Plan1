@@ -1,14 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[USER_UserTripInformation]	
 (
 	@AttractionID userTable_OnlyId ReadOnly 
-	,@TravelModeId INT
-	,@SourceAttractionID INT
-	,@DestinationAttractionID INT
-	,@UserBreakTime UserTable_UpdatedBreaks ReadOnly
-	,@AttractionReqOrder UserTable_AttractionRequestOrder ReadOnly
-	,@StartDate DATETIME = NULL	
-	,@CountryId INT		
-	,@EndDate DATETIME = NULL
+	,@TravelModeId INT	
+	,@UserBreakTime UserTable_UpdatedBreaks ReadOnly	
+	,@CountryId INT			
 	,@UserTripId INT
 	,@AttractionOrder UserTable_GetOrderOfAttractionVisit ReadOnly
 )
@@ -17,12 +12,8 @@ BEGIN
 
 	UPDATE [dbo].[UserTrip]
 	   SET [ModifiedDate] = GETDATE()
-		  ,[CountryId] = @CountryId
-		  ,[StartDate] = CASE WHEN @StartDate IS NULL THEN DATEADD(Day,1,GETDATE()) ELSE @StartDate END
-		  ,[EndDate] = @EndDate
-		  ,[TravelModeId] = @TravelModeId
-		  ,[SourceAttractionId] = @SourceAttractionId
-		  ,[DestinationAttractionId] = @DestinationAttractionId
+		  ,[CountryId] = @CountryId		  
+		  ,[TravelModeId] = @TravelModeId		  
 	 WHERE [UserTripId] = @UserTripId
 
 
@@ -38,28 +29,14 @@ BEGIN
 	 FROM @AttractionID
 
 
-	 DELETE FROM dbo.UserTripRequestOrder
-	 WHERE [UserTripId] = @UserTripId
 
 
-
-	INSERT INTO [dbo].[UserTripRequestOrder]
-			   ([UserTripId]
-			   ,[AttractionId]
-			   ,[OrderNumber]
-			   ,[CreatedDate])
-	SELECT 
-		@UserTripId
-		,AttractionId
-		,OrderNumber
-		,GETDATE()
-	FROM @AttractionReqOrder
-
+	
 
 
 	DELETE FROM dbo.UserTripDates
 	WHERE [UserTripId] = @UserTripId
-
+	AND CAST(TripDate AS DATE) NOT IN (SELECT DISTINCT CAST(DateAndTime As DATE) FROM @AttractionOrder)
 
 
 	
@@ -83,6 +60,7 @@ BEGIN
 			,1
 			,1
 	FROM @AttractionOrder
+	WHERE CAST(DateAndTime As DATE)	 NOT IN (SELECT DISTINCT CAST(TripDate As DATE) FROM dbo.UserTripDates WITH(NOLOCK))
 
 
 	
@@ -430,3 +408,8 @@ BEGIN
 		END
 	
 END
+
+
+
+
+

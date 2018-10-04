@@ -7,7 +7,7 @@
     var infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
 
-    if (placeId == null)
+    if (placeId === null)
         placeId = 'ChIJN1t_tDeuEmsRUsoyG83frY4';
 
     service.getDetails({
@@ -24,9 +24,9 @@
             result.adr_address = place.adr_address;
             result.formatted_address = place.formatted_address;
             result.formatted_phone_number = place.formatted_phone_number;
-            if (place.geometry != null) {
+            if (place.geometry !== null) {
                 result.geometry = [];
-                if (place.geometry.location != null)
+                if (place.geometry.location !== null)
                 {
                     result.geometry.location = [];
                     result.geometry.location.lat = place.geometry.location.lat();
@@ -37,16 +37,16 @@
             result.id = place.id;
             result.international_phone_number = place.international_phone_number;
             result.name = place.name;
-            if (place.opening_hours != null) {
+            if (place.opening_hours !== null) {
                 result.opening_hours = [];
                 result.opening_hours.open_now = place.opening_hours.open_now;
 
-                if (place.opening_hours.periods != null) {
+                if (place.opening_hours.periods !== null) {
                     result.opening_hours.periods = [];
                     result.opening_hours.periods.open = [];
                     result.opening_hours.periods.closeStatus = [];
                     $.each(place.opening_hours.periods, function (_key, _value) {
-                        if (_value["close"] != null) {
+                        if (_value["close"] !== null) {
                             $.each(_value["close"], function (_subKey, _subValue) {
                                 var close = [];
                                 close.day = _subValue["day"];
@@ -55,7 +55,7 @@
                             });
                         }
 
-                        if (_value["open"] != null) {
+                        if (_value["open"] !== null) {
                             $.each(_value["open"], function (_subKey, _subValue) {
                                 var open = [];
                                 open.day = _subValue["day"];
@@ -69,7 +69,7 @@
                     });                    
                 }
 
-                if (place.opening_hours.weekday_text != null) {
+                if (place.opening_hours.weekday_text !== null) {
                     result.opening_hours.weekday_text = [];
                     $.each(place.opening_hours.weekday_text, function (_key, _value) {
                         result.opening_hours.weekday_text.push(_value);
@@ -77,7 +77,7 @@
                 }
             }
 
-            if (place.photos != null) {
+            if (place.photos !== null) {
                 result.photos = [];
 
                 $.each(place.photos, function (_key, _value) {
@@ -96,13 +96,13 @@
             result.place_id = place.place_id;
             result.rating=place.rating;
             result.reference=place.reference;
-            if(place.reviews!=null)
+            if(place.reviews!==null)
             {
                 result.reviews = [];
                 
                 $.each(place.reviews, function (_key, _value) {
                     reviews = [];
-                    if (_value["aspects"] != null) {
+                    if (_value["aspects"] !== null) {
                         reviews.aspects = [];
                         $.each(_value["aspects"], function (_subkey, _subvalue) {
                             var aspects = [];
@@ -122,7 +122,7 @@
             }
             
             result.scope = place.scope;
-            if(place.types!=null)
+            if(place.types!==null)
             {
                 result.types=[];
                 $.each(place.types,function(_key,_value){
@@ -181,8 +181,8 @@ function GetDistanceBetweenTwoPoints(sourceAttractionId, sourceText, destination
                 var icon = asDestination ? destinationIcon : originIcon;
                 return function (results, status) {
                     if (status === 'OK') {
-                        
-                        
+
+                        var x = '';
                     } else {
                         alert('Geocode was not successful due to: ' + status);
                     }
@@ -208,7 +208,7 @@ function GetAddressInformation(attractionId, address) {
             address = [];
 
             $.each(data, function (addressKey, addressValue) {
-                if (addressKey == "results") {
+                if (addressKey === "results") {
                     $.each(addressValue, function (resultKey, resultValue) {
                        
                         item = [];

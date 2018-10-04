@@ -75,28 +75,28 @@
                                 case 1:
                                 {
 
-                                    <img src="/Images/TravelMode/driving.png" alt="Driving" width="100px" height="100px"/>
+                                    <img src="~/Images/TravelMode/driving.png" alt="Driving" width="100px" height="100px"/>
 
                                     break;
                                 }
                                 case 2:
                                 {
 
-                                    <img src="/Images/TravelMode/walking.png" alt="Walking" width="100px" height="100px"/>
+                                    <img src="~/Images/TravelMode/walking.png" alt="Walking" width="100px" height="100px"/>
 
                                     break;
                                 }
                                 case 3:
                                 {
 
-                                    <img src="/Images/TravelMode/bicycling.png" alt="Bicycling" width="100px" height="100px"/>
+                                    <img src="~/Images/TravelMode/bicycling.png" alt="Bicycling" width="100px" height="100px"/>
 
                                     break;
                                 }
                                 case 4:
                                 {
 
-                                    <img src="/Images/TravelMode/transit.png" alt="Transit" width="100px" height="100px"/>
+                                    <img src="~/Images/TravelMode/transit.png" alt="Transit" width="100px" height="100px"/>
 
                                     break;
                                 }
@@ -180,13 +180,14 @@
                                         if (!isBreakRecordExist)
                                         {
                                             <text>
-                                                <img src="/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude')"/>
+                                                <img src="~/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" 
+                                                     onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude')"/>
                                             </text>
                                         }
                                         else
                                         {
                                             <text>
-                                                <img src="/Images/Custome/edit.jpg" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude')" />
+                                                <img src="~/Images/Custome/edit.jpg" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude')" />
                                             </text>
                                             if (string.IsNullOrEmpty(_attraction.DestinationPhotoUrl))
                                             {
@@ -233,18 +234,18 @@
                                 @if (!_attraction.IsLunchDinnerBreakTime)
                                 {
 
-                                    <img src="/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)"/>
+                                    <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)"/>
 
 
                                     if (_attraction.RecordCount != 1)
                                     {
-                                        <img src="/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true)"/>
+                                        <img src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true)"/>
                                     }
                                     else
                                     {
                                         <span style="width: 30px; height: 30px">&nbsp;</span>
                                     }
-                                    <img src="/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false)"/>
+                                    <img src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false)"/>
 
                                 }
                             </td>
@@ -256,7 +257,204 @@
                         </tr>
                         <tr>
                             <td>
-                                Stay for View: @_attraction.TimeRequiredToView hh
+                                Stay for View:
+                                <select onchange="ViewTimeUpdate(@_attraction.DestinationAttractionId,this)">
+                                    <option value="00:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "00:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }  >00:30</option>
+                                    <option value="01:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "01:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }
+                                            >01:00</option>
+                                    <option value="01:30"
+                                            @{
+                                                if (@_attraction.TimeRequiredToView == "01:30")
+                                                {
+                                                    <text>selected</text>
+                                                }
+                                            }>01:30</option>
+                                    <option value="02:00" @{
+                                                             if (@_attraction.TimeRequiredToView == "02:00")
+                                                             {
+                                                                 <text>selected</text>
+                                                             }
+                                                         }>02:00</option>
+                                    <option value="02:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "02:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>02:30</option>
+                                    <option value="03:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "03:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>03:00</option>
+                                    <option value="03:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "03:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>03:30</option>
+                                    <option value="04:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "04:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>04:00</option>
+                                    <option value="04:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "04:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>04:30</option>
+                                    <option value="05:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "05:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>05:00</option>
+                                    <option value="05:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "05:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>05:30</option>
+                                    <option value="06:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "06:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>06:00</option>
+                                    <option value="06:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "06:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>06:30</option>
+                                    <option value="07:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "07:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>07:00</option>
+                                    <option value="07:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "07:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>07:30</option>
+                                    <option value="08:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "08:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>08:00</option>
+                                    <option value="08:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "08:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>08:30</option>
+                                    <option value="09:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "09:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>09:00</option>
+                                    <option value="09:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "09:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>09:30</option>
+                                    <option value="10:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "10:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>10:00</option>
+                                    <option value="10:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "10:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>10:30</option>
+                                    <option value="11:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "11:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>11:00</option>
+                                    <option value="11:30" @{
+                                                              if (@_attraction.TimeRequiredToView == "11:30")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>11:30</option>
+                                    <option value="12:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "12:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>12:00</option>
+                                    <option value="13:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "13:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>13:00</option>
+                                    <option value="14:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "14:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>14:00</option>
+                                    <option value="15:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "15:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>15:00</option>
+                                    <option value="16:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "16:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>16:00</option>
+                                    <option value="17:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "17:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>17:00</option>
+                                    <option value="18:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "18:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>18:00</option>
+                                    <option value="19:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "19:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>19:00</option>
+                                    <option value="20:00" @{
+                                                              if (@_attraction.TimeRequiredToView == "20:00")
+                                                              {
+                                                                  <text>selected</text>
+                                                              }
+                                                          }>20:00</option>
+                                </select>
+                                hh
                             </td>
                         </tr>
                         <tr>

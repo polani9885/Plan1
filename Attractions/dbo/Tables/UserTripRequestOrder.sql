@@ -4,6 +4,11 @@
 	[AttractionId] [int] NULL,
 	[OrderNumber] [int] NULL,
 	[CreatedDate] [datetime] NULL,
+	[StayTime] [time](7) NULL,
+	[IsRequestedAfterBreakFast] [bit] NULL,
+	[IsRequestedAfterLunch] [bit] NULL,
+	[IsRequestedAfterBreak] [bit] NULL,
+	[IsRequestedAfterDinner] [bit] NULL,
  CONSTRAINT [PK_UserTripRequestOrder] PRIMARY KEY CLUSTERED 
 (
 	[UserTripRequestOrderId] ASC
@@ -18,4 +23,5 @@ GO
 
 ALTER TABLE [dbo].[UserTripRequestOrder] CHECK CONSTRAINT [FK_UserTripRequestOrder_UserTrip]
 GO
+
 

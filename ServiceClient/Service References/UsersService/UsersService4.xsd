@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" />
-  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" />
-  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" />
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" />
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
   <xs:element name="User_DeleteUserAttractions">
     <xs:complexType>
       <xs:sequence>
@@ -88,6 +88,7 @@
         <xs:element minOccurs="0" name="tourName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="userTripId" type="xs:int" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="countryId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -157,15 +158,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="travelModeId" type="xs:int" />
-        <xs:element minOccurs="0" name="sourceAttractionID" type="xs:int" />
-        <xs:element minOccurs="0" name="destinationAttractionID" type="xs:int" />
         <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="attractionID" nillable="true" type="q10:ArrayOfuserTable_OnlyId" />
-        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="startTime" nillable="true" type="xs:string" />
         <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="listGetOrderOfAttractionVisit" nillable="true" type="q11:ArrayOfGetOrderOfAttractionVisit" />
         <xs:element minOccurs="0" name="countryId" type="xs:int" />
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTable_UpdatedBreaks" nillable="true" type="q12:ArrayOfUserTable_UpdatedBreaks" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTable_AttractionRequestOrder" nillable="true" type="q13:ArrayOfUserTable_AttractionRequestOrder" />
         <xs:element minOccurs="0" name="userTripId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -185,7 +181,7 @@
   <xs:element name="User_UserTripGetAttractionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_UserTripGetAttractionsResult" nillable="true" type="q14:ArrayOfUserTable_AttractionRequestOrder" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_UserTripGetAttractionsResult" nillable="true" type="q13:ArrayOfUserTable_AttractionRequestOrder" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -199,7 +195,7 @@
   <xs:element name="User_GetUserStoredAttractinInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="User_GetUserStoredAttractinInfoResult" nillable="true" type="q15:ArrayOfGetOrderOfAttractionVisit" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="User_GetUserStoredAttractinInfoResult" nillable="true" type="q14:ArrayOfGetOrderOfAttractionVisit" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -213,7 +209,7 @@
   <xs:element name="User_RequestedBreaksResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_RequestedBreaksResult" nillable="true" type="q16:ArrayOfUserTable_UpdatedBreaksTemp" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_RequestedBreaksResult" nillable="true" type="q15:ArrayOfUserTable_UpdatedBreaksTemp" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -227,7 +223,7 @@
   <xs:element name="User_UserTripBuildStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_UserTripBuildStatusResult" nillable="true" type="q17:ArrayOfUserTripBuildStatus" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_UserTripBuildStatusResult" nillable="true" type="q16:ArrayOfUserTripBuildStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -237,25 +233,87 @@
         <xs:element minOccurs="0" name="attractionsId" type="xs:int" />
         <xs:element minOccurs="0" name="travelModeId" type="xs:int" />
         <xs:element minOccurs="0" name="countryId" type="xs:int" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="coodinate" nillable="true" type="q18:ArrayOfCoordinate" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="coodinate" nillable="true" type="q17:ArrayOfCoordinate" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="User_GetNearestRestaruentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="User_GetNearestRestaruentsResult" nillable="true" type="q19:ArrayOfpublic_FilterAttractions" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="User_GetNearestRestaruentsResult" nillable="true" type="q18:ArrayOfpublic_FilterAttractions" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="User_UserTrip_Update">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTourInformation" nillable="true" type="q20:UserTourInformation" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="userTourInformation" nillable="true" type="q19:UserTourInformation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="User_UserTrip_UpdateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_UserRequestedAttraction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userTripId" type="xs:int" />
+        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="countryId" type="xs:int" />
+        <xs:element minOccurs="0" name="isSource" type="xs:int" />
+        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="googleSearchText" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="breakType" type="xs:int" />
+        <xs:element minOccurs="0" name="breakDate" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_UserRequestedAttractionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_GetTourInformationOnTripId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userTripId" type="xs:int" />
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_GetTourInformationOnTripIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_GetTourInformationOnTripIdResult" nillable="true" type="q20:UserTourInformation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_GetOrderOfRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userTripId" type="xs:int" />
+        <xs:element minOccurs="0" name="countryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_GetOrderOfRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="User_GetOrderOfRequestResult" nillable="true" type="q21:ArrayOfUserTable_AttractionRequestOrder" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_InsertUserRequested">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userTripId" type="xs:int" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" minOccurs="0" name="attractionRequestOrder" nillable="true" type="q22:ArrayOfUserTable_AttractionRequestOrder" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_InsertUserRequestedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

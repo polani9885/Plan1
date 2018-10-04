@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IGetListValues" contract="GetListValues.IGetListValues" bindingType="basicHttpBinding" address="http://localhost:23457/GetListValues.svc" bindingConfiguration="BasicHttpBinding_IGetListValues">
+    <endpoint name="BasicHttpBinding_IGetListValues" contract="GetListValues.IGetListValues" bindingType="basicHttpBinding" address="http://localhost/PlanGoGoService/GetListValues.svc" bindingConfiguration="BasicHttpBinding_IGetListValues">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:23457/GetListValues.svc</serializedValue>
+          <serializedValue>http://localhost/PlanGoGoService/GetListValues.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/MasterWeek.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MasterWeek.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MasterWeek.disco" MetadataType="Disco" ID="4c257ba6-985d-4937-9e17-adb6d6344051" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?disco" />
-    <MetadataFile FileName="MasterWeek.wsdl" MetadataType="Wsdl" ID="eee3b367-51d3-4316-9a25-3a3cfd137476" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?wsdl" />
-    <MetadataFile FileName="MasterWeek.xsd" MetadataType="Schema" ID="1f83ac07-f07d-4f32-81dc-b974e3d541cb" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?xsd=xsd2" />
-    <MetadataFile FileName="MasterWeek1.xsd" MetadataType="Schema" ID="f1366ae4-4f80-4a1b-b35e-c966253c38b2" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?xsd=xsd1" />
-    <MetadataFile FileName="MasterWeek2.xsd" MetadataType="Schema" ID="c82a179f-d0a6-473a-a988-ee2f23600390" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterWeek.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterWeek.disco" MetadataType="Disco" ID="4c257ba6-985d-4937-9e17-adb6d6344051" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterWeek.svc?disco" />
+    <MetadataFile FileName="MasterWeek.wsdl" MetadataType="Wsdl" ID="eee3b367-51d3-4316-9a25-3a3cfd137476" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterWeek.svc?wsdl" />
+    <MetadataFile FileName="MasterWeek.xsd" MetadataType="Schema" ID="1f83ac07-f07d-4f32-81dc-b974e3d541cb" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterWeek.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterWeek1.xsd" MetadataType="Schema" ID="f1366ae4-4f80-4a1b-b35e-c966253c38b2" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterWeek.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterWeek2.xsd" MetadataType="Schema" ID="c82a179f-d0a6-473a-a988-ee2f23600390" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterWeek.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -239,6 +239,33 @@ namespace GoogleMapsAPI.Features
             }
         }
 
+
+        public List<ResultsList> NearestLocationAutocomplete(string latitude, string longitude, string distance,string address)
+        {
+            if (!string.IsNullOrEmpty(latitude) && !string.IsNullOrEmpty(longitude))
+            {
+
+                string radiusData = string.Empty;
+                string url =
+                    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
+                    latitude +
+                    "," +
+                    longitude + "&radius=" + distance + "&key=" +
+                    ConfigurationManager.AppSettings["apiKey"];
+                url = url + "&name=" + address;
+
+
+                radiusData = webRequest.WebServiceInformation(url);
+                var returnsInformation =
+                    Newtonsoft.Json.JsonConvert.DeserializeObject<NearBySearchEntity>(
+                        radiusData);
+
+                return returnsInformation.results;
+
+            }
+            return null;
+        }
+
         private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType,int countryId,string url,string longitude,string latitude,int attractionId)
         {
             string radiusData = string.Empty;

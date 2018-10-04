@@ -2,7 +2,7 @@
     if (username!==null && username!=="") {
         $.ajax({
             type: "GET",
-            url: '/UserControls/UserExistChecking',
+            url: localUrl + 'UserControls/UserExistChecking',
             dataType: "json",
             data: { userName: username },
             beforeSend: function () {
@@ -31,7 +31,7 @@ function LoginCheck() {
     if ($("#txtLoginUsername").val() !== null && $("#txtLoginUsername").val() !== "") {
         $.ajax({
             type: "GET",
-            url: '/UserControls/User_GetUserInformation',
+            url: localUrl + 'UserControls/User_GetUserInformation',
             dataType: "json",
             data: { userName: $("#txtLoginUsername").val(), password: $("#txtLoginPassword").val() },
             beforeSend: function () {
@@ -60,7 +60,7 @@ function LoginCheck() {
 function IsUserLoggedIn() {
     $.ajax({
         type: "GET",
-        url: '/UserControls/IsUserLoggedIn',
+        url: localUrl + 'UserControls/IsUserLoggedIn',
         dataType: "json",
         beforeSend: function() {
             $(".blockPage").show();
@@ -104,7 +104,7 @@ function User_InsertingUserInfo() {
     };
     $.ajax({
         type: "POST",
-        url: '/UserControls/User_InsertingUserInfo',
+        url: localUrl + 'UserControls/User_InsertingUserInfo',
         dataType: "json",
         data: data,
         beforeSend: function() {
@@ -131,7 +131,7 @@ function User_InsertingUserInfo() {
 function UserLogOut() {
     $.ajax({
         type: "POST",
-        url: '/UserControls/UserLogOut',
+        url: localUrl + 'UserControls/UserLogOut',
         dataType: "json",
         beforeSend: function () {
         },
@@ -149,13 +149,13 @@ function UserLogOut() {
     });
 }
 
-function User_AddUpdateTourName(tourName, userTripId) {
+function User_AddUpdateTourName(tourName, userTripId, countryId) {
     
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_AddUpdateTourName',
+        url: localUrl + 'UserControls/User_AddUpdateTourName',
         dataType: "json",
-        data: { tourName: tourName, userTripId: userTripId },
+        data: { tourName: tourName, userTripId: userTripId, countryId: countryId },
         beforeSend: function () {
         },
         success: function (data) {
@@ -191,7 +191,7 @@ function User_GetTourInformation(angularScope, http) {
     
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_GetTourInformation',
+        url: localUrl + 'UserControls/User_GetTourInformation',
         dataType: "json",
         beforeSend: function () {
         },
@@ -209,10 +209,34 @@ function User_GetTourInformation(angularScope, http) {
     });
 }
 
+function GetTourInformationOnTripId(angularScope, http) {
+
+    
+    $.ajax({
+        type: "GET",
+        url: localUrl + 'UserControls/GetTourInformationOnTripId',
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
+
+            angularScope.PlannedTours(data);
+
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+
 function UserGetCityList($scope, $http) {
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_GetCityList',
+        url: localUrl + 'UserControls/User_GetCityList',
         dataType: "json",
         beforeSend: function () {
             
@@ -262,7 +286,7 @@ function User_InsertCategoryInformation($scope, $http) {
 
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_InsertCategoryInformation',
+        url: localUrl + 'UserControls/User_InsertCategoryInformation',
         data: JSON.stringify(jsonObject),
         dataType: "json",
         beforeSend: function () {
@@ -290,7 +314,7 @@ function User_UserTripGetAttractions(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_UserTripGetAttractions',
+        url: localUrl + 'UserControls/User_UserTripGetAttractions',
         dataType: "json",
         beforeSend: function () {
         },
@@ -313,7 +337,7 @@ function User_GetUserStoredAttractinInfo(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_GetUserStoredAttractinInfo',
+        url: localUrl + 'UserControls/User_GetUserStoredAttractinInfo',
         dataType: "json",
         beforeSend: function () {
         },
@@ -340,7 +364,7 @@ function User_RequestedBreaks(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_RequestedBreaks',
+        url: localUrl + 'UserControls/User_RequestedBreaks',
         dataType: "json",
         async:false,
         beforeSend: function () {
@@ -367,7 +391,7 @@ function User_UserTripBuildStatus(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_UserTripBuildStatus',
+        url: localUrl + 'UserControls/User_UserTripBuildStatus',
         dataType: "json",
         beforeSend: function () {
         },
@@ -393,7 +417,7 @@ function User_GetNearestRestaruents(angularScope, http) {
     
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_GetNearestRestaruents',
+        url: localUrl + 'UserControls/User_GetNearestRestaruents',
         data: { attractionsId: angularScope.breakValue.attractionId, travelModeId: angularScope.TravelModeId, countryId: angularScope.countryId, distance: angularScope.breakValue.distance, sourceLongitude: angularScope.breakValue.sourceLongitude, sourceLatitude: angularScope.breakValue.sourceLatitude },
         dataType: "json",
         beforeSend: function () {
@@ -421,13 +445,215 @@ function User_UserTrip_Update(angularScope, http, data) {
 
     $.ajax({
         type: "GET",
-        url: '/UserControls/User_UserTrip_Update',
+        url: localUrl + 'UserControls/User_UserTrip_Update',
         data: { noOfPersons: data.NoOfPersons, noOfCars: data.NoOfCars, carMileage: data.CarMileage, fuelPrice: data.FuelPrice },
         dataType: "json",
         beforeSend: function () {
         },
         success: function (data) {
 
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function AutoComplte(angularScope, http, data) {
+
+    $.ajax({
+        type: "GET",
+        url: localUrl + 'UserControls/AutoComplte',
+        data: { address: data, countryId: angularScope.countryId },
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
+
+            angularScope.$apply(function() {
+
+                angularScope.attractionListAutoComplete = [];
+                $.each(data,
+                    function(attractionKey, attractionValue) {
+                        var item = [];
+                        item.value = attractionValue["description"];
+                        item.data = attractionValue["description"];
+                        angularScope.attractionListAutoComplete.push(item);
+                    });
+                //Source Auto Complete Data
+                $('#autoStartLocation').autocomplete({
+                    source: angularScope.attractionListAutoComplete
+                });
+
+                //Desitnation auto complete information
+                $('#autoDestinationLocation').autocomplete({
+                    source: angularScope.attractionListAutoComplete
+                });
+
+                //Place search for adding to visit list
+                $('#placeSeachForAdding').autocomplete({
+                    source: angularScope.attractionListAutoComplete
+                });
+            });
+
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+
+function AutoComplteBreakInfo(angularScope, http, data) {
+
+    $.ajax({
+        type: "GET",
+        url: localUrl + 'UserControls/AutoComplteBreakInfo',
+        data: {
+            address: data.address,
+            latitude: data.latitude,
+            longitude: data.longitude,
+            distance: data.distance,
+            countryId: angularScope.countryId
+        },
+        dataType: "json",
+        beforeSend: function() {
+        },
+        success: function(data) {
+
+            var attractionListBreakAutoComplete = [];
+            $.each(data,
+                function(attractionKey, attractionValue) {
+                    var item = [];
+                    //item.value = attractionValue["vicinity"];
+                    //item.data = attractionValue["name"] + ' ' + attractionValue["vicinity"];
+                    item.data = attractionValue["name"];
+                    item.value = attractionValue["name"] + ' ' + attractionValue["vicinity"];
+                    item.name = attractionValue["vicinity"];
+                    attractionListBreakAutoComplete.push(item);
+                });
+            //Source Auto Complete Data
+            $('#autoAddAttractionForBreak').autocomplete({
+                source: attractionListBreakAutoComplete
+            });
+
+        },
+        error: function(result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function() {
+
+        }
+    });
+}
+
+
+function GetCountry(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: localUrl + 'UserControls/GetCountry',
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
+
+            angularScope.$apply(function () {
+
+                angularScope.CountryList = [];
+                $.each(data,
+                    function (attractionKey, attractionValue) {
+                        var item = [];
+                        item.value = attractionValue["CountryId"];
+                        item.data = attractionValue["CountryName"];
+                        angularScope.CountryList.push(item);
+                    });
+            });
+
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function UserRequestedAttraction(angularScope, data, isSource, googleSearchText, breakType, breakDate) {
+    
+    $.ajax({
+        type: "GET",
+        url: localUrl + 'UserControls/UserRequestedAttraction',
+        data: {
+            address: data,
+            countryId: angularScope.countryId,
+            isSource: isSource,
+            startDate: angularScope.StartDate,
+            googleSearchText: googleSearchText,
+            breakType: breakType,
+            breakDate: breakDate
+        },
+        dataType: "json",
+        beforeSend: function() {
+        },
+        success: function(data) {
+            angularScope.init();
+        },
+        error: function(result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function() {
+
+        }
+    });
+}
+
+function GetOrderOfRequest(angularScope) {
+
+    $.ajax({
+        type: "GET",
+        url: localUrl + 'UserControls/GetOrderOfRequest',
+        data: {
+            countryId: angularScope.countryId
+        },
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
+            angularScope.GetOrderOfRequest(data);
+        },
+        error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function InsertUserRequested(angularScope, http, data) {
+
+    var jsonObject = {
+        "attractionRequestOrder": data
+    };
+    
+    $.ajax({
+        type: "POST",
+        url: localUrl + 'UserControls/InsertUserRequested',
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
+            Public_GetOrderOfAttractionVisit(angularScope, http);
         },
         error: function (result) {
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);

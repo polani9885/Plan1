@@ -3,7 +3,7 @@ function GetCategoryList(angularScope, http) {
     
     $.ajax({
         type: "GET",
-        url: '/Schedule/GetCategoryList',
+        url: localUrl + 'Schedule/GetCategoryList',
         dataType: "json",
         beforeSend: function () {
             
@@ -29,7 +29,7 @@ function GetMasterCategory(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/Schedule/GetMasterCategory',
+        url: localUrl + 'Schedule/GetMasterCategory',
         dataType: "json",
         beforeSend: function () {
 
@@ -71,45 +71,24 @@ function PublicFilterAttractions(angularScope, http) {
 
             });
     }
-    var cityId = 0;
-    var countryId = 0;
-    if (angularScope.countryId > 0 && angularScope.cityId > 0) {
-        cityId = angularScope.cityId;
-        countryId = angularScope.countryId;
-    } else {
-        if (typeof ($("#autoCityName").data()) !== "undefined" && typeof ($("#autoCityName").data().uiAutocomplete) !== "undefined" && typeof ($("#autoCityName").data().uiAutocomplete.selectedItem) !== "undefined") {
-            cityId = $("#autoCityName").data().uiAutocomplete.selectedItem.data;
-            countryId = $("#autoCityName").data().uiAutocomplete.selectedItem.countryId;
-            angularScope.cityId = cityId;
-            angularScope.countryId = countryId;
-        }
-        countryId = angularScope.countryId;
-    }
+    
+    var countryId = angularScope.countryId;
+    
 
 
     var cityVisitList = [];
     
-    var isCityFount = false;
+    
     if (angularScope.VisitCityList.length > 0) {
         $.each(angularScope.VisitCityList,
             function(key, value) {
                 var subListValue = {};
-                if (value.cityId === cityId) {
-                    isCityFount = true;
-                }
 
                 subListValue.RecordIndex = value.recordIndex;
                 subListValue.CityId = value.cityId;
                 cityVisitList.push(subListValue);
 
             });
-    }
-    if (!isCityFount && cityId > 0) {
-        var subListValue = {};
-        subListValue.RecordIndex = (angularScope.VisitCityList.length === null ? 0 : angularScope.VisitCityList.length) +
-            1;
-        subListValue.CityId = cityId;
-        cityVisitList.push(subListValue);
     }
 
 
@@ -125,7 +104,7 @@ function PublicFilterAttractions(angularScope, http) {
 
     $.ajax({
         type: "POST",
-        url: '/Schedule/Public_FilterAttractions',
+        url: localUrl + 'Schedule/Public_FilterAttractions',
         data: JSON.stringify(jsonObject),
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -250,11 +229,7 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
     
     var jsonObject = {
         "TravelModeId": angularScope.TravelModeId,
-        "SourceAttractionID": angularScope.SourceAttractionID,
-        "DestinationAttractionID": angularScope.DestinationAttractionID,
         "AttractionID": angularScope.AttractionID,
-        "StartDate": angularScope.StartDate,
-        "StartTime": angularScope.StartTime,
         "ListGroupWithDateAttractions": OrderOfAttractionListTemp,
         "CountryId": angularScope.countryId,
         "UpdatedBreaks": updatedBreaks
@@ -265,7 +240,7 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
     
     $.ajax({
         type: "POST",
-        url: '/Schedule/Public_GetOrderOfAttractionVisit',
+        url: localUrl + 'Schedule/Public_GetOrderOfAttractionVisit',
         data: parameter,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -348,7 +323,7 @@ function TourInformation(divId, tourInformation, breakInformation) {
     //var jsonBrak = ;
     $.ajax({
         type: "POST",
-        url: '/UserControls/TourInformation',
+        url: localUrl + 'UserControls/TourInformation',
         data: JSON.stringify(jsonObject),
         dataType: "html",
         contentType: "application/json; charset=utf-8",
@@ -372,7 +347,7 @@ function GetExtraCategoryList(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/Schedule/GetExtraCategoryList',
+        url: localUrl + 'Schedule/GetExtraCategoryList',
         dataType: "json",
         beforeSend: function () {
 
@@ -396,7 +371,7 @@ function AttractionsPhotoInfo(angularScope, http, attractionId, attractionName) 
 
     $.ajax({
         type: "GET",
-        url: '/Schedule/AttractionsPhotoInfo',
+        url: localUrl + 'Schedule/AttractionsPhotoInfo',
         dataType: "json",
         data:{attractionId:attractionId, countryId: angularScope.countryId},
         beforeSend: function () {
@@ -422,7 +397,7 @@ function GetBreakInformation(angularScope, http) {
 
     $.ajax({
         type: "GET",
-        url: '/Schedule/GetBreakInformation',
+        url: localUrl + 'Schedule/GetBreakInformation',
         dataType: "json",
         beforeSend: function () {
 

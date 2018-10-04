@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Users" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
-  <xs:import schemaLocation="http://localhost:23457/Schedulers/UsersService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfUserAttractionEntity">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="UserAttractionEntity" nillable="true" type="tns:UserAttractionEntity" />
@@ -60,12 +60,14 @@
       <xs:element minOccurs="0" name="CountryId" type="xs:int" />
       <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="DestinationAttractionName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FuelPrice" type="xs:decimal" />
       <xs:element minOccurs="0" name="IsTripDone" type="xs:boolean" />
       <xs:element minOccurs="0" name="NoOfCars" type="xs:int" />
       <xs:element minOccurs="0" name="NoOfPersons" type="xs:int" />
       <xs:element minOccurs="0" name="SourceAttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="SourceAttractionName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
       <xs:element minOccurs="0" name="TripName" nillable="true" type="xs:string" />
@@ -144,7 +146,12 @@
   <xs:complexType name="UserTable_AttractionRequestOrder">
     <xs:sequence>
       <xs:element minOccurs="0" name="AttractionId" type="xs:int" />
+      <xs:element minOccurs="0" name="IsRequestedAfterBreak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRequestedAfterBreakFast" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRequestedAfterDinner" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRequestedAfterLunch" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrderNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="StayTime" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserTable_AttractionRequestOrder" nillable="true" type="tns:UserTable_AttractionRequestOrder" />

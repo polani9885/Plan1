@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/MasterState.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MasterState.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MasterState.xsd" MetadataType="Schema" ID="b489efec-33a5-4990-a6be-9c29159a62b0" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?xsd=xsd2" />
-    <MetadataFile FileName="MasterState1.xsd" MetadataType="Schema" ID="03cb1fb9-6382-4c01-8d67-bd385b492a1e" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?xsd=xsd1" />
-    <MetadataFile FileName="MasterState2.xsd" MetadataType="Schema" ID="0a87b56c-acf1-42d9-b668-0592963cb883" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?xsd=xsd0" />
-    <MetadataFile FileName="MasterState.disco" MetadataType="Disco" ID="739600e7-b215-4ed2-927d-7661ca1b426c" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?disco" />
-    <MetadataFile FileName="MasterState.wsdl" MetadataType="Wsdl" ID="1a8053a8-6280-4905-8892-f4ac528179dd" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterState.svc?wsdl" />
+    <MetadataFile FileName="MasterState.xsd" MetadataType="Schema" ID="b489efec-33a5-4990-a6be-9c29159a62b0" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterState.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterState1.xsd" MetadataType="Schema" ID="03cb1fb9-6382-4c01-8d67-bd385b492a1e" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterState.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterState2.xsd" MetadataType="Schema" ID="0a87b56c-acf1-42d9-b668-0592963cb883" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterState.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterState.disco" MetadataType="Disco" ID="739600e7-b215-4ed2-927d-7661ca1b426c" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterState.svc?disco" />
+    <MetadataFile FileName="MasterState.wsdl" MetadataType="Wsdl" ID="1a8053a8-6280-4905-8892-f4ac528179dd" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterState.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

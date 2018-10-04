@@ -1,32 +1,28 @@
 ﻿//Getting City Information
-function GetCityList() {    
+function GetCityList(angularScope, http) {
     $.ajax({
         type: "GET",
-        url: '/Schedule/GetCityList',        
+        url: localUrl + 'Schedule/GetCityOnCountryId',
         dataType: "json",
+        data:{countryId:angularScope.countryId},
         beforeSend: function () {
             $(".blockPage").show();
         },
         success: function (data) {
+            
             cityList = [];
             var scope = angular.element("#controlerIndex").scope();
-            $.each(data, function (cityKey, cityValue) {
-                if (scope.VisitCityList.length > 0) {
-                    if (cityValue["CountryId"] === scope.VisitCityList[0].countryId) {
-                        var item = [];
-                        item.value = cityValue["CityName"];
-                        item.data = cityValue["CityId"];
-                        item.countryId = cityValue["CountryId"];
-                        cityList.push(item);
-                    }
-                } else {
+            $.each(data,
+                function(cityKey, cityValue) {
+
+
                     var item = [];
-                    item.value = cityValue["CityName"];
-                    item.data = cityValue["CityId"];
-                    item.countryId = cityValue["CountryId"];
+                    item.value = cityValue.CityName;
+                    item.data = cityValue.CityId;
+                    item.countryId = cityValue.CountryId;
                     cityList.push(item);
-                }
-            });
+
+                });
             $('#autoCityName').autocomplete({
                 source: cityList
             });
@@ -52,74 +48,6 @@ function GetCityList() {
     });
 }
 
-//Get address information
-function GetAddressInformation(address) {
-    $.ajax({
-        type: "GET",
-        url: googleAPI + "/geocode/json",
-        dataType: "json",
-        data: { address: address, key: googleAPIKey },
-        beforeSend: function () {
-            //$(".blockPage").show();
-        },
-        success: function (data) {
-            
-            address = [];
-
-            $.each(data, function (addressKey, addressValue) {
-                if (addressKey == "results") {
-                    $.each(addressValue, function (resultKey, resultValue) {
-                        //$.each(resultValue, function (comKey, comValue) {
-                            
-                            
-                            //if (comKey == "formatted_address") {
-                                item = [];
-                                item.data = resultValue["place_id"];
-                            //}
-                        //if (comKey == "place_id") {
-                                item.value = resultValue["formatted_address"];
-                                //item.value = resultValue["place_id"];
-                                address.push(item);
-                            //}
-                            
-                        //});                        
-                    });
-                }
-            });
-            //$("#autoAddAttraction").autocomplete({ source: [] });
-
-            //$('#autoAddAttraction').autocomplete("destroy");
-            $('#autoAddAttraction').autocomplete({
-                source: address
-            });
-
-            autCompleteSelectionIsDone = false;
-            $("#autoAddAttraction").on("autocompleteselect", function (event, ui) {
-
-                if (!autCompleteSelectionIsDone) {
-                    autCompleteSelectionIsDone = true;
-
-                    //this will get the category list
-                    var scope = angular.element("#controlerIndex").scope();
-                    scope.$apply(function () {
-                        var attractionId = "";
-                        $.each(recordValue.ListGetOrderOfAttractionVisit, function (groupKey, groupValue) {
-                            attractionId += ","+groupValue.DestinationAttractionId;                            
-                        });
-
-                        scope.GetPlaceDetails(ui,attractionId);
-                    });
-                }
-            });
-        },
-        error: function (result) {
-            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
-        },
-        complete: function () {
-            $(".blockPage").hide();
-        }
-    });
-}
 
 //Get place information
 function SelectedPlace(selectedPlace, attractionId) {
@@ -150,17 +78,17 @@ function SelectedPlace(selectedPlace, attractionId) {
     });
 }
 
-function GetCountry() {
+function GetCountryList() {
     
     $.ajax({
         type: "GET",
-        url: '/Home/Admin_GetCountry',
+        url: localUrl + 'Home/Admin_GetCountry',
         dataType: "json",
         beforeSend: function () {
 
         },
         success: function (data) {
-            if ($("#ddlRegisterCountryList") != null) {
+            if ($("#ddlRegisterCountryList") !== null) {
                 BindingCountryList(data);
             }
         },
@@ -177,14 +105,14 @@ function GetState(countryId) {
     
     $.ajax({
         type: "GET",
-        url: '/Home/Admin_MasterStateGetOnCountryId',
+        url: localUrl + 'Home/Admin_MasterStateGetOnCountryId',
         dataType: "json",
         data:{countryId: countryId},
         beforeSend: function () {
 
         },
         success: function (data) {
-            if ($("#ddlRegisterStateList") != null) {
+            if ($("#ddlRegisterStateList") !== null) {
                 BindingStateList(data);
             }
         },
@@ -201,14 +129,14 @@ function GetCity(stateId) {
     
     $.ajax({
         type: "GET",
-        url: '/Home/Admin_MasterCityGetOnStateId',
+        url: localUrl + 'Home/Admin_MasterCityGetOnStateId',
         dataType: "json",
         data:{stateId: stateId},
         beforeSend: function () {
 
         },
         success: function (data) {
-            if ($("#ddlRegisterCityList") != null) {
+            if ($("#ddlRegisterCityList") !== null) {
                 BindingCityList(data);
             }
         },

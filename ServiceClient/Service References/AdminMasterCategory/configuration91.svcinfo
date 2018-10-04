@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IMasterCategory" contract="AdminMasterCategory.IMasterCategory" bindingType="basicHttpBinding" address="http://localhost:23457/Admin/MasterCategory.svc" bindingConfiguration="BasicHttpBinding_IMasterCategory">
+    <endpoint name="BasicHttpBinding_IMasterCategory" contract="AdminMasterCategory.IMasterCategory" bindingType="basicHttpBinding" address="http://localhost/PlanGoGoService/Admin/MasterCategory.svc" bindingConfiguration="BasicHttpBinding_IMasterCategory">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:23457/Admin/MasterCategory.svc</serializedValue>
+          <serializedValue>http://localhost/PlanGoGoService/Admin/MasterCategory.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

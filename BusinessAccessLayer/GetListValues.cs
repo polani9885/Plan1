@@ -80,16 +80,13 @@ namespace BusinessAccessLayer
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
-            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder)
+            List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             try
             {
-                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, SourceAttractionID,
-                    DestinationAttractionID, AttractionID, StartDate, StartTime, listGetOrderOfAttractionVisit,
-                    CountryId,userTable_UpdatedBreaks,userTable_AttractionRequestOrder);
+                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, AttractionID, listGetOrderOfAttractionVisit,
+                    CountryId,userTable_UpdatedBreaks,userTripId);
             }
             catch (Exception ex)
             {
@@ -138,6 +135,18 @@ namespace BusinessAccessLayer
             try
             {
                 return _dataAccess.GetBreakInformation();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<public_GetCityList> GetCityOnCountryId(int countryId)
+        {
+            try
+            {
+                return _dataAccess.GetCityOnCountryId(countryId);
             }
             catch (Exception ex)
             {

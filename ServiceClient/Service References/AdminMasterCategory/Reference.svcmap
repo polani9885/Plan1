@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/MasterCategory.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MasterCategory.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MasterCategory.xsd" MetadataType="Schema" ID="55f3a5ad-4b1b-4fa1-88b3-0dd50b548244" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCategory.svc?xsd=xsd0" />
-    <MetadataFile FileName="MasterCategory1.xsd" MetadataType="Schema" ID="91b3f7d7-d0cf-4e29-b31e-0fd6ea85df6a" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCategory.svc?xsd=xsd1" />
-    <MetadataFile FileName="MasterCategory2.xsd" MetadataType="Schema" ID="7aa18594-8482-4d0d-b176-e16500501bfd" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCategory.svc?xsd=xsd2" />
-    <MetadataFile FileName="MasterCategory.wsdl" MetadataType="Wsdl" ID="69eae45b-5271-4471-9abe-27ff20b9f6e9" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCategory.svc?wsdl" />
-    <MetadataFile FileName="MasterCategory.disco" MetadataType="Disco" ID="9ec55d2c-8465-415d-b0b3-f21a9f61df01" SourceId="1" SourceUrl="http://localhost:23457/Admin/MasterCategory.svc?disco" />
+    <MetadataFile FileName="MasterCategory.xsd" MetadataType="Schema" ID="55f3a5ad-4b1b-4fa1-88b3-0dd50b548244" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterCategory1.xsd" MetadataType="Schema" ID="91b3f7d7-d0cf-4e29-b31e-0fd6ea85df6a" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterCategory2.xsd" MetadataType="Schema" ID="7aa18594-8482-4d0d-b176-e16500501bfd" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterCategory.wsdl" MetadataType="Wsdl" ID="69eae45b-5271-4471-9abe-27ff20b9f6e9" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?wsdl" />
+    <MetadataFile FileName="MasterCategory.disco" MetadataType="Disco" ID="9ec55d2c-8465-415d-b0b3-f21a9f61df01" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

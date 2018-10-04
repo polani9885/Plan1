@@ -32,10 +32,11 @@ namespace GoogleMapsAPI
             CategorySearch categorySearch = new CategorySearch();
             RecalculateTourInfo recalculateTourInfo = new RecalculateTourInfo();
             PhotoReferences photoReferences = new PhotoReferences();
+            DALSchedulers dALSchedulers = new DALSchedulers();
 
 
 
-            string argMessage = "Please enter arguments in the following format /mode:NEARBYSEARCH~2 or /mode:PLACEDETAILS~2 or /mode:DISTANCECALCULATION~2 or /mode:USERFAILEDRECORDS~2";
+        string argMessage = "Please enter arguments in the following format /mode:NEARBYSEARCH~2 or /mode:PLACEDETAILS~2 or /mode:DISTANCECALCULATION~2 or /mode:USERFAILEDRECORDS~2";
 
             try
             {
@@ -94,9 +95,9 @@ namespace GoogleMapsAPI
                         recalculateTourInfo.UpdateUserTourInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         //missing distance calcuation
                         getDistanceCalculation.MissingDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
-                        getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
-                            .Split('~')[1]));
-                        getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        //getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
+                        //    .Split('~')[1]));
+                        //getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         Main(args);
                         break;
                     }
@@ -104,6 +105,40 @@ namespace GoogleMapsAPI
                     {
                         photoReferences.PhotoReference(Convert.ToInt32(argmentarray[1]
                             .Split('~')[1]));
+                        break;
+                    }
+                    case "USERREQUESTED":
+                    {
+
+                        List<GetUserRequested> getUserRequested = dALSchedulers.Scheduler_GetUserRequested(
+                            Convert.ToInt32(argmentarray[1]
+                                .Split('~')[1]));
+
+                        if (getUserRequested != null && getUserRequested.Count > 0)
+                        {
+                            foreach (GetUserRequested _getUserRequested in getUserRequested)
+                            {
+                                getPlaceInformation.GetAutoCompleteInformation(_getUserRequested.CountryId,
+                                    new GetPlaceDetails
+                                    {
+                                        AttractionsId = _getUserRequested.AttractionsId,
+                                        AttractionName = string.Empty,
+                                        GoogleSearchText = _getUserRequested.GoogleSearchText
+                                    },
+                                    new MasterCountryScheduler
+                                    {
+                                        CountryId = _getUserRequested.CountryId,
+                                        CountryName = _getUserRequested.CountryName,
+                                        CountryShortName = _getUserRequested.CountryShortName
+                                    }, _getUserRequested.AttractionsId, _getUserRequested.UserTripId);
+
+                                dALSchedulers.Scheduler_DeleteUserRequested(_getUserRequested.UserRequestedId,
+                                    _getUserRequested.CountryId);
+
+                            }
+                            
+                        }
+                        
                         break;
                     }
                     default:

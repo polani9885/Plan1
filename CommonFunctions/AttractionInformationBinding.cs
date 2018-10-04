@@ -23,17 +23,15 @@ namespace CommonFunctions
         }
 
         public List<GroupWithDateAttractions> UserRequestedAttractionInformation(int travelModeId,
-            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionList, string startDate,
-            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder, int UserTripId)
+             List<userTable_OnlyId> attractionList, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int UserTripId)
         {
 
             List<GetOrderOfAttractionVisit> _ListGetOrderOfAttractionVisit =
                 getListValues.Public_GetOrderOfAttractionVisit(travelModeId,
-                    sourceAttractionID, destinationAttractionID, attractionList,
-                    startDate, startTime, listGetOrderOfAttractionVisit,
-                    countryId, userTable_UpdatedBreaks, userTable_AttractionRequestOrder);
+                    attractionList,
+                    listGetOrderOfAttractionVisit,
+                    countryId, userTable_UpdatedBreaks, UserTripId);
 
             List<GetOrderOfAttractionVisit> userLogOrderOfVisit = _ListGetOrderOfAttractionVisit;
 
@@ -45,9 +43,9 @@ namespace CommonFunctions
 
             try
             {
-                userInfo.User_LogUserTripInformation(travelModeId, sourceAttractionID, destinationAttractionID,
-                    attractionList, startDate, startTime, userLogOrderOfVisit, countryId,
-                    userTable_UpdatedBreaks, userTable_AttractionRequestOrder, UserTripId);
+                userInfo.User_LogUserTripInformation(travelModeId, 
+                    attractionList, userLogOrderOfVisit, countryId,
+                    userTable_UpdatedBreaks, UserTripId);
             }
             catch (Exception e)
             {

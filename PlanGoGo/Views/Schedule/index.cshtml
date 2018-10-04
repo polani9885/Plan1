@@ -28,11 +28,11 @@
                     <input id="autoCityName" placeholder="Enter City Name"> <input type="button" value="Add More Cites" ng-click="addCitites()" />
                     <br />
                     <div id="travelBasic" style="display: none">
-                        <input id="autoStartLocation" placeholder="Start Location">
+                        <input id="autoStartLocation" placeholder="Start Location" ng-keyup="SearchAutoComplete()" >
                         <br />
-                        <input id="autoDestinationLocation" placeholder="End Location">
+                        <input id="autoDestinationLocation" placeholder="End Location" ng-keyup="SearchAutoComplete()">
                         <br />
-                        <input id="calStartDateAndTime" placeholder="Start Date And Time" ng-model="StartDate">
+                        <input id="calStartDateAndTime" placeholder="Start Date And Time" ng-model="StartDate" onblur="DateUpdated()">
                         <br />
                         <input id="calDropDateAndTime" placeholder="End Date And Time">
                     </div>
@@ -56,11 +56,11 @@
                                         {{cities.cityName}}
                                     </td>
                                     <td>
-                                        <img src="/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" ng-click="CityNotIntereseted(cities.cityId)" />
+                                        <img src="Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" ng-click="CityNotIntereseted(cities.cityId)" />
                                     </td>
                                     <td>
-                                        <img ng-show="!$first" src="/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, true)" />
-                                        <img ng-show="!$last" src="/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, false)" />
+                                        <img ng-show="!$first" src="Images/Custome/up.jpg" alt="Up" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, true)" />
+                                        <img ng-show="!$last" src="Images/Custome/down.jpg" alt="Down" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, false)" />
                                     </td>
                                 </tr>
                             </table>
@@ -97,7 +97,7 @@
                                 <tr ng-repeat="categoryList in filterCategoryList" ng-switch on="$index % 5">
                                     <td ng-switch-when="0" valign="top">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index]">
-                                            <img src="/Images/User/Category/{{filterCategoryList[$index].TypeName}}.png" alt="{{filterCategoryList[$index].TypeName}}" width="50px" height="50px" />
+                                            <img src="Images/User/Category/{{filterCategoryList[$index].TypeName}}.png" alt="{{filterCategoryList[$index].TypeName}}" width="50px" height="50px" />
                                             <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index])" />
                                             {{filterCategoryList[$index].TypeName}}
                                         </div>
@@ -105,28 +105,28 @@
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+1]">
                                             
-                                            <img src="/Images/User/Category/{{filterCategoryList[$index+1].TypeName}}.png" alt="{{filterCategoryList[$index+1].TypeName}}" width="50px" height="50px"/>
+                                            <img src="Images/User/Category/{{filterCategoryList[$index+1].TypeName}}.png" alt="{{filterCategoryList[$index+1].TypeName}}" width="50px" height="50px"/>
                                             <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+1])"/>
                                             {{filterCategoryList[$index+1].TypeName}}
                                         </div>
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+2]">
-                                            <img src="/Images/User/Category/{{filterCategoryList[$index+2].TypeName}}.png" alt="{{filterCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
+                                            <img src="Images/User/Category/{{filterCategoryList[$index+2].TypeName}}.png" alt="{{filterCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
                                             <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+2])" />
                                             {{filterCategoryList[$index+2].TypeName}}
                                         </div>
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+3]">
-                                            <img src="/Images/User/Category/{{filterCategoryList[$index+3].TypeName}}.png" alt="{{filterCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
+                                            <img src="Images/User/Category/{{filterCategoryList[$index+3].TypeName}}.png" alt="{{filterCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
                                             <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+3])" />
                                             {{filterCategoryList[$index+3].TypeName}}
                                         </div>
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+4]">
-                                            <img src="/Images/User/Category/{{filterCategoryList[$index+4].TypeName}}.png" alt="{{filterCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
+                                            <img src="Images/User/Category/{{filterCategoryList[$index+4].TypeName}}.png" alt="{{filterCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
                                             <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+4])" />
                                             {{filterCategoryList[$index+4].TypeName}}
                                         </div>
@@ -137,7 +137,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" placeholder="Search Interested Place" ng-keyup="categoryFilter()" ng-model="CategoryPlaceSearch"  /> 
+                            <input type="text" id="placeSeachForAdding" placeholder="Search Interested Place" ng-keyup="categoryFilter()" ng-model="CategoryPlaceSearch"  /> 
                             <input type="button" ng-click="CategorySelectedAttractionFilter()" value="Show All"/>
                         </td>
                     </tr>
@@ -167,7 +167,7 @@
                                                             </td>
                                                             <td valign="top">
                                                                 <a herf="javascript:void(0)" style="cursor: pointer">
-                                                                    <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                                    <img src="Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
                                                                          ng-click="Interested(filterAttractionList[$index])"/>
                                                                 </a>
                                                             </td>
@@ -239,7 +239,7 @@
                                                             </td>
                                                             <td valign="top">
                                                                 <a herf="javascript:void(0)" style="cursor: pointer">
-                                                                    <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                                    <img src="Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
                                                                          ng-click="Interested(filterAttractionList[$index+1])" />
                                                                 </a>
                                                             </td>
@@ -933,15 +933,7 @@
 
 <br />
 <br />
-<div id="editTour" title="Modify Tour Information">
-    <p class="validateTips">All form fields are required.</p>
-    <form>
-        <fieldset>
-            <label for="name">No Of Hours Required to View</label>
-            <input type="text" alt="View Time" id="ViewTime" />
-        </fieldset>
-    </form>
-</div>
+
 <div id="addingAttraction" title="Adddint Attraction Information">
     <p class="validateTips">All form fields are required.</p>
     <form>
@@ -961,7 +953,9 @@
                     <fieldset>
                         <input type="hidden" id="hdSelectedDivId"/>
                         <input type="hidden" id="hdSelectedBreakType" />
-                        <input id="autoAddAttraction" placeholder="Location" onKeyUp="getAttractions()">
+                        <input type="hidden" id="hdSourceLongitude" />
+                        <input type="hidden" id="hdSourceLatitude" />
+                        <input id="autoAddAttractionForBreak" placeholder="Location" ng-keyup="BreakAttractionCallingAutoComplete()"/>
                         <br/>
                         Distance from <span id="breakPreviousAttractionName" style="color: orange; font-weight: bold"></span>:
 
@@ -988,35 +982,35 @@
                     <tr ng-repeat="categoryList in ExtraCategoryList" ng-switch on="$index % 5">
                         <td ng-switch-when="0" valign="top">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index]">
-                                <img src="/Images/User/Category/{{ExtraCategoryList[$index].TypeName}}.png" alt="{{ExtraCategoryList[$index].TypeName}}" width="50px" height="50px" />
+                                <img src="Images/User/Category/{{ExtraCategoryList[$index].TypeName}}.png" alt="{{ExtraCategoryList[$index].TypeName}}" width="50px" height="50px" />
                                 <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index])" />
                                 {{ExtraCategoryList[$index].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+1]">
-                                <img src="/Images/User/Category/{{ExtraCategoryList[$index+1].TypeName}}.png" alt="{{ExtraCategoryList[$index+1].TypeName}}" width="50px" height="50px" />
+                                <img src="Images/User/Category/{{ExtraCategoryList[$index+1].TypeName}}.png" alt="{{ExtraCategoryList[$index+1].TypeName}}" width="50px" height="50px" />
                                 <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+1])" />
                                 {{ExtraCategoryList[$index+1].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+2]">
-                                <img src="/Images/User/Category/{{ExtraCategoryList[$index+2].TypeName}}.png" alt="{{ExtraCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
+                                <img src="Images/User/Category/{{ExtraCategoryList[$index+2].TypeName}}.png" alt="{{ExtraCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
                                 <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+2])" />
                                 {{ExtraCategoryList[$index+2].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+3]">
-                                <img src="/Images/User/Category/{{ExtraCategoryList[$index+3].TypeName}}.png" alt="{{ExtraCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
+                                <img src="Images/User/Category/{{ExtraCategoryList[$index+3].TypeName}}.png" alt="{{ExtraCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
                                 <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+3])" />
                                 {{ExtraCategoryList[$index+3].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+4]">
-                                <img src="/Images/User/Category/{{ExtraCategoryList[$index+4].TypeName}}.png" alt="{{ExtraCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
+                                <img src="Images/User/Category/{{ExtraCategoryList[$index+4].TypeName}}.png" alt="{{ExtraCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
                                 <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+4])" />
                                 {{ExtraCategoryList[$index+4].TypeName}}
                             </div>
@@ -1051,7 +1045,7 @@
                                                 </td>
                                                 <td valign="top">
                                                     <a herf="javascript:void(0)" style="cursor: pointer">
-                                                        <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                        <img src="Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
                                                              ng-click="InsertBreakInformation(FilterNearLocations[$index])" />
                                                     </a>
                                                 </td>
@@ -1132,7 +1126,7 @@
                                                 </td>
                                                 <td valign="top">
                                                     <a herf="javascript:void(0)" style="cursor: pointer">
-                                                        <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
+                                                        <img src="Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
                                                              ng-click="InsertBreakInformation(FilterNearLocations[$index+1])" />
                                                     </a>
                                                 </td>

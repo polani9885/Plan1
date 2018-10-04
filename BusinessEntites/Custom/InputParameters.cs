@@ -11,15 +11,7 @@ namespace BusinessEntites.Custom
     {
         public int TravelModeId { get; set; }
 
-        public int SourceAttractionID { get; set; }
-
-        public int DestinationAttractionID { get; set; }
-
         public string AttractionID { get; set; }
-
-        public string StartDate { get; set; }
-
-        public string StartTime { get; set; }
 
         public int CountryId { get; set; }
 

@@ -13,7 +13,9 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.StartTime;
     $scope.attractionList = [];
     $scope.filterAttractionList = [];
+    $scope.filterAttractionListAutoSelect = [];
     $scope.attractionListAutoComplete = [];
+    $scope.attractionListBreakAutoComplete = [];
     //$scope.notInterestedList = [];
     $scope.attractionInterestedList = [];
     $scope.countryId = 0;
@@ -34,6 +36,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.FilterNearLocations = [];
     $scope.AttractionPhotoReference = [];
 
+    $scope.UserRequestedOrder = [];
+
     $scope.OneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     
@@ -51,7 +55,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.init = function () {
         //Get User stored information
         GetBreakInformation($scope, $http);
-        User_GetTourInformation($scope, $http);
+        GetTourInformationOnTripId($scope, $http);
         $scope.ExtraCategoryList = [];
         GetExtraCategoryList($scope, $http);
         
@@ -157,8 +161,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
     $scope.addCitites = function () {
 
-        if ($scope.VisitCityList.length === 0)
-            GetCityList();
+        
 
         var existed = false;
         var recordIndex = $scope.VisitCityList.length;
@@ -194,10 +197,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 }
             });
         $scope.VisitCityList.splice(recordOrder, 1);
-
-        if ($scope.VisitCityList.length === 0) {
-            GetCityList();
-        }
+        
     };
 
 
@@ -244,37 +244,6 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
             $scope.attractionList.push(item);            
         });
 
-        
-        //Source Auto Complete Data
-        $('#autoStartLocation').autocomplete({
-            source: $scope.attractionListAutoComplete
-        });
-
-
-        $("#autoStartLocation").on("autocompleteselect", function (event, ui) {
-
-            //this will get the category list
-            //var scope = angular.element("#controlerIndex").scope();
-            //scope.$apply(function () {
-            //    scope.GetCategoryList();
-            //});
-        });
-
-        //Desitnation auto complete information
-        $('#autoDestinationLocation').autocomplete({
-            source: $scope.attractionList
-        });
-
-
-        $("#autoDestinationLocation").on("autocompleteselect", function (event, ui) {
-
-            //this will get the category list
-            //var scope = angular.element("#controlerIndex").scope();
-            //scope.$apply(function () {
-            //    scope.GetCategoryList();
-            //});
-        });
-
         //it will filter with the selected attraction list
         $scope.CategorySelectedAttractionFilter();
     };
@@ -306,21 +275,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
         //We need to make dynamic
         $scope.TravelModeId = 1;
-        $scope.StartDate = '';
-        $scope.StartTime = '';
-        if ($("#autoStartLocation").val() !== "") {
-            $scope.SourceAttractionID = $("#autoStartLocation").val();
-        }
-        if ($("#autoDestinationLocation").val() !== "") {
-            $scope.DestinationAttractionID = $("#autoDestinationLocation").val();
-        }
         $scope.AttractionID = attractionListConcated;
-        if ($("#calStartDateAndTime").val() !== "") {
-            $scope.StartDate = $("#calStartDateAndTime").val();
-        }
-        if ($("#calDropDateAndTime").val() !== "") {
-            $scope.StartTime = $("#calDropDateAndTime").val();
-        }
     };
 
     //Ajax return data for the order of attractions
@@ -331,11 +286,13 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
         //Google Maps data binding
         $scope.GoogleMapMarks(data);
-        
-        //$scope.$apply(function () {
+
         $scope.OrderOfAttractionList = data;
-        //$scope.$apply();
-        //});
+
+        
+        GetOrderOfRequest($scope);
+        
+        
         $scope.ItenateDynamicDatesCreation(data);
     };
 
@@ -645,15 +602,21 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.categoryFilter = function () {
         var tempFilterAttractionList = $scope.filterAttractionList;
         $scope.filterAttractionList = [];
+        
         $(tempFilterAttractionList).filter(function (index) {
             if (tempFilterAttractionList[index].AttractionName.toLowerCase().indexOf($scope.CategoryPlaceSearch.toLowerCase()) !== -1) {
                 $scope.filterAttractionList.push(tempFilterAttractionList[index]);
             }
         });
+
+        if ($scope.filterAttractionList.length === 0) {
+            AutoComplte($scope, $http, $("#placeSeachForAdding").val());
+        }
+        
     }
 
     $scope.InsertBreakInformation = function (attractionInfo) {
-        debugger;
+        
         var indexCounter = 0;
         $.each($scope.UpdatedBreaks,
             function (key, value) {
@@ -855,25 +818,29 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
 
     $scope.PlannedTours = function(data) {
+
+      
         
+        $scope.countryId = data.CountryId;
+        $scope.TravelModeId = data.TravelModeId;
+        $scope.StartDate = data.StartDate;
+        $scope.SourceAttractionID = data.SourceAttractionID;
+        $scope.DestinationAttractionID = data.DestinationAttractionID;
+        $("#expense_Persons").val(data.NoOfPersons);
+        $("#expense_Cars").val(data.NoOfCars);
+        $("#expense_PerGallon").val(data.CarMileage);
+        $("#expense_PerGallonPrice").val(data.FuelPrice);
+        $("#autoStartLocation").val(data.SourceAttractionName);
+        $("#autoDestinationLocation").val(data.DestinationAttractionName);
 
-        $.each(data,
-            function(key, value) {
-                $scope.countryId = value.CountryId;
-                $scope.TravelModeId = value.TravelModeId;
-                $scope.StartDate = value.StartDate;
-                $scope.SourceAttractionID = value.SourceAttractionID;
-                $scope.DestinationAttractionID = value.DestinationAttractionID;
-                $("#expense_Persons").val(value.NoOfPersons);
-                $("#expense_Cars").val(value.NoOfCars);
-                $("#expense_PerGallon").val(value.CarMileage);
-                $("#expense_PerGallonPrice").val(value.FuelPrice);
-
-                return false;
-            });
+        //calling the auto complete for filling the city information
+        GetCityList($scope, $http);
+        
         UserGetCityList($scope, $http);
         $scope.GetCategoryList();
         User_UserTripGetAttractions($scope, $http);
+
+        
 
     };
 
@@ -1087,7 +1054,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.PhotoInfo = function (attractionId, data, attractionName) {
         //$('.demo').gallerybox();
         $scope.AttractionPhotoReference = [];
-        debugger;
+        
         if (data.length > 0) {
 
             $("#photoSlideShow ul").empty();
@@ -1136,8 +1103,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 CarRentalExpense = CarRentalExpense + value.CarRentalExpense;
                 DinnerExpense = DinnerExpense + (value.DinnerExpense * $("#expense_Persons").val());
             });
-
-        FuelExpense = (distance * $("#expense_PerGallonPrice").val()) * $("#expense_Cars").val();
+        
+        FuelExpense = (distance / $("#expense_PerGallon").val()) * $("#expense_Cars").val() * $("#expense_PerGallonPrice").val();
 
         TotalExpense = BreakFastExpense +
             LunchExpense +
@@ -1199,6 +1166,118 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
         Public_GetOrderOfAttractionVisit($scope, $http);
     };
+
+    $scope.SearchAutoComplete=function() {
+
+        if ($("#autoStartLocation").val().length > 3) {
+            AutoComplte($scope, $http, $("#autoStartLocation").val());
+        }
+
+        if ($("#autoDestinationLocation").val().length > 3) {
+            AutoComplte($scope, $http, $("#autoDestinationLocation").val());
+        }
+    }
+
+    $scope.TourInfoUpdate = function (data, isSource, googleSearchText, breakType, breakDate) {
+        UserRequestedAttraction($scope, data, isSource, googleSearchText, breakType, breakDate);
+    }
+
+
+    $scope.BreakAttractionCallingAutoComplete = function () {
+
+        var data = {};
+        data.address = $("#autoAddAttractionForBreak").val();
+        data.latitude = $("#hdSourceLatitude").val();
+        data.longitude = $("#hdSourceLongitude").val();
+        data.distance = $("#breakDistance").val();
+        AutoComplteBreakInfo($scope, $http,data);
+    };
+
+    $scope.ViewTimeUpdate = function (attractionId, viewTime) {
+        
+        $.each($scope.UserRequestedOrder, function (recordKey, recordValue) {
+            if (recordValue.AttractionId === attractionId) {
+                recordValue.StayTime = viewTime;
+            }
+        });
+
+        var attractionRequestOrder = [];
+        $.each($scope.UserRequestedOrder,
+            function(orderKey, orderValue) {
+                
+                if (jQuery.type(orderValue.StayTime) !== "undefined") {
+                    var temp = {};
+                    temp.AttractionId = orderValue.AttractionId;
+                    temp.OrderNumber = orderValue.OrderNumber;
+                    temp.BreakInformationId = orderValue.BreakInformationId;
+                    temp.StayTime = orderValue.StayTime;
+                    temp.IsRequestedAfterBreakFast = orderValue.IsRequestedAfterBreakFast;
+                    temp.IsRequestedAfterLunch = orderValue.IsRequestedAfterLunch;
+                    temp.IsRequestedAfterBreak = orderValue.IsRequestedAfterBreak;
+                    temp.IsRequestedAfterDinner = orderValue.IsRequestedAfterDinner;
+                    attractionRequestOrder.push(temp);
+                }
+            });
+        
+        InsertUserRequested($scope, $http, attractionRequestOrder);
+        
+    };
+
+    $scope.GetOrderOfRequest = function(data) {
+        
+        $scope.UserRequestedOrder = [];
+        if (data !== null) {
+            $.each($scope.OrderOfAttractionList,
+                function(key, value) {
+                    $.each(value.ListGetOrderOfAttractionVisit,
+                        function (googleKey, googleValue) {
+
+                            var temp = [];
+                            temp.AttractionId = googleValue.DestinationAttractionId;
+                            temp.OrderNumber = googleValue.RecordCount;
+                            temp.BreakInformationId = googleValue.BreakInformationId;
+                            
+                            if (data !== null && data.length > 0) {
+                                $.each(data,
+                                    function(orderKey, orderValue) {
+
+
+                                        if (googleValue.DestinationAttractionId === orderValue.AttractionId) {
+                                            temp.StayTime = orderValue.StayTime;
+                                            temp.IsRequestedAfterBreakFast = orderValue.IsRequestedAfterBreakFast;
+                                            temp.IsRequestedAfterLunch = orderValue.IsRequestedAfterLunch;
+                                            temp.IsRequestedAfterBreak = orderValue.IsRequestedAfterBreak;
+                                            temp.IsRequestedAfterDinner = orderValue.IsRequestedAfterDinner;
+                                            return false;
+
+                                        } else {
+
+                                            temp.StayTime = googleValue.TimeRequiredToView;
+                                            temp.IsRequestedAfterBreakFast = false;
+                                            temp.IsRequestedAfterLunch = false;
+                                            temp.IsRequestedAfterBreak = false;
+                                            temp.IsRequestedAfterDinner = false;
+                                        }
+
+                                    });
+                            } else {
+                                temp.StayTime = googleValue.TimeRequiredToView;
+                                temp.IsRequestedAfterBreakFast = false;
+                                temp.IsRequestedAfterLunch = false;
+                                temp.IsRequestedAfterBreak = false;
+                                temp.IsRequestedAfterDinner = false;
+
+                            }
+
+                            $scope.UserRequestedOrder.push(temp);
+                        });
+                });
+        }
+
+        
+
+    };
+    
 
     $scope.init();
 });

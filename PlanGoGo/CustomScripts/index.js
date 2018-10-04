@@ -6,24 +6,12 @@ function init()
 {
     
     try{
-        //calling the auto complete for filling the city information
-        GetCityList();
+       
 
         $(function () {            
             $("#tabs, #subtabs").tabs();
-            GetCountry();
-            $("#editTour").dialog({
-                autoOpen: false,
-                height: 400,
-                width: 350,
-                modal: true,
-                buttons: {
-                    "Update": UpdateTourInformation,
-                    Cancel: function () {
-                        $("#editTour").dialog("close");
-                    }
-                },
-            });
+            GetCountryList();
+            
 
             $("#addingAttraction").dialog({
                 autoOpen: false,
@@ -49,12 +37,64 @@ function init()
                     }
                 },
             });
+
+
+            $("#autoStartLocation").on("autocompleteselect", function (event, ui) {
+
+                var angularScope = angular.element(document.getElementById('main')).scope();
+                angularScope.$apply(function () {
+                    angularScope.TourInfoUpdate(ui.item.data, 1,'',0,'');
+
+                });
+            });
+
+            $("#autoDestinationLocation").on("autocompleteselect", function (event, ui) {
+
+                var angularScope = angular.element(document.getElementById('main')).scope();
+                angularScope.$apply(function () {
+                    angularScope.TourInfoUpdate(ui.item.data, 2, '', 0, '');
+                });
+            });
+
+
+            $("#placeSeachForAdding").on("autocompleteselect", function (event, ui) {
+
+                var angularScope = angular.element(document.getElementById('main')).scope();
+                angularScope.$apply(function () {
+                    angularScope.TourInfoUpdate(ui.item.data, 3, '', 0, '');
+                });
+            });
+
+            $("#autoAddAttractionForBreak").on("autocompleteselect", function (event, ui) {
+                
+                var angularScope = angular.element(document.getElementById('main')).scope();
+                angularScope.$apply(function () {
+                    angularScope.TourInfoUpdate(ui.item.data,
+                        4,
+                        ui.item.name,
+                        $("#hdSelectedBreakType").val(),
+                        $("#hdSelectedDivId").val());
+                });
+
+                $("#addingBreak")
+                    .dialog("close");
+            });
+
+            
+
         });
     }
     catch(e)
     {
         alert(e);
     }
+}
+
+function DateUpdated() {
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        angularScope.TourInfoUpdate('', 5, '', 0, '');
+    });
 }
 
 //displaying the google maps information with the current attraction information

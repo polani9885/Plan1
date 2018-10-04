@@ -1,6 +1,7 @@
 ﻿CREATE FUNCTION [dbo].[fun_GetViewTime] 
 (
 	@NextAttractionId AS INT
+	,@UserTripId AS INT
 )
 RETURNS TIME
 AS
@@ -9,8 +10,13 @@ BEGIN
 	DECLARE @ResTimeRequiredToView AS TIME
 	DECLARE @AverageMinimumTime AS TIME = '02:00:00.0000000'
 	
-	
-	IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
+	IF EXISTS( SELECT 1 FROM [Attractions]..[UserTripRequestOrder] WITH(NOLOCK) WHERE AttractionId = @NextAttractionId AND UserTripId = @UserTripId)
+	BEGIN
+		SELECT  
+			@ResTimeRequiredToView = StayTime
+		FROM [Attractions]..[UserTripRequestOrder] WITH(NOLOCK) WHERE AttractionId = @NextAttractionId AND UserTripId = @UserTripId
+	END
+	ELSE IF EXISTS( SELECT 1 FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
 	BEGIN
 		SET @ResTimeRequiredToView = (SELECT AverageTime FROM AttractionAverageTime WITH(NOLOCK) WHERE AttractionsId = @NextAttractionId)
 	END

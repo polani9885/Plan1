@@ -22,15 +22,15 @@ namespace Interfaces
             int mainCategorySelected);
 
         List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-            int SourceAttractionID, int DestinationAttractionID, List<userTable_OnlyId> AttractionID, string StartDate,
-            string StartTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder);
+             List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId);
         List<GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId);
 
         List<GoogleTypes> Scheduler_GetExtraCategoryList();
         List<AttractionPhotoReference> public_AttractionsPhotoInfo(int countryId, int attractionId);
 
         List<BreakInformation> GetBreakInformation();
+
+        List<public_GetCityList> GetCityOnCountryId(int countryId);
     }
 }

@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23457/Admin/AttractionTravelTimeDistance.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/AttractionTravelTimeDistance.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AttractionTravelTimeDistance.xsd" MetadataType="Schema" ID="70aba8d9-cd76-4a5f-bc75-a9feba650324" SourceId="1" SourceUrl="http://localhost:23457/Admin/AttractionTravelTimeDistance.svc?xsd=xsd0" />
-    <MetadataFile FileName="AttractionTravelTimeDistance1.xsd" MetadataType="Schema" ID="8e23fa20-7e25-45dd-a0af-e5acff35e695" SourceId="1" SourceUrl="http://localhost:23457/Admin/AttractionTravelTimeDistance.svc?xsd=xsd1" />
-    <MetadataFile FileName="AttractionTravelTimeDistance.disco" MetadataType="Disco" ID="27ad43d9-81de-4c14-aef2-b5920cb7a2c5" SourceId="1" SourceUrl="http://localhost:23457/Admin/AttractionTravelTimeDistance.svc?disco" />
-    <MetadataFile FileName="AttractionTravelTimeDistance.wsdl" MetadataType="Wsdl" ID="8541bab8-8ef2-42f4-8e3d-07b27b23eb4a" SourceId="1" SourceUrl="http://localhost:23457/Admin/AttractionTravelTimeDistance.svc?wsdl" />
-    <MetadataFile FileName="AttractionTravelTimeDistance2.xsd" MetadataType="Schema" ID="f4eba805-7a49-4f46-9ef8-d579c147f852" SourceId="1" SourceUrl="http://localhost:23457/Admin/AttractionTravelTimeDistance.svc?xsd=xsd2" />
+    <MetadataFile FileName="AttractionTravelTimeDistance.xsd" MetadataType="Schema" ID="70aba8d9-cd76-4a5f-bc75-a9feba650324" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/AttractionTravelTimeDistance.svc?xsd=xsd0" />
+    <MetadataFile FileName="AttractionTravelTimeDistance1.xsd" MetadataType="Schema" ID="8e23fa20-7e25-45dd-a0af-e5acff35e695" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/AttractionTravelTimeDistance.svc?xsd=xsd1" />
+    <MetadataFile FileName="AttractionTravelTimeDistance.disco" MetadataType="Disco" ID="27ad43d9-81de-4c14-aef2-b5920cb7a2c5" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/AttractionTravelTimeDistance.svc?disco" />
+    <MetadataFile FileName="AttractionTravelTimeDistance.wsdl" MetadataType="Wsdl" ID="8541bab8-8ef2-42f4-8e3d-07b27b23eb4a" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/AttractionTravelTimeDistance.svc?wsdl" />
+    <MetadataFile FileName="AttractionTravelTimeDistance2.xsd" MetadataType="Schema" ID="f4eba805-7a49-4f46-9ef8-d579c147f852" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/AttractionTravelTimeDistance.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -12,6 +12,7 @@
 	,@CountryId AS INT
 	,@StateShortName AS VARCHAR(50)
 	,@CityShortName AS VARCHAR(50)
+	,@UserTripId AS INT = NULL
 )	
 AS
 BEGIN
@@ -73,6 +74,14 @@ BEGIN
 				   )
 			SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC
 		END
+	END
+
+	IF ISNULL(@UserTripId,0) > 0
+		AND NOT EXISTS(SELECT 1 FROM Attractions..UserTripCities WITH(NOLOCK) WHERE UserTripId = @UserTripId AND MasterCityId = @CityId)
+	BEGIN
+		UPDATE Attractions..UserTripCities
+			SET MasterCityId = @CityId
+		WHERE UserTripId = @UserTripId
 	END
 
 	UPDATE [dbo].[Attractions]

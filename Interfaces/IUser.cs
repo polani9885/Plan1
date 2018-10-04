@@ -23,7 +23,7 @@ namespace Interfaces
 
         bool User_UserExistChecking(string userName);
 
-        UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId);
+        UserTourInformation User_AddUpdateTourName(string tourName, int userTripId, int userId, int countryId);
 
         List<UserTourInformation> User_GetTourInformation(int userId);
 
@@ -34,10 +34,8 @@ namespace Interfaces
         void User_InsertCategoryInformation(int userTripId, List<userTable_Category> category);
 
         void User_LogUserTripInformation(int travelModeId,
-            int sourceAttractionID, int destinationAttractionID, List<userTable_OnlyId> attractionID, string startDate,
-            string startTime, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
-            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,
-            List<UserTable_AttractionRequestOrder> userTable_AttractionRequestOrder, int userTripId);
+             List<userTable_OnlyId> attractionID,  List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId);
 
         List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId);
 
@@ -50,5 +48,13 @@ namespace Interfaces
         List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate);
 
         void User_UserTrip_Update(UserTourInformation userTourInformation);
+
+        void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource,string startDate, string googleSearchText, int breakType, string breakDate);
+
+        UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId);
+        List<UserTable_AttractionRequestOrder> User_GetOrderOfRequest(int userTripId, int countryId);
+
+        void User_InsertUserRequested(int userTripId,
+            List<UserTable_AttractionRequestOrder> attractionRequestOrder);
     }
 }

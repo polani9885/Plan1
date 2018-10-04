@@ -4,6 +4,7 @@
 	,@OrderOfAttactionInfomration AS user_OrderOfAttractionVisit READONLY
 	,@UserBreakTime AS UserTable_UpdatedBreaks READONLY
 	,@RecordOrder AS INT
+	,@UserTripId INT
 )
 
 AS
@@ -118,7 +119,12 @@ BEGIN
 		SET @ResDestincationAttractionName  = @BreakType
 		SET @NormalBreakExist = 0
 		
-
+		SELECT TOP 1
+				 @ResSourceAttractionId = DestinationAttractionId
+				 ,@ResSourceAttractionName = DestinationAttractionName
+				 ,@ResTravelModeId = TravelModeId
+			FROM @OrderOfAttactionInfomration
+			ORDER BY EventEndTime DESC
 		
 		
 
@@ -209,16 +215,17 @@ BEGIN
 
 				END
 				ELSE 
-				BEGIN
+				BEGIN					
 					IF NOT Exists (
 					SELECT 1 FROM @OrderOfAttactionInfomration WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE) 
 					AND BreakInformationId = @BreakInformationId
 					)
-					BEGIN					
+					BEGIN		
+									
 						SELECT @ResDestincationAttractionId = LunchAttractionId 							
 						FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
 						AND IsLunchAdded = 1	
-
+						
 						SET @IsBreakAttractionExist = 1
 					END
 				END
@@ -345,13 +352,14 @@ BEGIN
 
 				IF @IsBreakAttractionExist = 1
 				BEGIN
+				
 					IF EXISTS 
 					(
 						SELECT 1 FROM AttractionTravelTimeDistance WITH(NOLOCK) 
 						WHERE SourceAttractionId = @ResSourceAttractionId AND DestinationAttractionId = @ResDestincationAttractionId
 						AND TravelModeId = @ResTravelModeId
 					)
-					BEGIN
+					BEGIN					
 						SELECT	@ResDistance = Distance
 								,@ResTravelTime = TravelTime  
 						FROM AttractionTravelTimeDistance WITH(NOLOCK) 
@@ -362,6 +370,8 @@ BEGIN
 					END
 					ELSE
 					BEGIN
+						
+					
 						SET @ResDistance = 0
 						SET @ResTravelTime = 0
 						SET @IsDistanceCalculationMissing = 1
@@ -369,7 +379,7 @@ BEGIN
 						--Adding missing Distance information
 
 						DELETE FROM @MissingAttractionID						
-
+						
 						INSERT INTO @MissingAttractionID(ID)
 						SELECT @ResDestincationAttractionId
 
@@ -391,6 +401,15 @@ BEGIN
 				END
 					SET @ResDateAndtime  = @GetStartingTimeEvent
 					SET @ReachTime = DateADD(ss,@ResTravelTime,@GetStartingTimeEvent) 
+
+					IF EXISTS( SELECT 1 FROM [Attractions]..[UserTripRequestOrder] WITH(NOLOCK) WHERE AttractionId = @ResDestincationAttractionId AND UserTripId = @UserTripId)
+					BEGIN
+						SELECT  
+							@ResTimeRequiredToView = StayTime
+						FROM [Attractions]..[UserTripRequestOrder] WITH(NOLOCK) WHERE AttractionId = @ResDestincationAttractionId AND UserTripId = @UserTripId
+					END
+
+
 					SET @ResTimeRequiredToView = @BreakMinimumTime
 					SET @EventEndTime  = @ReachTime + CAST(@BreakMinimumTime AS DATETIME)
 					SET @GetStartingTimeEvent = @EventEndTime			
@@ -406,12 +425,7 @@ BEGIN
 		IF(@RecordUpdate = 1)
 		BEGIN
 
-			SELECT TOP 1
-				 @ResSourceAttractionId = DestinationAttractionId
-				 ,@ResSourceAttractionName = DestinationAttractionName
-				 ,@ResTravelModeId = TravelModeId
-			FROM @OrderOfAttactionInfomration
-			ORDER BY EventEndTime DESC
+			
 
 			INSERT INTO @OrderOfAttactionInfomrationOutPut(
 				RecordCount
@@ -461,5 +475,6 @@ BEGIN
 		
 		SELECT * FROM @OrderOfAttactionInfomrationOutPut	
 END
+
 
 

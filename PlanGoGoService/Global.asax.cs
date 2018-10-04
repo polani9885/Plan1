@@ -1,13 +1,11 @@
 ﻿using Interfaces;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.SessionState;
-using Unity.Mvc5;
+
 
 namespace PlanGoGoService
 {
@@ -16,21 +14,21 @@ namespace PlanGoGoService
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            IUnityContainer container = GetUnityContainer();
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            //IUnityContainer container = GetUnityContainer();
+            //DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
 
         /// <summary>
         /// gets the unity container.
         /// </summary>
         /// <returns></returns>
-        private IUnityContainer GetUnityContainer()
-        {
-            //create unitycontainer          
-            IUnityContainer container = new UnityContainer()
-                .RegisterType<IGetListValues, BusinessAccessLayer.GetListValues>();
-            return container;
-        }
+        //private IUnityContainer GetUnityContainer()
+        //{
+        //    //create unitycontainer          
+        //    IUnityContainer container = new UnityContainer()
+        //        .RegisterType<IGetListValues, BusinessAccessLayer.GetListValues>();
+        //    return container;
+        //}
 
         protected void Session_Start(object sender, EventArgs e)
         {

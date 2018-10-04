@@ -304,7 +304,7 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_InsertAttractionAuto(AttractionsDTO attractionsDTO,int countryId)
+        public void Scheduler_InsertAttractionAuto(AttractionsDTO attractionsDTO,int countryId,int userTripId)
         {
             try
             {
@@ -323,7 +323,8 @@ namespace DataAccessLayer.Schedulers
                         CountryId = attractionsDTO.CountryId,
                         AttractionsId = attractionsDTO.AttractionsId,
                         StateShortName = attractionsDTO.StateShortName,
-                        CityShortName = attractionsDTO.CityShortName
+                        CityShortName = attractionsDTO.CityShortName,
+                        UserTripId = userTripId
                     });
             }
             catch (Exception ex)
@@ -390,7 +391,8 @@ namespace DataAccessLayer.Schedulers
                         CountryId = attractionsDTO.CountryId,
                         StateShortName = attractionsDTO.StateShortName,
                         CityShortName = attractionsDTO.CityShortName,
-                        Utc_offset = schedulerInsertPlaceDetails.Utc_offset
+                        Utc_offset = schedulerInsertPlaceDetails.Utc_offset,
+                        AttractionName = attractionsDTO.AttractionName
 
                     });
             }
@@ -674,6 +676,38 @@ namespace DataAccessLayer.Schedulers
                     new
                     {
                         AttractionsId = attractionsId
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GetUserRequested> Scheduler_GetUserRequested(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<GetUserRequested> _returnResult = SqlHelper.QuerySP<GetUserRequested>("Scheduler_GetUserRequested").ToList();
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public void Scheduler_DeleteUserRequested(int userRequestedId, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_DeleteUserRequested",
+                    new
+                    {
+                        UserRequestedId = userRequestedId
                     });
             }
             catch (Exception ex)

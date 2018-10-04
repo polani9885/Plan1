@@ -3,6 +3,7 @@
 	@UserId AS INT
 	,@UserTripId AS INT
 	,@TripName AS Varchar(500)
+	,@CountryId AS INT
 )	
 AS
 BEGIN
@@ -17,6 +18,7 @@ BEGIN
 			   ,NoOfCars
 			   ,CarMileage
 			   ,FuelPrice
+			   ,CountryId
 			   )
 		 VALUES
 			   (@UserId
@@ -26,6 +28,7 @@ BEGIN
 			   ,1
 			   ,20
 			   ,2.5
+			   ,@CountryId
 			   )	
 	END
 	ELSE
@@ -34,6 +37,7 @@ BEGIN
 		UPDATE [dbo].[UserTrip]
 		   SET TripName = @TripName			  
 			  ,ModifiedDate = GETDATE()
+			  ,CountryId = @CountryId
 		 WHERE UserTripId = @UserTripId
 
 	END

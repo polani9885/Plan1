@@ -2,11 +2,13 @@
 appPlanGoGo.controller('controlerPlannedTour', function ($scope, $http) {
     $scope.plannedTour = [];
     $scope.UserSelectedTripInfo = [];
+    $scope.CountryList = [];
     
 
     $scope.init= function() {
 
         User_GetTourInformation($scope, $http);
+        GetCountry($scope, $http);
     }
 
     $scope.init();
@@ -19,6 +21,7 @@ appPlanGoGo.controller('controlerPlannedTour', function ($scope, $http) {
                 var temp = [];
                 temp.TripName = value.TripName;
                 temp.CreatedDate = value.CreatedDate;
+                temp.CountryId = value.CountryId;
                 temp.UserTripId = value.UserTripId;
 
                 $scope.plannedTour.push(temp);
@@ -34,11 +37,12 @@ appPlanGoGo.controller('controlerPlannedTour', function ($scope, $http) {
         $("#popCreateNewTour")
             .dialog("open");
         $("#txtTripName").val(tourInfo.TripName);
+        $("#ddlCountry").val(tourInfo.CountryId);
 
 
     };
 
     $scope.NavigateToSchedule = function(userTripId) {
-        window.location.href = "/Schedule/index?userTripId=" + userTripId;
+        window.location.href = localUrl + "Schedule/index?userTripId=" + userTripId;
     };
 });

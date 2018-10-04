@@ -7,19 +7,7 @@
     //alert(attractionId);
 }
 
-//Opening the dialog for edit the view time
-function editTourInformation(timeRequiredToView, recordCounter) {
-    
-    $("#editTour")
-        .data("recordCounter",recordCounter)
-        .dialog("open");
-    
-    if (timeRequiredToView.toString().indexOf(':') === -1)
-    {
-        timeRequiredToView = timeRequiredToView + ":00";
-    }
-    $("#ViewTime").val(timeRequiredToView); 
-}
+
 
 
 //Opening the dialog for adding attraction the view time
@@ -123,6 +111,8 @@ function AddLunchDinnerBreak(sourceAttractionName, breakType, attractionId, divI
 
     $("#hdSelectedDivId").val(divId);
     $("#hdSelectedBreakType").val(breakType);
+    $("#hdSourceLongitude").val(sourceLongitude);
+    $("#hdSourceLatitude").val(sourceLatitude);
 
     $("#chkExtraCategory input:checkbox").each(function () {
         $(this).prop('checked', true);
@@ -171,5 +161,12 @@ function IgnoreMyExpenseChanges() {
     var angularScope = angular.element(document.getElementById('main')).scope();
     angularScope.$apply(function () {
         angularScope.IgnoreMyExpenseChanges();
+    });
+}
+
+function ViewTimeUpdate(attractionId, object) {
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function() {
+        angularScope.ViewTimeUpdate(attractionId, $(object).val());
     });
 }
