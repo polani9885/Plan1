@@ -61,6 +61,17 @@ BEGIN
 					SELECT AttractionsID 
 					FROM MissingDistanceAttractionsRecordsXAttractions
 					WHERE MissingDistanceAttractionsRecordsID = @MissingDistanceAttractionsRecordsID
-				)	
-END
+				)
+				
+	AND ID NOT IN 
+	(	
 
+		SELECT [DestinationAttractionId]			  
+		FROM [dbo].[AttractionTravelTimeDistance]
+		WHERE SourceAttractionId = @SourceAttractionID
+		AND DestinationAttractionId IN (SELECT ID FROM @DestinationAttractions)
+	)	
+
+
+
+END

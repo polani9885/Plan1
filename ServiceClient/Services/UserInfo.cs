@@ -301,6 +301,19 @@ namespace ServiceClient.Services
             }
         }
 
+        public List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId)
+        {
+            try
+            {
+                return _userService.User_CheckTheCalculationPartIsDone(userTripId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+        }
+
 
     }
 }

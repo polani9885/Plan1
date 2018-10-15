@@ -21,6 +21,7 @@ BEGIN
 	  ,UT.FuelPrice
 	  ,SA.GoogleSearchText SourceAttractionName
 	  ,DA.GoogleSearchText DestinationAttractionName
+	  ,UT.DrivingBreak
   FROM Attractions..[UserTrip] UT WITH(NOLOCK)
   LEFT OUTER JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = UT.SourceAttractionId
   LEFT OUTER JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = UT.DestinationAttractionId

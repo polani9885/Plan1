@@ -7,10 +7,10 @@ BEGIN
 
 	SELECT 
 		MissingDistanceAttractionsRecordsXAttractionsID
-		,A.GoogleSearchText AS DestinationText
-		,AA.GoogleSearchText AS SourceText
+		,CASE WHEN ISNULL(A.GoogleSearchText,'') = '' THEN A.AttractionName ELSE A.GoogleSearchText END  AS DestinationText
+		,CASE WHEN ISNULL(AA.GoogleSearchText,'') = '' THEN AA.AttractionName ELSE AA.GoogleSearchText END  AS SourceText
 		,MDARXA.AttractionsID
-		,MAR.MasterTravelModeID
+		,MAR.MasterTravelModeID		
 	FROM MissingDistanceAttractionsRecords MAR
 	JOIN MissingDistanceAttractionsRecordsXAttractions MDARXA ON MDARXA.MissingDistanceAttractionsRecordsID =  MAR.MissingDistanceAttractionsRecordsID	
 	JOIN Attractions A ON A.AttractionsId = MDARXA.AttractionsID

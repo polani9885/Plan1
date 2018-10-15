@@ -396,9 +396,9 @@
     <Content Include="Images\User\UI\Correct.jpg" />
     <Content Include="Images\User\UI\Correct.png" />
     <Content Include="Images\User\UI\DifferentIcons.jpg" />
+    <Content Include="Images\User\UI\left-arrow.png" />
+    <Content Include="Images\User\UI\right-arrow.png" />
     <Content Include="Images\User\UI\Wrong.png" />
-    <Content Include="Plugins\gallerybox\gallerybox.css" />
-    <Content Include="Plugins\gallerybox\jquery.gallerybox.js" />
     <Content Include="Plugins\prettyPhoto\jquery.prettyPhoto.js" />
     <Content Include="Plugins\prettyPhoto\prettyPhoto.css" />
     <Content Include="Plugins\Scripts\gmaps.js" />
@@ -1260,6 +1260,7 @@
     <Content Include="Templates\BeachResort\images\seafoods.jpg" />
     <Content Include="Templates\BeachResort\images\searchbar.png" />
     <Content Include="Templates\BeachResort\images\suite.jpg" />
+    <Content Include="Views\Schedule\SlideShow.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

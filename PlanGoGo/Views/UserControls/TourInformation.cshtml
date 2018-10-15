@@ -1,4 +1,5 @@
 ﻿@using BusinessEntites;
+@using BusinessEntites.Custom
 @model PlanGoGo.Models.UserControls.AttractionsInformation
 @{
     Layout = null;
@@ -228,240 +229,126 @@
                         </tr>
                         <tr>
                             <td class="attractionName">
-                                @_attraction.DestinationAttractionName
+                                <table>
+                                    <tr>
+                                        <td>
+                                            @_attraction.DestinationAttractionName
+                                        </td>
+                                        <td>
+                                            <div id="weather_@{@_attraction.RecordCount}" class="tooltip">
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                             <td rowspan="6">
                                 @if (!_attraction.IsLunchDinnerBreakTime)
                                 {
 
-                                    <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)"/>
+                                    if (Model.attractionsList.Count() != _attraction.RecordCount)
+                                    {
+
+                                        <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)"/>
+
+                                        if (_attraction.RecordCount != 1)
+                                        {
+                                            <img src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true,0)"/>
+                                        }
+                                        else
+                                        {
+                                            <span style="width: 30px; height: 30px">&nbsp;</span>
+                                        }
+
+                                        switch (Model.attractionsList.Where(x => x.RecordCount == _attraction.RecordCount + 1).Select(y => y.BreakInformationId).FirstOrDefault())
+                                        {
+                                            case 1:
+                                            {
+                                                <text>
+                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,1)">
+                                                         Visit After BreakFast
+                                                    </a> 
+                                                </text>
+                                                break;
+                                            }
+                                            case 2:
+                                            {
+                                                <text>
+                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,2)">
+                                                        Visit After Lunch
+                                                    </a> 
+                                                </text>
+                                                break;
+                                            }
+                                            case 3:
+                                            {
+                                                <text>
+                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,3)">
+                                                        Visit After Break
+                                                    </a> 
+                                                </text>
+                                                break;
+                                            }
+                                            case 4:
+                                            {
+                                                <text>
+                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,4)">
+                                                        Visit After Dinner
+                                                    </a> 
+                                                </text>
+                                                    break;
+                                                }
+                                            default:
+                                                {
+                                                    <text>
+                                <img src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,0)" />
+                                                    </text>
+                                                    break;
+                                                }
+
+                                        }
 
 
-                                    if (_attraction.RecordCount != 1)
-                                    {
-                                        <img src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true)"/>
+
+
                                     }
-                                    else
-                                    {
-                                        <span style="width: 30px; height: 30px">&nbsp;</span>
-                                    }
-                                    <img src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false)"/>
 
                                 }
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                Reach Time: @_attraction.ReachTime hh
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            Reach Time: @_attraction.ReachTime hh
+                        </td>
+                    </tr>
+                        <!--Final Event-->
+                    @if (Model.attractionsList.Count() != _attraction.RecordCount)
+                        {
                         <tr>
                             <td>
                                 Stay for View:
                                 <select onchange="ViewTimeUpdate(@_attraction.DestinationAttractionId,this)">
-                                    <option value="00:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "00:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }  >00:30</option>
-                                    <option value="01:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "01:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }
-                                            >01:00</option>
-                                    <option value="01:30"
-                                            @{
-                                                if (@_attraction.TimeRequiredToView == "01:30")
-                                                {
-                                                    <text>selected</text>
-                                                }
-                                            }>01:30</option>
-                                    <option value="02:00" @{
-                                                             if (@_attraction.TimeRequiredToView == "02:00")
-                                                             {
-                                                                 <text>selected</text>
-                                                             }
-                                                         }>02:00</option>
-                                    <option value="02:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "02:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>02:30</option>
-                                    <option value="03:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "03:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>03:00</option>
-                                    <option value="03:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "03:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>03:30</option>
-                                    <option value="04:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "04:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>04:00</option>
-                                    <option value="04:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "04:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>04:30</option>
-                                    <option value="05:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "05:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>05:00</option>
-                                    <option value="05:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "05:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>05:30</option>
-                                    <option value="06:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "06:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>06:00</option>
-                                    <option value="06:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "06:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>06:30</option>
-                                    <option value="07:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "07:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>07:00</option>
-                                    <option value="07:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "07:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>07:30</option>
-                                    <option value="08:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "08:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>08:00</option>
-                                    <option value="08:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "08:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>08:30</option>
-                                    <option value="09:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "09:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>09:00</option>
-                                    <option value="09:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "09:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>09:30</option>
-                                    <option value="10:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "10:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>10:00</option>
-                                    <option value="10:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "10:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>10:30</option>
-                                    <option value="11:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "11:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>11:00</option>
-                                    <option value="11:30" @{
-                                                              if (@_attraction.TimeRequiredToView == "11:30")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>11:30</option>
-                                    <option value="12:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "12:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>12:00</option>
-                                    <option value="13:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "13:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>13:00</option>
-                                    <option value="14:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "14:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>14:00</option>
-                                    <option value="15:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "15:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>15:00</option>
-                                    <option value="16:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "16:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>16:00</option>
-                                    <option value="17:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "17:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>17:00</option>
-                                    <option value="18:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "18:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>18:00</option>
-                                    <option value="19:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "19:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>19:00</option>
-                                    <option value="20:00" @{
-                                                              if (@_attraction.TimeRequiredToView == "20:00")
-                                                              {
-                                                                  <text>selected</text>
-                                                              }
-                                                          }>20:00</option>
+                                    @{
+                                        foreach (string _time in TimeInterval.HoursInterval)
+                                        {
+                                            <option value="@_time" @{
+                                                                       if (@_attraction.TimeRequiredToView == @_time)
+                                                                       {
+                                                                           <text>selected</text>
+                                                                       }
+                                                                   }>@_time</option>
+                                        }
+                                    }
                                 </select>
                                 hh
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                Complete Event: @_attraction.EventEndTime hh
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            Complete Event: @_attraction.EventEndTime hh
+                        </td>
+                    </tr>
+                        }
                         @if (!_attraction.IsLunchDinnerBreakTime)
                         {
                             if (!string.IsNullOrEmpty(_attraction.DestinationOpenTime) && !string.IsNullOrEmpty(_attraction.DestinationCloseTime))
@@ -502,7 +389,21 @@
                             </td>
                             <td>
                                 @{ strId = Model.divId + "_UpdateDayStartTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDayStartTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                                
+                            <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                            @{
+                                foreach (string _time in TimeInterval.TimeValue)
+                                {
+                                    <option value="@_time" @{
+                                                               if (Model.updatedBreaks.UpdateDayStartTime == @_time)
+                                                               {
+                                                                   <text>selected</text>
+                                                               }
+                                                           }>@_time</option>
+                                }
+                            }
+                           
+                            </select>
                             </td>
                         </tr>
                         <tr>
@@ -511,7 +412,20 @@
                             </td>
                             <td>
                                 @{ strId = Model.divId + "_UpdateDayEndTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDayEndTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
+                                <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                    @{
+                                        foreach (string _time in TimeInterval.TimeValue)
+                                        {
+                                            <option value="@_time" @{
+                                                                       if (Model.updatedBreaks.UpdateDayEndTime == @_time)
+                                                                       {
+                                                                           <text>selected</text>
+                                                                       }
+                                                                   }>@_time</option>
+                                        }
+                                    }
+                           
+                                </select>
                             </td>
                         </tr>
                         @{ strId = Model.divId + "_IsUserInterestedBreakFast_tr";}
@@ -525,25 +439,36 @@
                             </td>
                         </tr>
                         @{ strId = Model.divId + "_UpdatedBreakFast_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Break Fast Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedBreakFast";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakTime" class="time" onchange="BreakInformationUpdate('@Model.divId')" />
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdatedBreakFastMinimumTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Break Fast Minimum Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedBreakFastMinimumTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')" />
-                            </td>
-                        </tr>
+                        @{
+                            if (Model.updatedBreaks.IsUserInterestedBreakFast)
+                            {
+                                
+                                <tr id='@strId'>
+                                    <td>
+                                        Break Fast Time:
+                                    </td>
+                                    <td>
+                                        @{ strId = Model.divId + "_UpdatedBreakFast";}
+                                        <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                            @{
+                                                foreach (string _time in TimeInterval.TimeValue)
+                                                {
+                                                    <option value="@_time" @{ if (Model.updatedBreaks.UpdatedBreakFastTime == @_time) { <text> selected</text>
+                                                                              }
+                                                                           }>
+                                                        @_time
+                                                    </option>
+                                                }
+                                            }
+
+                                        </select>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                        
                         @{ strId = Model.divId + "_IsUserInterestedLunchBreak_tr";}
                         <tr id='@strId'>
                             <td>
@@ -555,25 +480,35 @@
                             </td>
                         </tr>
                         @{ strId = Model.divId + "_UpdatedLunchTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Lunch Break Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedLunchTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedLunchTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdatedLunchMinimumTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Lunch Minimum Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedLunchMinimumTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedLunchMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
+                    @{
+                        if (Model.updatedBreaks.IsUserInterestedLunchBreak)
+                        {
+                            <tr id='@strId'>
+                                <td>
+                                    Lunch Break Time:
+                                </td>
+                                <td>
+                                    @{ strId = Model.divId + "_UpdatedLunchTime";}
+                                
+                                    <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                        @{
+                                            foreach (string _time in TimeInterval.TimeValue)
+                                            {
+                                                <option value="@_time" @{ if (Model.updatedBreaks.UpdatedLunchTime == @_time) { <text> selected</text>
+                                                                          }
+                                                                       }>
+                                                    @_time
+                                                </option>
+                                            }
+                                        }
+
+                                    </select>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                        
                         @{ strId = Model.divId + "_IsUserInterestedBreak_tr";}
                         <tr id='@strId'>
                             <td>
@@ -585,25 +520,35 @@
                             </td>
                         </tr>
                         @{ strId = Model.divId + "_UpdatedBreakTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Break Start Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedBreakTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdatedBreakMinimumTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Break Minimum Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedBreakMinimumTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedBreakMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
+                    @{
+                        if (Model.updatedBreaks.IsUserInterestedBreak)
+                        {
+                            <tr id='@strId'>
+                                <td>
+                                    Break Start Time:
+                                </td>
+                                <td>
+                                    @{ strId = Model.divId + "_UpdatedBreakTime";}
+                                
+                                    <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                        @{
+                                            foreach (string _time in TimeInterval.TimeValue)
+                                            {
+                                                <option value="@_time" @{ if (Model.updatedBreaks.UpdatedBreakTime == @_time) { <text> selected</text>
+                                                                          }
+                                                                       }>
+                                                    @_time
+                                                </option>
+                                            }
+                                        }
+
+                                    </select>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                        
                         @{ strId = Model.divId + "_IsUserInterestedDinnerBreak_tr";}
                         <tr id='@strId'>
                             <td>
@@ -614,26 +559,36 @@
                                 <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedDinnerBreak" onclick="BreakInformationUpdate('@Model.divId')"/>
                             </td>
                         </tr>
-                        @{ strId = Model.divId + "_UpdatedDinnerTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Dinner Time
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdatedDinnerTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdatedDinnerTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdateDinnerMinimumTime_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Dinner Minimum Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdateDinnerMinimumTime";}
-                                <input type="text" id='@strId' value="@Model.updatedBreaks.UpdateDinnerMinimumTime" class="time" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
+                    @{ strId = Model.divId + "_UpdatedDinnerTime_tr";}
+                    @{
+                        if (Model.updatedBreaks.IsUserInterestedDinnerBreak)
+                        {
+                            <tr id='@strId'>
+                                <td>
+                                    Dinner Time
+                                </td>
+                                <td>
+                                    @{ strId = Model.divId + "_UpdatedDinnerTime";}
+                                
+                                    <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                        @{
+                                            foreach (string _time in TimeInterval.TimeValue)
+                                            {
+                                                <option value="@_time" @{ if (Model.updatedBreaks.UpdatedDinnerTime == @_time) { <text> selected</text>
+                                                                          }
+                                                                       }>
+                                                    @_time
+                                                </option>
+                                            }
+                                        }
+
+                                    </select>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                        
                     </table>            
                 </td>
             </tr>

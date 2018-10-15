@@ -20,11 +20,14 @@ BEGIN
 	BEGIN
 
 		IF @IsSource = 4
-			SET @Address = @GoogleSearchText
+			SET @Address = CASE WHEN ISNULL(@GoogleSearchText,'') = '' THEN @Address ELSE @GoogleSearchText END
 
 		SELECT @AttractionId = AttractionsId 
 			,@CityId = CityId	
-		FROM Attractions WITH(NOLOCK) WHERE GoogleSearchText = @Address
+		FROM Attractions WITH(NOLOCK) 
+		WHERE GoogleSearchText = @Address
+		OR AttractionName = @Address
+
 
 		IF ISNULL(@AttractionId,0) = 0 
 		BEGIN

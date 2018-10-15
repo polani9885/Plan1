@@ -142,6 +142,12 @@
   <wsdl:message name="IUserServices_User_InsertUserRequested_OutputMessage">
     <wsdl:part name="parameters" element="tns:User_InsertUserRequestedResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserServices_User_CheckTheCalculationPartIsDone_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_CheckTheCalculationPartIsDone" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_CheckTheCalculationPartIsDone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_CheckTheCalculationPartIsDoneResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserServices">
     <wsdl:operation name="User_DeleteUserAttractions">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_DeleteUserAttractions" message="tns:IUserServices_User_DeleteUserAttractions_InputMessage" />
@@ -230,6 +236,10 @@
     <wsdl:operation name="User_InsertUserRequested">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_InsertUserRequested" message="tns:IUserServices_User_InsertUserRequested_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_InsertUserRequestedResponse" message="tns:IUserServices_User_InsertUserRequested_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_CheckTheCalculationPartIsDone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDone" message="tns:IUserServices_User_CheckTheCalculationPartIsDone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDoneResponse" message="tns:IUserServices_User_CheckTheCalculationPartIsDone_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserServices" type="tns:IUserServices">
@@ -425,6 +435,15 @@
     </wsdl:operation>
     <wsdl:operation name="User_InsertUserRequested">
       <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertUserRequested" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_CheckTheCalculationPartIsDone">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDone" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

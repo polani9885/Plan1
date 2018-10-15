@@ -179,9 +179,62 @@ namespace GoogleMapsAPI.Features
             }
         }
 
+        public void SearchStepsDistanceNearBy(int countryId)
+        {
+            try
+            {
+                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                if (googleCounter == null || googleCounter.Counter <
+                    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                {
+                    var attractinoList = dALSchedulers.Scheduler_GetStepsSearchnearBy(countryId);
+
+                    var googleType = dALSchedulers.Scheduler_GetTypes().ToArray();
+
+                    var googleTypeExtra = dALSchedulers.Scheduler_GetExtraCategoryList();
+
+                    foreach (AttractionsDTO _attractionInfo in attractinoList)
+                    {
+                        try
+                        {
+                            foreach (GoogleTypes _googleTypes in googleTypeExtra)
+                            {
+                                NearestLocationAPICall(_attractionInfo.Latitude, _attractionInfo.Longitude,
+                                    googleCounter,
+                                    false, null, googleType, countryId,
+                                    _attractionInfo.AttractionsId, _googleTypes.TypeName,
+                                    _attractionInfo.AttractionTravelStepsId);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            dALSchedulers.Scheduler_UpdateAttractionNoOfTimesStepsNearyByCalcuated(countryId,
+                                _attractionInfo.AttractionTravelStepsId);
+                        }
+
+                        dALSchedulers.Scheduler_UpdateAttractionRestarentSearch(_attractionInfo.AttractionsId,
+                            countryId);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                exceptionLogging.InsertExceptionInformation(new LoggingEntity
+                {
+                    CreatedBy = "scheduler",
+                    ExceptionMessage = ex.Message,
+                    ExceptionStackTrace = ex.StackTrace,
+                    MethodName = "SearchByCategoryAttraction",
+                    Parameters = "countryId = " + countryId.ToString(),
+                    CountryId = countryId
+                });
+            }
+        }
+
         private void NearestLocationAPICall(string latitude, string longitude, GoogleMapsLoggingDTO googleCounter,
             bool isCityInfo, MasterCityDTO _masterCityDTO, GoogleTypes[] googleType, int countryId,
-             int attractionId, string type)
+             int attractionId, string type,int attractionTravelStepsId = 0)
         {
             if (!string.IsNullOrEmpty(latitude) && !string.IsNullOrEmpty(longitude))
             {
@@ -217,7 +270,7 @@ namespace GoogleMapsAPI.Features
                         InsertSearchResult(returnsInformation, googleType, countryId, url,
                             longitude,
                             latitude,
-                            attractionId);
+                            attractionId, attractionTravelStepsId);
                     
                         dALSchedulers.Scheduler_GoogleLogging("place",
                             "GetRadiusInformation", "",
@@ -234,7 +287,7 @@ namespace GoogleMapsAPI.Features
                             true);
                     }
 
-                    getPlaceInformation.GetPlaceDetails(countryId);
+                    //getPlaceInformation.GetPlaceDetails(countryId);
                 }
             }
         }
@@ -266,7 +319,7 @@ namespace GoogleMapsAPI.Features
             return null;
         }
 
-        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType,int countryId,string url,string longitude,string latitude,int attractionId)
+        private void InsertSearchResult(NearBySearchEntity returnsInformation, GoogleTypes[] googleType,int countryId,string url,string longitude,string latitude,int attractionId,int attractionTravelStepsId)
         {
             string radiusData = string.Empty;
             string urlString = string.Empty;
@@ -281,7 +334,7 @@ namespace GoogleMapsAPI.Features
                 PlaceId =  x.place_id
             }).ToList();
 
-            dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId, attractionId);
+            dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId, attractionId, attractionTravelStepsId);
 
             var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
             if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
@@ -307,7 +360,7 @@ namespace GoogleMapsAPI.Features
                     if (returnsInformation != null && returnsInformation.results.Count > 0)
                     {
                         InsertSearchResult(returnsInformation, googleType, countryId, url, longitude, latitude,
-                            attractionId);
+                            attractionId, attractionTravelStepsId);
                     }
                 }
             }

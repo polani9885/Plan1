@@ -67,5 +67,6 @@ BEGIN
 	,@MissingDistanceAttractionsRecordsID							
 	,getdate()
 	,@CreatedBy
-	FROM @MissingAttractionID				
+	FROM @MissingAttractionID	
+	WHERE ID > 0				
 END

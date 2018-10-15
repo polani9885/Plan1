@@ -239,7 +239,7 @@ namespace PlanGoGo.Controllers
         }
 
         [HttpGet]
-        public JsonResult User_UserTrip_Update(int noOfPersons, int noOfCars, decimal carMileage, decimal fuelPrice)
+        public JsonResult User_UserTrip_Update(int noOfPersons, int noOfCars, decimal carMileage, decimal fuelPrice,int drivingBreak)
         {
             UserTourInformation result = new UserTourInformation();
             result.UserTripId = userEntity.UserTripId;
@@ -247,6 +247,7 @@ namespace PlanGoGo.Controllers
             result.NoOfCars = noOfCars;
             result.CarMileage = carMileage;
             result.FuelPrice = fuelPrice;
+            result.DrivingBreak = drivingBreak;
 
             _IUserInfo.User_UserTrip_Update(result);
 
@@ -333,6 +334,16 @@ namespace PlanGoGo.Controllers
             _IUserInfo.User_InsertUserRequested(userEntity.UserTripId, requestOrder.attractionRequestOrder);
 
             return jsonReturn.JsonResult<UserTable_AttractionRequestOrder>(result);
+        }
+
+        [HttpGet]
+        public JsonResult CheckTheCalculationPartIsDone()
+        {
+            List<GetOrderOfAttractionVisit> result = new List<GetOrderOfAttractionVisit>();
+
+            result = _IUserInfo.User_CheckTheCalculationPartIsDone(userEntity.UserTripId);
+
+            return jsonReturn.JsonResult<GetOrderOfAttractionVisit>(result);
         }
 
 

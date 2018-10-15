@@ -32,7 +32,7 @@ BEGIN
 		  ,[Utc_offset]
 		  ,[IsNearRestarentDone]
 	  FROM [dbo].[Attractions] A WITH(NOLOCK)
-	  JOIN dbo.MissingAttractionRestarentSearch M WITH(NOLOCK) ON M.AttractionsId = A.AttractionsId
+	  WHERE IsNULL(IsNearRestarentDone,0) = 0
 
 
 

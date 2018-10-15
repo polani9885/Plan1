@@ -136,6 +136,11 @@ namespace PlanGoGoService.Schedulers
             _businessUserBAL.User_InsertUserRequested(userTripId, attractionRequestOrder);
         }
 
+        public List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId)
+        {
+            return _businessUserBAL.User_CheckTheCalculationPartIsDone(userTripId);
+        }
+
 
     }
 }

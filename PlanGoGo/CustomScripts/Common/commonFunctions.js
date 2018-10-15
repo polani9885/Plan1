@@ -21,10 +21,10 @@ function addingAttraction(recordCounter) {
 }
 
 //Changing the Order List
-function IsOrderUpdated(destinationAttractionId, recordCount,isUp) {
+function IsOrderUpdated(destinationAttractionId, recordCount, isUp, breakInformationId) {
     var angularScope = angular.element(document.getElementById('main')).scope();
     angularScope.$apply(function () {
-        angularScope.IsOrderUpdated(destinationAttractionId, recordCount, isUp);
+        angularScope.IsOrderUpdated(destinationAttractionId, recordCount, isUp, breakInformationId);
     });
 }
 
@@ -170,3 +170,21 @@ function ViewTimeUpdate(attractionId, object) {
         angularScope.ViewTimeUpdate(attractionId, $(object).val());
     });
 }
+
+function tabClicked(tabName) {
+    tabname = tabName;
+}
+
+function persistTab() {
+    $('a[href="#' + tabname + '"]').click();
+}
+
+function taskDate(inputDate) {
+    var datemilli = Date.parse(inputDate);
+    var d = (new Date(datemilli) + '').split(' ');
+    d[2] = d[2] + ',';
+
+    return [d[0], d[1], d[2], d[3]].join(' ');
+}
+
+

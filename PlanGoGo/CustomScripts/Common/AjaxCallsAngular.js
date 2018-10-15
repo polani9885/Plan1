@@ -180,10 +180,7 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
             temp.IsUserInterestedDayBreak = value.IsUserInterestedDayBreak;
             temp.UpdateDayStartTime = convertTo24Hour(value.UpdateDayStartTime);
             temp.UpdatedDinnerTime = convertTo24Hour(value.UpdatedDinnerTime);
-            temp.UpdateDinnerMinimumTime = convertTo24Hour(value.UpdateDinnerMinimumTime);
-            temp.UpdatedBreakMinimumTime = convertTo24Hour(value.UpdatedBreakMinimumTime);
             temp.UpdatedLunchTime = convertTo24Hour(value.UpdatedLunchTime);
-            temp.UpdatedLunchMinimumTime = convertTo24Hour(value.UpdatedLunchMinimumTime);
             temp.IsUserInterestedLunchBreak = value.IsUserInterestedLunchBreak;
             temp.UpdatedBreakTime = convertTo24Hour(value.UpdatedBreakTime);
             temp.UpdateDayEndTime = convertTo24Hour(value.UpdateDayEndTime);
@@ -197,7 +194,6 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
             temp.DinnerAttractionId = value.DinnerAttractionId;
             temp.IsUserInterestedBreakFast = value.IsUserInterestedBreakFast;
             temp.UpdatedBreakFastTime = convertTo24Hour(value.UpdatedBreakFastTime);
-            temp.UpdatedBreakFastMinimumTime = convertTo24Hour(value.UpdatedBreakFastMinimumTime);
             temp.IsBreakFastAdded = value.IsBreakFastAdded;
             temp.BreakFastAttractionId = value.BreakFastAttractionId;
             temp.IsDayBreakAdded = value.IsDayBreakAdded;
@@ -253,6 +249,7 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
                 
                 angularScope.AttractionInformationRendaring(data);
             });
+            
         },
         error: function (result) {
             
@@ -274,10 +271,7 @@ function TourInformation(divId, tourInformation, breakInformation) {
     "IsUserInterestedDayBreak" : breakInformation.IsUserInterestedDayBreak,
     "UpdateDayStartTime" : breakInformation.UpdateDayStartTime,
     "UpdatedDinnerTime" : breakInformation.UpdatedDinnerTime,
-    "UpdateDinnerMinimumTime" : breakInformation.UpdateDinnerMinimumTime,
-    "UpdatedBreakMinimumTime" : breakInformation.UpdatedBreakMinimumTime,
     "UpdatedLunchTime" : breakInformation.UpdatedLunchTime,
-    "UpdatedLunchMinimumTime" : breakInformation.UpdatedLunchMinimumTime,
     "IsUserInterestedLunchBreak" : breakInformation.IsUserInterestedLunchBreak,
     "UpdatedBreakTime" : breakInformation.UpdatedBreakTime,
     "UpdateDayEndTime" : breakInformation.UpdateDayEndTime,
@@ -291,7 +285,6 @@ function TourInformation(divId, tourInformation, breakInformation) {
     "DinnerAttractionId" : breakInformation.DinnerAttractionId,
     "IsUserInterestedBreakFast" : breakInformation.IsUserInterestedBreakFast,
     "UpdatedBreakFastTime" : breakInformation.UpdatedBreakFastTime,
-    "UpdatedBreakFastMinimumTime" : breakInformation.UpdatedBreakFastMinimumTime,
     "IsBreakFastAdded" : breakInformation.IsBreakFastAdded,
     "BreakFastAttractionId" : breakInformation.BreakFastAttractionId,
     "IsDayBreakAdded" : breakInformation.IsDayBreakAdded,
@@ -415,19 +408,15 @@ function GetBreakInformation(angularScope, http) {
                         
                         if (value.Display === "Break Fast") {
                             angularScope.UpdatedBreakFastTime = convertTo12Hour(value.StartTime);
-                            angularScope.UpdatedBreakFastMinimumTime = convertTo12Hour(value.MinimumTime);
                         }
                         if (value.Display === "Lunch Time") {
                             angularScope.UpdatedLunchTime = convertTo12Hour(value.StartTime);
-                            angularScope.UpdatedLunchMinimumTime = convertTo12Hour(value.MinimumTime);
                         }
                         if (value.Display === "Break Time") {
                             angularScope.UpdatedBreakTime = convertTo12Hour(value.StartTime);
-                            angularScope.UpdatedBreakMinimumTime = convertTo12Hour(value.MinimumTime);
                         }
                         if (value.Display === "Dinner Time") {
                             angularScope.UpdatedDinnerTime = convertTo12Hour(value.StartTime);
-                            angularScope.UpdateDinnerMinimumTime = convertTo12Hour(value.MinimumTime);
                         }
                     });
             });

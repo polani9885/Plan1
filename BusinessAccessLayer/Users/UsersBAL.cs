@@ -136,5 +136,10 @@ namespace BusinessAccessLayer.Users
         {
             _dataAccessUsers.User_InsertUserRequested(userTripId, attractionRequestOrder);
         }
+
+        public List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId)
+        {
+            return _dataAccessUsers.User_CheckTheCalculationPartIsDone(userTripId);
+        }
     }
 }

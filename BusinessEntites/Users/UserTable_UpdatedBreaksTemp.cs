@@ -28,34 +28,24 @@ namespace BusinessEntites.Users
         public string UpdatedBreakFastTime { get; set; }
 
         [DataMember]
-        public string UpdatedBreakFastMinimumTime { get; set; }
-
-        [DataMember]
         public bool IsUserInterestedLunchBreak { get; set; }
 
         [DataMember]
         public string UpdatedLunchTime { get; set; }
-
-        [DataMember]
-        public string UpdatedLunchMinimumTime { get; set; }
+        
 
         [DataMember]
         public bool IsUserInterestedBreak { get; set; }
 
         [DataMember]
         public string UpdatedBreakTime { get; set; }
-
-        [DataMember]
-        public string UpdatedBreakMinimumTime { get; set; }
+        
 
         [DataMember]
         public bool IsUserInterestedDinnerBreak { get; set; }
 
         [DataMember]
         public string UpdatedDinnerTime { get; set; }
-
-        [DataMember]
-        public string UpdateDinnerMinimumTime { get; set; }
 
 
         [DataMember]

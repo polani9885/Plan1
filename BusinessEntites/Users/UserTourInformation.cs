@@ -43,6 +43,8 @@ namespace BusinessEntites.Users
 
         public string DestinationAttractionName { get; set; }
 
+        public int DrivingBreak { get; set; }
+
 
 
     }

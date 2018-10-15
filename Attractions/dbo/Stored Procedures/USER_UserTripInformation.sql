@@ -14,22 +14,7 @@ BEGIN
 	   SET [ModifiedDate] = GETDATE()
 		  ,[CountryId] = @CountryId		  
 		  ,[TravelModeId] = @TravelModeId		  
-	 WHERE [UserTripId] = @UserTripId
-
-
-
-	 DELETE FROM dbo.UserTripAttractionList
-	 WHERE [UserTripId] = @UserTripId
-
-	 INSERT INTO dbo.UserTripAttractionList(UserTripId,AttractionId,CreatedDate)
-	 SELECT 
-		@UserTripId
-		,ID
-		,GETDATE()
-	 FROM @AttractionID
-
-
-
+	 WHERE [UserTripId] = @UserTripId	 
 
 	
 
@@ -60,7 +45,7 @@ BEGIN
 			,1
 			,1
 	FROM @AttractionOrder
-	WHERE CAST(DateAndTime As DATE)	 NOT IN (SELECT DISTINCT CAST(TripDate As DATE) FROM dbo.UserTripDates WITH(NOLOCK))
+	WHERE CAST(DateAndTime As DATE)	 NOT IN (SELECT DISTINCT CAST(TripDate As DATE) FROM dbo.UserTripDates WITH(NOLOCK) WHERE UserTripId = @UserTripId)
 
 
 	
@@ -76,14 +61,11 @@ BEGIN
 		  ,UTD.[UpdateDayEndTime] = UBT.UpdateDayEndTime
 		  ,UTD.[UpdateDayStartTime] = UBT.UpdateDayStartTime
 		  ,UTD.[IsUserInterestedLunchBreak] = ISNULL(UBT.IsUserInterestedLunchBreak,1)
-		  ,UTD.[UpdatedLunchTime] = UBT.UpdatedLunchTime
-		  ,UTD.[UpdatedLunchMinimumTime] = UBT.UpdatedLunchMinimumTime
+		  ,UTD.[UpdatedLunchTime] = UBT.UpdatedLunchTime		  
 		  ,UTD.[IsUserInterestedBreak] = ISNULL(UBT.IsUserInterestedBreak,1)
-		  ,UTD.[UpdatedBreakTime] = UBT.UpdatedBreakTime
-		  ,UTD.[UpdatedBreakMinimumTime] = UBT.UpdatedBreakMinimumTime
+		  ,UTD.[UpdatedBreakTime] = UBT.UpdatedBreakTime		  
 		  ,UTD.[IsUserInterestedDinnerBreak] = ISNULL(UBT.IsUserInterestedDinnerBreak,1)
-		  ,UTD.[UpdatedDinnerTime] = UBT.UpdatedDinnerTime
-		  ,UTD.[UpdateDinnerMinimumTime] = UBT.UpdateDinnerMinimumTime
+		  ,UTD.[UpdatedDinnerTime] = UBT.UpdatedDinnerTime		  
 		  ,UTD.IsBreakAdded = UBT.IsBreakAdded
 		  ,UTD.BreakAttractionId = UBT.BreakAttractionId
 		  ,UTD.IsLunchAdded = UBT.IsLunchAdded
@@ -91,8 +73,7 @@ BEGIN
 		  ,UTD.IsDinnerAdded = UBT.IsDinnerAdded
 		  ,UTD.DinnerAttractionId = UBT.DinnerAttractionId
 		  ,UTD.IsUserInterestedBreakFast = ISNULL(UBT.IsUserInterestedBreakFast,1)
-		  ,UTD.UpdatedBreakFastTime = UBT.UpdatedBreakFastTime
-		  ,UTD.UpdatedBreakFastMinimumTime = UBT.UpdatedBreakFastMinimumTime
+		  ,UTD.UpdatedBreakFastTime = UBT.UpdatedBreakFastTime		  
 		  ,UTD.IsBreakFastAdded = UBT.IsBreakFastAdded
 		  ,UTD.BreakFastAttractionId = UBT.BreakFastAttractionId
 		  ,UTD.IsDayBreakAdded = UBT.IsDayBreakAdded
@@ -101,19 +82,19 @@ BEGIN
 			,UTD.AverageMileage		= UBT.AverageMileage
 			,UTD.NoOfRooms			= UBT.NoOfRooms
 			,UTD.BreakFastExpense	= CASE WHEN UBT.IsBreakFastAdded = 1 AND  UBT.BreakFastAttractionId > 0 AND ISNULL(UBT.IsBreakFastExpenseUserUpdated,0) = 0  THEN 
-										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.BreakFastAttractionId) 
+										(SELECT TOP 1 FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.BreakFastAttractionId) 
 										ELSE UBT.BreakFastExpense END 
 			,UTD.LunchExpense		= CASE WHEN UBT.IsLunchAdded = 1 AND  UBT.LunchAttractionId > 0  AND ISNULL(UBT.IsLunchExpenseUserUpdated,0) = 0 THEN 
-										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.LunchAttractionId) 
+										(SELECT TOP 1 FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.LunchAttractionId) 
 										ELSE UBT.LunchExpense END
 			,UTD.BreakExpense		= CASE WHEN UBT.IsBreakAdded = 1 AND  UBT.BreakAttractionId > 0   AND ISNULL(UBT.IsBreakExpenseUserUpdated,0) = 0 THEN 
-										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.BreakAttractionId) 
+										(SELECT  TOP 1 FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.BreakAttractionId) 
 										ELSE UBT.BreakExpense END 
 			,UTD.DayBreakExpense	= CASE WHEN UBT.IsDayBreakAdded = 1 AND  UBT.DayBreakAttractionId > 0 AND ISNULL(UBT.IsDayBreakExpenseUserUpdated,0) = 0 THEN 
-										(SELECT StayExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.DayBreakAttractionId) 
+										(SELECT TOP 1 StayExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.DayBreakAttractionId) 
 										ELSE UBT.DayBreakExpense END 
 			,UTD.DinnerExpense		= CASE WHEN UBT.IsDinnerAdded = 1 AND  UBT.DinnerAttractionId > 0  AND ISNULL(UBT.IsDinnerExpenseUserUpdated,0) = 0 THEN 
-										(SELECT FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.DinnerAttractionId) 
+										(SELECT TOP 1 FoodExpense FROM  @AttractionOrder WHERE DestinationAttractionId = UBT.DinnerAttractionId) 
 										ELSE UBT.DinnerExpense END
 			,UTD.CarRentalExpense	= UBT.CarRentalExpense
 			,UTD.NoOfAttractions	= (SELECT COUNT(*) FROM @AttractionOrder WHERE CAST(DateAndTime AS DATE) = CAST(UBT.RequestDate As DATE) AND ISNULL(IsLunchDinnerBreakTime,0) = 0)
@@ -273,14 +254,11 @@ BEGIN
 			[UpdateDayEndTime] [time](7) NULL,
 			[UpdateDayStartTime] [time](7) NULL,
 			[IsUserInterestedLunchBreak] [bit] NULL,
-			[UpdatedLunchTime] [time](7) NULL,
-			[UpdatedLunchMinimumTime] [time](7) NULL,
+			[UpdatedLunchTime] [time](7) NULL,			
 			[IsUserInterestedBreak] [bit] NULL,
-			[UpdatedBreakTime] [time](7) NULL,
-			[UpdatedBreakMinimumTime] [time](7) NULL,
+			[UpdatedBreakTime] [time](7) NULL,			
 			[IsUserInterestedDinnerBreak] [bit] NULL,
-			[UpdatedDinnerTime] [time](7) NULL,
-			[UpdateDinnerMinimumTime] [time](7) NULL,
+			[UpdatedDinnerTime] [time](7) NULL,			
 			IsBreakAdded BIT NULL,
 			BreakAttractionId [bigint] NULL,
 			IsLunchAdded BIT NULL,
@@ -298,14 +276,11 @@ BEGIN
 			,[UpdateDayEndTime]
 			,[UpdateDayStartTime]
 			,[IsUserInterestedLunchBreak]
-			,[UpdatedLunchTime]
-			,[UpdatedLunchMinimumTime]
+			,[UpdatedLunchTime]			
 			,[IsUserInterestedBreak]
-			,[UpdatedBreakTime]
-			,[UpdatedBreakMinimumTime]
+			,[UpdatedBreakTime]			
 			,[IsUserInterestedDinnerBreak]
-			,[UpdatedDinnerTime]
-			,[UpdateDinnerMinimumTime]
+			,[UpdatedDinnerTime]			
 			,IsBreakAdded
 			,BreakAttractionId
 			,IsLunchAdded
@@ -408,6 +383,7 @@ BEGIN
 		END
 	
 END
+
 
 
 

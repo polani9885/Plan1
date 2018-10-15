@@ -61,7 +61,7 @@ BEGIN
 		AND DestinationAttractionId = @DestinationAttractionId
 		AND TravelModeId = @TravelModeId
 
-	IF EXISTS (SELECT 1 FROM @StepsConsolidated) AND @Distance > 9000
+	IF EXISTS (SELECT 1 FROM @StepsConsolidated) AND @TravelTime > 3700 AND @TravelModeId = 1
 	BEGIN
 	
 		DELETE FROM AttractionTravelSteps WHERE AttractionTravelTimeDistanceId = @AttractionTravelTimeDistanceId	
@@ -90,7 +90,8 @@ BEGIN
 
 		UPDATE AttractionTravelTimeDistance
 			SET IsHasSteps = 1
-		WHERE AttractionTravelTimeDistanceId = @AttractionTravelTimeDistanceId	
+		WHERE AttractionTravelTimeDistanceId = @AttractionTravelTimeDistanceId
+
 
 	END
 

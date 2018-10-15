@@ -122,11 +122,8 @@
     <Build Include="dbo\Stored Procedures\GetCityCategoryPending.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCityCategorySearch.sql" />
     <Build Include="dbo\Tables\AttractionNoOfTimesDistanceCalcuated.sql" />
-    <Build Include="dbo\Tables\MissingAttractionRestarentSearch.sql" />
     <Build Include="dbo\Stored Procedures\Service_GetAttractionRestarentMissing.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionRestarentSearch.sql" />
     <Build Include="dbo\Stored Procedures\User_GetNearestRestaruents.sql" />
-    <Build Include="dbo\Stored Procedures\User_UpdateFindNearestRestarent.sql" />
     <Build Include="dbo\Stored Procedures\public_AttractionsPhotoInfo.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferencePending.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_PhotoReferenceUrlUpdate.sql" />
@@ -138,6 +135,11 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\User_GetTourInformationOnTripId.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionRestarentSearch_1.sql" />
+    <Build Include="dbo\Tables\AttractionTravelStepsXAttractionsId.sql" />
+    <Build Include="dbo\Tables\AttractionNoOfTimesStepsNearyByCalcuated.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetStepsSearchnearBy.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionNoOfTimesStepsNearyByCalcuated.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\CityVisitList.sql" />

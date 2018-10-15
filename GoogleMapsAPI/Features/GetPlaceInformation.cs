@@ -112,6 +112,11 @@ namespace GoogleMapsAPI.Features
                                 .address_components, "administrative_area_level_2");
                             attractionDto.CityName = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
                                 .address_components, "locality");
+                            if(string.IsNullOrEmpty(attractionDto.CityName))
+                            {
+                                attractionDto.CityName = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
+                                    .address_components, "administrative_area_level_2");
+                            }
                             attractionDto.CreatedBy = "schedule";
                             attractionDto.Longitude = placeDetailsInfo.results.FirstOrDefault().geometry.location.lng;
                             attractionDto.PlaceId = placeDetailsInfo.results.FirstOrDefault().place_id;
@@ -127,6 +132,11 @@ namespace GoogleMapsAPI.Features
                             attractionDto.CityShortName =
                                 GetShortNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
                                     .address_components, "locality");
+                            if (string.IsNullOrEmpty(attractionDto.CityShortName))
+                            {
+                                attractionDto.CityShortName = GetLongNameAddressElement(placeDetailsInfo.results.FirstOrDefault()
+                                    .address_components, "administrative_area_level_2");
+                            }
                             dALSchedulers.Scheduler_InsertAttractionAuto(attractionDto, countryId, userTripId);
 
                             GetPlaceDetails(attractionDto.PlaceId, attractionsId, countryId);

@@ -19,6 +19,7 @@ BEGIN
 			   ,CarMileage
 			   ,FuelPrice
 			   ,CountryId
+			   ,DrivingBreak
 			   )
 		 VALUES
 			   (@UserId
@@ -29,6 +30,7 @@ BEGIN
 			   ,20
 			   ,2.5
 			   ,@CountryId
+			   ,2
 			   )	
 	END
 	ELSE

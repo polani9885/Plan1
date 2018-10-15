@@ -13,17 +13,13 @@ BEGIN
       ,CAST([UpdateDayEndTime] AS VARCHAR(8)) UpdateDayEndTime
       ,CAST([UpdateDayStartTime] AS VARCHAR(8)) UpdateDayStartTime
       ,[IsUserInterestedLunchBreak]
-      ,CAST([UpdatedLunchTime] AS VARCHAR(8)) UpdatedLunchTime
-      ,CAST([UpdatedLunchMinimumTime] AS VARCHAR(8)) UpdatedLunchMinimumTime
+      ,CAST([UpdatedLunchTime] AS VARCHAR(8)) UpdatedLunchTime      
       ,[IsUserInterestedBreak]
-      ,CAST([UpdatedBreakTime] AS VARCHAR(8)) UpdatedBreakTime
-      ,CAST([UpdatedBreakMinimumTime] AS VARCHAR(8)) UpdatedBreakMinimumTime
+      ,CAST([UpdatedBreakTime] AS VARCHAR(8)) UpdatedBreakTime      
       ,[IsUserInterestedDinnerBreak]
-      ,CAST([UpdatedDinnerTime] AS VARCHAR(8)) UpdatedDinnerTime
-      ,CAST([UpdateDinnerMinimumTime] AS VARCHAR(8)) UpdateDinnerMinimumTime
+      ,CAST([UpdatedDinnerTime] AS VARCHAR(8)) UpdatedDinnerTime      
 	  ,IsUserInterestedBreakFast
-	  ,CAST(UpdatedBreakFastTime AS VARCHAR(8)) UpdatedBreakFastTime
-	  ,CAST(UpdatedBreakFastMinimumTime AS VARCHAR(8)) UpdatedBreakFastMinimumTime
+	  ,CAST(UpdatedBreakFastTime AS VARCHAR(8)) UpdatedBreakFastTime	  
 	  ,[IsBreakAdded]
       ,[BreakAttractionId]
       ,[IsLunchAdded]

@@ -77,7 +77,6 @@
     <Build Include="dbo\Tables\MasterRank.sql" />
     <Build Include="dbo\Tables\MasterWeek.sql" />
     <Build Include="dbo\Tables\MasterGoogleType.sql" />
-    <Build Include="dbo\Stored Procedures\Admin_AddMissingDistanceRecords.sql" />
     <Build Include="dbo\Stored Procedures\public_GetCityList.sql" />
     <Build Include="dbo\Stored Procedures\Public_GetCategory.sql" />
     <Build Include="dbo\Stored Procedures\Admin_GetCountryList.sql" />
@@ -164,8 +163,8 @@
     <Build Include="dbo\Stored Procedures\User_UserTrip_Update.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\public_GetCityListOnCountryId.sql" />
-    <Build Include="dbo\Stored Procedures\User_GetOrderOfRequest.sql" />
     <Build Include="dbo\Stored Procedures\User_InsertUserRequested.sql" />
+    <Build Include="dbo\Stored Procedures\User_CheckTheCalculationPartIsDone.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />

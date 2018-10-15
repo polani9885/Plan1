@@ -70,6 +70,18 @@ namespace GoogleMapsAPI
                         categorySearch.SearchByCategory(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
+                    case "SEARCHCATEGORYRESTARUNT":
+                    {
+                        getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
+                            .Split('~')[1]));
+                        break;
+                    }
+                    case "SEARCHSTEPSDISTANCENEARBY":
+                    {
+                        getNearestInformation.SearchStepsDistanceNearBy(Convert.ToInt32(argmentarray[1]
+                            .Split('~')[1]));
+                        break;
+                        }
                     case "PLACEDETAILS":
                     {
                         getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
@@ -98,7 +110,7 @@ namespace GoogleMapsAPI
                         //getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
                         //    .Split('~')[1]));
                         //getDistanceCalculation.CalculateDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
-                        Main(args);
+                        //Main(args);
                         break;
                     }
                     case "PHOTOREFERENCEUPDATE":

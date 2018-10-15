@@ -118,7 +118,7 @@ namespace GoogleMapsAPI.Features
                 PlaceId = x.place_id
             }).ToList();
 
-            dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId, attractionId);
+            dALSchedulers.Scheduler_InsertGoogleSearchText(nearByPlaceSearchEntity, countryId, attractionId, 0);
 
             var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
             if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))

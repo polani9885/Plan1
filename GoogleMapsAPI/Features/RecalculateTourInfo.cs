@@ -34,11 +34,8 @@ namespace GoogleMapsAPI.Features
                 List<UserTable_UpdatedBreaks> breakInfo = breakInformation
                     .Where(y => !string.IsNullOrEmpty(y.UpdateDayEndTime)
                                 && !string.IsNullOrEmpty(y.UpdateDayStartTime)
-                                && !string.IsNullOrEmpty(y.UpdateDinnerMinimumTime)
-                                && !string.IsNullOrEmpty(y.UpdatedBreakMinimumTime)
                                 && !string.IsNullOrEmpty(y.UpdatedBreakTime)
                                 && !string.IsNullOrEmpty(y.UpdatedDinnerTime)
-                                && !string.IsNullOrEmpty(y.UpdatedLunchMinimumTime)
                                 && !string.IsNullOrEmpty(y.UpdatedLunchTime)
                     ).Select(x => new UserTable_UpdatedBreaks
                     {
@@ -47,10 +44,7 @@ namespace GoogleMapsAPI.Features
                         IsUserInterestedDayBreak = x.IsUserInterestedDayBreak,
                         UpdateDayStartTime = TimeSpan.Parse(x.UpdateDayStartTime),
                         UpdatedDinnerTime = TimeSpan.Parse(x.UpdatedDinnerTime),
-                        UpdateDinnerMinimumTime = TimeSpan.Parse(x.UpdateDinnerMinimumTime),
-                        UpdatedBreakMinimumTime = TimeSpan.Parse(x.UpdatedBreakMinimumTime),
                         UpdatedLunchTime = TimeSpan.Parse(x.UpdatedLunchTime),
-                        UpdatedLunchMinimumTime = TimeSpan.Parse(x.UpdatedLunchMinimumTime),
                         IsUserInterestedLunchBreak = x.IsUserInterestedLunchBreak,
                         UpdatedBreakTime = TimeSpan.Parse(x.UpdatedBreakTime),
                         UpdateDayEndTime = TimeSpan.Parse(x.UpdateDayEndTime),
@@ -64,7 +58,6 @@ namespace GoogleMapsAPI.Features
                         DinnerAttractionId = x.DinnerAttractionId,
                         IsUserInterestedBreakFast = x.IsUserInterestedBreakFast,
                         UpdatedBreakFastTime = TimeSpan.Parse(x.UpdatedBreakFastTime),
-                        UpdatedBreakFastMinimumTime = TimeSpan.Parse(x.UpdatedBreakFastMinimumTime),
                         IsBreakFastAdded = x.IsBreakFastAdded,
                         BreakFastAttractionId = x.BreakFastAttractionId,
                         IsDayBreakAdded = x.IsDayBreakAdded,

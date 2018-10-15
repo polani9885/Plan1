@@ -56,5 +56,7 @@ namespace Interfaces
 
         void User_InsertUserRequested(int userTripId,
             List<UserTable_AttractionRequestOrder> attractionRequestOrder);
+
+        List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId);
     }
 }

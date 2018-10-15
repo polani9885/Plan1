@@ -43,12 +43,11 @@ namespace PlanGoGo
 
 
             bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
-                        "~/Plugins/Scripts/gmaps.js",
-                        "~/Plugins/gallerybox/jquery.gallerybox.js"
+                        "~/Plugins/Scripts/gmaps.js"
                         ));
 
             bundles.Add(new StyleBundle("~/bundles/pluginsCSS").Include(
-                "~/Plugins/gallerybox/gallerybox.css"
+                
             ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

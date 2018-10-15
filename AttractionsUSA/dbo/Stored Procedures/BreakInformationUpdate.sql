@@ -5,6 +5,10 @@
 	,@UserBreakTime AS UserTable_UpdatedBreaks READONLY
 	,@RecordOrder AS INT
 	,@UserTripId INT
+	,@IsForceAdding AS BIT
+	,@BreakId AS INT
+	,@SourceAttractionID AS INT
+	,@TravelModeId AS INT
 )
 
 AS
@@ -98,6 +102,8 @@ BEGIN
 
 	WHILE @Counter <= (SELECT MAX(RowCounter) FROM @BreakInformation)
 	BEGIN
+
+
 		
 		SELECT  @BreakType = Display
 				,@BreakStartTime = StartTime
@@ -118,25 +124,31 @@ BEGIN
 		SET @ResSourceAttractionName = @BreakType
 		SET @ResDestincationAttractionName  = @BreakType
 		SET @NormalBreakExist = 0
-		
-		SELECT TOP 1
-				 @ResSourceAttractionId = DestinationAttractionId
-				 ,@ResSourceAttractionName = DestinationAttractionName
-				 ,@ResTravelModeId = TravelModeId
-			FROM @OrderOfAttactionInfomration
-			ORDER BY EventEndTime DESC
-		
-		
 
-		IF NOT Exists (
-				SELECT 1 FROM @OrderOfAttactionInfomration WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE) 
-				AND DestinationAttractionName = @BreakType
-			) AND 
-			Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedBreak = 1 
-					)
+
+		IF EXISTS(SELECT 1 FROM @OrderOfAttactionInfomration)
 		BEGIN
+		
+			SELECT TOP 1
+					 @ResSourceAttractionId = DestinationAttractionId
+					 ,@ResSourceAttractionName = DestinationAttractionName
+					 ,@ResTravelModeId = TravelModeId
+				FROM @OrderOfAttactionInfomration
+				ORDER BY EventEndTime DESC
+		END
+		ELSE
+		BEGIN
+			SELECT 
+				@ResSourceAttractionId = AttractionsId
+				,@ResSourceAttractionName = AttractionName
+				,@ResTravelModeId = @TravelModeId
+			FROM Attractions WITH(NOLOCK)
+			WHERE AttractionsId = @SourceAttractionID
+		END
+		
+		
 
+		
 			--Getting the user Requested Break time
 			--User Time he required
 
@@ -154,19 +166,9 @@ BEGIN
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedBreakFastTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
 						AND IsUserInterestedBreakFast = 1 AND UpdatedBreakFastTime IS NOt NULL
-					END			
 
-
-					--User Lunch Time he required
-					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-								AND IsUserInterestedBreakFast = 1 AND UpdatedBreakFastMinimumTime IS Not NULL
-							)
-					BEGIN				
-						SELECT @BreakMinimumTime = UpdatedLunchMinimumTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedBreakFast = 1 AND UpdatedBreakFastMinimumTime IS NOt NULL
-					END		
-
-					SET @NormalBreakExist = 1
+						SET @NormalBreakExist = 1
+					END					
 				END
 				ELSE
 				BEGIN
@@ -199,19 +201,9 @@ BEGIN
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedLunchTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
 						AND IsUserInterestedLunchBreak = 1 AND UpdatedLunchTime IS NOt NULL
-					END			
 
-
-					--User Lunch Time he required
-					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-								AND IsUserInterestedLunchBreak = 1 AND UpdatedLunchMinimumTime IS Not NULL
-							)
-					BEGIN				
-						SELECT @BreakMinimumTime = UpdatedLunchMinimumTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedLunchBreak = 1 AND UpdatedLunchMinimumTime IS NOt NULL
-					END		
-
-					SET @NormalBreakExist = 1
+						SET @NormalBreakExist = 1
+					END						
 
 				END
 				ELSE 
@@ -245,18 +237,9 @@ BEGIN
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedBreakTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
 						AND IsUserInterestedBreak = 1 AND UpdatedBreakTime IS NOt NULL
-					END			
 
-				
-					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-								AND IsUserInterestedBreak = 1 AND UpdatedBreakMinimumTime IS Not NULL
-							)
-					BEGIN				
-						SELECT @BreakMinimumTime = UpdatedBreakMinimumTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedBreak = 1 AND UpdatedBreakMinimumTime IS Not NULL
-					END		
-
-					SET @NormalBreakExist = 1
+						SET @NormalBreakExist = 1
+					END								
 				END
 
 				IF NOT Exists (
@@ -286,18 +269,9 @@ BEGIN
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedDinnerTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
 						AND IsUserInterestedDinnerBreak = 1 AND UpdatedDinnerTime IS NOt NULL
-					END			
 
-				
-					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-								AND IsUserInterestedDinnerBreak = 1 AND UpdateDinnerMinimumTime IS Not NULL
-							)
-					BEGIN				
-						SELECT @BreakMinimumTime = UpdateDinnerMinimumTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedDinnerBreak = 1 AND UpdateDinnerMinimumTime IS Not NULL
-					END		
-
-					SET @NormalBreakExist = 1
+						SET @NormalBreakExist = 1
+					END								
 				END
 
 				IF NOT Exists (
@@ -343,13 +317,40 @@ BEGIN
 				
 
 			END
+							
 
-						
+			
 
 			IF (@BreakInformationId = 5 AND (CAST(@GetStartingTimeEvent AS TIME) Between @BreakStartTime AND  @BreakEndTime))	OR   
-			(CAST(@GetStartingTimeEvent AS TIME) Between @BreakStartTime AND DATEADD(SECOND,DATEDIFF(SECOND,0,@BreakStartTime), @BreakEndTime))	 
+			(CAST(@GetStartingTimeEvent AS TIME) Between @BreakStartTime AND DATEADD(SECOND,DATEDIFF(SECOND,0,@BreakStartTime), @BreakEndTime))
+			OR
+			(
+				@BreakInformationId IN (1,2,3,4) AND @BreakEndTime < CAST(@GetStartingTimeEvent AS TIME) 
+				AND NOT EXISTS (SELECT 1 FROM @OrderOfAttactionInfomration WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE) 
+					AND BreakInformationId = @BreakInformationId)
+				AND EXISTS(
+							SELECT 1  FROM @UserBreakTime 
+							WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) AND
+								1 = CASE WHEN @BreakInformationId = 1 AND IsUserInterestedBreakFast = 1 THEN 1 
+									ELSE 
+										CASE WHEN @BreakInformationId = 2 AND IsUserInterestedLunchBreak = 1 THEN 1 
+										ELSE
+											CASE WHEN @BreakInformationId = 3 AND IsUserInterestedBreak = 1 THEN 1 	
+											ELSE
+												CASE WHEN @BreakInformationId = 4 AND IsUserInterestedDinnerBreak = 1 THEN 1 	
+												ELSE
+													0
+												END
+											END
+										END
+									END
+						)
+				AND (@NormalBreakExist = 1 OR @IsBreakAttractionExist = 1)
+			)
+			OR
+			(@IsForceAdding = 1 AND @BreakInformationId = @BreakId)				 
 			BEGIN
-
+				
 				IF @IsBreakAttractionExist = 1
 				BEGIN
 				
@@ -374,7 +375,7 @@ BEGIN
 					
 						SET @ResDistance = 0
 						SET @ResTravelTime = 0
-						SET @IsDistanceCalculationMissing = 1
+						
 
 						--Adding missing Distance information
 
@@ -383,13 +384,14 @@ BEGIN
 						INSERT INTO @MissingAttractionID(ID)
 						SELECT @ResDestincationAttractionId
 
-						IF @ResSourceAttractionId > 0 
+						IF @ResSourceAttractionId > 0  AND EXISTS (SELECT 1 FROM @MissingAttractionID)
 						BEGIN
 							EXEC AddingMissingClaims				
 								@AttractionId = @ResSourceAttractionId
 								,@TravelModeId  = @ResTravelModeId
 								,@MissingAttractionID  = @MissingAttractionID
 								,@CreatedBy = 'Missing Break Info'
+							SET @IsDistanceCalculationMissing = 1
 						END
 					
 					END
@@ -405,9 +407,10 @@ BEGIN
 					IF EXISTS( SELECT 1 FROM [Attractions]..[UserTripRequestOrder] WITH(NOLOCK) WHERE AttractionId = @ResDestincationAttractionId AND UserTripId = @UserTripId)
 					BEGIN
 						SELECT  
-							@ResTimeRequiredToView = StayTime
+							@BreakMinimumTime = StayTime
 						FROM [Attractions]..[UserTripRequestOrder] WITH(NOLOCK) WHERE AttractionId = @ResDestincationAttractionId AND UserTripId = @UserTripId
 					END
+					
 
 
 					SET @ResTimeRequiredToView = @BreakMinimumTime
@@ -419,13 +422,17 @@ BEGIN
 					SET @RecordUpdate = 1		
 				END
 			END		
-		END
+		
 
 
 		IF(@RecordUpdate = 1)
 		BEGIN
 
 			
+			IF(@ResDestincationAttractionId = 0)
+			BEGIN
+				SET @ResDestincationAttractionId = @ResSourceAttractionId
+			END
 
 			INSERT INTO @OrderOfAttactionInfomrationOutPut(
 				RecordCount
@@ -475,6 +482,7 @@ BEGIN
 		
 		SELECT * FROM @OrderOfAttactionInfomrationOutPut	
 END
+
 
 
 

@@ -342,7 +342,7 @@ function User_GetUserStoredAttractinInfo(angularScope, http) {
         beforeSend: function () {
         },
         success: function (data) {
-
+            
             angularScope.$apply(function () {
 
                 angularScope.AttractionInformationRendaring(data);
@@ -446,7 +446,7 @@ function User_UserTrip_Update(angularScope, http, data) {
     $.ajax({
         type: "GET",
         url: localUrl + 'UserControls/User_UserTrip_Update',
-        data: { noOfPersons: data.NoOfPersons, noOfCars: data.NoOfCars, carMileage: data.CarMileage, fuelPrice: data.FuelPrice },
+        data: { noOfPersons: data.NoOfPersons, noOfCars: data.NoOfCars, carMileage: data.CarMileage, fuelPrice: data.FuelPrice, drivingBreak: data.DrivingBreak },
         dataType: "json",
         beforeSend: function () {
         },
@@ -495,6 +495,11 @@ function AutoComplte(angularScope, http, data) {
 
                 //Place search for adding to visit list
                 $('#placeSeachForAdding').autocomplete({
+                    source: angularScope.attractionListAutoComplete
+                });
+                debugger;
+                //Source Auto Complete Data
+                $('#autoAddAttractionForBreak').autocomplete({
                     source: angularScope.attractionListAutoComplete
                 });
             });
@@ -604,7 +609,7 @@ function UserRequestedAttraction(angularScope, data, isSource, googleSearchText,
         beforeSend: function() {
         },
         success: function(data) {
-            angularScope.init();
+            angularScope.UpdateTrouInfo();
         },
         error: function(result) {
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
@@ -616,7 +621,7 @@ function UserRequestedAttraction(angularScope, data, isSource, googleSearchText,
 }
 
 function GetOrderOfRequest(angularScope) {
-
+    
     $.ajax({
         type: "GET",
         url: localUrl + 'UserControls/GetOrderOfRequest',
@@ -627,6 +632,7 @@ function GetOrderOfRequest(angularScope) {
         beforeSend: function () {
         },
         success: function (data) {
+            
             angularScope.GetOrderOfRequest(data);
         },
         error: function (result) {
@@ -662,5 +668,30 @@ function InsertUserRequested(angularScope, http, data) {
 
         }
     });
+}
+
+
+function CheckTheCalculationPartIsDone(angularScope) {
+    
+    if (angularScope.IsDistanceCalcuationMissing === false) {
+        $.ajax({
+            type: "GET",
+            url: localUrl + 'UserControls/CheckTheCalculationPartIsDone',
+            dataType: "json",
+            beforeSend: function() {
+            },
+            success: function(data) {
+                if (data.length === 0) {
+                    angularScope.init();
+                }
+            },
+            error: function(result) {
+                alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+            },
+            complete: function() {
+
+            }
+        });
+    }
 }
 

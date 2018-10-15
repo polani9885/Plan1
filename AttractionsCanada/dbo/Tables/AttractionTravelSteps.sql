@@ -9,7 +9,8 @@
 	[Start_location_lng] [varchar](50) NULL,
 	[Travel_mode] [varchar](50) NULL,
 	[OrderId] [int] NULL,
- CONSTRAINT [PK_AttractionTravelSteps] PRIMARY KEY CLUSTERED 
+ [IsNearestRestarentDone] BIT NULL, 
+    CONSTRAINT [PK_AttractionTravelSteps] PRIMARY KEY CLUSTERED 
 (
 	[AttractionTravelStepsId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

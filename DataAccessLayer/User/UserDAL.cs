@@ -342,30 +342,8 @@ namespace DataAccessLayer.User
                         sourceEndLongitude = coodinate.Where(x => x.Least == false).Select(y => y.Longitude).FirstOrDefault(),
                         sourceEndLatitude = coodinate.Where(x => x.Least == false).Select(y => y.Latitude).FirstOrDefault(),
                     }).ToList();
-
-
-                if (result.Count == 0)
-                {
-                    User_UpdateFindNearestRestarent(attractionsId, countryId);
-                }
+               
                 return result;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public void User_UpdateFindNearestRestarent(int attractionsId, int countryId)
-        {
-            try
-            {
-                SqlHelper.countryId = countryId;
-                var result = SqlHelper.QuerySP("User_UpdateFindNearestRestarent",
-                    new
-                    {
-                        AttractionsId = attractionsId,
-                    });
             }
             catch (Exception ex)
             {
@@ -392,6 +370,7 @@ namespace DataAccessLayer.User
                         ,NoOfCars = userTourInformation.NoOfCars
                         ,CarMileage = userTourInformation.CarMileage
                         ,FuelPrice = userTourInformation.FuelPrice
+                        ,DrivingBreak = userTourInformation.DrivingBreak
                     });
             }
             catch (Exception ex)
@@ -473,6 +452,26 @@ namespace DataAccessLayer.User
                             AttractionRequestOrder = CommonObjects.Convert.ToDataTable<UserTable_AttractionRequestOrder>(attractionRequestOrder)
 
                         });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId)
+        {
+            try
+            {
+
+                var result = SqlHelper
+                    .QuerySP<GetOrderOfAttractionVisit>("User_CheckTheCalculationPartIsDone",
+                        new
+                        {
+                            UserTripId = userTripId
+
+                        }).ToList();
+                return result;
             }
             catch (Exception ex)
             {

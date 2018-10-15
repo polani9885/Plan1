@@ -38,6 +38,18 @@ function init()
                 },
             });
 
+            $("#photoSlideShow").dialog({
+                autoOpen: false,
+                height: 700,
+                width: 1000,
+                modal: true,
+                buttons: {
+                    Cancel: function () {
+                        $("#photoSlideShow").dialog("close");
+                    }
+                },
+            });
+
 
             $("#autoStartLocation").on("autocompleteselect", function (event, ui) {
 
@@ -71,7 +83,7 @@ function init()
                 angularScope.$apply(function () {
                     angularScope.TourInfoUpdate(ui.item.data,
                         4,
-                        ui.item.name,
+                        '',
                         $("#hdSelectedBreakType").val(),
                         $("#hdSelectedDivId").val());
                 });
@@ -80,7 +92,8 @@ function init()
                     .dialog("close");
             });
 
-            
+            //Everytime check the missing data is cleared or not
+            var reloadTourInfo = setInterval(function () { IntervalChecking(); }, 9000);
 
         });
     }
@@ -88,6 +101,16 @@ function init()
     {
         alert(e);
     }
+}
+
+
+
+function IntervalChecking() {
+    
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        CheckTheCalculationPartIsDone(angularScope);
+    });
 }
 
 function DateUpdated() {
@@ -198,4 +221,10 @@ $(document).ready(function () {
 function getAttractions() {    
     GetAddressInformation($("#autoAddAttraction").val());
 }
+
+$(document).mousemove(function (e) {
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+});
+
 

@@ -146,6 +146,12 @@ namespace ServiceClient.UsersService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_InsertUserRequested", ReplyAction="http://tempuri.org/IUserServices/User_InsertUserRequestedResponse")]
         System.Threading.Tasks.Task User_InsertUserRequestedAsync(int userTripId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_AttractionRequestOrder> attractionRequestOrder);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDone", ReplyAction="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDoneResponse")]
+        System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDone", ReplyAction="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDoneResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> User_CheckTheCalculationPartIsDoneAsync(int userTripId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -349,6 +355,14 @@ namespace ServiceClient.UsersService {
         
         public System.Threading.Tasks.Task User_InsertUserRequestedAsync(int userTripId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_AttractionRequestOrder> attractionRequestOrder) {
             return base.Channel.User_InsertUserRequestedAsync(userTripId, attractionRequestOrder);
+        }
+        
+        public System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId) {
+            return base.Channel.User_CheckTheCalculationPartIsDone(userTripId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> User_CheckTheCalculationPartIsDoneAsync(int userTripId) {
+            return base.Channel.User_CheckTheCalculationPartIsDoneAsync(userTripId);
         }
     }
 }

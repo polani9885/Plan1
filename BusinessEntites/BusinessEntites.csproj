@@ -62,6 +62,7 @@
     <Compile Include="Custom\GroupWithDateAttractions.cs" />
     <Compile Include="Custom\InputParameters.cs" />
     <Compile Include="Custom\StepsConsolidated.cs" />
+    <Compile Include="Custom\TimeInterval.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\Entitydebug_log.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityMatched_substrings.cs" />

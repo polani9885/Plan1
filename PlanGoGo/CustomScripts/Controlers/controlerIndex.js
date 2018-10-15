@@ -34,13 +34,17 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.selectedExtraCategoryList = [];
 
     $scope.FilterNearLocations = [];
-    $scope.AttractionPhotoReference = [];
+    $scope.images = [];
 
     $scope.UserRequestedOrder = [];
 
+    $scope.currentIndex = 0;
+
     $scope.OneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    
+    $scope.IsDistanceCalcuationMissing = true;
+
+
 
 
 
@@ -94,11 +98,11 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $scope.CategorySelectedAttractionFilter();
     };
 
-    $scope.ClickMainCategorySelected = function (mainCategoryId) {
+    $scope.ClickMainCategorySelected = function(mainCategoryId) {
         $scope.MainCategorySelected = mainCategoryId;
         $scope.filterCategoryList = [];
         $scope.selectedCategoryList = [];
-        
+
         $($scope.CategoryList).filter(function(index) {
             if ($scope.CategoryList[index].MasterCategoryId === mainCategoryId) {
                 $scope.filterCategoryList.push($scope.CategoryList[index]);
@@ -106,21 +110,21 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 $scope.selectedCategoryList.push($scope.CategoryList[index]);
             }
         });
-        
+
         //it will filter with the selected attraction list
         $scope.CategorySelectedAttractionFilter();
 
         PublicFilterAttractions($scope, $http);
-    }
+    };
 
-    $scope.CategorySelectedAttractionFilter = function () {
+    $scope.CategorySelectedAttractionFilter = function() {
 
 
         var isNotFilterd = false;
 
 
         $scope.filterAttractionList = [];
-        $($scope.selectedCategoryList).filter(function (index) {
+        $($scope.selectedCategoryList).filter(function(index) {
             $($scope.attractionList).filter(function(attractionIndex) {
                 if ($scope.selectedCategoryList[index].GoogleTypeID ===
                     $scope.attractionList[attractionIndex].CategoryId) {
@@ -132,7 +136,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
                             if (!jQuery.isEmptyObject(value.ListGetOrderOfAttractionVisit)) {
                                 $.each(value.ListGetOrderOfAttractionVisit,
-                                    function (googleKey, googleValue) {
+                                    function(googleKey, googleValue) {
                                         if (googleValue.SourceAttractionId ===
                                             $scope.attractionList[attractionIndex].AttractionsId ||
                                             googleValue.DestinationAttractionId ===
@@ -150,14 +154,14 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         });
         $scope.CategoryPlaceSearch = "";
         $scope.FilterInterestedAttraction();
-    }
+    };
 
-    $scope.CssMainCategory = function (mainCategoryId) {
+    $scope.CssMainCategory = function(mainCategoryId) {
         if (mainCategoryId === $scope.MainCategorySelected) {
             return true;
         }
         return false;
-    }
+    };
 
     $scope.addCitites = function () {
 
@@ -201,12 +205,12 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     };
 
 
-    $scope.IsCityOrderUpdated = function (cityId, recordIndex, isUp) {
-        
+    $scope.IsCityOrderUpdated = function(cityId, recordIndex, isUp) {
+
 
         if (isUp) {
             $.each($scope.VisitCityList,
-                function (key, value) {
+                function(key, value) {
                     if (value.recordIndex === recordIndex) {
                         value.recordIndex = recordIndex - 1;
                     } else {
@@ -217,7 +221,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 });
         } else {
             $.each($scope.VisitCityList,
-                function (key, value) {
+                function(key, value) {
                     if (value.recordIndex === recordIndex + 1) {
                         value.recordIndex = recordIndex;
                     } else {
@@ -227,8 +231,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     }
                 });
         }
-        
-    }
+
+    };
 
     //City Selected
     $scope.CitySelected=function(data) {
@@ -379,13 +383,14 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                                 
                                
                             });
-
-                        googleMaps.drawPolyline({
-                            path: path,
-                            strokeColor: '#131540',
-                            strokeOpacity: 0.6,
-                            strokeWeight: 6
-                        });
+                        if (path.length > 0) {
+                            googleMaps.drawPolyline({
+                                path: path,
+                                strokeColor: '#131540',
+                                strokeOpacity: 0.6,
+                                strokeWeight: 6
+                            });
+                        }
                     }
                 });
         }
@@ -405,7 +410,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
         var isDayExists = false;
         var num_tabs = $("div#subtabs ul li").length + 1;
-
+        
         var breakInformation = [];
         $.each(data,
             function (groupKey, groupValue) {
@@ -431,16 +436,12 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     temp.UpdateDayStartTime = $scope.UpdateDayStartTime;
                     temp.IsUserInterestedLunchBreak = 1;
                     temp.UpdatedLunchTime = $scope.UpdatedLunchTime;
-                    temp.UpdatedLunchMinimumTime = $scope.UpdatedLunchMinimumTime;
                     temp.IsUserInterestedBreak = 1;
                     temp.UpdatedBreakTime = $scope.UpdatedBreakTime;
-                    temp.UpdatedBreakMinimumTime = $scope.UpdatedBreakMinimumTime;
                     temp.IsUserInterestedDinnerBreak = 1;
                     temp.UpdatedDinnerTime = $scope.UpdatedDinnerTime;
-                    temp.UpdateDinnerMinimumTime = $scope.UpdateDinnerMinimumTime;
                     temp.IsUserInterestedBreakFast = 1;
                     temp.UpdatedBreakFastTime = $scope.UpdatedBreakFastTime;
-                    temp.UpdatedBreakFastMinimumTime = $scope.UpdatedBreakFastMinimumTime;
                     temp.divId = divId;
                     breakInformation = temp;
                     $scope.UpdatedBreaks.push(temp);
@@ -451,7 +452,9 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 $("div#subtabs ul").append(
                     "<li><a href='#tab_" +
                     groupValue.GroupDate.replace("/", "_").replace("/", "_") +
-                    "'>" +
+                    "' onclick='tabClicked(\"tab_" +
+                    groupValue.GroupDate.replace("/", "_").replace("/", "_") +
+                    "\")'>" +
                     groupValue.GroupDate +
                     "</a></li>"
                 );
@@ -472,26 +475,18 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 
             }
         );
-        $("div#subtabs ul li").find('a:first').triggerHandler('click');
+        if (tabname.length === 0) {
+            $("div#subtabs ul li").find('a:first').triggerHandler('click');
+        } else {
+            persistTab();
+        }
         $scope.TourTabClick();
+
+        $scope.WeatherUpdate(data);
         //$("#"+firstDate).triggerHandler('click');
     };
     $scope.TourTabClick = function() {
-        $.each($scope.UpdatedBreaks,
-            function(key, value) {
-                $("#" + value.divId + "_UpdateDayStartTime").timepicker({ 'timeFormat': 'h:i A' });
-                $("#" + value.divId + "_UpdateDayEndTime").timepicker({ 'timeFormat': 'h:i A' });
-                $("#" + value.divId + "_UpdatedLunchTime").timepicker({ 'timeFormat': 'h:i A' });
-                $("#" + value.divId + "_UpdatedBreakTime").timepicker({ 'timeFormat': 'h:i A' });
-                $("#" + value.divId + "_UpdatedDinnerTime").timepicker({ 'timeFormat': 'h:i A' });
-                $("#" + value.divId + "_UpdatedBreakFast").timepicker({ 'timeFormat': 'h:i A' });
-
-                $("#" + value.divId + "_UpdatedLunchMinimumTime").timepicker({ 'timeFormat': 'H:i:s' });
-                $("#" + value.divId + "_UpdatedBreakMinimumTime").timepicker({ 'timeFormat': 'H:i:s' });
-                $("#" + value.divId + "_UpdateDinnerMinimumTime").timepicker({ 'timeFormat': 'H:i:s' });
-                $("#" + value.divId + "_UpdatedBreakFastMinimumTime").timepicker({ 'timeFormat': 'H:i:s' });
-
-            });
+       
     };
 
     $scope.CategoryStyleLeft = {
@@ -545,29 +540,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     };
 
 
-    $scope.IsOrderUpdated = function (destinationAttractionId, recordCount, isUp) {
-        var isFound = false;
-        $.each($scope.OrderOfAttractionList, function (recordKey, recordValue) {
-            
-            $.each(recordValue.ListGetOrderOfAttractionVisit, function (groupKey, groupValue) {
-                if (groupValue.DestinationAttractionId === destinationAttractionId) {
-                    if (isUp === true) {
-                        groupValue.UpdatedOrder = recordCount - 1;
-                    }
-                    else {
-                        groupValue.UpdatedOrder = recordCount + 1;
-                    }
-                groupValue.IsOrderUpdated = true;
-                isFound = true;
-                return false;
-            }
-            });
-            if (isFound) {
-                return false;
-            }
-        });
-        Public_GetOrderOfAttractionVisit($scope, $http);
-    }
+    
 
    
     
@@ -599,12 +572,14 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $('#cat_' + categoryId).show();
     };
 
-    $scope.categoryFilter = function () {
+    $scope.categoryFilter = function() {
         var tempFilterAttractionList = $scope.filterAttractionList;
         $scope.filterAttractionList = [];
-        
-        $(tempFilterAttractionList).filter(function (index) {
-            if (tempFilterAttractionList[index].AttractionName.toLowerCase().indexOf($scope.CategoryPlaceSearch.toLowerCase()) !== -1) {
+
+        $(tempFilterAttractionList).filter(function(index) {
+            if (tempFilterAttractionList[index].AttractionName.toLowerCase()
+                .indexOf($scope.CategoryPlaceSearch.toLowerCase()) !==
+                -1) {
                 $scope.filterAttractionList.push(tempFilterAttractionList[index]);
             }
         });
@@ -612,8 +587,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         if ($scope.filterAttractionList.length === 0) {
             AutoComplte($scope, $http, $("#placeSeachForAdding").val());
         }
-        
-    }
+
+    };
 
     $scope.InsertBreakInformation = function (attractionInfo) {
         
@@ -680,64 +655,60 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     return false;
                 }
             });
-        
+        debugger;
         
         //$scope.UpdatedBreaks[indexCounter].IsUserInterestedDayBreak = $("#" + divId + "_IsUserInterestedDayBreak").prop('checked');
-        $scope.UpdatedBreaks[indexCounter].UpdateDayEndTime = $("#" + divId + "_UpdateDayEndTime").val();
-        $scope.UpdatedBreaks[indexCounter].UpdateDayStartTime = $("#" + divId + "_UpdateDayStartTime").val();
-        $scope.UpdatedBreaks[indexCounter].IsUserInterestedLunchBreak = $("#" + divId + "_IsUserInterestedLunchBreak").prop('checked');
-        $scope.UpdatedBreaks[indexCounter].UpdatedLunchTime = $("#" + divId + "_UpdatedLunchTime").val();
-        $scope.UpdatedBreaks[indexCounter].UpdatedLunchMinimumTime = $("#" + divId + "_UpdatedLunchMinimumTime").val();
-        $scope.UpdatedBreaks[indexCounter].IsUserInterestedBreak = $("#" + divId + "_IsUserInterestedBreak").prop('checked');
-        $scope.UpdatedBreaks[indexCounter].UpdatedBreakTime = $("#" + divId + "_UpdatedBreakTime").val();
-        $scope.UpdatedBreaks[indexCounter].UpdatedBreakMinimumTime = $("#" + divId + "_UpdatedBreakMinimumTime").val();
-        $scope.UpdatedBreaks[indexCounter].IsUserInterestedDinnerBreak = $("#" + divId + "_IsUserInterestedDinnerBreak").prop('checked');
-        $scope.UpdatedBreaks[indexCounter].UpdatedDinnerTime = $("#" + divId + "_UpdatedDinnerTime").val();
-        $scope.UpdatedBreaks[indexCounter].UpdateDinnerMinimumTime = $("#" + divId + "_UpdateDinnerMinimumTime").val();
-        $scope.UpdatedBreaks[indexCounter].IsUserInterestedBreakFast = $("#" + divId + "_IsUserInterestedBreakFast").prop('checked');
-        $scope.UpdatedBreaks[indexCounter].UpdatedBreakFastTime = $("#" + divId + "_UpdatedBreakFast").val();
-        $scope.UpdatedBreaks[indexCounter].UpdatedBreakFastMinimumTime = $("#" + divId + "_UpdatedBreakFastMinimumTime").val();
+        $scope.UpdatedBreaks[indexCounter].UpdateDayEndTime = (jQuery.type($("#" + divId + "_UpdateDayEndTime").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdateDayEndTime").val();
+        $scope.UpdatedBreaks[indexCounter].UpdateDayStartTime = (jQuery.type($("#" + divId + "_UpdateDayStartTime").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdateDayStartTime").val();
+        $scope.UpdatedBreaks[indexCounter].IsUserInterestedLunchBreak = (jQuery.type($("#" + divId + "_IsUserInterestedLunchBreak").val()) === "undefined") ? false : $("#" + divId + "_IsUserInterestedLunchBreak").prop('checked');
+        $scope.UpdatedBreaks[indexCounter].UpdatedLunchTime = (jQuery.type($("#" + divId + "_UpdatedLunchTime").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdatedLunchTime").val();
+        $scope.UpdatedBreaks[indexCounter].IsUserInterestedBreak = (jQuery.type($("#" + divId + "_IsUserInterestedBreak").val()) === "undefined") ? false : $("#" + divId + "_IsUserInterestedBreak").prop('checked');
+        $scope.UpdatedBreaks[indexCounter].UpdatedBreakTime = (jQuery.type($("#" + divId + "_UpdatedBreakTime").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdatedBreakTime").val();
+        $scope.UpdatedBreaks[indexCounter].IsUserInterestedDinnerBreak = (jQuery.type($("#" + divId + "_IsUserInterestedDinnerBreak").val()) === "undefined") ? false : $("#" + divId + "_IsUserInterestedDinnerBreak").prop('checked');
+        $scope.UpdatedBreaks[indexCounter].UpdatedDinnerTime = (jQuery.type($("#" + divId + "_UpdatedDinnerTime").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdatedDinnerTime").val();
+        $scope.UpdatedBreaks[indexCounter].IsUserInterestedBreakFast = (jQuery.type($("#" + divId + "_IsUserInterestedBreakFast").val()) === "undefined") ? false : $("#" + divId + "_IsUserInterestedBreakFast").prop('checked');
+        $scope.UpdatedBreaks[indexCounter].UpdatedBreakFastTime = (jQuery.type($("#" + divId + "_UpdatedBreakFast").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdatedBreakFast").val();
 
         
-        $.each($scope.UpdatedBreaks,
-            function(key, value) {
-                if (value.IsUserInterestedLunchBreak) {
-                    $("#" + value.divId + "_UpdatedLunchTime_tr").show();
-                    $("#" + value.divId + "_UpdatedLunchMinimumTime_tr").show();
-                } else {
-                    $("#" + value.divId + "_UpdatedLunchTime_tr").hide();
-                    $("#" + value.divId + "_UpdatedLunchMinimumTime_tr").hide();
-                }
 
-                if (value.IsUserInterestedBreak) {
-                    $("#" + value.divId + "_UpdatedBreakTime_tr").show();
-                    $("#" + value.divId + "_UpdatedBreakMinimumTime_tr").show();
-                } else {
-                    $("#" + value.divId + "_UpdatedBreakTime_tr").hide();
-                    $("#" + value.divId + "_UpdatedBreakMinimumTime_tr").hide();
-                    
-                }
-
-                if (value.IsUserInterestedDinnerBreak) {
-                    $("#" + value.divId + "_UpdatedDinnerTime_tr").show();
-                    $("#" + value.divId + "_UpdateDinnerMinimumTime_tr").show();
-                } else {
-                    $("#" + value.divId + "_UpdatedDinnerTime_tr").hide();
-                    $("#" + value.divId + "_UpdateDinnerMinimumTime_tr").hide();
-                    
-                }
-                if (value.IsUserInterestedBreakFast) {
-                    $("#" + value.divId + "_UpdatedBreakFast_tr").show();
-                    $("#" + value.divId + "_UpdatedBreakFastMinimumTime_tr").show();
-                } else {
-                    $("#" + value.divId + "_UpdatedBreakFast_tr").hide();
-                    $("#" + value.divId + "_UpdatedBreakFastMinimumTime_tr").hide();
-
-                }
-            });
+        
 
         Public_GetOrderOfAttractionVisit($scope, $http);
     };
+
+
+    //$scope.HideBreakInfo = function() {
+
+    //    $.each($scope.UpdatedBreaks,
+    //        function (key, value) {
+    //            debugger;
+    //            if (value.IsUserInterestedLunchBreak) {
+    //                $("#" + value.divId + "_UpdatedLunchTime_tr").show();
+    //            } else {
+    //                $("#" + value.divId + "_UpdatedLunchTime_tr").hide();
+    //            }
+
+    //            if (value.IsUserInterestedBreak) {
+    //                $("#" + value.divId + "_UpdatedBreakTime_tr").show();
+    //            } else {
+    //                $("#" + value.divId + "_UpdatedBreakTime_tr").hide();
+
+    //            }
+
+    //            if (value.IsUserInterestedDinnerBreak) {
+    //                $("#" + value.divId + "_UpdatedDinnerTime_tr").show();
+    //            } else {
+    //                $("#" + value.divId + "_UpdatedDinnerTime_tr").hide();
+
+    //            }
+    //            if (value.IsUserInterestedBreakFast) {
+    //                $("#" + value.divId + "_UpdatedBreakFast_tr").show();
+    //            } else {
+    //                $("#" + value.divId + "_UpdatedBreakFast_tr").hide();
+
+    //            }
+    //        });
+    //};
 
 
     $scope.DayExpenseInformationUpdate = function (divId,strId) {
@@ -832,6 +803,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $("#expense_PerGallonPrice").val(data.FuelPrice);
         $("#autoStartLocation").val(data.SourceAttractionName);
         $("#autoDestinationLocation").val(data.DestinationAttractionName);
+        $("#expense_DrivingBreak").val(data.DrivingBreak);
 
         //calling the auto complete for filling the city information
         GetCityList($scope, $http);
@@ -885,11 +857,11 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.RequestedBreaks = function(data) {
         $scope.UpdatedBreaks = [];
 
-        
+
         $.each(data,
             function(key, value) {
                 var temp = [];
-                
+
                 temp.RequestDate = value.RequestDate;
                 temp.IsUserInterestedDayBreak = value.IsUserInterestedDayBreak;
                 if (value.UpdateDayEndTime === null) {
@@ -908,44 +880,28 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 } else {
                     temp.UpdatedLunchTime = convertTo12Hour(value.UpdatedLunchTime);
                 }
-                if (value.UpdatedLunchMinimumTime === null) {
-                    temp.UpdatedLunchMinimumTime = $scope.UpdatedLunchMinimumTime;
-                } else {
-                    temp.UpdatedLunchMinimumTime = convertTo12Hour(value.UpdatedLunchMinimumTime);
-                }
+                
                 temp.IsUserInterestedBreak = value.IsUserInterestedBreak;
                 if (value.UpdatedBreakTime === null) {
                     temp.UpdatedBreakTime = $scope.UpdatedBreakTime;
                 } else {
                     temp.UpdatedBreakTime = convertTo12Hour(value.UpdatedBreakTime);
                 }
-                if (value.UpdatedBreakMinimumTime === null) {
-                    temp.UpdatedBreakMinimumTime = $scope.UpdatedBreakMinimumTime;
-                } else {
-                    temp.UpdatedBreakMinimumTime = convertTo12Hour(value.UpdatedBreakMinimumTime);
-                }
+                
                 temp.IsUserInterestedDinnerBreak = value.IsUserInterestedDinnerBreak;
                 if (value.UpdatedDinnerTime === null) {
                     temp.UpdatedDinnerTime = $scope.UpdatedDinnerTime;
                 } else {
                     temp.UpdatedDinnerTime = convertTo12Hour(value.UpdatedDinnerTime);
                 }
-                if (value.UpdateDinnerMinimumTime === null) {
-                    temp.UpdateDinnerMinimumTime = $scope.UpdateDinnerMinimumTime;
-                } else {
-                    temp.UpdateDinnerMinimumTime = convertTo12Hour(value.UpdateDinnerMinimumTime);
-                }
+                
                 temp.IsUserInterestedBreakFast = value.IsUserInterestedBreakFast;
                 if (value.UpdatedBreakFastTime === null) {
                     temp.UpdatedBreakFastTime = $scope.UpdatedBreakFastTime;
                 } else {
                     temp.UpdatedBreakFastTime = convertTo12Hour(value.UpdatedBreakFastTime);
                 }
-                if (value.UpdatedBreakFastMinimumTime === null) {
-                    temp.UpdatedBreakFastMinimumTime = $scope.UpdatedBreakFastMinimumTime;
-                } else {
-                    temp.UpdatedBreakFastMinimumTime = convertTo12Hour(value.UpdatedBreakFastMinimumTime);
-                }
+                
 
                 temp.IsBreakAdded = value.IsBreakAdded;
                 temp.BreakAttractionId = value.BreakAttractionId;
@@ -979,7 +935,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 temp.divId = "tab_" + value.RequestDate.replace("/", "_").replace("/", "_");
                 $scope.UpdatedBreaks.push(temp);
             });
-    }
+    };
 
 
     $scope.AddLunchDinnerBreak = function (breakType, attractionId, divId, sourceLongitude, sourceLatitude) {
@@ -1031,7 +987,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     };
 
     $scope.ExtraCategorySelectedAttractionFilter = function() {
-        
+
         $scope.FilterNearLocations = [];
         $($scope.selectedExtraCategoryList).filter(function(index) {
             $($scope.NearLocations).filter(function(attractionIndex) {
@@ -1045,37 +1001,63 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     });
             });
         });
-    }
+    };
 
     $scope.imageSlideShow = function(attractionsId, attractionName) {
         AttractionsPhotoInfo($scope, $http, attractionsId, attractionName);
     };
 
     $scope.PhotoInfo = function (attractionId, data, attractionName) {
-        //$('.demo').gallerybox();
-        $scope.AttractionPhotoReference = [];
+        
+        $scope.images = [];
+        $scope.currentIndex = 0;
         
         if (data.length > 0) {
-
-            $("#photoSlideShow ul").empty();
+            $("#photoSlideShow")
+                .dialog("open");
+            var counter = 0;
+            
             $.each(data,
                 function (key, value) {
-                    $("#photoSlideShow").append(
-                        "<img src='"+value["PhotoURL"]+"' alt='"+attractionName+"' class='demo'/>"
-                    );
-                });
 
-            $('.demo').gallerybox();
-            
-            $("#photoSlideShow img")[0].click();
-            //$("#photoSlideShow ul").find('a:first').triggerHandler('click');
+                    var temp = [];
+                    temp.src = value["PhotoURL"];
+                    temp.id = counter;
+                    counter = counter + 1;
+                    temp.title = attractionName + ' - Pic '+  counter;
+                    $scope.images.push(temp);
+                });
+            $scope.displaySlideImage();
+
+
         }
     };
 
-    $scope.CategoriesTabClick = function () {
+    $scope.displaySlideImage = function() {
+        $.each($scope.images,
+            function(key, value) {
+                $("#photoSlideShow .slider .slide #" + value.id).hide();
+            });
+
+        $("#photoSlideShow .slider .slide #" + $scope.images[$scope.currentIndex].id).show();
+
+        window.scrollTo(mouseX, mouseY);
+    };
+
+    $scope.next = function () {
+        $scope.currentIndex < $scope.images.length - 1 ? $scope.currentIndex++ : $scope.currentIndex = 0;
+        $scope.displaySlideImage();
+    };
+
+    $scope.prev = function () {
+        $scope.currentIndex > 0 ? $scope.currentIndex-- : $scope.currentIndex = $scope.images.length - 1;
+        $scope.displaySlideImage();
+    };
+
+    $scope.CategoriesTabClick = function() {
         //debugger;
         $scope.ClickMainCategorySelected($scope.MasterCategoryList[0].CategoryId);
-    }
+    };
 
 
     $scope.BuildExpenseInfo = function () {
@@ -1134,7 +1116,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
             NoOfPersons: $("#expense_Persons").val(),
             NoOfCars: $("#expense_Cars").val(),
             CarMileage: $("#expense_PerGallon").val(),
-            FuelPrice: $("#expense_PerGallonPrice").val()
+            FuelPrice: $("#expense_PerGallonPrice").val(),
+            DrivingBreak: $("#expense_DrivingBreak").val()
         };
 
         
@@ -1167,7 +1150,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         Public_GetOrderOfAttractionVisit($scope, $http);
     };
 
-    $scope.SearchAutoComplete=function() {
+    $scope.SearchAutoComplete = function() {
 
         if ($("#autoStartLocation").val().length > 3) {
             AutoComplte($scope, $http, $("#autoStartLocation").val());
@@ -1176,11 +1159,11 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         if ($("#autoDestinationLocation").val().length > 3) {
             AutoComplte($scope, $http, $("#autoDestinationLocation").val());
         }
-    }
+    };
 
-    $scope.TourInfoUpdate = function (data, isSource, googleSearchText, breakType, breakDate) {
+    $scope.TourInfoUpdate = function(data, isSource, googleSearchText, breakType, breakDate) {
         UserRequestedAttraction($scope, data, isSource, googleSearchText, breakType, breakDate);
-    }
+    };
 
 
     $scope.BreakAttractionCallingAutoComplete = function () {
@@ -1190,94 +1173,320 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         data.latitude = $("#hdSourceLatitude").val();
         data.longitude = $("#hdSourceLongitude").val();
         data.distance = $("#breakDistance").val();
-        AutoComplteBreakInfo($scope, $http,data);
+        AutoComplte($scope, $http, $("#autoAddAttractionForBreak").val());
     };
 
     $scope.ViewTimeUpdate = function (attractionId, viewTime) {
-        
-        $.each($scope.UserRequestedOrder, function (recordKey, recordValue) {
-            if (recordValue.AttractionId === attractionId) {
-                recordValue.StayTime = viewTime;
-            }
-        });
 
+        var indexCounter = 0;
+        var recordExist = false;
+        var recordValue = [];
+        recordValue.StayTime = viewTime;
+
+        $.each($scope.UserRequestedOrder,
+            function (key, value) {
+
+                if (attractionId === value.AttractionId) {
+
+                    recordValue.AttractionId = value.AttractionId;
+                    recordValue.OrderNumber = value.OrderNumber;
+                    recordValue.IsRequestedAfterBreakFast = value.IsRequestedAfterBreakFast;
+                    recordValue.IsRequestedAfterLunch = value.IsRequestedAfterLunch;
+                    recordValue.IsRequestedAfterBreak = value.IsRequestedAfterBreak;
+                    recordValue.IsRequestedAfterDinner = value.IsRequestedAfterDinner;
+                    indexCounter = key;
+                    recordExist = true;
+                    return false;
+                }
+            });
+
+        if (recordExist) {
+            $scope.UserRequestedOrder.splice(indexCounter, 1);
+
+        } else {
+            recordValue.AttractionId = attractionId;
+            recordValue.OrderNumber = 0;
+            recordValue.IsRequestedAfterBreakFast = false;
+            recordValue.IsRequestedAfterLunch = false;
+            recordValue.IsRequestedAfterBreak = false;
+            recordValue.IsRequestedAfterDinner = false;
+        }
+
+        $scope.UserRequestedOrder.push(recordValue);
+
+
+        $scope.UpdateTourInfoForCustomChanges();
+
+    };
+
+
+    $scope.IsOrderUpdated = function (destinationAttractionId, recordCount, isUp, breakInformationId) {
+        
+
+        var indexCounter = 0;
+        var recordExist = false;
+        var recordValue = [];
+        
+        $.each($scope.UserRequestedOrder,
+            function (key, value) {
+
+                if (destinationAttractionId === value.AttractionId) {
+                    
+                    recordValue.AttractionId = value.AttractionId;
+                    recordValue.StayTime = value.StayTime;
+                    recordValue.OrderNumber = value.OrderNumber;
+                    recordValue.IsRequestedAfterBreakFast = value.IsRequestedAfterBreakFast;
+                    recordValue.IsRequestedAfterLunch = value.IsRequestedAfterLunch;
+                    recordValue.IsRequestedAfterBreak = value.IsRequestedAfterBreak;
+                    recordValue.IsRequestedAfterDinner = value.IsRequestedAfterDinner;
+                    indexCounter = key;
+                    recordExist = true;
+                    return false;
+                }
+            });
+
+        if (recordExist) {
+            $scope.UserRequestedOrder.splice(indexCounter, 1);
+
+        } else {
+            recordValue.AttractionId = destinationAttractionId;
+            recordValue.OrderNumber = recordCount;
+            recordValue.IsRequestedAfterBreakFast = false;
+            recordValue.IsRequestedAfterLunch = false;
+            recordValue.IsRequestedAfterBreak = false;
+            recordValue.IsRequestedAfterDinner = false;
+        }
+
+
+        switch (breakInformationId) {
+        case 1:
+        {
+            recordValue.IsRequestedAfterBreakFast = true;
+            break;
+        }
+        case 2:
+        {
+            recordValue.IsRequestedAfterLunch = true;
+            break;
+        }
+        case 3:
+        {
+            recordValue.IsRequestedAfterBreak = true;
+            break;
+        }
+        case 4:
+        {
+            recordValue.IsRequestedAfterDinner = true;
+            break;
+        }
+        default:
+        {
+            if (isUp) {
+                recordValue.OrderNumber = recordCount + 1;
+            } else {
+                recordValue.OrderNumber = recordCount - 1;
+            }
+            break;
+        }
+        }
+
+        $scope.UserRequestedOrder.push(recordValue);
+
+
+        $scope.UpdateTourInfoForCustomChanges();
+    };
+
+    $scope.UpdateTourInfoForCustomChanges = function() {
         var attractionRequestOrder = [];
         $.each($scope.UserRequestedOrder,
             function(orderKey, orderValue) {
-                
+
+
+                var temp = {};
+                temp.AttractionId = orderValue.AttractionId;
+                temp.OrderNumber = orderValue.OrderNumber;
+                temp.BreakInformationId = orderValue.BreakInformationId;
                 if (jQuery.type(orderValue.StayTime) !== "undefined") {
-                    var temp = {};
+                    temp.StayTime = orderValue.StayTime;
+                } else {
+                    temp.StayTime = "00:00";
+                }
+                temp.IsRequestedAfterBreakFast = orderValue.IsRequestedAfterBreakFast;
+                temp.IsRequestedAfterLunch = orderValue.IsRequestedAfterLunch;
+                temp.IsRequestedAfterBreak = orderValue.IsRequestedAfterBreak;
+                temp.IsRequestedAfterDinner = orderValue.IsRequestedAfterDinner;
+                attractionRequestOrder.push(temp);
+
+            });
+
+        InsertUserRequested($scope, $http, attractionRequestOrder);
+    };
+
+    
+
+    $scope.GetOrderOfRequest = function(data) {
+
+        $scope.UserRequestedOrder = [];
+
+
+        if (data !== null && data.length > 0) {
+
+            $.each(data,
+                function(orderKey, orderValue) {
+                    var temp = [];
                     temp.AttractionId = orderValue.AttractionId;
                     temp.OrderNumber = orderValue.OrderNumber;
                     temp.BreakInformationId = orderValue.BreakInformationId;
+
+
                     temp.StayTime = orderValue.StayTime;
                     temp.IsRequestedAfterBreakFast = orderValue.IsRequestedAfterBreakFast;
                     temp.IsRequestedAfterLunch = orderValue.IsRequestedAfterLunch;
                     temp.IsRequestedAfterBreak = orderValue.IsRequestedAfterBreak;
                     temp.IsRequestedAfterDinner = orderValue.IsRequestedAfterDinner;
-                    attractionRequestOrder.push(temp);
-                }
-            });
-        
-        InsertUserRequested($scope, $http, attractionRequestOrder);
-        
-    };
-
-    $scope.GetOrderOfRequest = function(data) {
-        
-        $scope.UserRequestedOrder = [];
-        if (data !== null) {
-            $.each($scope.OrderOfAttractionList,
-                function(key, value) {
-                    $.each(value.ListGetOrderOfAttractionVisit,
-                        function (googleKey, googleValue) {
-
-                            var temp = [];
-                            temp.AttractionId = googleValue.DestinationAttractionId;
-                            temp.OrderNumber = googleValue.RecordCount;
-                            temp.BreakInformationId = googleValue.BreakInformationId;
-                            
-                            if (data !== null && data.length > 0) {
-                                $.each(data,
-                                    function(orderKey, orderValue) {
 
 
-                                        if (googleValue.DestinationAttractionId === orderValue.AttractionId) {
-                                            temp.StayTime = orderValue.StayTime;
-                                            temp.IsRequestedAfterBreakFast = orderValue.IsRequestedAfterBreakFast;
-                                            temp.IsRequestedAfterLunch = orderValue.IsRequestedAfterLunch;
-                                            temp.IsRequestedAfterBreak = orderValue.IsRequestedAfterBreak;
-                                            temp.IsRequestedAfterDinner = orderValue.IsRequestedAfterDinner;
-                                            return false;
+                    $scope.UserRequestedOrder.push(temp);
 
-                                        } else {
-
-                                            temp.StayTime = googleValue.TimeRequiredToView;
-                                            temp.IsRequestedAfterBreakFast = false;
-                                            temp.IsRequestedAfterLunch = false;
-                                            temp.IsRequestedAfterBreak = false;
-                                            temp.IsRequestedAfterDinner = false;
-                                        }
-
-                                    });
-                            } else {
-                                temp.StayTime = googleValue.TimeRequiredToView;
-                                temp.IsRequestedAfterBreakFast = false;
-                                temp.IsRequestedAfterLunch = false;
-                                temp.IsRequestedAfterBreak = false;
-                                temp.IsRequestedAfterDinner = false;
-
-                            }
-
-                            $scope.UserRequestedOrder.push(temp);
-                        });
                 });
         }
 
+
+        //enabling the flag is distance calculation is missing or not
+        $scope.IsDistanceCalcuationMissing = true;
+        if ($scope.OrderOfAttractionList.length === 0) {
+            $scope.IsDistanceCalcuationMissing = false;
+        }
+        $.each($scope.OrderOfAttractionList,
+            function(key, value) {
+                $.each(value.ListGetOrderOfAttractionVisit,
+                    function(googleKey, googleValue) {
+
+
+                        if (googleValue.IsDistanceCalculationMissing === 1 ||
+                            googleValue.IsDistanceCalculationMissing === true) {
+                            $scope.IsDistanceCalcuationMissing = false;
+                            return false;
+                        }
+
+                    });
+            });
+
         
 
     };
-    
 
+
+    $scope.WeatherUpdate = function(data) {
+        var d = new Date();
+        var destidate = new Date();
+        var numberOfDaysToAdd = 6;
+        destidate.setDate(destidate.getDate() + numberOfDaysToAdd);
+        
+        if (!jQuery.isEmptyObject(data)) {
+            $.each(data,
+                function (key, value) {
+                    var currentDate = new Date(value.GroupDate);
+
+                    
+                    
+                    if (currentDate.getTime() >= d.getTime() && currentDate.getTime() <= destidate.getTime()) {
+                        if (!jQuery.isEmptyObject(value.ListGetOrderOfAttractionVisit)) {
+                            $.each(value.ListGetOrderOfAttractionVisit,
+                                function(googleKey, googleValue) {
+
+                                    
+                                    if (googleValue.DestinationLatitude !== null &&
+                                        googleValue.DestinationLongitude !== null) {
+                                        if (googleValue.DestinationLatitude !== null) {
+
+                                            var destinatinoCoordinates = [];
+                                            destinatinoCoordinates.DestinationLatitude =
+                                                googleValue.DestinationLatitude;
+                                            destinatinoCoordinates.DestinationLongitude =
+                                                googleValue.DestinationLongitude;
+                                            destinatinoCoordinates.RecordCount = googleValue.RecordCount;
+                                            watherAPI($scope, destinatinoCoordinates);
+                                            
+                                        }
+                                    }
+
+
+                                });
+
+                        }
+                    }
+                });
+        }
+
+    };
+    $scope.weatherInfoUpdate = function (watherData, recordCount) {
+
+        
+        var d = new Date();
+        var destidate = new Date();
+        var numberOfDaysToAdd = 6;
+        destidate.setDate(destidate.getDate() + numberOfDaysToAdd);
+
+        if (!jQuery.isEmptyObject(watherData)) {
+            if (!jQuery.isEmptyObject($scope.OrderOfAttractionList)) {
+                $.each($scope.OrderOfAttractionList,
+                    function (key, value) {
+                        
+                        var currentDate = new Date(value.GroupDate);
+
+                        $.each(watherData.dailyForecasts.forecastLocation.forecast,
+                            function(weatherKey, weatherValue) {
+                                var currentDate = new Date(weatherValue.utcTime);
+                                
+                                if (taskDate(weatherValue.utcTime) === taskDate(value.GroupDate)) {
+                                    $("#weather_" + recordCount).empty();
+                                    $("#weather_" + recordCount)
+                                        .prepend('<img alt="weather" src="' + weatherValue.iconLink + '" />');
+                                    $("#weather_" + recordCount)
+                                        .prepend('<span class="tooltiptext">' +
+                                            "Description : " +
+                                            weatherValue.description +
+                                            "<br/>" +
+                                            "Sky Description : " +
+                                            weatherValue.skyDescription +
+                                            "<br/>" +
+                                            "High Temperature : " +
+                                            weatherValue.highTemperature +
+                                            "<br/>" +
+                                            "Low Temperature : " +
+                                            weatherValue.lowTemperature +
+                                            "<br/>" +
+                                            "Humidity : " +
+                                            weatherValue.humidity +
+                                            "<br/>" +
+                                            "Rain Fall : " +
+                                            weatherValue.rainFall +
+                                            "<br/>" +
+                                            "Snow Fall : " +
+                                            weatherValue.snowFall +
+                                            "<br/>" +
+                                            "WindSpeed : " +
+                                            weatherValue.windSpeed +
+                                            "<br/>" +
+                                            "UV : " +
+                                            weatherValue.uvDesc +
+                                            '</span>');
+
+                                    return false;
+                                }
+                            });
+
+                        
+                    });
+            }
+        }
+    };
+
+    $scope.UpdateTrouInfo = function() {
+        $scope.init();
+        Public_GetOrderOfAttractionVisit($scope, $http);
+    };
     $scope.init();
 });
+

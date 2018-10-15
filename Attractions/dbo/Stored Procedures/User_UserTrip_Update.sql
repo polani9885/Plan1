@@ -11,12 +11,13 @@
 	,@NoOfCars [int] 
 	,@CarMileage [decimal](18, 2) 
 	,@FuelPrice [decimal](18, 2) 
+	,@DrivingBreak INT 
 )	
 AS
 BEGIN	
 	UPDATE [dbo].[UserTrip]
 	   SET [ModifiedDate] = GETDATE()
-		  ,[CountryId] = CASE WHEN @CountryId > 0 THEN @CountryId ELSE CountryId END
+		  ,[CountryId] = CASE WHEN @CountryId >  0 THEN @CountryId ELSE CountryId END
 		  ,[StartDate] = CASE WHEN @StartDate IS NOT NULL THEN @StartDate ELSE StartDate END 
 		  ,[EndDate] = CASE WHEN @EndDate IS NOT NULL THEN @EndDate ELSE EndDate END 
 		  ,[TravelModeId] = CASE WHEN @TravelModeId > 0 THEN @TravelModeId ELSE TravelModeId END
@@ -26,6 +27,7 @@ BEGIN
 		  ,[NoOfCars] = @NoOfCars
 		  ,[CarMileage] = @CarMileage
 		  ,[FuelPrice] = @FuelPrice
+		  ,DrivingBreak = @DrivingBreak
 	 WHERE UserTripId = @UserTripId
 
 END

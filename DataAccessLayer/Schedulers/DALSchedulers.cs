@@ -256,7 +256,7 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_InsertGoogleSearchText(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId,int attractionId)
+        public void Scheduler_InsertGoogleSearchText(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId,int attractionId, int attractionTravelStepsId)
         {
             try
             {
@@ -266,6 +266,7 @@ namespace DataAccessLayer.Schedulers
                     {
                         NearBySearchData = DataTableFun.ToDataTable<NearByPlaceSearchEntity>(nearByPlaceSearchEntity)
                         ,AttractionsId = attractionId
+                        ,AttractionTravelStepsId = attractionTravelStepsId
                     });
             }
             catch (Exception ex)
@@ -654,6 +655,43 @@ namespace DataAccessLayer.Schedulers
                 throw ex;
             }
         }
+
+        public List<AttractionsDTO> Scheduler_GetStepsSearchnearBy(int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                List<AttractionsDTO> _returnResult = SqlHelper.QuerySP<AttractionsDTO>("Scheduler_GetStepsSearchnearBy").ToList();
+
+                return _returnResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public void Scheduler_UpdateAttractionNoOfTimesStepsNearyByCalcuated(int countryId,int attractionTravelStepsId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                SqlHelper.QuerySP("Scheduler_UpdateAttractionNoOfTimesStepsNearyByCalcuated", new
+                {
+                    AttractionTravelStepsId = attractionTravelStepsId
+                });
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
         public List<GoogleTypes> Scheduler_GetExtraCategoryList()
         {
             try

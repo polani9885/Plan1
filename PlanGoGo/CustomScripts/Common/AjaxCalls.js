@@ -52,8 +52,6 @@ function GetCityList(angularScope, http) {
 //Get place information
 function SelectedPlace(selectedPlace, attractionId) {
     
-
-    
     $.ajax({
         type: "GET",
         //url: googleAPI + "/place/details/json",
@@ -141,6 +139,35 @@ function GetCity(stateId) {
             }
         },
         error: function (result) {
+            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function watherAPI(angularScope,param) {
+    $.ajax({
+        type: "GET",
+        url: "https://weather.api.here.com/weather/1.0/report.json",
+        dataType: 'jsonp',
+        jsonp: 'jsonpcallback',
+        data: {
+            app_id : app_id,
+            app_code:app_code,
+            product:"forecast_7days_simple",
+            latitude: param.DestinationLatitude,
+            longitude: param.DestinationLongitude
+        },
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            angularScope.weatherInfoUpdate(data, param.RecordCount);
+        },
+        error: function (result) {
+            
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
         },
         complete: function () {

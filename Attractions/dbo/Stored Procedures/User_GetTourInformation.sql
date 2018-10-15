@@ -19,7 +19,9 @@ BEGIN
 	  ,NoOfCars
 	  ,CarMileage
 	  ,FuelPrice
-  FROM [dbo].[UserTrip]
+	  ,DrivingBreak
+  FROM [dbo].[UserTrip] WITH(NOLOCK)
   WHERE UserId = @UserId
 END
+
 GO

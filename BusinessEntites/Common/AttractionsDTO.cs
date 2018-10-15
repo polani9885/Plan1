@@ -44,6 +44,8 @@ namespace BusinessEntites.Common
 
         public int MasterTravelModeID { get; set; }
 
+        public int AttractionTravelStepsId { get; set; }
+
 
 
     }

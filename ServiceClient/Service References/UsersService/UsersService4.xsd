@@ -318,4 +318,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="User_CheckTheCalculationPartIsDone">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userTripId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="User_CheckTheCalculationPartIsDoneResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="User_CheckTheCalculationPartIsDoneResult" nillable="true" type="q23:ArrayOfGetOrderOfAttractionVisit" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

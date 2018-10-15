@@ -68,4 +68,5 @@ BEGIN
 	,getdate()
 	,@CreatedBy
 	FROM @MissingAttractionID				
+	WHERE ID > 0	
 END

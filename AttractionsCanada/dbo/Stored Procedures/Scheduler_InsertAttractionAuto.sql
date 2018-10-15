@@ -26,11 +26,16 @@ BEGIN
 	AND MC.CityName = @CityName
 	AND MS.StateName = @StateName
 
+	
+
 	IF ISNULL(@CityId,0) = 0
 	BEGIN
+		
 		SELECT @StateId = StateId FROM Attractions.dbo.MasterState 
 		WHERE StateName = @StateName
 		AND CountryId = @CountryId
+
+		
 
 		IF ISNULL(@StateId,0) = 0
 		BEGIN		
@@ -51,10 +56,9 @@ BEGIN
 			WHERE StateName = @StateName
 			AND CountryId = @CountryId
 
-		END
+		END		
 
-		SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC
-		WHERE MC.StateId = @StateId
+		
 
 		IF ISNULL(@CityId,0) = 0 
 		BEGIN			
@@ -66,22 +70,25 @@ BEGIN
 				   ,[IsDefault]
 				   )
 			 VALUES
-				   ((SELECT ISNULL(MAX(StateId),0) + 1 FROM Attractions.dbo.MasterCity) 
+				   ((SELECT ISNULL(MAX(CityId),0) + 1 FROM Attractions.dbo.MasterCity) 
 				   ,@CityName
 				   ,@CityShortName
 				   ,@StateId
 				   ,0
-				   )
-			SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC
+				   )			
 		END
+		SELECT @CityId = MC.CityId FROM Attractions.dbo.MasterCity MC
+		JOIN Attractions.dbo.MasterState MS ON MS.StateId = MC.StateId
+		WHERE MS.CountryId = @CountryId
+		AND MC.CityName = @CityName
+		AND MS.StateName = @StateName
 	END
 
 	IF ISNULL(@UserTripId,0) > 0
 		AND NOT EXISTS(SELECT 1 FROM Attractions..UserTripCities WITH(NOLOCK) WHERE UserTripId = @UserTripId AND MasterCityId = @CityId)
 	BEGIN
-		UPDATE Attractions..UserTripCities
-			SET MasterCityId = @CityId
-		WHERE UserTripId = @UserTripId
+		INSERT INTO Attractions..UserTripCities (MasterCityId,UserTripId)
+		SELECT @CityId,@UserTripId			
 	END
 
 	UPDATE [dbo].[Attractions]
