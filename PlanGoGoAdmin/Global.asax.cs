@@ -39,17 +39,17 @@ namespace PlanGoGoAdmin
         {
             //create unitycontainer          
             IUnityContainer container = new UnityContainer()
-                .RegisterType<IAdminUser, PlanGoGoAdmin.Repository.Reference.User>()
-                .RegisterType<ICountry, PlanGoGoAdmin.Repository.Reference.Country>()
-            .RegisterType<IMasterState, PlanGoGoAdmin.Repository.Reference.MasterState>()
-            .RegisterType<IMasterCity, PlanGoGoAdmin.Repository.Reference.MasterCity>()
-            .RegisterType<IMasterCategory, PlanGoGoAdmin.Repository.Reference.MasterCategory>()
-            .RegisterType<IAttractions, PlanGoGoAdmin.Repository.Reference.Attractions>()
-            .RegisterType<IGetListValues, PlanGoGoAdmin.Repository.Reference.GetListValues>()
-            .RegisterType<IAttractionsActiveStatus, PlanGoGoAdmin.Repository.Reference.AttractionsActiveStatus>()
-            .RegisterType<IMasterWeek, PlanGoGoAdmin.Repository.Reference.MasterWeek>()
-            .RegisterType<IAttractionTravelTimeDistance, PlanGoGoAdmin.Repository.Reference.AttractionTravelTimeDistance>()
-            .RegisterType<IMissingDistanceAttractionsRecords, PlanGoGoAdmin.Repository.Reference.RepMissingDistanceAttractionsRecords>();
+                  .RegisterType<IAdminUser, ServiceClient.Services.Admin_User>()
+                .RegisterType<ICountry, ServiceClient.Services.Country>()
+                .RegisterType<IMasterState, ServiceClient.Services.MasterState>()
+                .RegisterType<IMasterCity, ServiceClient.Services.MasterCity>()
+                .RegisterType<IMasterCategory, ServiceClient.Services.MasterCategory>()
+                .RegisterType<IAttractions, ServiceClient.Services.Attractions>()
+                .RegisterType<IGetListValues, ServiceClient.Services.GetListValues>()
+                .RegisterType<IAttractionsActiveStatus, ServiceClient.Services.AttractionsActiveStatus>()
+                .RegisterType<IMasterWeek, ServiceClient.Services.MasterWeek>()
+                .RegisterType<IAttractionTravelTimeDistance, ServiceClient.Services.AttractionTravelTimeDistance>()
+            .RegisterType<IMissingDistanceAttractionsRecords, ServiceClient.Services.MissingDistanceAttractionsRecords>();
             return container;
         }
 
@@ -71,7 +71,7 @@ namespace PlanGoGoAdmin
 
                 System.Web.HttpContext.Current.User = newUser;
                 Application["LoggedInformation"] = newUser;
-                Response.Redirect("/User/ManageUser");
+                Response.Redirect("../User/ManageUser");
             }
         }
     }

@@ -102,6 +102,24 @@ namespace DataAccessLayer.Admin
             }
         }
 
+        public void Admin_MergeCity(int sourceCityId, int destinationCityId)
+        {
+            try
+            {
+                SqlHelper.QuerySP("Admin_MergeCity",
+                    new
+                    {
+
+                        SourceCityId = sourceCityId,
+                        DestinationCityId = destinationCityId
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

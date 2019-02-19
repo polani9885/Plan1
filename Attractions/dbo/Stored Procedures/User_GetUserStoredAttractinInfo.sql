@@ -50,6 +50,8 @@ BEGIN
 	  ,SourcePhotoUrl
 	  ,DestinationPhotoUrl
 	  ,BreakInformationId
+	  ,IsNeedDrivningBreak
+	  ,AttractionTravelTimeDistanceId
   FROM [dbo].[UserTripAttractionOrderVisit]
   WHERE UserTripId = @UserTripId
 END

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="65776b77-c971-4bb7-9230-24c5ea0a7d09" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/Attractions.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Attractions.xsd" MetadataType="Schema" ID="6bf22c6c-2eb5-46ab-93a6-ecfdd8abc8f2" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Attractions.svc?xsd=xsd2" />
+    <MetadataFile FileName="Attractions.wsdl" MetadataType="Wsdl" ID="6e6aae8c-018f-4b4a-a03a-0b29e55b6ea3" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Attractions.svc?wsdl" />
+    <MetadataFile FileName="Attractions.disco" MetadataType="Disco" ID="8ded46cd-6d30-454e-921b-d41646af6fd1" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Attractions.svc?disco" />
+    <MetadataFile FileName="Attractions1.xsd" MetadataType="Schema" ID="be83be41-babf-43ef-bd24-59c4093192a7" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Attractions.svc?xsd=xsd1" />
+    <MetadataFile FileName="Attractions2.xsd" MetadataType="Schema" ID="7842a53d-6e6a-4765-accb-e9ca60a8263a" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Attractions.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

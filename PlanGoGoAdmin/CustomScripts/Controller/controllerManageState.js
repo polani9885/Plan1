@@ -31,15 +31,12 @@ appPlanGoGo.controller('controllerManageState', function ($scope, $http, NgTable
     }
 
 
-    $scope.CountryDropDownSelected = function () {
-
-        Admin_GetStates($scope, $http, NgTableParams, $scope.CountrySelectedValue);
-    };
+    
 
     $scope.SubmitClick = function () {        
         $("#CountryId").val($("#ddlCountryId").val());
     };
       
     
-    Admin_GetCountryList($scope, $http, NgTableParams);
+    Admin_GetStates($scope, $http, NgTableParams);
 });

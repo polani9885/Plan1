@@ -4,8 +4,8 @@
 )	
 AS
 BEGIN
-	SELECT TOP 1 IsDistanceCalculationMissing        
+	SELECT *
   FROM [dbo].[UserTripAttractionOrderVisit] WITH(NOLOCK)
   WHERE UserTripId = @UserTripId
-  AND IsDistanceCalculationMissing = 1
+  
 END

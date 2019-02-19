@@ -24,15 +24,15 @@
     <MetadataSource Address="http://localhost/PlanGoGoService/GetListValues.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GetListValues.xsd" MetadataType="Schema" ID="c25ac05e-50b0-4e1b-b4d5-1dafc6ee7304" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd1" />
+    <MetadataFile FileName="GetListValues5.xsd" MetadataType="Schema" ID="e233e053-d0fe-4c34-bfc2-42ed9c68f84d" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd5" />
+    <MetadataFile FileName="GetListValues6.xsd" MetadataType="Schema" ID="0d8f171c-8b89-42eb-9e6e-fd7a6e4dbf60" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd6" />
+    <MetadataFile FileName="GetListValues.wsdl" MetadataType="Wsdl" ID="5ec7550f-20c2-4843-b601-3cf0fa10a345" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?wsdl" />
     <MetadataFile FileName="GetListValues1.xsd" MetadataType="Schema" ID="f6c1fe32-6aa2-42a2-a786-7c0267d29293" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd2" />
+    <MetadataFile FileName="GetListValues.xsd" MetadataType="Schema" ID="c25ac05e-50b0-4e1b-b4d5-1dafc6ee7304" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd1" />
     <MetadataFile FileName="GetListValues2.xsd" MetadataType="Schema" ID="5ff0033d-21a4-4023-a633-59c8570f1702" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd3" />
     <MetadataFile FileName="GetListValues3.xsd" MetadataType="Schema" ID="86deee68-a636-4973-837a-01fb5ffb042d" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd0" />
-    <MetadataFile FileName="GetListValues.wsdl" MetadataType="Wsdl" ID="5ec7550f-20c2-4843-b601-3cf0fa10a345" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?wsdl" />
-    <MetadataFile FileName="GetListValues6.xsd" MetadataType="Schema" ID="0d8f171c-8b89-42eb-9e6e-fd7a6e4dbf60" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd6" />
-    <MetadataFile FileName="GetListValues.disco" MetadataType="Disco" ID="5e87171f-6f70-4b0a-a7f0-ec3465fb2808" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?disco" />
     <MetadataFile FileName="GetListValues4.xsd" MetadataType="Schema" ID="c1ce1e52-1ca7-4341-b929-372c545814b1" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd4" />
-    <MetadataFile FileName="GetListValues5.xsd" MetadataType="Schema" ID="e233e053-d0fe-4c34-bfc2-42ed9c68f84d" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?xsd=xsd5" />
+    <MetadataFile FileName="GetListValues.disco" MetadataType="Disco" ID="5e87171f-6f70-4b0a-a7f0-ec3465fb2808" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/GetListValues.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

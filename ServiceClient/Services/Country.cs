@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using BusinessEntites.DataBaseModels;
 using Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,14 @@ namespace ServiceClient.Services
 
         public List<MasterCountryDTO> Admin_CheckCountryExist(string countryName, int countryId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_CheckCountryExist(countryName, countryId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<MasterCountryDTO> Admin_GetCountry()
@@ -34,9 +42,40 @@ namespace ServiceClient.Services
             throw new NotImplementedException();
         }
 
-        public void Admin_UpdateCountry(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault)
+        public void Admin_UpdateCountry(MasterCountryDTO dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _client.Admin_UpdateCountry(dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Admin_MasterPriceInfoUpdate(int countryId, MasterPriceInfo dto)
+        {
+            try
+            {
+                _client.Admin_MasterPriceInfoUpdate(countryId,dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<MasterPriceInfo> Admin_GetMasterPriceInfo(int countryId)
+        {
+            try
+            {
+               return _client.Admin_GetMasterPriceInfo(countryId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

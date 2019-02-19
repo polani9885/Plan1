@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/shared/_countryLayout.cshtml";
+}
+@model PlanGoGoAdmin.Models.MasterState.ModelMasterState
+@Scripts.Render("~/controllerManageStates")
+@using (Html.BeginForm())
+{
+    <div ng-controller="controllerManageState" id="controllerManageState">
+        <div class="adminPanelBody">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td colspan="2" style="color:red">
+                        @Model.ErrorMessage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                Change State
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.DropDownListFor(m=>m.SourceStateId,Model.States.Select(s=>new SelectListItem()
+                            {
+                                Value = s.StateId.ToString(),
+                                Text = s.StateName
+                            }))
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="adminField">
+                            <span class="adminFieldText">
+                                To State
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adminInputControl">
+                            @Html.DropDownListFor(m => m.DestinationStateId, Model.States.Select(s => new SelectListItem()
+                       {
+                           Value = s.StateId.ToString(),
+                           Text = s.StateName
+                       }))
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="adminActionControl">
+                            <input type="submit" value="Submit" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        @Html.HiddenFor(m => m.StateId)
+        @Html.HiddenFor(m => m.CountryId)
+    </div>
+}
+

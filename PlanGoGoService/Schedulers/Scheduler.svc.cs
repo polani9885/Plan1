@@ -15,7 +15,7 @@ namespace PlanGoGoService.Schedulers
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Scheduler" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Scheduler.svc or Scheduler.svc.cs at the Solution Explorer and start debugging.
-    public class Scheduler : BaseReference, ISchedulers
+    public class Scheduler : BaseReference
     {
         public int Services_AddAttraction(AttractionsDTO attractionDTO, List<userTable_Category> Category, List<user_AttractionsActiveStatus> attractionsActiveStatus)
         {
@@ -82,5 +82,8 @@ namespace PlanGoGoService.Schedulers
             return _businessSchedulers.Scheduler_GetExtraCategoryList();
 
         }
+
+        
+
     }
 }

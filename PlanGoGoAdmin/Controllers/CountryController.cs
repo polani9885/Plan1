@@ -40,10 +40,19 @@ namespace PlanGoGoAdmin.Controllers
             ModelCountry model = new ModelCountry();
             if (countryId > 0)
             {
-                MasterCountryDTO _adminUser = _ICountry.Admin_GetCountryOnId(countryId);
-                model.CountryId = _adminUser.CountryId;
-                model.CountryName  = _adminUser.CountryName;
-                model.CountryShortName  = _adminUser.CountryShortName;
+                MasterCountryDTO adminUser = _ICountry.Admin_GetCountry().FirstOrDefault(x=>x.CountryId == countryId);
+                model.CountryId = adminUser.CountryId;
+                model.CountryName  = adminUser.CountryName;
+                model.CountryShortName  = adminUser.CountryShortName;
+                model.DatabaseName = adminUser.DatabaseName;
+                model.DistanceMeasure = adminUser.DistanceMeasure;
+                model.IsDefault = adminUser.IsDefault;
+                model.IsWindowsAccess = adminUser.IsWindowsAccess;
+                model.MetersIn = adminUser.MetersIn;
+                model.Password = adminUser.Password;
+                model.ServerName = adminUser.ServerName;
+                model.UserName = adminUser.UserName;
+
             }
 
 
@@ -59,10 +68,32 @@ namespace PlanGoGoAdmin.Controllers
             }
             else
             {
-                _ICountry.Admin_UpdateCountry(model.CountryId, model.CountryName, model.CountryShortName, CurrentUser.UserName,model.IsDefault);
-                Response.Redirect("/Country/ManageCountry");
+                MasterCountryDTO dto = new MasterCountryDTO();
+                dto.CountryId = model.CountryId;
+                dto.DatabaseName = model.DatabaseName;
+                dto.DistanceMeasure = model.DistanceMeasure;
+                dto.IsDefault = model.IsDefault;
+                dto.IsWindowsAccess = model.IsWindowsAccess;
+                dto.MetersIn = model.MetersIn;
+                dto.Password = model.Password;
+                dto.ServerName = model.ServerName;
+                dto.UserName = model.UserName;
+                dto.CountryName = model.CountryName;
+                dto.CountryShortName = model.CountryShortName;
+                dto.CreatedBy = userEntity.UserName;
+
+                _ICountry.Admin_UpdateCountry(dto);
+                Response.Redirect("ManageCountry");
             }
             return View(model);
+        }
+
+        public ActionResult ViewContryInfo(int countryId)
+        {
+            GetCookieInformation();
+            userEntity.MasterCountryId = countryId;
+            UpdateCookieInformation();
+            return RedirectToAction("ManageState", "MasterState");
         }
 
     }

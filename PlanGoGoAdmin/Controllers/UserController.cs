@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using BusinessEntites.Users;
 
 namespace PlanGoGoAdmin.Controllers
 {
@@ -42,27 +43,13 @@ namespace PlanGoGoAdmin.Controllers
             else
             {
                 modelLogin.ErrorMessage = "";
-                CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
-                serializeModel.Id = _adminUser.AdminUserId;
-                serializeModel.UserName = _adminUser.UserName;
+                if(userEntity ==null)
+                    userEntity = new UserEntity();
+                userEntity.UserId = _adminUser.AdminUserId;
+                userEntity.UserName = _adminUser.UserName;
+                base.CreateCookie();
 
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-                string userData = serializer.Serialize(serializeModel);
-
-                FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-             1,
-             modelLogin.UserName,
-             DateTime.Now,
-             DateTime.Now.AddMinutes(15),
-             false,
-             userData);
-
-                string encTicket = FormsAuthentication.Encrypt(authTicket);
-                HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
-                Response.Cookies.Add(faCookie);
-
-                Response.Redirect("/User/ManageUser");
+                return RedirectToAction("ManageUser");
 
             }
             return View(modelLogin);
@@ -108,8 +95,8 @@ namespace PlanGoGoAdmin.Controllers
             }
             else
             {
-                _IUser.Admin_UpdateUser(model.UserName, model.Password, CurrentUser.UserName, model.AdminUserId);
-                Response.Redirect("/User/ManageUser");
+                _IUser.Admin_UpdateUser(model.UserName, model.Password, userEntity.UserName, model.AdminUserId);
+                return RedirectToAction("ManageUser");
             }
             return View(model);
         }

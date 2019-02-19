@@ -1,55 +1,55 @@
 ﻿//Get Category List
-function GetCategoryList(angularScope, http) {
+//function GetCategoryList(angularScope, http) {
     
-    $.ajax({
-        type: "GET",
-        url: localUrl + 'Schedule/GetCategoryList',
-        dataType: "json",
-        beforeSend: function () {
+//    $.ajax({
+//        type: "GET",
+//        url: localUrl + 'Schedule/GetCategoryList',
+//        dataType: "json",
+//        beforeSend: function () {
             
-        },
-        success: function (data) {
-            angularScope.$apply(function () {                
-                $(".ngCategorytable").show();
-                angularScope.CategoryList = data;
-            });
+//        },
+//        success: function (data) {
+//            angularScope.$apply(function () {                
+//                $(".ngCategorytable").show();
+//                angularScope.CategoryList = data;
+//            });
             
-        },
-        error: function (result) {
-            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
-        },
-        complete: function () {
+//        },
+//        error: function (result) {
+//            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+//        },
+//        complete: function () {
             
-        }
-    });
-}
+//        }
+//    });
+//}
 
 
-function GetMasterCategory(angularScope, http) {
+//function GetMasterCategory(angularScope, http) {
 
-    $.ajax({
-        type: "GET",
-        url: localUrl + 'Schedule/GetMasterCategory',
-        dataType: "json",
-        beforeSend: function () {
+//    $.ajax({
+//        type: "GET",
+//        url: localUrl + 'Schedule/GetMasterCategory',
+//        dataType: "json",
+//        beforeSend: function () {
 
-        },
-        success: function (data) {
-            angularScope.$apply(function () {
-                angularScope.MasterCategoryList = data;
-                angularScope.ClickMainCategorySelected(data[0].CategoryId);
-            });
-            GetCategoryList(angularScope, http);
+//        },
+//        success: function (data) {
+//            angularScope.$apply(function () {
+//                angularScope.MasterCategoryList = data;
+//                angularScope.ClickMainCategorySelected(data[0].CategoryId);
+//            });
+//            GetCategoryList(angularScope, http);
 
-        },
-        error: function (result) {
-            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
-        },
-        complete: function () {
+//        },
+//        error: function (result) {
+//            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+//        },
+//        complete: function () {
 
-        }
-    });
-}
+//        }
+//    });
+//}
 
 
 function PublicFilterAttractions(angularScope, http) {
@@ -176,6 +176,7 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
     $.each(angularScope.UpdatedBreaks,
         function(key, value) {
             var temp = {};
+            
             temp.IsUserInterestedBreak = value.IsUserInterestedBreak;
             temp.IsUserInterestedDayBreak = value.IsUserInterestedDayBreak;
             temp.UpdateDayStartTime = convertTo24Hour(value.UpdateDayStartTime);
@@ -225,7 +226,6 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
     
     var jsonObject = {
         "TravelModeId": angularScope.TravelModeId,
-        "AttractionID": angularScope.AttractionID,
         "ListGroupWithDateAttractions": OrderOfAttractionListTemp,
         "CountryId": angularScope.countryId,
         "UpdatedBreaks": updatedBreaks
@@ -262,102 +262,102 @@ function Public_GetOrderOfAttractionVisit(angularScope, http) {
 }
 
 
-//Gettigng the attraction information
-function TourInformation(divId, tourInformation, breakInformation) {
+////Gettigng the attraction information
+//function TourInformation(divId, tourInformation, breakInformation) {
 
+    
+//    var x = {
+//        "IsUserInterestedBreak" : breakInformation.IsUserInterestedBreak,
+//    "IsUserInterestedDayBreak" : breakInformation.IsUserInterestedDayBreak,
+//    "UpdateDayStartTime" : breakInformation.UpdateDayStartTime,
+//    "UpdatedDinnerTime" : breakInformation.UpdatedDinnerTime,
+//    "UpdatedLunchTime" : breakInformation.UpdatedLunchTime,
+//    "IsUserInterestedLunchBreak" : breakInformation.IsUserInterestedLunchBreak,
+//    "UpdatedBreakTime" : breakInformation.UpdatedBreakTime,
+//    "UpdateDayEndTime" : breakInformation.UpdateDayEndTime,
+//    "IsUserInterestedDinnerBreak" : breakInformation.IsUserInterestedDinnerBreak,
+//    "RequestDate" : breakInformation.RequestDate,
+//    "IsBreakAdded" : breakInformation.IsBreakAdded,
+//    "BreakAttractionId" : breakInformation.BreakAttractionId,
+//    "IsLunchAdded" : breakInformation.IsLunchAdded,
+//    "LunchAttractionId" : breakInformation.LunchAttractionId,
+//    "IsDinnerAdded" : breakInformation.IsDinnerAdded,
+//    "DinnerAttractionId" : breakInformation.DinnerAttractionId,
+//    "IsUserInterestedBreakFast" : breakInformation.IsUserInterestedBreakFast,
+//    "UpdatedBreakFastTime" : breakInformation.UpdatedBreakFastTime,
+//    "IsBreakFastAdded" : breakInformation.IsBreakFastAdded,
+//    "BreakFastAttractionId" : breakInformation.BreakFastAttractionId,
+//    "IsDayBreakAdded" : breakInformation.IsDayBreakAdded,
+//    "DayBreakAttractionId" : breakInformation.DayBreakAttractionId,
+//    "NoOfCars" : breakInformation.NoOfCars,
+//    "AverageMileage" : breakInformation.AverageMileage,
+//    "BreakExpense" : breakInformation.BreakExpense,
+//    "BreakFastExpense" : breakInformation.BreakFastExpense,
+//    "CarRentalExpense" : breakInformation.CarRentalExpense,
+//    "DayBreakExpense" : breakInformation.DayBreakExpense,
+//    "LunchExpense" : breakInformation.LunchExpense,
+//    "NoOfRooms" : breakInformation.NoOfRooms,
+//    "DinnerExpense" : breakInformation.DinnerExpense,
+//    "IsNoOfCarsUserUpdated" : breakInformation.IsNoOfCarsUserUpdated,
+//    "IsAverageMileageUserUpdated" : breakInformation.IsAverageMileageUserUpdated,
+//    "IsCarRentalExpenseUserUpdated" : breakInformation.IsCarRentalExpenseUserUpdated,
+//    "IsBreakFastExpenseUserUpdated" : breakInformation.IsBreakFastExpenseUserUpdated,
+//    "IsLunchExpenseUserUpdated" : breakInformation.IsLunchExpenseUserUpdated,
+//    "IsBreakExpenseUserUpdated" : breakInformation.IsBreakExpenseUserUpdated,
+//    "IsDinnerExpenseUserUpdated" : breakInformation.IsDinnerExpenseUserUpdated,
+//    "IsDayBreakExpenseUserUpdated" : breakInformation.IsDayBreakExpenseUserUpdated,
+//    "IsNoOfRoomsUserUpdated" : breakInformation.IsNoOfRoomsUserUpdated
 
-    var x = {
-        "IsUserInterestedBreak" : breakInformation.IsUserInterestedBreak,
-    "IsUserInterestedDayBreak" : breakInformation.IsUserInterestedDayBreak,
-    "UpdateDayStartTime" : breakInformation.UpdateDayStartTime,
-    "UpdatedDinnerTime" : breakInformation.UpdatedDinnerTime,
-    "UpdatedLunchTime" : breakInformation.UpdatedLunchTime,
-    "IsUserInterestedLunchBreak" : breakInformation.IsUserInterestedLunchBreak,
-    "UpdatedBreakTime" : breakInformation.UpdatedBreakTime,
-    "UpdateDayEndTime" : breakInformation.UpdateDayEndTime,
-    "IsUserInterestedDinnerBreak" : breakInformation.IsUserInterestedDinnerBreak,
-    "RequestDate" : breakInformation.RequestDate,
-    "IsBreakAdded" : breakInformation.IsBreakAdded,
-    "BreakAttractionId" : breakInformation.BreakAttractionId,
-    "IsLunchAdded" : breakInformation.IsLunchAdded,
-    "LunchAttractionId" : breakInformation.LunchAttractionId,
-    "IsDinnerAdded" : breakInformation.IsDinnerAdded,
-    "DinnerAttractionId" : breakInformation.DinnerAttractionId,
-    "IsUserInterestedBreakFast" : breakInformation.IsUserInterestedBreakFast,
-    "UpdatedBreakFastTime" : breakInformation.UpdatedBreakFastTime,
-    "IsBreakFastAdded" : breakInformation.IsBreakFastAdded,
-    "BreakFastAttractionId" : breakInformation.BreakFastAttractionId,
-    "IsDayBreakAdded" : breakInformation.IsDayBreakAdded,
-    "DayBreakAttractionId" : breakInformation.DayBreakAttractionId,
-    "NoOfCars" : breakInformation.NoOfCars,
-    "AverageMileage" : breakInformation.AverageMileage,
-    "BreakExpense" : breakInformation.BreakExpense,
-    "BreakFastExpense" : breakInformation.BreakFastExpense,
-    "CarRentalExpense" : breakInformation.CarRentalExpense,
-    "DayBreakExpense" : breakInformation.DayBreakExpense,
-    "LunchExpense" : breakInformation.LunchExpense,
-    "NoOfRooms" : breakInformation.NoOfRooms,
-    "DinnerExpense" : breakInformation.DinnerExpense,
-    "IsNoOfCarsUserUpdated" : breakInformation.IsNoOfCarsUserUpdated,
-    "IsAverageMileageUserUpdated" : breakInformation.IsAverageMileageUserUpdated,
-    "IsCarRentalExpenseUserUpdated" : breakInformation.IsCarRentalExpenseUserUpdated,
-    "IsBreakFastExpenseUserUpdated" : breakInformation.IsBreakFastExpenseUserUpdated,
-    "IsLunchExpenseUserUpdated" : breakInformation.IsLunchExpenseUserUpdated,
-    "IsBreakExpenseUserUpdated" : breakInformation.IsBreakExpenseUserUpdated,
-    "IsDinnerExpenseUserUpdated" : breakInformation.IsDinnerExpenseUserUpdated,
-    "IsDayBreakExpenseUserUpdated" : breakInformation.IsDayBreakExpenseUserUpdated,
-    "IsNoOfRoomsUserUpdated" : breakInformation.IsNoOfRoomsUserUpdated
-
-    };
+//    };
 
     
     
-    var jsonObject = { "public_FilterAttractions": tourInformation, "breakInformation": x, "divId": divId };
-    //var jsonBrak = ;
-    $.ajax({
-        type: "POST",
-        url: localUrl + 'UserControls/TourInformation',
-        data: JSON.stringify(jsonObject),
-        dataType: "html",
-        contentType: "application/json; charset=utf-8",
-        beforeSend: function () {
+//    var jsonObject = { "public_FilterAttractions": tourInformation, "breakInformation": x, "divId": divId };
+//    //var jsonBrak = ;
+//    $.ajax({
+//        type: "POST",
+//        url: localUrl + 'UserControls/TourInformation',
+//        data: JSON.stringify(jsonObject),
+//        dataType: "html",
+//        contentType: "application/json; charset=utf-8",
+//        beforeSend: function () {
 
-        },
-        success: function (data) {
-            $("#" + divId).empty();
-            $("#" + divId).append(data);            
-        },
-        error: function (result) {
-            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
-        },
-        complete: function () {
+//        },
+//        success: function (data) {
+//            $("#" + divId).empty();
+//            $("#" + divId).append(data);            
+//        },
+//        error: function (result) {
+//            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+//        },
+//        complete: function () {
 
-        }
-    });
-}
+//        }
+//    });
+//}
 
-function GetExtraCategoryList(angularScope, http) {
+//function GetExtraCategoryList(angularScope, http) {
 
-    $.ajax({
-        type: "GET",
-        url: localUrl + 'Schedule/GetExtraCategoryList',
-        dataType: "json",
-        beforeSend: function () {
+//    $.ajax({
+//        type: "GET",
+//        url: localUrl + 'Schedule/GetExtraCategoryList',
+//        dataType: "json",
+//        beforeSend: function () {
 
-        },
-        success: function (data) {
-            angularScope.$apply(function () {
-                angularScope.ExtraCategoryList = data;
-            });
-        },
-        error: function (result) {
-            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
-        },
-        complete: function () {
+//        },
+//        success: function (data) {
+//            angularScope.$apply(function () {
+//                angularScope.ExtraCategoryList = data;
+//            });
+//        },
+//        error: function (result) {
+//            alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+//        },
+//        complete: function () {
 
-        }
-    });
-}
+//        }
+//    });
+//}
 
 
 function AttractionsPhotoInfo(angularScope, http, attractionId, attractionName) {
@@ -386,46 +386,46 @@ function AttractionsPhotoInfo(angularScope, http, attractionId, attractionName) 
     });
 }
 
-function GetBreakInformation(angularScope, http) {
+//function GetBreakInformation(angularScope, http) {
 
-    $.ajax({
-        type: "GET",
-        url: localUrl + 'Schedule/GetBreakInformation',
-        dataType: "json",
-        beforeSend: function () {
+//    $.ajax({
+//        type: "GET",
+//        url: localUrl + 'Schedule/GetBreakInformation',
+//        dataType: "json",
+//        beforeSend: function () {
 
-        },
-        aync: false,
-        success: function (data) {
+//        },
+//        aync: false,
+//        success: function (data) {
             
             
-            angularScope.$apply(function () {
-                angularScope.UpdateDayEndTime = convertTo12Hour("22:00:00");
-                angularScope.UpdateDayStartTime = convertTo12Hour("09:00:00");
+//            angularScope.$apply(function () {
+//                angularScope.UpdateDayEndTime = convertTo12Hour("22:00:00");
+//                angularScope.UpdateDayStartTime = convertTo12Hour("09:00:00");
 
-                $.each(data,
-                    function (key, value) {
+//                $.each(data,
+//                    function (key, value) {
                         
-                        if (value.Display === "Break Fast") {
-                            angularScope.UpdatedBreakFastTime = convertTo12Hour(value.StartTime);
-                        }
-                        if (value.Display === "Lunch Time") {
-                            angularScope.UpdatedLunchTime = convertTo12Hour(value.StartTime);
-                        }
-                        if (value.Display === "Break Time") {
-                            angularScope.UpdatedBreakTime = convertTo12Hour(value.StartTime);
-                        }
-                        if (value.Display === "Dinner Time") {
-                            angularScope.UpdatedDinnerTime = convertTo12Hour(value.StartTime);
-                        }
-                    });
-            });
-        },
-        error: function (result) {
-            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
-        },
-        complete: function () {
+//                        if (value.Display === "Break Fast") {
+//                            angularScope.UpdatedBreakFastTime = convertTo12Hour(value.StartTime);
+//                        }
+//                        if (value.Display === "Lunch Time") {
+//                            angularScope.UpdatedLunchTime = convertTo12Hour(value.StartTime);
+//                        }
+//                        if (value.Display === "Break Time") {
+//                            angularScope.UpdatedBreakTime = convertTo12Hour(value.StartTime);
+//                        }
+//                        if (value.Display === "Dinner Time") {
+//                            angularScope.UpdatedDinnerTime = convertTo12Hour(value.StartTime);
+//                        }
+//                    });
+//            });
+//        },
+//        error: function (result) {
+//            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+//        },
+//        complete: function () {
 
-        }
-    });
-}
+//        }
+//    });
+//}

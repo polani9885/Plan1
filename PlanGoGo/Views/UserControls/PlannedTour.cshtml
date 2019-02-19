@@ -3,15 +3,16 @@
     ViewBag.Title = "PlannedTour";
     Layout = "~/Views/Shared/_LayoutBeachResort.cshtml";
 }
-
 @Scripts.Render("~/plannedTour")
 
-<div ng-controller="controlerPlannedTour" id="divTourPlan">
 
+
+<div ng-controller="ControlerPlannedTour as ctrl" id="divTourPlan">
+    
 <table>
     <tr>
         <td>
-            <a href="javascript:void(0)" onclick="CreateNewTour()">Create New Tour</a>
+            <a href="javascript:void(0)" ng-click="ctrl.createNewTour()">Create New Tour</a>
         </td>
     </tr>
     <tr ng-show="plannedTour.length">
@@ -44,18 +45,18 @@
                             </tbody>
                             <tr ng-repeat="tourInfo in plannedTour">
                                 <td>
-                                    {{tourInfo.TripName}}
+                                    {{tourInfo.tripName}}
                                 </td>
                                 <td>
-                                    {{tourInfo.CreatedDate}}
+                                    {{tourInfo.createdDate}}
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" ng-click="EditTripName(tourInfo)">
+                                    <a href="javascript:void(0)" ng-click="ctrl.editTripName(tourInfo)">
                                         <img src="~/Images/User/UI/edit.png" alt="Edit Tour Name" class="iconWidhHeigh"/>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" ng-click="NavigateToSchedule(tourInfo.UserTripId)">
+                                    <a href="{{tourScheduleUrl + tourInfo.userTripId}}" >
                                         <img src="~/Images/User/UI/trip.png" alt="Edit Tour Info" class="iconWidhHeigh" />
                                     </a>
                                 </td>
@@ -99,15 +100,11 @@
                     </td>
                     <td>
                         <select id="ddlCountry">
-                            <option ng-repeat="country in CountryList" value="{{country.value}}">{{country.data}}</option>
+                            <option ng-repeat="country in countryList" value="{{country.countryId}}">{{country.countryName}}</option>
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <input id="btnAddTrip" type="button" value="Add" onclick="TripNameInfo()">
-                    </td>
-                </tr>
+                
             </table>
         </fieldset>
     </form>

@@ -5,7 +5,7 @@
 @Scripts.Render("~/index")
 <link href="~/Content/AttractionsCategories.css" rel="stylesheet" />
 
-<div id="main" ng-controller="controlerIndex">
+<div id="main" ng-controller="ControlerIndex as ctrl">
 <table cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td>
@@ -13,60 +13,225 @@
 <div id="tabs" style="width:1200px;" class="avoidBorder">
 <ul>
     <li><a href="#tab_Filter">Filter</a></li>
-    <li><a href="#tab_Categories" ng-click="CategoriesTabClick()">Categories</a></li>
-    <li><a href="#tab_TourPlan" ng-click="TourTabClick()">Tour Plan</a></li>
-    <li><a href="#tab_TourMap">Tour Map</a></li>
+    <li><a href="#tab_Categories" ng-click="ctrl.categoriesTabClick()">Categories</a></li>
+    <li><a href="#tab_TourPlan" ng-click="ctrl.tourTabClick()">Tour Plan</a></li>
+    <li><a href="#tab_TourMap" ng-click="ctrl.categoriesTabClick()">Tour Map</a></li>
     <li><a href="#tab_SuggestedAttractions">Suggested Attractions</a></li>
     <li><a href="#tab_BuildStatus">Tour Build Status</a></li>
-    <li><a href="#tab_TourExpenses" ng-click="BuildExpenseInfo()">Tour Expenses & Information</a></li>
+    <li><a href="#tab_TourExpenses" ng-click="ctrl.buildExpenseInfo()">Tour Expenses & Information</a></li>
 </ul>
 <div id="tab_Filter">
     <table border="0">
         <tr>
             <td>
-                <div class="ui-widget" style="float: left; padding: 5px">
-                    <input id="autoCityName" placeholder="Enter City Name"> <input type="button" value="Add More Cites" ng-click="addCitites()" />
-                    <br />
-                    <div id="travelBasic" style="display: none">
-                        <input id="autoStartLocation" placeholder="Start Location" ng-keyup="SearchAutoComplete()" >
-                        <br />
-                        <input id="autoDestinationLocation" placeholder="End Location" ng-keyup="SearchAutoComplete()">
-                        <br />
-                        <input id="calStartDateAndTime" placeholder="Start Date And Time" ng-model="StartDate" onblur="DateUpdated()">
-                        <br />
-                        <input id="calDropDateAndTime" placeholder="End Date And Time">
-                    </div>
+                <div class="rcorners2">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="filterheader">
+                                    Visiting Cities
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="autoCityName" placeholder="Enter City Name"> 
+                                <input type="button" value="Add More Cites" ng-click="ctrl.addCitites()" />
+                            </td>
+                        </tr>
+                        <tr ng-show="visitCityList.length>0">
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            City Name
+                                        </td>
+                                        <td>
+                                            Order or Visit
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="cities in  visitCityList | orderBy:'recordIndex'">
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        {{cities.cityName}}
+                                                    </td>
+                                                    <td>
+                                                        <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" ng-click="ctrl.cityNotIntereseted(cities.cityId)" />
+                                                    </td>
+                                                    <td>
+                                                        <img ng-show="!$first" src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" ng-click="ctrl.isCityOrderUpdated(cities.cityId, cities.recordIndex, true)" />
+                                                        <img ng-show="!$last" src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" ng-click="ctrl.isCityOrderUpdated(cities.cityId, cities.recordIndex, false)" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </td>
-            <td ng-show="VisitCityList.length>0">
-                <table>
-                    <tr>
-                        <td>
-                            City Name
-                        </td>
-                        <td>
-                            Order or Visit
-                        </td>
-                    </tr>
-                    <tr ng-repeat="cities in  VisitCityList | orderBy:'recordIndex'">
-                        <td>
-                            <table>
+            <td>
+                <div class="rcorners2">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="filterheader">
+                                    Start & End Locations
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="travelBasic" style="display: none">
+                                    <input id="autoStartLocation" placeholder="Start Location" ng-keyup="SearchAutoComplete()">
+                                    <br/>
+                                    <input id="autoDestinationLocation" placeholder="End Location" ng-keyup="SearchAutoComplete()">
+                                    <br/>
+                                    <input id="calStartDateAndTime" placeholder="Start Date And Time" ng-model="StartDate" onblur="DateUpdated()">
+                                    <br/>
+                                    <input id="calDropDateAndTime" placeholder="End Date And Time">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                <div class="rcorners2">
+                    <table>
+                        <tr>
+                            <td class="filterheader">
+                                <span>It will help for the Expense calculation</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                               
+                                    <td class="paddingLeft">
+                                        
+                                                    No Of Persons: <select id="expense_Persons" onchange="TripInfoUpdate()">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="22">22</option>
+                                                        <option value="23">23</option>
+                                                        <option value="24">24</option>
+                                                        <option value="25">25</option>
+                                                        <option value="26">26</option>
+                                                        <option value="27">27</option>
+                                                        <option value="28">28</option>
+                                                        <option value="29">29</option>
+                                                        <option value="30">30</option>
+                                                        <option value="31">31</option>
+                                                        <option value="32">32</option>
+                                                        <option value="33">33</option>
+                                                        <option value="34">34</option>
+                                                        <option value="35">35</option>
+                                                        <option value="36">36</option>
+                                                        <option value="37">37</option>
+                                                        <option value="38">38</option>
+                                                        <option value="39">39</option>
+                                                        <option value="40">40</option>
+                                                        <option value="41">41</option>
+                                                        <option value="42">42</option>
+                                                        <option value="43">43</option>
+                                                        <option value="44">44</option>
+                                                        <option value="45">45</option>
+                                                        <option value="46">46</option>
+                                                        <option value="47">47</option>
+                                                        <option value="48">48</option>
+                                                        <option value="49">49</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </td>
+                                           
+                                </tr>
                                 <tr>
-                                    <td>
-                                        {{cities.cityName}}
-                                    </td>
-                                    <td>
-                                        <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" ng-click="CityNotIntereseted(cities.cityId)" />
-                                    </td>
-                                    <td>
-                                        <img ng-show="!$first" src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, true)" />
-                                        <img ng-show="!$last" src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" ng-click="IsCityOrderUpdated(cities.cityId, cities.recordIndex, false)" />
+                                    <td class="paddingLeft">
+                                        
+                                                    No Of Cars: <select id="expense_Cars" onchange="TripInfoUpdate()">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                               
                                     </td>
                                 </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                                <tr>
+                                    <td class="paddingLeft">
+                                        Average Car Mileage Per Gallon: <select id="expense_PerGallon" onchange="TripInfoUpdate()">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="25">25</option>
+                                            <option value="30">30</option>
+                                            <option value="35">35</option>
+                                            <option value="40">40</option>
+                                            <option value="45">45</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="paddingLeft">
+                                        Per Gallon Fuel Average Price: <input type="text" id="expense_PerGallonPrice" class="txtBoxSize" onkeyup="TripInfoUpdate()"/>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                           
+                                                        Driving Break: Every <select id="expense_DrivingBreak" onchange="TripInfoUpdate()">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select> Hours
+                                                   
+                                      
+                            </td>
+                        </tr>
+                       
+                    </table>
+                </div>
             </td>
         </tr>
     </table>
@@ -78,9 +243,9 @@
                 <table>
                     <tr>
                         <td valign="top">
-                            <ul class="Catnav" id="mainCategory" ng-repeat="mainCategoryList in MasterCategoryList">
+                            <ul class="Catnav" id="mainCategory" ng-repeat="mainCategoryList in masterCategoryList">
                                 <li ng-class="{'CatNavSelected':CssMainCategory(mainCategoryList.CategoryId)}">
-                                    <a href="JavaScript:Void(0)" ng-click="ClickMainCategorySelected(mainCategoryList.CategoryId)">
+                                    <a href="JavaScript:Void(0)" ng-click="ctrl.clickMainCategorySelected(mainCategoryList.CategoryId)">
                                         {{mainCategoryList.CategoryName}}
                                     </a>
                                 </li>
@@ -98,7 +263,7 @@
                                     <td ng-switch-when="0" valign="top">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index]">
                                             <img src="~/Images/User/Category/{{filterCategoryList[$index].TypeName}}.png" alt="{{filterCategoryList[$index].TypeName}}" width="50px" height="50px" />
-                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index])" />
+                                            <input type="checkbox" checked="checked" ng-click="ctrl.categorySelected(filterCategoryList[$index])" />
                                             {{filterCategoryList[$index].TypeName}}
                                         </div>
                                     </td>
@@ -106,28 +271,28 @@
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+1]">
                                             
                                             <img src="~/Images/User/Category/{{filterCategoryList[$index+1].TypeName}}.png" alt="{{filterCategoryList[$index+1].TypeName}}" width="50px" height="50px"/>
-                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+1])"/>
+                                            <input type="checkbox" checked="checked" ng-click="ctrl.categorySelected(filterCategoryList[$index+1])"/>
                                             {{filterCategoryList[$index+1].TypeName}}
                                         </div>
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+2]">
                                             <img src="~/Images/User/Category/{{filterCategoryList[$index+2].TypeName}}.png" alt="{{filterCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
-                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+2])" />
+                                            <input type="checkbox" checked="checked" ng-click="ctrl.categorySelected(filterCategoryList[$index+2])" />
                                             {{filterCategoryList[$index+2].TypeName}}
                                         </div>
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+3]">
                                             <img src="~/Images/User/Category/{{filterCategoryList[$index+3].TypeName}}.png" alt="{{filterCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
-                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+3])" />
+                                            <input type="checkbox" checked="checked" ng-click="ctrl.categorySelected(filterCategoryList[$index+3])" />
                                             {{filterCategoryList[$index+3].TypeName}}
                                         </div>
                                     </td>
                                     <td ng-switch-when="0">
                                         <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+4]">
                                             <img src="~/Images/User/Category/{{filterCategoryList[$index+4].TypeName}}.png" alt="{{filterCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
-                                            <input type="checkbox" checked="checked" ng-click="CategorySelected(filterCategoryList[$index+4])" />
+                                            <input type="checkbox" checked="checked" ng-click="ctrl.categorySelected(filterCategoryList[$index+4])" />
                                             {{filterCategoryList[$index+4].TypeName}}
                                         </div>
                                     </td>
@@ -137,8 +302,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" id="placeSeachForAdding" placeholder="Search Interested Place" ng-keyup="categoryFilter()" ng-model="CategoryPlaceSearch"  /> 
-                            <input type="button" ng-click="CategorySelectedAttractionFilter()" value="Show All"/>
+                            <input type="text" id="placeSeachForAdding" placeholder="Search Interested Place" ng-keyup="ctrl.categoryFilter()" ng-model="CategoryPlaceSearch"  /> 
+                            <input type="button" ng-click="ctrl.categorySelectedAttractionFilter()" value="Show All"/>
                         </td>
                     </tr>
                     <tr>
@@ -153,7 +318,7 @@
                                                         <a herf="javascript:void(0)" style="cursor: pointer">
                                                             <img src="{{filterAttractionList[$index].PhotoURL}}" alt="{{filterAttractionList[$index].AttractionName}} Photo" 
                                                                  width="300px" height="300px" 
-                                                                 ng-click="imageSlideShow(filterAttractionList[$index].AttractionsId,filterAttractionList[$index].AttractionName)"/>
+                                                                 ng-click="ctrl.imageSlideShow(filterAttractionList[$index].AttractionsId,filterAttractionList[$index].AttractionName)"/>
                                                         </a>
                                                     </div>
                                                 </td>
@@ -168,7 +333,7 @@
                                                             <td valign="top">
                                                                 <a herf="javascript:void(0)" style="cursor: pointer">
                                                                     <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
-                                                                         ng-click="Interested(filterAttractionList[$index])"/>
+                                                                         ng-click="ctrl.interested(filterAttractionList[$index])"/>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -225,7 +390,7 @@
                                                         <a herf="javascript:void(0)" style="cursor: pointer">
                                                             <img src="{{filterAttractionList[$index+1].PhotoURL}}" alt="{{filterAttractionList[$index+1].AttractionName}} Photo"
                                                                  width="300px" height="300px" 
-                                                                 ng-click="imageSlideShow(filterAttractionList[$index+1].AttractionsId,filterAttractionList[$index+1].AttractionName)"/>
+                                                                 ng-click="ctrl.imageSlideShow(filterAttractionList[$index+1].AttractionsId,filterAttractionList[$index+1].AttractionName)"/>
                                                         </a>
                                                     </div>
                                                 </td>
@@ -240,7 +405,7 @@
                                                             <td valign="top">
                                                                 <a herf="javascript:void(0)" style="cursor: pointer">
                                                                     <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
-                                                                         ng-click="Interested(filterAttractionList[$index+1])" />
+                                                                         ng-click="ctrl.interested(filterAttractionList[$index+1])" />
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -314,8 +479,95 @@
     </div>
 </div>
 <div id="tab_TourMap">
-    <div id="googleMaps" style="float: left;">
-    </div>
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td style="width:300px" valign="top">
+                            <table>
+                                <tr>
+                                    <td valign="top">
+                                        <ul class="Catnav" id="mainCategory" ng-repeat="mainCategoryList in masterCategoryList">
+                                            <li ng-class="{'CatNavSelected':CssMainCategory(mainCategoryList.CategoryId)}">
+                                                <a href="JavaScript:Void(0)" ng-click="ctrl.clickMainCategorySelected(mainCategoryList.CategoryId)">
+                                                    {{mainCategoryList.CategoryName}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td valign="top">
+                            <table ng-show="filterCategoryList.length">
+                                <tr>
+                                    <td valign="top">
+                                        <table>
+                                            <tr ng-repeat="categoryList in filterCategoryList" ng-switch on="$index % 5">
+                                                <td ng-switch-when="0" valign="top">
+                                                    <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index]">
+                                                        <img src="~/Images/User/Category/{{filterCategoryList[$index].TypeName}}.png" alt="{{filterCategoryList[$index].TypeName}}" width="50px" height="50px" />
+                                                        <input type="checkbox" ng-checked="ctrl.isMapCategoryExist(filterCategoryList[$index].GoogleTypeID)!=-1" ng-click="ctrl.mapCategorySelected(filterCategoryList[$index])" />
+                                                        {{filterCategoryList[$index].TypeName}}
+                                                    </div>
+                                                </td>
+                                                <td ng-switch-when="0">
+                                                    <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+1]">
+
+                                                        <img src="~/Images/User/Category/{{filterCategoryList[$index+1].TypeName}}.png" alt="{{filterCategoryList[$index+1].TypeName}}" width="50px" height="50px" />
+                                                        <input type="checkbox" ng-checked="ctrl.isMapCategoryExist(filterCategoryList[$index+1].GoogleTypeID)!=-1"  ng-click="ctrl.mapCategorySelected(filterCategoryList[$index+1])" />
+                                                        {{filterCategoryList[$index+1].TypeName}}
+                                                    </div>
+                                                </td>
+                                                <td ng-switch-when="0">
+                                                    <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+2]">
+                                                        <img src="~/Images/User/Category/{{filterCategoryList[$index+2].TypeName}}.png" alt="{{filterCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
+                                                        <input type="checkbox" ng-checked="ctrl.isMapCategoryExist(filterCategoryList[$index+2].GoogleTypeID)!=-1"  ng-click="ctrl.mapCategorySelected(filterCategoryList[$index+2])" />
+                                                        {{filterCategoryList[$index+2].TypeName}}
+                                                    </div>
+                                                </td>
+                                                <td ng-switch-when="0">
+                                                    <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+3]">
+                                                        <img src="~/Images/User/Category/{{filterCategoryList[$index+3].TypeName}}.png" alt="{{filterCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
+                                                        <input type="checkbox" ng-checked="ctrl.isMapCategoryExist(filterCategoryList[$index+3].GoogleTypeID)!=-1"  ng-click="ctrl.mapCategorySelected(filterCategoryList[$index+3])" />
+                                                        {{filterCategoryList[$index+3].TypeName}}
+                                                    </div>
+                                                </td>
+                                                <td ng-switch-when="0">
+                                                    <div class="cat_DisplayNewLine" ng-show="filterCategoryList[$index+4]">
+                                                        <img src="~/Images/User/Category/{{filterCategoryList[$index+4].TypeName}}.png" alt="{{filterCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
+                                                        <input type="checkbox" ng-checked="ctrl.isMapCategoryExist(filterCategoryList[$index+4].GoogleTypeID)!=-1"  ng-click="ctrl.mapCategorySelected(filterCategoryList[$index+4])" />
+                                                        {{filterCategoryList[$index+4].TypeName}}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="googleMapplaceSeachForAdding" placeholder="Search Interested Place" ng-keyup="ctrl.categoryFilter()" ng-model="CategoryPlaceSearch" />
+                                        <input type="button" ng-click="ctrl.categorySelectedAttractionFilter()" value="Show All" />
+                                    
+                                        <input type="button" ng-click="ctrl.mapBreakInfo(0)" value="Reset Map" />
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="googleMaps" style="float: left;">
+                </div>
+            </td>
+        </tr>
+    </table>
+    
 </div>
 <div id="tab_SuggestedAttractions">
     <p>
@@ -325,7 +577,7 @@
 <div id="tab_BuildStatus">
     <div>
         <table cellpadding="5" cellspacing="5" border="1">
-            <tr ng-repeat="_buildStatus in UserTripBuildStatus">
+            <tr ng-repeat="_buildStatus in userTripBuildStatus">
                 <td ng-class="{errorMessage : _buildStatus.IsError, warningMessage: !_buildStatus.IsError}">
                     {{_buildStatus.FormattedMessage}}
                 </td>
@@ -384,140 +636,10 @@
                 </table>
             </td>
         </tr>
-    <tr>
-        <td>
-            <table class="border">
-                <tr>
-                    <td class="paddingLeft infoMessage" colspan="3">
-                        <span>This No of cars will update to all the Day's No of cars</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="paddingLeft">
-                        <table>
-                            <tr>
-                                <td>
-                                    No Of Persons: <select id="expense_Persons" onchange="TripInfoUpdate()">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                        <option value="32">32</option>
-                                        <option value="33">33</option>
-                                        <option value="34">34</option>
-                                        <option value="35">35</option>
-                                        <option value="36">36</option>
-                                        <option value="37">37</option>
-                                        <option value="38">38</option>
-                                        <option value="39">39</option>
-                                        <option value="40">40</option>
-                                        <option value="41">41</option>
-                                        <option value="42">42</option>
-                                        <option value="43">43</option>
-                                        <option value="44">44</option>
-                                        <option value="45">45</option>
-                                        <option value="46">46</option>
-                                        <option value="47">47</option>
-                                        <option value="48">48</option>
-                                        <option value="49">49</option>
-                                        <option value="50">50</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="paddingLeft">
-                        <table>
-                            <tr>
-                                <td>
-                                    No Of Cars: <select id="expense_Cars" onchange="TripInfoUpdate()">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="paddingLeft">
-                        Average Car Mileage Per Gallon: <select id="expense_PerGallon" onchange="TripInfoUpdate()">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="30">30</option>
-                            <option value="35">35</option>
-                            <option value="40">40</option>
-                            <option value="45">45</option>
-                            <option value="50">50</option>
-                        </select>
-                    </td>
-                    <td class="paddingLeft">
-                        Per Gallon Fuel Average Price: <input type="text" id="expense_PerGallonPrice" class="txtBoxSize" onkeyup="TripInfoUpdate()"/>
-                    </td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>
-                                    Driving Break: Every <select id="expense_DrivingBreak" onchange="TripInfoUpdate()">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                    </select> Hours
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
         <tr>
             <td>
                 <table>
-                    <tr ng-repeat="dayBreak in UpdatedBreaks" ng-switch on="$index % 5">
+                    <tr ng-repeat="dayBreak in updatedBreaks" ng-switch on="$index % 5">
                         <td ng-switch-when="0" valign="top">
                             <table class="border">
                             <tr>
@@ -999,39 +1121,39 @@
         <tr>
             <td>
                 <table id="chkExtraCategory">
-                    <tr ng-repeat="categoryList in ExtraCategoryList" ng-switch on="$index % 5">
+                    <tr ng-repeat="categoryList in extraCategoryList" ng-switch on="$index % 5">
                         <td ng-switch-when="0" valign="top">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index]">
                                 <img src="~/Images/User/Category/{{ExtraCategoryList[$index].TypeName}}.png" alt="{{ExtraCategoryList[$index].TypeName}}" width="50px" height="50px" />
-                                <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index])" />
+                                <input type="checkbox" checked="checked" ng-click="ctrl.extraCategorySelected(ExtraCategoryList[$index])" />
                                 {{ExtraCategoryList[$index].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+1]">
                                 <img src="~/Images/User/Category/{{ExtraCategoryList[$index+1].TypeName}}.png" alt="{{ExtraCategoryList[$index+1].TypeName}}" width="50px" height="50px" />
-                                <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+1])" />
+                                <input type="checkbox" checked="checked" ng-click="ctrl.extraCategorySelected(ExtraCategoryList[$index+1])" />
                                 {{ExtraCategoryList[$index+1].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+2]">
                                 <img src="~/Images/User/Category/{{ExtraCategoryList[$index+2].TypeName}}.png" alt="{{ExtraCategoryList[$index+2].TypeName}}" width="50px" height="50px" />
-                                <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+2])" />
+                                <input type="checkbox" checked="checked" ng-click="ctrl.extraCategorySelected(ExtraCategoryList[$index+2])" />
                                 {{ExtraCategoryList[$index+2].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+3]">
                                 <img src="~/Images/User/Category/{{ExtraCategoryList[$index+3].TypeName}}.png" alt="{{ExtraCategoryList[$index+3].TypeName}}" width="50px" height="50px" />
-                                <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+3])" />
+                                <input type="checkbox" checked="checked" ng-click="ctrl.extraCategorySelected(ExtraCategoryList[$index+3])" />
                                 {{ExtraCategoryList[$index+3].TypeName}}
                             </div>
                         </td>
                         <td ng-switch-when="0">
                             <div class="cat_DisplayNewLine" ng-show="ExtraCategoryList[$index+4]">
                                 <img src="~/Images/User/Category/{{ExtraCategoryList[$index+4].TypeName}}.png" alt="{{ExtraCategoryList[$index+4].TypeName}}" width="50px" height="50px" />
-                                <input type="checkbox" checked="checked" ng-click="ExtraCategorySelected(ExtraCategoryList[$index+4])" />
+                                <input type="checkbox" checked="checked" ng-click="ctrl.extraCategorySelected(ExtraCategoryList[$index+4])" />
                                 {{ExtraCategoryList[$index+4].TypeName}}
                             </div>
                         </td>
@@ -1042,7 +1164,7 @@
         <tr>
             <td>
                 <table>
-                    <tr ng-repeat="attraction in FilterNearLocations" ng-switch on="$index % 2">
+                    <tr ng-repeat="attraction in filterNearLocations" ng-switch on="$index % 2">
                         <td ng-switch-when="0" valign="top">
                             <table ng-show="FilterNearLocations[$index]" class="attractionInfo">
                                 <tr>
@@ -1051,7 +1173,7 @@
                                             <a herf="javascript:void(0)" style="cursor: pointer">
                                                 <img src="{{FilterNearLocations[$index].PhotoURL}}" alt="{{FilterNearLocations[$index].AttractionName}} Photo"
                                                      width="300px" height="300px" 
-                                                     ng-click="imageSlideShow(FilterNearLocations[$index].AttractionsId,FilterNearLocations[$index].AttractionName)"/>
+                                                     ng-click="ctrl.imageSlideShow(FilterNearLocations[$index].AttractionsId,FilterNearLocations[$index].AttractionName)"/>
                                             </a>
                                         </div>
                                     </td>
@@ -1066,7 +1188,7 @@
                                                 <td valign="top">
                                                     <a herf="javascript:void(0)" style="cursor: pointer">
                                                         <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
-                                                             ng-click="InsertBreakInformation(FilterNearLocations[$index])" />
+                                                             ng-click="ctrl.insertBreakInformation(FilterNearLocations[$index])" />
                                                     </a>
                                                 </td>
                                             </tr>
@@ -1132,7 +1254,7 @@
                                             <a herf="javascript:void(0)" style="cursor: pointer">
                                                 <img src="{{FilterNearLocations[$index+1].PhotoURL}}" alt="{{FilterNearLocations[$index+1].AttractionName}} Photo"
                                                      width="300px" height="300px" 
-                                                     ng-click="imageSlideShow(FilterNearLocations[$index+1].AttractionsId,FilterNearLocations[$index+1].AttractionName)"/>
+                                                     ng-click="ctrl.imageSlideShow(FilterNearLocations[$index+1].AttractionsId,FilterNearLocations[$index+1].AttractionName)"/>
                                             </a>
                                         </div>
                                     </td>
@@ -1147,7 +1269,7 @@
                                                 <td valign="top">
                                                     <a herf="javascript:void(0)" style="cursor: pointer">
                                                         <img src="~/Images/Custome/intersted.png" alt="Interested" width="50px" height="50px"
-                                                             ng-click="InsertBreakInformation(FilterNearLocations[$index+1])" />
+                                                             ng-click="ctrl.insertBreakInformation(FilterNearLocations[$index+1])" />
                                                     </a>
                                                 </td>
                                             </tr>
@@ -1221,10 +1343,10 @@
             <img src="{{image.src}}" id="{{image.id}}" width="700px" height="400px"/>
         </div>
         <div class="arrows">
-            <a href="#" ng-click="prev()">
+            <a href="#" ng-click="ctrl.prev()">
                 <img src="~/Images/User/UI/left-arrow.png"/>
             </a> 
-            <a href="#" ng-click="next()">
+            <a href="#" ng-click="ctrl.next()">
                 <img src="~/Images/User/UI/right-arrow.png"/>
             </a>
         </div>

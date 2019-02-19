@@ -165,6 +165,25 @@
     <Build Include="dbo\Stored Procedures\public_GetCityListOnCountryId.sql" />
     <Build Include="dbo\Stored Procedures\User_InsertUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\User_CheckTheCalculationPartIsDone.sql" />
+    <Build Include="dbo\Stored Procedures\User_DeleteNotInterestedAttractionList.sql" />
+    <Build Include="dbo\Stored Procedures\User_AddInterestedAttractionList.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_BreakInformationCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterBreakInfoUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_TravelModeUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_TravelModeCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterGoogleTypeUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterGoogleTypeCheckExists.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterGoogleTypeGet.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterCategoryXMasterGoogleType.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MergeStates.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MergeCity.sql" />
+    <Build Include="dbo\Stored Procedures\User_UpdateBreakInformation.sql" />
+    <Build Include="dbo\Tables\Maps.sql" />
+    <Build Include="dbo\Tables\MapsCredentials.sql" />
+    <Build Include="dbo\Tables\MapFeatures.sql" />
+    <Build Include="dbo\Tables\MapsXMapsFeatures.sql" />
+    <Build Include="dbo\Tables\MapsXCategory.sql" />
+    <Build Include="dbo\Tables\MapsXCategoryXMasterGoogleType.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
@@ -186,6 +205,10 @@
     <None Include="dbo\Seeds\UserTripBuildMessage.sql" />
     <None Include="dbo\Seeds\BreakInformation.sql" />
     <None Include="dbo\Seeds\MasterPriceInfo.sql" />
+    <None Include="dbo\Seeds\MapFeatures.sql" />
+    <None Include="dbo\Seeds\Maps.sql" />
+    <None Include="dbo\Seeds\MapsXCategory.sql" />
+    <None Include="dbo\Seeds\MapsXCategoryXMasterGoogleType.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Attractions.refactorlog" />

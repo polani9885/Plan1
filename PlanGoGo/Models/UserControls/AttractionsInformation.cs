@@ -18,6 +18,12 @@ namespace PlanGoGo.Models.UserControls
         public UserTable_UpdatedBreaksTemp updatedBreaks { get; set; }
 
         [DataMember]
+        public List<DrivingSteps> Directions { get; set; }
+
+        [DataMember]
         public string divId { get; set; }
+
+        [DataMember]
+        public List<BreakInformation> BreakInformation { get; set; }
     }
 }

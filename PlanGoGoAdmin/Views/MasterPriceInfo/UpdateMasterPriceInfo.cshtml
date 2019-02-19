@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/shared/_countryLayout.cshtml";
+}
+@model BusinessEntites.DataBaseModels.MasterPriceInfo
+@using (Html.BeginForm())
+{
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        <a href="~/MasterPriceInfo/ManageMasterPriceInfo" title="View PriceInfo">
+                            View PriceInfo
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="adminPanelBody">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td colspan="2" style="color: red">
+                                @Model.ErrorMessage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="adminField">
+                                    <span class="adminFieldText">
+                                        Price Level
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="adminInputControl">
+                                    @Html.DropDownListFor(m=>m.PriveLevel,new SelectList(Model.PriveLevelId),Model.PriveLevelId)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="adminField">
+                                    <span class="adminFieldText">
+                                        Food
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="adminInputControl">
+                                    @Html.TextBoxFor(m=>m.Food)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="adminField">
+                                    <span class="adminFieldText">
+                                        Stay
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="adminInputControl">
+                                    @Html.TextBoxFor(m => m.Stay)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="adminActionControl">
+                                    <input type="submit" value="Submit" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+        @Html.HiddenFor(m => m.MasterPriceInfoId)
+    </div>
+}
+
+
+

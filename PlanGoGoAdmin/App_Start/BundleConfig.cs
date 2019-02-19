@@ -59,7 +59,9 @@ namespace PlanGoGoAdmin
             bundles.Add(new ScriptBundle("~/customscript").Include(
                         "~/CustomScripts/Common/ajax/AjaxCalls.js",
                         "~/CustomScripts/Common/ngTableParameters.js",
-                        "~/CustomScripts/Helper/UseFullMethods.js"
+                        "~/CustomScripts/Helper/UseFullMethods.js",
+                        "~/CustomScripts/Helper/constants.js",
+                        "~/CustomScripts/Common/commonFunctions.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/controllerManageUser").Include(
@@ -102,6 +104,22 @@ namespace PlanGoGoAdmin
             bundles.Add(new ScriptBundle("~/controllerMissingDistanceAttractionsRecords").Include(
                         "~/CustomScripts/Controller/controllerMissingDistanceAttractionsRecords.js"
                         ));
+
+            bundles.Add(new ScriptBundle("~/controlleBreakInformation").Include(
+                "~/CustomScripts/Controller/controlleBreakInformation.js"
+                , "~/CustomScripts/Common/Internal/UpdateBreakInformation.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/controllerMasterTravelMode").Include(
+                "~/CustomScripts/Controller/controlleMasterTravelMode.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/controllerMasterGoogleType").Include(
+                "~/CustomScripts/Controller/controllerMasterGoogleType.js"
+            ));
+            bundles.Add(new ScriptBundle("~/controllerMasterPriceInfo").Include(
+                "~/CustomScripts/Controller/controllerMasterPriceInfo.js"
+            ));
 
         }
     }

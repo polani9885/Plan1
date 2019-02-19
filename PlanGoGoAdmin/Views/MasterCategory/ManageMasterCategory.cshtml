@@ -7,21 +7,30 @@
 
     <table class="gridTable" cellpadding="5px">
         <tbody class="gridHeader">
-            <tr>
-                <th>
-                    Category Name
-                </th>                
-            </tr>
+        <tr>
+            <th>
+                Actions
+            </th>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Minimum View Time
+            </th>
+        </tr>
         </tbody>
         <tr ng-repeat="_result in masterCategory">
             <td>
-                <a href="/MasterCategory/UpdateMasterCategory?Category={{_result.CategoryId}}" title="Update Category">
+                <a href="~/MasterCategory/UpdateMasterCategory?Category={{_result.CategoryId}}" title="Update Category">
                     Edit 
                 </a>
             </td>            
             <td title="'Category Name'">
                 {{_result.CategoryName}}
-            </td>                        
+            </td>   
+            <td title="Minimum View Time">
+                {{_result.ViewTime}}
+            </td>                     
         </tr>
     </table>
 

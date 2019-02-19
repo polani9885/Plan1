@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessEntites" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessEntites" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfBreakInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BreakInformation" nillable="true" type="tns:BreakInformation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBreakInformation" nillable="true" type="tns:ArrayOfBreakInformation" />
+  <xs:complexType name="BreakInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BreakInformationId" type="xs:int" />
+      <xs:element minOccurs="0" name="BreakType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Display" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinimumTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BreakInformation" nillable="true" type="tns:BreakInformation" />
+</xs:schema>

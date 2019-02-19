@@ -11,7 +11,7 @@
                 Actions
             </th>
             <th>
-                State
+                Country Info
             </th>
             <th>
                 Country Name
@@ -22,16 +22,40 @@
             <th>
                 isDefault
             </th>
+            <th>
+                Server Name
+            </th>
+            <th>
+                Is Windows Access
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Database Name
+            </th>
+            <th>
+                Distance Measure
+            </th>
+            <th>
+                MetersIn
+            </th>
+            <th>
+                State Count
+            </th>
         </tr>
         </tbody>
         <tr ng-repeat="user in manageCountry">
             <td>
-                <a href="/Country/AddCountry?CountryId={{user.CountryId}}" title="Update Country">
+                <a href="~/Country/AddCountry?CountryId={{user.CountryId}}" title="Update Country">
                     Edit 
                 </a>
             </td>
             <td>
-                <a href="/MasterState/ManageState?CountryId={{user.CountryId}}" title="State List">
+                <a href="~/Country/ViewContryInfo?CountryId={{user.CountryId}}" title="View State Info">
                     State 
                 </a>
             </td>
@@ -43,6 +67,30 @@
             </td>
             <td title="'Is Default'">
                 {{user.IsDefault}}
+            </td>
+            <td title="Server Name">
+                {{user.ServerName}}
+            </td>
+            <td title="Is Windows Access">
+                {{user.IsWindowsAccess}}
+            </td>
+            <td title="User Name">
+                {{user.UserName}}
+            </td>
+            <td title="Password">
+                {{user.Password}}
+            </td>
+            <td title="Database Name">
+                {{user.DatabaseName}}
+            </td>
+            <td title="Distance Measure">
+                {{user.DistanceMeasure}}
+            </td>
+            <td title="Meters In">
+                {{user.MetersIn}}
+            </td>
+            <td title="State Count">
+                {{user.StateCount}}
             </td>
         </tr>
     </table>

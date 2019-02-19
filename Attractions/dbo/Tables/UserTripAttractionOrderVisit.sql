@@ -46,6 +46,8 @@ CREATE TABLE [dbo].[UserTripAttractionOrderVisit](
  [SourcePhotoUrl] VARCHAR(1000) NULL, 
     [DestinationPhotoUrl] VARCHAR(1000) NULL, 
     [BreakInformationId] INT NULL, 
+    [IsNeedDrivningBreak] BIT NULL, 
+    [AttractionTravelTimeDistanceId] BIGINT NULL, 
     CONSTRAINT [PK_UserTripAttractionOrderVisit] PRIMARY KEY CLUSTERED 
 (
 	[UserTripAttractionOrderVisitId] ASC

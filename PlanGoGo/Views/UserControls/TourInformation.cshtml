@@ -5,849 +5,835 @@
     Layout = null;
 }
 @Scripts.Render("~/TourInformation")
-<div style="overflow: auto;" ng-controller="controlerTourInformation" id="TourInformation">
+<div style="overflow: auto;"  id="TourInformation">
     <table cellpadding="0" cellspacing="0" border="0" width="100%">
-    <tr>
-    <td>
-    <table cellpadding="0" cellspacing="0" border="1">
-    @if (Model.attractionsList != null)
-    {
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1">
+                    @if (Model.attractionsList != null)
+                    {
 
-        var isFirst = false;
-        var destinationAttractionId = 0;
-        foreach (GetOrderOfAttractionVisit _attraction in Model.attractionsList)
-        {
-
-            if (!isFirst)
-            {
-                <tr class="attractionInfo">
-                    <td>
-                        <table cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td rowspan="2">
-                                    @{
-                                        if (string.IsNullOrEmpty(_attraction.SourcePhotoUrl))
-                                        {
-                                            <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="100px" height="100px"/>
-                                        }
-                                        else
-                                        {
-                                            <img src="@_attraction.SourcePhotoUrl" alt="@_attraction.SourceAttractionName" class="attractionImage"/>
-                                        }
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top">
-                                    <table cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td class="attractionName">
-                                                @_attraction.SourceAttractionName
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Start Location
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Start: @_attraction.DateAndTime hh
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                isFirst = true;
-            }
-
-            <tr class="attractionInfo">
-                <td>
-                    <table cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td rowspan="5">
-                            @switch (_attraction.TravelModeId)
-                            {
-
-                                case 1:
-                                {
-
-                                    <img src="~/Images/TravelMode/driving.png" alt="Driving" width="100px" height="100px"/>
-
-                                    break;
-                                }
-                                case 2:
-                                {
-
-                                    <img src="~/Images/TravelMode/walking.png" alt="Walking" width="100px" height="100px"/>
-
-                                    break;
-                                }
-                                case 3:
-                                {
-
-                                    <img src="~/Images/TravelMode/bicycling.png" alt="Bicycling" width="100px" height="100px"/>
-
-                                    break;
-                                }
-                                case 4:
-                                {
-
-                                    <img src="~/Images/TravelMode/transit.png" alt="Transit" width="100px" height="100px"/>
-
-                                    break;
-                                }
-                            }
-                        </tr>
-                        <tr>
-                            <td>
-                                Start Time :@_attraction.DateAndTime hh
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Distance: @_attraction.Distance
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Distance Cover Time: @_attraction.TravelTime hh
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Reach Time: @_attraction.ReachTime hh
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr class="attractionInfo">
-                <td>
-                    <table cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td rowspan="7">
-                                @{
-                                    if (_attraction.IsLunchDinnerBreakTime)
-                                    {
-                                        Boolean isBreakRecordExist = false;
-                                        switch (_attraction.BreakInformationId)
-                                        {
-                                            case 1:
-                                                {
-                                                    if (Model.updatedBreaks.IsBreakFastAdded)
-                                                    {
-                                                        isBreakRecordExist = true;
-                                                    }
-                                                    break;
-                                                }
-                                            case 2:
-                                                {
-                                                    if (Model.updatedBreaks.IsLunchAdded)
-                                                    {
-                                                        isBreakRecordExist = true;
-                                                    }
-                                                    break;
-                                                }
-                                            case 3:
-                                                {
-                                                    if (Model.updatedBreaks.IsBreakAdded)
-                                                    {
-                                                        isBreakRecordExist = true;
-                                                    }
-                                                    break;
-                                                }
-                                            case 4:
-                                                {
-                                                    if (Model.updatedBreaks.IsDinnerAdded)
-                                                    {
-                                                        isBreakRecordExist = true;
-                                                    }
-                                                    break;
-                                                }
-                                            case 5:
-                                                {
-                                                    if (Model.updatedBreaks.IsDayBreakAdded)
-                                                    {
-                                                        isBreakRecordExist = true;
-                                                    }
-                                                    break;
-                                                }
-                                        }
-                                        if (!isBreakRecordExist)
-                                        {
-                                            <text>
-                                                <img src="~/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" 
-                                                     onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude')"/>
-                                            </text>
-                                        }
-                                        else
-                                        {
-                                            <text>
-                                                <img src="~/Images/Custome/edit.jpg" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude')" />
-                                            </text>
-                                            if (string.IsNullOrEmpty(_attraction.DestinationPhotoUrl))
-                                            {
-                                                <text>
-                                                    <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
-                                                </text>
-                                            }
-                                            else
-                                            {
-                                                <text>
-                                                    <img src="@_attraction.DestinationPhotoUrl" alt="@_attraction.DestinationPhotoUrl" class="attractionImage"/>
-                                                </text>
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-
-                                        if (string.IsNullOrEmpty(_attraction.DestinationPhotoUrl))
-                                        {
-                                            <text>
-                                                <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"/>
-                                            </text>
-                                                    }
-                                                    else
-                                                    {
-                                            <text>
-                                                <img src="@_attraction.DestinationPhotoUrl" alt="@_attraction.DestinationPhotoUrl" class="attractionImage"/>
-                                            </text>
-                                        }
-                                    }
-
-                                }
-
-
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td class="attractionName">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            @_attraction.DestinationAttractionName
-                                        </td>
-                                        <td>
-                                            <div id="weather_@{@_attraction.RecordCount}" class="tooltip">
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td rowspan="6">
-                                @if (!_attraction.IsLunchDinnerBreakTime)
-                                {
-
-                                    if (Model.attractionsList.Count() != _attraction.RecordCount)
-                                    {
-
-                                        <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)"/>
-
-                                        if (_attraction.RecordCount != 1)
-                                        {
-                                            <img src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true,0)"/>
-                                        }
-                                        else
-                                        {
-                                            <span style="width: 30px; height: 30px">&nbsp;</span>
-                                        }
-
-                                        switch (Model.attractionsList.Where(x => x.RecordCount == _attraction.RecordCount + 1).Select(y => y.BreakInformationId).FirstOrDefault())
-                                        {
-                                            case 1:
-                                            {
-                                                <text>
-                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,1)">
-                                                         Visit After BreakFast
-                                                    </a> 
-                                                </text>
-                                                break;
-                                            }
-                                            case 2:
-                                            {
-                                                <text>
-                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,2)">
-                                                        Visit After Lunch
-                                                    </a> 
-                                                </text>
-                                                break;
-                                            }
-                                            case 3:
-                                            {
-                                                <text>
-                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,3)">
-                                                        Visit After Break
-                                                    </a> 
-                                                </text>
-                                                break;
-                                            }
-                                            case 4:
-                                            {
-                                                <text>
-                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,4)">
-                                                        Visit After Dinner
-                                                    </a> 
-                                                </text>
-                                                    break;
-                                                }
-                                            default:
-                                                {
-                                                    <text>
-                                <img src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,0)" />
-                                                    </text>
-                                                    break;
-                                                }
-
-                                        }
-
-
-
-
-                                    }
-
-                                }
-                            </td>
-                        </tr>
-                    <tr>
-                        <td>
-                            Reach Time: @_attraction.ReachTime hh
-                        </td>
-                    </tr>
-                        <!--Final Event-->
-                    @if (Model.attractionsList.Count() != _attraction.RecordCount)
+                        var isFirst = false;
+                        var destinationAttractionId = 0;
+                        foreach (GetOrderOfAttractionVisit _attraction in Model.attractionsList)
                         {
-                        <tr>
-                            <td>
-                                Stay for View:
-                                <select onchange="ViewTimeUpdate(@_attraction.DestinationAttractionId,this)">
-                                    @{
-                                        foreach (string _time in TimeInterval.HoursInterval)
-                                        {
-                                            <option value="@_time" @{
-                                                                       if (@_attraction.TimeRequiredToView == @_time)
-                                                                       {
-                                                                           <text>selected</text>
+
+                            if (!isFirst)
+                            {
+                                <tr class="attractionInfo">
+                                    <td>
+                                        <table cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td rowspan="2">
+                                                    @{
+                                                        if (string.IsNullOrEmpty(_attraction.SourcePhotoUrl))
+                                                        {
+                                                            <img src="@_attraction.SourceIcon" alt="@_attraction.SourceAttractionName" width="100px" height="100px" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="@_attraction.SourcePhotoUrl" alt="@_attraction.SourceAttractionName" class="attractionImage" />
+                                                        }
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td class="attractionName">
+                                                                @_attraction.SourceAttractionName
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Start Location
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Start: @_attraction.DateAndTime hh
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                                            isFirst = true;
+                                                        }
+
+                                                        <tr class="attractionInfo">
+                                                            <td>
+                                                                <table cellspacing="0" cellpadding="0" id="DriveBreak_@{@_attraction.RecordCount}">
+                                                                    <tr>
+                                                                        <td>
+                                                                            @switch (_attraction.TravelModeId)
+                                                                            {
+
+                                                                                case 1:
+                                                                                    {
+
+                                                                                        <img src="~/Images/TravelMode/driving.png" alt="Driving" width="100px" height="100px" />
+
+                                                                                        break;
+                                                                                    }
+                                                                                case 2:
+                                                                                    {
+
+                                                                                        <img src="~/Images/TravelMode/walking.png" alt="Walking" width="100px" height="100px" />
+
+                                                                                        break;
+                                                                                    }
+                                                                                case 3:
+                                                                                    {
+
+                                                                                        <img src="~/Images/TravelMode/bicycling.png" alt="Bicycling" width="100px" height="100px" />
+
+                                                                                        break;
+                                                                                    }
+                                                                                case 4:
+                                                                                    {
+
+                                                                                        <img src="~/Images/TravelMode/transit.png" alt="Transit" width="100px" height="100px" />
+
+                                                                                        break;
+                                                                                    }
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            <table class="@( _attraction.IsNeedDrivningBreak ? "DrivingBreak" : "")">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        Start Time :@_attraction.DateAndTime hh
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        Distance: @_attraction.Distance
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        Distance Cover Time: @_attraction.TravelTime hh
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        Reach Time: @_attraction.ReachTime hh
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @{
+                                                                                    if (_attraction.IsNeedDrivningBreak)
+                                                                                    {
+                                                                                        <tr>
+                                                                                            <td style="text-align: center">
+                                                                            
+                                                                                <span class="attractionName">
+                                                                                    It is a Long Journey Please choose following Leg to take Break
+                                                                                </span>
+                                                                            
+                                                                                                <div id="DriveBreakInfo_@{@_attraction.RecordCount}">
+
+
+                                                                                                                              @{
+                                                                                                                                  <table border="1">
+                                                                                                                                      <tr>
+                                                                                                                                          <td>
+                                                                                                                                              S.No
+                                                                                                                                          </td>
+                                                                                                                                          <td>
+                                                                                                                                              Start Time
+                                                                                                                                          </td>
+                                                                                                                                          <td>
+                                                                                                                                              End Time
+                                                                                                                                          </td>
+                                                                                                                                          <td>
+                                                                                                                                              Distance Covered
+                                                                                                                                          </td>
+                                                                                                                                          <td>
+                                                                                                                                              Break Info
+                                                                                                                                          </td>
+                                                                                                                                      </tr>
+                                                                                                                                      @foreach (var steps in Model.Directions.Where(x => x.RecordCount == _attraction.RecordCount))
+                                                                                                                                      {
+
+                                                                                                                                          foreach (var subSteps in steps.DirectionSteps.OrderBy(x => x.OrderId))
+                                                                                                                                          {
+                                                                                                                                              <tr>
+                                                                                                                                                  <td>
+                                                                                                                                                      <span>
+                                                                                                                                                          @subSteps.OrderId
+                                                                                                                                                      </span>
+                                                                                                                                                  </td>
+                                                                                                                                                  <td>
+                                                                                                                                                      <span>
+                                                                                                                                                          @subSteps.StartDateTime
+                                                                                                                                                      </span>
+                                                                                                                                                  </td>
+                                                                                                                                                  <td>
+                                                                                                                                                      <span>
+                                                                                                                                                          @subSteps.EndDateTime
+                                                                                                                                                      </span>
+                                                                                                                                                  </td>
+                                                                                                                                                  <td>
+                                                                                                                                                      <span>
+                                                                                                                                                          @subSteps.DistanceCovered
+                                                                                                                                                      </span>
+                                                                                                                                                  </td>
+                                                                                                                                                  <td>
+                                                                                                                                                      <select id="ddlExtraBreakInfo_@subSteps.OrderId" onchange="ExtraBreakSelected('@_attraction.SourceAttractionName','@Model.divId',@subSteps.AttractionTravelStepsId,'ddlExtraBreakInfo_@subSteps.OrderId')">
+                                                                                                                                                          <option value="0"> Select Break</option>
+                                                                                                                                                          @foreach (var breakInfo in Model.BreakInformation)
+                                                                                                                                                          {
+                                                                                                                                                              <option value="@breakInfo.BreakInformationId"> @breakInfo.Display</option>
+                                                                                                                                                          }
+                                                                                                                                                      </select>
+                                                                                                                                                  </td>
+                                                                                                                                              </tr>
+                                                                                                                                          }
+
+                                                                                                                                      }
+                                                                                                                                  </table>
+                                                                                                                              }
+
+                                                                                                                          </div>
+                                                                                                                          </td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                }
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="attractionInfo">
+                                                            <td>
+                                                                <table cellspacing="0" cellpadding="0">
+                                                                    <tr>
+                                                                        <td rowspan="7">
+                                                                            @{
+                                                                                if (_attraction.IsLunchDinnerBreakTime)
+                                                                                {
+                                                                                    Boolean isBreakRecordExist = false;
+                                                                                    switch (_attraction.BreakInformationId)
+                                                                                    {
+                                                                                        case 1:
+                                                                                            {
+                                                                                                if (Model.updatedBreaks.IsBreakFastAdded)
+                                                                                                {
+                                                                                                    isBreakRecordExist = true;
+                                                                                                }
+                                                                                                break;
+                                                                                            }
+                                                                                        case 2:
+                                                                                            {
+                                                                                                if (Model.updatedBreaks.IsLunchAdded)
+                                                                                                {
+                                                                                                    isBreakRecordExist = true;
+                                                                                                }
+                                                                                                break;
+                                                                                            }
+                                                                                        case 3:
+                                                                                            {
+                                                                                                if (Model.updatedBreaks.IsBreakAdded)
+                                                                                                {
+                                                                                                    isBreakRecordExist = true;
+                                                                                                }
+                                                                                                break;
+                                                                                            }
+                                                                                        case 4:
+                                                                                            {
+                                                                                                if (Model.updatedBreaks.IsDinnerAdded)
+                                                                                                {
+                                                                                                    isBreakRecordExist = true;
+                                                                                                }
+                                                                                                break;
+                                                                                            }
+                                                                                        case 5:
+                                                                                            {
+                                                                                                if (Model.updatedBreaks.IsDayBreakAdded)
+                                                                                                {
+                                                                                                    isBreakRecordExist = true;
+                                                                                                }
+                                                                                                break;
+                                                                                            }
+                                                                                    }
+                                                                                    if (!isBreakRecordExist)
+                                                                                    {
+                                                                                        <text>
+                                                                                            <img src="~/Images/Custome/add.png" alt="@_attraction.DestinationAttractionName" width="100px" height="100px"
+                                                                                                 onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude',0)" />
+                                                                                        </text>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <text>
+                                                                                            <img src="~/Images/Custome/edit.jpg" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" onclick="AddLunchDinnerBreak('@_attraction.SourceAttractionName', '@_attraction.BreakInformationId', @destinationAttractionId, '@Model.divId', '@_attraction.SourceLongitude', '@_attraction.SourceLatitude',0)" />
+                                                                                        </text>
+                                                                                        if (string.IsNullOrEmpty(_attraction.DestinationPhotoUrl))
+                                                                                        {
+                                                                                            <text>
+                                                                                                <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" />
+                                                                                            </text>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <text>
+                                                                                                <img src="@_attraction.DestinationPhotoUrl" alt="@_attraction.DestinationPhotoUrl" class="attractionImage" />
+                                                                                            </text>
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+
+                                                                                    if (string.IsNullOrEmpty(_attraction.DestinationPhotoUrl))
+                                                                                    {
+                                                                                        <text>
+                                                                                            <img src="@_attraction.DestinationIcon" alt="@_attraction.DestinationAttractionName" width="100px" height="100px" />
+                                                                                        </text>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <text>
+                                                                                            <img src="@_attraction.DestinationPhotoUrl" alt="@_attraction.DestinationPhotoUrl" class="attractionImage" />
+                                                                                        </text>
+                                                                                    }
+                                                                                }
+
+                                                                            }
+
+
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="attractionName">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @_attraction.DestinationAttractionName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div id="weather_@{@_attraction.RecordCount}" class="tooltip">
+
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td rowspan="6">
+                                                                            @if (!_attraction.IsLunchDinnerBreakTime)
+                                                                            {
+
+                                                                                if (Model.attractionsList.Count != _attraction.RecordCount)
+                                                                                {
+
+                                                                                    <img src="~/Images/Custome/red_x.png" alt="Not Intereseted" width="30px" height="30px" onclick="NotIntereseted(@_attraction.DestinationAttractionId)" />
+
+                                                                                    if (_attraction.RecordCount != 1)
+                                                                                    {
+                                                                                        <img src="~/Images/Custome/up.jpg" alt="Up" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, true,0)" />
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <span style="width: 30px; height: 30px">&nbsp;</span>
+                                                                                    }
+
+                                                                                    switch (Model.attractionsList.Where(x => x.RecordCount == _attraction.RecordCount + 1).Select(y => y.BreakInformationId).FirstOrDefault())
+                                                                                    {
+                                                                                        case 1:
+                                                                                            {
+                                                                                                <text>
+                                                                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,1)">
+                                                                                                        Visit After BreakFast
+                                                                                                    </a>
+                                                                                                </text>
+                                                                                                break;
+                                                                                            }
+                                                                                        case 2:
+                                                                                            {
+                                                                                                <text>
+                                                                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,2)">
+                                                                                                        Visit After Lunch
+                                                                                                    </a>
+                                                                                                </text>
+                                                                                                break;
+                                                                                            }
+                                                                                        case 3:
+                                                                                            {
+                                                                                                <text>
+                                                                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,3)">
+                                                                                                        Visit After Break
+                                                                                                    </a>
+                                                                                                </text>
+                                                                                                break;
+                                                                                            }
+                                                                                        case 4:
+                                                                                            {
+                                                                                                <text>
+                                                                                                    <a href="javascript:void(0)" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,4)">
+                                                                                                        Visit After Dinner
+                                                                                                    </a>
+                                                                                                </text>
+                                                                                                break;
+                                                                                            }
+                                                                                        default:
+                                                                                            {
+                                                                                                <text>
+                                                                                                    <img src="~/Images/Custome/down.jpg" alt="Down" width="30px" height="30px" onclick="IsOrderUpdated(@_attraction.DestinationAttractionId, @_attraction.RecordCount, false,0)" />
+                                                                                                </text>
+                                                                                                break;
+                                                                                            }
+
+                                                                                    }
+
+
+
+
+                                                                                }
+
+                                                                            }
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Reach Time: @_attraction.ReachTime hh
+                                                                        </td>
+                                                                    </tr>
+                                                                    <!--Final Event-->
+                                                                    @if (Model.attractionsList.Count != _attraction.RecordCount)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                Stay for View:
+                                                                                <select onchange="ViewTimeUpdate(@_attraction.DestinationAttractionId,this)">
+                                                                                    @{
+                                                                                        foreach (string _time in TimeInterval.HoursInterval)
+                                                                                        {
+                                                                                            <option value="@_time" @{ if (@_attraction.TimeRequiredToView == @_time) { <text> selected</text>
                                                                        }
-                                                                   }>@_time</option>
-                                        }
-                                    }
-                                </select>
-                                hh
-                            </td>
-                        </tr>
-                    <tr>
-                        <td>
-                            Complete Event: @_attraction.EventEndTime hh
-                        </td>
-                    </tr>
-                        }
-                        @if (!_attraction.IsLunchDinnerBreakTime)
-                        {
-                            if (!string.IsNullOrEmpty(_attraction.DestinationOpenTime) && !string.IsNullOrEmpty(_attraction.DestinationCloseTime))
-                            {
-                                <tr>
-                                    <td>
-                                        Open Time: @_attraction.DestinationOpenTime hh Close Time: @_attraction.DestinationCloseTime hh
-                                    </td>
-                                </tr>
-                            }
-                            if (!string.IsNullOrEmpty(_attraction.DestinationRating))
-                            {
-                                <tr>
-                                    <td>
-                                        Google Rating: @_attraction.DestinationRating
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </table>
-                </td>
-            </tr>
+                                                                   }>
+                                                                                                @_time
+                                                            </option>
+    }
+                                                                                    }
+                                                                                </select>
+                                                                                hh
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Complete Event: @_attraction.EventEndTime hh
+                                                                            </td>
+                                                                        </tr>
+    }
+                                                                    @if (!_attraction.IsLunchDinnerBreakTime)
+                                                                    {
+                                                                        if (!string.IsNullOrEmpty(_attraction.DestinationOpenTime) && !string.IsNullOrEmpty(_attraction.DestinationCloseTime))
+                                                                        {
+                                                                            <tr>
+                                                                                <td>
+                                                                                    Open Time: @_attraction.DestinationOpenTime hh Close Time: @_attraction.DestinationCloseTime hh
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                        if (!string.IsNullOrEmpty(_attraction.DestinationRating))
+                                                                        {
+                                                                            <tr>
+                                                                                <td>
+                                                                                    Google Rating: @_attraction.DestinationRating
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                </table>
+                                                            </td>
+                                                        </tr>
             destinationAttractionId = _attraction.DestinationAttractionId;
         }
 
     }
-    </table>            
-    </td>
-    <td valign="top">
-        @{ string strId = string.Empty;}
-        <table>
-            <tr>
-                <td>
-                    <table cellspacing="5" cellpadding="5" class="tableBreak">
-                        <tr>
-                            <td>
-                                Day Start Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdateDayStartTime";}
-                                
-                            <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
-                            @{
-                                foreach (string _time in TimeInterval.TimeValue)
-                                {
-                                    <option value="@_time" @{
-                                                               if (Model.updatedBreaks.UpdateDayStartTime == @_time)
-                                                               {
-                                                                   <text>selected</text>
-                                                               }
-                                                           }>@_time</option>
-                                }
-                            }
-                           
-                            </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Day End Time:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_UpdateDayEndTime";}
-                                <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
-                                    @{
-                                        foreach (string _time in TimeInterval.TimeValue)
-                                        {
-                                            <option value="@_time" @{
-                                                                       if (Model.updatedBreaks.UpdateDayEndTime == @_time)
-                                                                       {
-                                                                           <text>selected</text>
-                                                                       }
-                                                                   }>@_time</option>
-                                        }
-                                    }
-                           
-                                </select>
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_IsUserInterestedBreakFast_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Interested Break Fast:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_IsUserInterestedBreakFast";}
-                                <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedBreakFast" onchange="BreakInformationUpdate('@Model.divId')" />
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdatedBreakFast_tr";}
-                        @{
-                            if (Model.updatedBreaks.IsUserInterestedBreakFast)
-                            {
-                                
-                                <tr id='@strId'>
+                </table>
+            </td>
+            <td valign="top">
+                @{ string strId = string.Empty;}
+                <table>
+                    <tr>
+                        <td>
+                            <table cellspacing="5" cellpadding="5" class="tableBreak">
+                                <tr>
                                     <td>
-                                        Break Fast Time:
+                                        Day Start Time:
                                     </td>
                                     <td>
-                                        @{ strId = Model.divId + "_UpdatedBreakFast";}
+                                        @{ strId = Model.divId + "_UpdateDayStartTime";}
+
                                         <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
                                             @{
                                                 foreach (string _time in TimeInterval.TimeValue)
                                                 {
-                                                    <option value="@_time" @{ if (Model.updatedBreaks.UpdatedBreakFastTime == @_time) { <text> selected</text>
-                                                                              }
-                                                                           }>
+                                                    <option value="@_time" @{ if (Model.updatedBreaks.UpdateDayStartTime == @_time) { <text> selected</text>
+                                                               }
+                                                           }>
                                                         @_time
                                                     </option>
-                                                }
+    }
                                             }
 
                                         </select>
-
                                     </td>
                                 </tr>
-                            }
-                        }
-
-                        
-                        @{ strId = Model.divId + "_IsUserInterestedLunchBreak_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Interested Lunch Break:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_IsUserInterestedLunchBreak";}
-                                <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedLunchBreak" onchange="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdatedLunchTime_tr";}
-                    @{
-                        if (Model.updatedBreaks.IsUserInterestedLunchBreak)
-                        {
-                            <tr id='@strId'>
-                                <td>
-                                    Lunch Break Time:
-                                </td>
-                                <td>
-                                    @{ strId = Model.divId + "_UpdatedLunchTime";}
-                                
-                                    <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
-                                        @{
-                                            foreach (string _time in TimeInterval.TimeValue)
-                                            {
-                                                <option value="@_time" @{ if (Model.updatedBreaks.UpdatedLunchTime == @_time) { <text> selected</text>
-                                                                          }
-                                                                       }>
-                                                    @_time
-                                                </option>
-                                            }
-                                        }
-
-                                    </select>
-
-                                </td>
-                            </tr>
-                        }
-                    }
-                        
-                        @{ strId = Model.divId + "_IsUserInterestedBreak_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Interested Break:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_IsUserInterestedBreak";}
-                                <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedBreak" onclick="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
-                        @{ strId = Model.divId + "_UpdatedBreakTime_tr";}
-                    @{
-                        if (Model.updatedBreaks.IsUserInterestedBreak)
-                        {
-                            <tr id='@strId'>
-                                <td>
-                                    Break Start Time:
-                                </td>
-                                <td>
-                                    @{ strId = Model.divId + "_UpdatedBreakTime";}
-                                
-                                    <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
-                                        @{
-                                            foreach (string _time in TimeInterval.TimeValue)
-                                            {
-                                                <option value="@_time" @{ if (Model.updatedBreaks.UpdatedBreakTime == @_time) { <text> selected</text>
-                                                                          }
-                                                                       }>
-                                                    @_time
-                                                </option>
-                                            }
-                                        }
-
-                                    </select>
-
-                                </td>
-                            </tr>
-                        }
-                    }
-                        
-                        @{ strId = Model.divId + "_IsUserInterestedDinnerBreak_tr";}
-                        <tr id='@strId'>
-                            <td>
-                                Interested Dinner Break:
-                            </td>
-                            <td>
-                                @{ strId = Model.divId + "_IsUserInterestedDinnerBreak";}
-                                <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedDinnerBreak" onclick="BreakInformationUpdate('@Model.divId')"/>
-                            </td>
-                        </tr>
-                    @{ strId = Model.divId + "_UpdatedDinnerTime_tr";}
-                    @{
-                        if (Model.updatedBreaks.IsUserInterestedDinnerBreak)
-                        {
-                            <tr id='@strId'>
-                                <td>
-                                    Dinner Time
-                                </td>
-                                <td>
-                                    @{ strId = Model.divId + "_UpdatedDinnerTime";}
-                                
-                                    <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
-                                        @{
-                                            foreach (string _time in TimeInterval.TimeValue)
-                                            {
-                                                <option value="@_time" @{ if (Model.updatedBreaks.UpdatedDinnerTime == @_time) { <text> selected</text>
-                                                                          }
-                                                                       }>
-                                                    @_time
-                                                </option>
-                                            }
-                                        }
-
-                                    </select>
-
-                                </td>
-                            </tr>
-                        }
-                    }
-                        
-                    </table>            
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table class="tableBreak">
-                        <tr>
-                            <td colspan="2">
-                                Day Trip Information & Expenditure
-                                <br/>
-                                <br />
-                                <br />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Travel Distance: @Model.updatedBreaks.Distance Miles
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                No Of Attractions : @Model.updatedBreaks.NoOfAttractions
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @{ strId = Model.divId + "_NoOfCars";}
-                                No Of Cars : <select id='@strId' onchange="DayExpenseInformationUpdate('@Model.divId','@strId')">
-                                    <option value="1" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 1)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      } >1</option>
-                                    <option value="2" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 2)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      }>2</option>
-                                    <option value="3" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 3)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      }>3</option>
-                                    <option value="4"@{
-                                                         if (Model.updatedBreaks.NoOfCars == 4)
-                                                         {
-                                                             <text> selected </text>
-                                                         }
-                                                     }>4</option>
-                                    <option value="5"
+                                <tr>
+                                    <td>
+                                        Day End Time:
+                                    </td>
+                                    <td>
+                                        @{ strId = Model.divId + "_UpdateDayEndTime";}
+                                        <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
                                             @{
-                                                if (Model.updatedBreaks.NoOfCars == 5)
+                                                foreach (string _time in TimeInterval.TimeValue)
                                                 {
-                                                    <text> selected </text>
-                                                }
-                                            }>5</option>
-                                    <option value="6" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 6)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      }>6</option>
-                                    <option value="7" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 7)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      }>7</option>
-                                    <option value="8" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 8)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      }>8</option>
-                                    <option value="9" @{
-                                                          if (Model.updatedBreaks.NoOfCars == 9)
-                                                          {
-                                                              <text> selected </text>
-                                                          }
-                                                      }>9</option>
-                                    <option value="10" @{
-                                                           if (Model.updatedBreaks.NoOfCars == 10)
-                                                           {
-                                                               <text> selected </text>
-                                                           }
-                                                       }>10</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @{ strId = Model.divId + "_AverageMileage";}
-                                Average Mileage : <input type="text" id='@strId' value="@Model.updatedBreaks.AverageMileage" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @{ strId = Model.divId + "_CarRentalExpense";}
-                                Car Rental Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.CarRentalExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Please provide one person expense only
-                            </td>
-                        </tr>
-                        @{
-                            if (Model.updatedBreaks.DayBreakAttractionId > 0)
-                            {
+                                                    <option value="@_time" @{ if (Model.updatedBreaks.UpdateDayEndTime == @_time) { <text> selected</text>
+                                                                       }
+                                                                   }>
+                                                        @_time
+                                                            </option>
+    }
+                                            }
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                @{ strId = Model.divId + "_IsUserInterestedBreakFast_tr";}
+                                <tr id='@strId'>
+                                    <td>
+                                        Interested Break Fast:
+                                    </td>
+                                    <td>
+                                        @{ strId = Model.divId + "_IsUserInterestedBreakFast";}
+                                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedBreakFast" onchange="BreakInformationUpdate('@Model.divId')" />
+                                    </td>
+                                </tr>
+                                @{ strId = Model.divId + "_UpdatedBreakFast_tr";}
+                                @{
+                                    if (Model.updatedBreaks.IsUserInterestedBreakFast)
+                                    {
+
+                                        <tr id='@strId'>
+                                            <td>
+                                                Break Fast Time:
+                                            </td>
+                                            <td>
+                                                @{ strId = Model.divId + "_UpdatedBreakFast";}
+                                                <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                                    @{
+                                                        foreach (string _time in TimeInterval.TimeValue)
+                                                        {
+                                                            <option value="@_time" @{ if (Model.updatedBreaks.UpdatedBreakFastTime == @_time) { <text> selected</text>
+                                                                              }
+                                                                           }>
+                                                                @_time
+                                                            </option>
+    }
+                                                    }
+
+                                                </select>
+
+                                            </td>
+                                        </tr>
+    }
+                                }
+
+
+                                @{ strId = Model.divId + "_IsUserInterestedLunchBreak_tr";}
+                                <tr id='@strId'>
+                                    <td>
+                                        Interested Lunch Break:
+                                    </td>
+                                    <td>
+                                        @{ strId = Model.divId + "_IsUserInterestedLunchBreak";}
+                                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedLunchBreak" onchange="BreakInformationUpdate('@Model.divId')" />
+                                    </td>
+                                </tr>
+                                @{ strId = Model.divId + "_UpdatedLunchTime_tr";}
+                                @{
+                                    if (Model.updatedBreaks.IsUserInterestedLunchBreak)
+                                    {
+                                        <tr id='@strId'>
+                                            <td>
+                                                Lunch Break Time:
+                                            </td>
+                                            <td>
+                                                @{ strId = Model.divId + "_UpdatedLunchTime";}
+
+                                                <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                                    @{
+                                                        foreach (string _time in TimeInterval.TimeValue)
+                                                        {
+                                                            <option value="@_time" @{ if (Model.updatedBreaks.UpdatedLunchTime == @_time) { <text> selected</text>
+                                                                          }
+                                                                       }>
+                                                                @_time
+                                                            </option>
+    }
+                                                    }
+
+                                                </select>
+
+                                            </td>
+                                        </tr>
+    }
+                                }
+
+                                @{ strId = Model.divId + "_IsUserInterestedBreak_tr";}
+                                <tr id='@strId'>
+                                    <td>
+                                        Interested Break:
+                                    </td>
+                                    <td>
+                                        @{ strId = Model.divId + "_IsUserInterestedBreak";}
+                                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedBreak" onclick="BreakInformationUpdate('@Model.divId')" />
+                                    </td>
+                                </tr>
+                                @{ strId = Model.divId + "_UpdatedBreakTime_tr";}
+                                @{
+                                    if (Model.updatedBreaks.IsUserInterestedBreak)
+                                    {
+                                        <tr id='@strId'>
+                                            <td>
+                                                Break Start Time:
+                                            </td>
+                                            <td>
+                                                @{ strId = Model.divId + "_UpdatedBreakTime";}
+
+                                                <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                                    @{
+                                                        foreach (string _time in TimeInterval.TimeValue)
+                                                        {
+                                                            <option value="@_time" @{ if (Model.updatedBreaks.UpdatedBreakTime == @_time) { <text> selected</text>
+                                                                          }
+                                                                       }>
+                                                                @_time
+                                                            </option>
+    }
+                                                    }
+
+                                                </select>
+
+                                            </td>
+                                        </tr>
+    }
+                                }
+
+                                @{ strId = Model.divId + "_IsUserInterestedDinnerBreak_tr";}
+                                <tr id='@strId'>
+                                    <td>
+                                        Interested Dinner Break:
+                                    </td>
+                                    <td>
+                                        @{ strId = Model.divId + "_IsUserInterestedDinnerBreak";}
+                                        <input type="checkbox" id='@strId' checked="@Model.updatedBreaks.IsUserInterestedDinnerBreak" onclick="BreakInformationUpdate('@Model.divId')" />
+                                    </td>
+                                </tr>
+                                @{ strId = Model.divId + "_UpdatedDinnerTime_tr";}
+                                @{
+                                    if (Model.updatedBreaks.IsUserInterestedDinnerBreak)
+                                    {
+                                        <tr id='@strId'>
+                                            <td>
+                                                Dinner Time
+                                            </td>
+                                            <td>
+                                                @{ strId = Model.divId + "_UpdatedDinnerTime";}
+
+                                                <select id='@strId' onchange="BreakInformationUpdate('@Model.divId')">
+                                                    @{
+                                                        foreach (string _time in TimeInterval.TimeValue)
+                                                        {
+                                                            <option value="@_time" @{ if (Model.updatedBreaks.UpdatedDinnerTime == @_time) { <text> selected</text>
+                                                                          }
+                                                                       }>
+                                                                @_time
+                                                            </option>
+    }
+                                                    }
+
+                                                </select>
+
+                                            </td>
+                                        </tr>
+    }
+                                }
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="tableBreak">
+                                <tr>
+                                    <td colspan="2">
+                                        Day Trip Information & Expenditure
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
-                                        @{ strId = Model.divId + "_NoOfRooms";}
-                                        No Of Rooms : <select id='@strId' onchange="DayExpenseInformationUpdate('@Model.divId','@strId')">
-                                            <option value="1" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 1)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              } >1</option>
-                                            <option value="2" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 2)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              }>2</option>
-                                            <option value="3" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 3)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              }>3</option>
-                                            <option value="4"@{
-                                                                 if (Model.updatedBreaks.NoOfRooms == 4)
-                                                                 {
-                                                                     <text> selected </text>
-                                                                 }
-                                                             }>4</option>
+                                        Travel Distance: @Model.updatedBreaks.Distance Miles
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        No Of Attractions : @Model.updatedBreaks.NoOfAttractions
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @{ strId = Model.divId + "_NoOfCars";}
+                                        No Of Cars : <select id='@strId' onchange="DayExpenseInformationUpdate('@Model.divId','@strId')">
+                                            <option value="1" @{ if (Model.updatedBreaks.NoOfCars == 1) { <text> selected </text>  } }>1</option>
+                                            <option value="2" @{ if (Model.updatedBreaks.NoOfCars == 2) { <text> selected </text>  } }>2</option>
+                                            <option value="3" @{ if (Model.updatedBreaks.NoOfCars == 3) { <text> selected </text>  } }>3</option>
+                                            <option value="4" @{ if (Model.updatedBreaks.NoOfCars == 4) { <text> selected </text>  } }>4</option>
                                             <option value="5"
-                                                    @{
-                                                        if (Model.updatedBreaks.NoOfRooms == 5)
-                                                        {
-                                                            <text> selected </text>
-                                                        }
-                                                    }>5</option>
-                                            <option value="6" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 6)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              }>6</option>
-                                            <option value="7" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 7)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              }>7</option>
-                                            <option value="8" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 8)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              }>8</option>
-                                            <option value="9" @{
-                                                                  if (Model.updatedBreaks.NoOfRooms == 9)
-                                                                  {
-                                                                      <text> selected </text>
-                                                                  }
-                                                              }>9</option>
-                                            <option value="10" @{
-                                                                   if (Model.updatedBreaks.NoOfRooms == 10)
-                                                                   {
-                                                                       <text> selected </text>
-                                                                   }
-                                                               }>10</option>
+                                                    @{ if (Model.updatedBreaks.NoOfCars == 5) { <text> selected </text>  } }>
+                                                5
+                                            </option>
+                                            <option value="6" @{ if (Model.updatedBreaks.NoOfCars == 6) { <text> selected </text>  } }>6</option>
+                                            <option value="7" @{ if (Model.updatedBreaks.NoOfCars == 7) { <text> selected </text>  } }>7</option>
+                                            <option value="8" @{ if (Model.updatedBreaks.NoOfCars == 8) { <text> selected </text>  } }>8</option>
+                                            <option value="9" @{ if (Model.updatedBreaks.NoOfCars == 9) { <text> selected </text>  } }>9</option>
+                                            <option value="10" @{ if (Model.updatedBreaks.NoOfCars == 10) { <text> selected </text>  } }>10</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @{ strId = Model.divId + "_DayBreakExpense";}
-                                        Day Break Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.DayBreakExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')"/>
+                                        @{ strId = Model.divId + "_AverageMileage";}
+                                        Average Mileage : <input type="text" id='@strId' value="@Model.updatedBreaks.AverageMileage" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
                                     </td>
                                 </tr>
-                            } 
-                        }
-                    @{
-                        if (Model.updatedBreaks.BreakFastAttractionId > 0)
-                        {
-                            <tr>
-                                <td>
-                                    @{ strId = Model.divId + "_BreakFastExpense"; }
-                                    Break Fast Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.BreakFastExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')"/>
-                                </td>
-                            </tr>
-                        }
-                    }
-                    @{
-                        if (Model.updatedBreaks.LunchAttractionId > 0)
-                        {
-                            <tr>
-                                <td>
-                                    @{ strId = Model.divId + "_LunchExpense"; }
-                                    Lunch Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.LunchExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')"/>
-                                </td>
-                            </tr>
-                        }
-                    }
-                    @{
-                        if (Model.updatedBreaks.BreakAttractionId > 0)
-                        {
-                            <tr>
-                                <td>
-                                    @{ strId = Model.divId + "_BreakExpense"; }
-                                    Break Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.BreakExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')"/>
-                                </td>
-                            </tr>
-                        }
-                    }
-                    @{
-                        if (Model.updatedBreaks.DinnerAttractionId > 0)
-                        {
-                            <tr>
-                                <td>
-                                    @{ strId = Model.divId + "_DinnerExpense"; }
-                                    Dinner Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.BreakExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')"/>
-                                </td>
-                            </tr>
-                        }
-                    }
-                        @{
-                            if (Model.updatedBreaks.IsNoOfCarsUserUpdated || Model.updatedBreaks.IsAverageMileageUserUpdated || 
-                                Model.updatedBreaks.IsCarRentalExpenseUserUpdated || Model.updatedBreaks.IsBreakFastExpenseUserUpdated || 
-                                Model.updatedBreaks.IsLunchExpenseUserUpdated || Model.updatedBreaks.IsBreakExpenseUserUpdated || 
-                                Model.updatedBreaks.IsDinnerExpenseUserUpdated || Model.updatedBreaks.IsDayBreakExpenseUserUpdated || 
-                                Model.updatedBreaks.IsNoOfRoomsUserUpdated)
-                            {
                                 <tr>
                                     <td>
-                                        @{ strId = Model.divId + "_IgnoreMyExpenseChanges"; }
-                                        <a href="javascript:void(0)" onclick="IgnoreMyExpenseChanges('@Model.divId')" id='@strId'>Ignore my Expense changes</a>
+                                        @{ strId = Model.divId + "_CarRentalExpense";}
+                                        Car Rental Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.CarRentalExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
                                     </td>
                                 </tr>
-                            }
+                                <tr>
+                                    <td>
+                                        Please provide one person expense only
+                                    </td>
+                                </tr>
+                                @{
+                                    if (Model.updatedBreaks.DayBreakAttractionId > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_NoOfRooms";}
+                                                No Of Rooms : <select id='@strId' onchange="DayExpenseInformationUpdate('@Model.divId','@strId')">
+                                                    <option value="1" @{ if (Model.updatedBreaks.NoOfRooms == 1) { <text> selected </text>  } }>1</option>
+                                                    <option value="2" @{ if (Model.updatedBreaks.NoOfRooms == 2) { <text> selected </text>  } }>2</option>
+                                                    <option value="3" @{ if (Model.updatedBreaks.NoOfRooms == 3) { <text> selected </text>  } }>3</option>
+                                                    <option value="4" @{ if (Model.updatedBreaks.NoOfRooms == 4) { <text> selected </text>  } }>4</option>
+                                                    <option value="5"
+                                                            @{ if (Model.updatedBreaks.NoOfRooms == 5) { <text> selected </text>  } }>
+                                                        5
+                                                    </option>
+                                                    <option value="6" @{ if (Model.updatedBreaks.NoOfRooms == 6) { <text> selected </text>  } }>6</option>
+                                                    <option value="7" @{ if (Model.updatedBreaks.NoOfRooms == 7) { <text> selected </text>  } }>7</option>
+                                                    <option value="8" @{ if (Model.updatedBreaks.NoOfRooms == 8) { <text> selected </text>  } }>8</option>
+                                                    <option value="9" @{ if (Model.updatedBreaks.NoOfRooms == 9) { <text> selected </text>  } }>9</option>
+                                                    <option value="10" @{ if (Model.updatedBreaks.NoOfRooms == 10) { <text> selected </text>  } }>10</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_DayBreakExpense";}
+                                                Day Break Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.DayBreakExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
+                                            </td>
+                                        </tr>
+                                                    }
+                                }
+                                @{
+                                    if (Model.updatedBreaks.BreakFastAttractionId > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_BreakFastExpense"; }
+                                                Break Fast Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.BreakFastExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
+                                            </td>
+                                        </tr>
+                                                    }
+                                }
+                                @{
+                                    if (Model.updatedBreaks.LunchAttractionId > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_LunchExpense"; }
+                                                Lunch Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.LunchExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
+                                            </td>
+                                        </tr>
+                                                    }
+                                }
+                                @{
+                                    if (Model.updatedBreaks.BreakAttractionId > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_BreakExpense"; }
+                                                Break Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.BreakExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
+                                            </td>
+                                        </tr>
+                                                    }
+                                }
+                                @{
+                                    if (Model.updatedBreaks.DinnerAttractionId > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_DinnerExpense"; }
+                                                Dinner Expense : <input type="text" id='@strId' value="@Model.updatedBreaks.BreakExpense" onchange="DayExpenseInformationUpdate('@Model.divId','@strId')" />
+                                            </td>
+                                        </tr>
+                                                    }
+                                }
+                                @{
+                                    if (Model.updatedBreaks.IsNoOfCarsUserUpdated || Model.updatedBreaks.IsAverageMileageUserUpdated ||
+                                        Model.updatedBreaks.IsCarRentalExpenseUserUpdated || Model.updatedBreaks.IsBreakFastExpenseUserUpdated ||
+                                        Model.updatedBreaks.IsLunchExpenseUserUpdated || Model.updatedBreaks.IsBreakExpenseUserUpdated ||
+                                        Model.updatedBreaks.IsDinnerExpenseUserUpdated || Model.updatedBreaks.IsDayBreakExpenseUserUpdated ||
+                                        Model.updatedBreaks.IsNoOfRoomsUserUpdated)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ strId = Model.divId + "_IgnoreMyExpenseChanges"; }
+                                                <a href="javascript:void(0)" onclick="IgnoreMyExpenseChanges('@Model.divId')" id='@strId'>Ignore my Expense changes</a>
+                                            </td>
+                                        </tr>
+                                                    }
 
-                        }
+                                }
 
 
-                       
-                        
-                    </table>        
-                </td>
-            </tr>
-        </table>
-        
-    </td>
-    </tr>
+
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
     </table>
-    
+
 </div>

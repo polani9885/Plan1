@@ -115,6 +115,10 @@
       <Project>{3aece02d-e791-4b1a-94d6-a50ac4040ada}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoogleMapsAPI\GoogleMapsAPI.csproj">
+      <Project>{F3DFCACC-3110-4D28-9344-2C47923DA332}</Project>
+      <Name>GoogleMapsAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>
       <Name>Interfaces</Name>

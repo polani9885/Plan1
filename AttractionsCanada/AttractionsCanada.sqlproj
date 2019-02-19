@@ -136,10 +136,17 @@
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\User_GetTourInformationOnTripId.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionRestarentSearch_1.sql" />
-    <Build Include="dbo\Tables\AttractionTravelStepsXAttractionsId.sql" />
+    <Build Include="dbo\Tables\AttractionTravelStepsXAttractions.sql" />
     <Build Include="dbo\Tables\AttractionNoOfTimesStepsNearyByCalcuated.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetStepsSearchnearBy.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionNoOfTimesStepsNearyByCalcuated.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetDirectionsSteps.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_MasterPriceInfoUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Admin_GetMasterPriceInfo.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetAttractionTravelStepsNearAttractionInfo.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetAttractionsNextAttractions.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetAttractionXCategory.sql" />
+    <Build Include="dbo\Stored Procedures\User_AutoComplete.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\CityVisitList.sql" />

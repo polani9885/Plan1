@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.Admin" />
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
   <xs:element name="Admin_MasterCategoryUpdate">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="categoryId" type="xs:int" />
         <xs:element minOccurs="0" name="categoryName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="viewTime" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -52,6 +54,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessEntites.Admin" minOccurs="0" name="Admin_MasterCategoryOnCategoryIdResult" nillable="true" type="q3:MasterCategoryDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Admin_BreakInformationCheckExists">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="breakInformationId" type="xs:int" />
+        <xs:element minOccurs="0" name="breakType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Admin_BreakInformationCheckExistsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessEntites" minOccurs="0" name="Admin_BreakInformationCheckExistsResult" nillable="true" type="q4:ArrayOfBreakInformation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

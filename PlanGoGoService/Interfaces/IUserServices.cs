@@ -1,4 +1,6 @@
 ﻿using BusinessEntites;
+using BusinessEntites.DataBaseModels;
+using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Scheduler;
 using BusinessEntites.Users;
@@ -51,7 +53,7 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         void User_LogUserTripInformation(int travelModeId,
-            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId);
 
 
@@ -59,7 +61,7 @@ namespace PlanGoGoService.Interfaces
         List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId);
 
         [OperationContract]
-        List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId);
+        List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId,int userId);
 
         [OperationContract]
         List<UserTable_UpdatedBreaksTemp> User_RequestedBreaks(int userTripId);
@@ -68,13 +70,13 @@ namespace PlanGoGoService.Interfaces
         List<UserTripBuildStatus> User_UserTripBuildStatus(int userTripId);
 
         [OperationContract]
-        List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate);
+        List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate, int attractionTravelStepsId);
 
         [OperationContract]
         void User_UserTrip_Update(UserTourInformation userTourInformation);
 
         [OperationContract]
-        void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate);
+        void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate, string startTime);
 
         [OperationContract]
         UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId);
@@ -88,5 +90,27 @@ namespace PlanGoGoService.Interfaces
         [OperationContract]
         List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId);
 
+        [OperationContract]
+        void User_AddInterestedAttractionList(int userTripId, int attractionId);
+
+        [OperationContract]
+        void User_DeleteNotInterestedAttractionList(int userTripId, int attractionId);
+
+        [OperationContract]
+        List<User_GetDirectionsSteps> User_GetDirectionsSteps(int countryId, int attractionTravelTimeDistanceId, string dateAndTime);
+
+        [OperationContract]
+        List<GetOrderOfAttractionVisit> User_GetAttractionTravelStepsNearAttractionInfo(
+            int attractionTravelStepsId, int countryId);
+
+        [OperationContract]
+        List<GetOrderOfAttractionVisit> User_GetAttractionsNextAttractions(int attractionsId, int countryId);
+
+        [OperationContract]
+        List<AttractionXCategory> User_GetAttractionXCategory(List<userTable_OnlyId> attractionsId,
+            int countryId);
+
+        [OperationContract]
+        List<EntityPredictions> User_AutoComplete(string address, int countryId);
     }
 }

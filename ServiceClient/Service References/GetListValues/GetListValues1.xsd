@@ -78,18 +78,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="public_FilterAttractions" nillable="true" type="tns:public_FilterAttractions" />
-  <xs:complexType name="ArrayOfuserTable_OnlyId">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfuserTable_OnlyId" nillable="true" type="tns:ArrayOfuserTable_OnlyId" />
-  <xs:complexType name="userTable_OnlyId">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
   <xs:complexType name="ArrayOfGetOrderOfAttractionVisit">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GetOrderOfAttractionVisit" nillable="true" type="tns:GetOrderOfAttractionVisit" />

@@ -44,6 +44,12 @@ namespace ServiceClient.AdminMasterCity {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCity/Admin_MasterCityUpdate", ReplyAction="http://tempuri.org/IMasterCity/Admin_MasterCityUpdateResponse")]
         System.Threading.Tasks.Task Admin_MasterCityUpdateAsync(BusinessEntites.Admin.MasterCityDTO masterCityDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCity/Admin_MergeCity", ReplyAction="http://tempuri.org/IMasterCity/Admin_MergeCityResponse")]
+        void Admin_MergeCity(int sourceCityId, int destinationCityId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCity/Admin_MergeCity", ReplyAction="http://tempuri.org/IMasterCity/Admin_MergeCityResponse")]
+        System.Threading.Tasks.Task Admin_MergeCityAsync(int sourceCityId, int destinationCityId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace ServiceClient.AdminMasterCity {
         
         public System.Threading.Tasks.Task Admin_MasterCityUpdateAsync(BusinessEntites.Admin.MasterCityDTO masterCityDTO) {
             return base.Channel.Admin_MasterCityUpdateAsync(masterCityDTO);
+        }
+        
+        public void Admin_MergeCity(int sourceCityId, int destinationCityId) {
+            base.Channel.Admin_MergeCity(sourceCityId, destinationCityId);
+        }
+        
+        public System.Threading.Tasks.Task Admin_MergeCityAsync(int sourceCityId, int destinationCityId) {
+            return base.Channel.Admin_MergeCityAsync(sourceCityId, destinationCityId);
         }
     }
 }

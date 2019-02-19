@@ -123,7 +123,7 @@ BEGIN
 		SET @ResTravelModeId = 0
 		SET @ResSourceAttractionName = @BreakType
 		SET @ResDestincationAttractionName  = @BreakType
-		SET @NormalBreakExist = 0
+		SET @NormalBreakExist = 0		
 
 
 		IF EXISTS(SELECT 1 FROM @OrderOfAttactionInfomration)
@@ -161,7 +161,7 @@ BEGIN
 				BEGIN	
 					
 					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedBreakFast = 1 AND UpdatedBreakFastTime IS NOt NULL
+						AND IsUserInterestedBreakFast = 1 
 					)
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedBreakFastTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
@@ -178,11 +178,16 @@ BEGIN
 					AND BreakInformationId = @BreakInformationId
 					)
 					BEGIN
-						SELECT @ResDestincationAttractionId = BreakFastAttractionId 							
-						FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsBreakFastAdded = 1	
+						IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+						AND IsUserInterestedBreakFast = 1 
+						)
+						BEGIN
+							SELECT @ResDestincationAttractionId = BreakFastAttractionId 							
+							FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+							AND IsBreakFastAdded = 1	
 
-						SET @IsBreakAttractionExist = 1
+							SET @IsBreakAttractionExist = 1
+						END
 					END
 				END
 
@@ -196,7 +201,7 @@ BEGIN
 				BEGIN				
 								
 					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsUserInterestedLunchBreak = 1 AND UpdatedLunchTime IS NOt NULL
+						AND IsUserInterestedLunchBreak = 1 
 					)
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedLunchTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
@@ -213,12 +218,16 @@ BEGIN
 					AND BreakInformationId = @BreakInformationId
 					)
 					BEGIN		
-									
-						SELECT @ResDestincationAttractionId = LunchAttractionId 							
-						FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-						AND IsLunchAdded = 1	
+						IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+							AND IsUserInterestedLunchBreak = 1 
+						)
+						BEGIN			
+							SELECT @ResDestincationAttractionId = LunchAttractionId 							
+							FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+							AND IsLunchAdded = 1	
 						
-						SET @IsBreakAttractionExist = 1
+							SET @IsBreakAttractionExist = 1
+						END
 					END
 				END
 
@@ -232,7 +241,7 @@ BEGIN
 				BEGIN	
 			
 					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-								AND IsUserInterestedBreak = 1 AND UpdatedBreakTime IS NOt NULL
+								AND IsUserInterestedBreak = 1 
 							)
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedBreakTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
@@ -247,11 +256,16 @@ BEGIN
 					AND BreakInformationId = @BreakInformationId
 					)
 				BEGIN
-					SELECT @ResDestincationAttractionId = BreakAttractionId 							
-					FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-					AND IsBreakAdded = 1	
+					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+								AND IsUserInterestedBreak = 1 
+							)
+					BEGIN	
+						SELECT @ResDestincationAttractionId = BreakAttractionId 							
+						FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+						AND IsBreakAdded = 1	
 
-					SET @IsBreakAttractionExist = 1
+						SET @IsBreakAttractionExist = 1
+					END
 				END
 
 			END
@@ -264,13 +278,14 @@ BEGIN
 				AND IsDinnerAdded = 1)
 				BEGIN				
 					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-								AND IsUserInterestedDinnerBreak = 1 AND UpdatedDinnerTime IS NOt NULL
+								AND IsUserInterestedDinnerBreak = 1 
 							)
 					BEGIN				
 						SELECT @BreakStartTime = UpdatedDinnerTime  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
 						AND IsUserInterestedDinnerBreak = 1 AND UpdatedDinnerTime IS NOt NULL
 
 						SET @NormalBreakExist = 1
+						
 					END								
 				END
 
@@ -279,11 +294,16 @@ BEGIN
 					AND BreakInformationId = @BreakInformationId
 					)
 				BEGIN
-					SELECT @ResDestincationAttractionId = DinnerAttractionId 							
-					FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
-					AND IsDinnerAdded = 1	
+					IF Exists (SELECT 1  FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+								AND IsUserInterestedDinnerBreak = 1 
+							)
+					BEGIN
+						SELECT @ResDestincationAttractionId = DinnerAttractionId 							
+						FROM @UserBreakTime WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) 
+						AND IsDinnerAdded = 1	
 
-					SET @IsBreakAttractionExist = 1
+						SET @IsBreakAttractionExist = 1
+					END
 				END
 
 			END
@@ -321,37 +341,47 @@ BEGIN
 
 			
 
-			IF (@BreakInformationId = 5 AND (CAST(@GetStartingTimeEvent AS TIME) Between @BreakStartTime AND  @BreakEndTime))	OR   
-			(CAST(@GetStartingTimeEvent AS TIME) Between @BreakStartTime AND DATEADD(SECOND,DATEDIFF(SECOND,0,@BreakStartTime), @BreakEndTime))
-			OR
-			(
-				@BreakInformationId IN (1,2,3,4) AND @BreakEndTime < CAST(@GetStartingTimeEvent AS TIME) 
-				AND NOT EXISTS (SELECT 1 FROM @OrderOfAttactionInfomration WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE) 
-					AND BreakInformationId = @BreakInformationId)
-				AND EXISTS(
-							SELECT 1  FROM @UserBreakTime 
-							WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) AND
-								1 = CASE WHEN @BreakInformationId = 1 AND IsUserInterestedBreakFast = 1 THEN 1 
-									ELSE 
-										CASE WHEN @BreakInformationId = 2 AND IsUserInterestedLunchBreak = 1 THEN 1 
-										ELSE
-											CASE WHEN @BreakInformationId = 3 AND IsUserInterestedBreak = 1 THEN 1 	
+			IF 
+				(
+					@BreakInformationId = 5 
+					AND @BreakEndTime < CAST(@GetStartingTimeEvent AS TIME)
+				)	
+				OR   
+				(
+					CAST(@GetStartingTimeEvent AS TIME) Between @BreakStartTime 
+					AND DATEADD(SECOND,DATEDIFF(SECOND,0,@BreakStartTime), @BreakEndTime)
+					AND (@NormalBreakExist = 1 OR @IsBreakAttractionExist = 1)
+				)
+				OR
+				(
+					@BreakInformationId IN (1,2,3,4) AND @BreakEndTime < CAST(@GetStartingTimeEvent AS TIME) 
+					AND NOT EXISTS (SELECT 1 FROM @OrderOfAttactionInfomration WHERE CAST(DateAndtime AS DATE) = CAST(@GetStartingTimeEvent AS DATE) 
+						AND BreakInformationId = @BreakInformationId)
+					AND EXISTS(
+								SELECT 1  FROM @UserBreakTime 
+								WHERE RequestDate = CAST(@GetStartingTimeEvent AS DATE) AND
+									1 = CASE WHEN @BreakInformationId = 1 AND IsUserInterestedBreakFast = 1 THEN 1 
+										ELSE 
+											CASE WHEN @BreakInformationId = 2 AND IsUserInterestedLunchBreak = 1 THEN 1 
 											ELSE
-												CASE WHEN @BreakInformationId = 4 AND IsUserInterestedDinnerBreak = 1 THEN 1 	
+												CASE WHEN @BreakInformationId = 3 AND IsUserInterestedBreak = 1 THEN 1 	
 												ELSE
-													0
+													CASE WHEN @BreakInformationId = 4 AND IsUserInterestedDinnerBreak = 1 THEN 1 	
+													ELSE
+														0
+													END
 												END
 											END
 										END
-									END
-						)
-				AND (@NormalBreakExist = 1 OR @IsBreakAttractionExist = 1)
-			)
-			OR
-			(@IsForceAdding = 1 AND @BreakInformationId = @BreakId)				 
+							)
+					AND (@NormalBreakExist = 1 OR @IsBreakAttractionExist = 1)
+				)				
+				OR
+				(
+					@IsForceAdding = 1 AND @BreakInformationId = @BreakId
+				)				 
 			BEGIN
 				
-				IF @IsBreakAttractionExist = 1
 				BEGIN
 				
 					IF EXISTS 

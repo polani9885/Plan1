@@ -1,7 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[USER_UserTripInformation]	
 (
-	@AttractionID userTable_OnlyId ReadOnly 
-	,@TravelModeId INT	
+	@TravelModeId INT	
 	,@UserBreakTime UserTable_UpdatedBreaks ReadOnly	
 	,@CountryId INT			
 	,@UserTripId INT
@@ -162,6 +161,8 @@ BEGIN
 		   ,SourcePhotoUrl
 		   ,DestinationPhotoUrl
 		   ,BreakInformationId
+		   ,IsNeedDrivningBreak
+		   ,AttractionTravelTimeDistanceId
 		  )
 	SELECT @UserTripId
 		  ,[SourceAttractionId]
@@ -207,7 +208,9 @@ BEGIN
 		  ,GETDATE()
 		  ,SourcePhotoUrl
 		  ,DestinationPhotoUrl
-		  ,BreakInformationId		  
+		  ,BreakInformationId	
+		  ,IsNeedDrivningBreak	 
+		  ,AttractionTravelTimeDistanceId 
 	  FROM @AttractionOrder
 
 
@@ -383,9 +386,3 @@ BEGIN
 		END
 	
 END
-
-
-
-
-
-

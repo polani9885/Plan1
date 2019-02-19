@@ -19,9 +19,14 @@ namespace PlanGoGoAdmin.Controllers
             _IAttractions = attractions;
         }
 
-        public JsonResult AttractionsOnCityId(int cityId)
+        public JsonResult AttractionsOnCityId()
         {
-            List<AttractionsDTO> getResult = _IAttractions.AttractionsOnCityId(new AttractionsDTO { CityId = cityId });
+            List<AttractionsDTO> getResult =
+                _IAttractions.AttractionsOnCityId(new AttractionsDTO
+                {
+                    CityId = userEntity.MasterCityId,
+                    CountryId = userEntity.MasterCountryId
+                });
             return base.jsonReturn.JsonResult<AttractionsDTO>(getResult);
         }
 
@@ -42,8 +47,8 @@ namespace PlanGoGoAdmin.Controllers
                 model.AttractionName = _data.AttractionName;
                 model.AttractionsId = _data.AttractionsId;
                 model.CategoryId = _data.CategoryId;
-                model.CityId = _data.CityId;
-                model.CreatedBy = CurrentUser.UserName;
+                model.CityId = userEntity.MasterCityId;
+                model.CreatedBy = userEntity.UserName;
                 model.Googleadr_address = _data.Googleadr_address;
                 model.GoogleICon = _data.GoogleICon;
                 model.GoogleInternational_phone_number = _data.GoogleInternational_phone_number;
@@ -65,9 +70,9 @@ namespace PlanGoGoAdmin.Controllers
         [HttpPost]
         public ActionResult UpdateAttractions(ModelAttractions model)
         {
-            if (_IAttractions.AttractionsCheckExists(new AttractionsDTO { AttractionsId = model.AttractionsId, AttractionName = model.AttractionName,CityId = model.CityId }).Count > 0)
+            if (_IAttractions.AttractionsCheckExists(new AttractionsDTO { AttractionsId = model.AttractionsId, AttractionName = model.AttractionName,CityId = userEntity.MasterCityId }).Count > 0)
             {
-                model.ErrorMessage = "Country name already existed";
+                model.ErrorMessage = "Attraction name already existed";
             }
             else
             {
@@ -78,8 +83,8 @@ namespace PlanGoGoAdmin.Controllers
                     AttractionName = model.AttractionName,
                     AttractionsId = model.AttractionsId,
                     CategoryId = model.CategoryId,
-                    CityId = model.CityId,
-                    CreatedBy = CurrentUser.UserName,
+                    CityId = userEntity.MasterCityId,
+                    CreatedBy = userEntity.UserName,
                     Googleadr_address = model.Googleadr_address,
                     GoogleICon = model.GoogleICon,
                     GoogleInternational_phone_number = model.GoogleInternational_phone_number,
@@ -93,7 +98,7 @@ namespace PlanGoGoAdmin.Controllers
                     PlaceId = model.PlaceId,
                     RankId = model.RankId                    
                 });
-                Response.Redirect("/Attractions/ManageAttractions");
+                Response.Redirect("ManageAttractions");
             }
             return View(model);
         }

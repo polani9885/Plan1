@@ -24,5 +24,6 @@ namespace Interfaces
         List<AttractionsDTO> Service_GetSearchTextNotCorrect();
 
         List<GoogleTypes> Scheduler_GetExtraCategoryList();
+        
     }
 }

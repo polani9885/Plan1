@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controlleBreakInformation")
+<div ng-controller="controllerBreakInformation">
+    <table class="gridTable" cellpadding="5px">
+        <tbody class="gridHeader">
+            <tr>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    Break Type
+                </th>
+                <th>
+                    Start Time
+                </th>
+                <th>
+                    Minimum Time
+                </th>
+                <th>
+                    Display
+                </th>
+                <th>
+                    End Time
+                </th>
+            </tr>
+        </tbody>
+        <tr ng-repeat="_result in masterBreakInfo">
+            <td>
+                <a href="~/BreakInformation/UpdateBreakInformation?breakInformationId={{_result.BreakInformationId}}" title="Update Break Information">
+                    Edit
+                </a>
+            </td>
+            <td title="'Break Type'">
+                {{_result.BreakType}}
+            </td>
+            <td title="Start Time">
+                {{_result.StartTime}}
+            </td>
+            <td title="Minimum Time">
+                {{_result.MinimumTime}}
+            </td>
+            <td title="Display">
+                {{_result.Display}}
+            </td>
+            <td>
+                {{_result.EndTime}}
+            </td>
+        </tr>
+    </table>
+</div>

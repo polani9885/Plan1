@@ -24,5 +24,8 @@ namespace BusinessEntites.Admin
 
         [DataMember]
         public bool IsDefault { get; set; }
+
+        [DataMember]
+        public int CityCount { get; set; }
     }
 }

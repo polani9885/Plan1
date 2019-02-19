@@ -8,7 +8,6 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     $scope.TravelModeId;
     $scope.SourceAttractionID;
     $scope.DestinationAttractionID;
-    $scope.AttractionID;
     $scope.StartDate;
     $scope.StartTime;
     $scope.attractionList = [];
@@ -35,8 +34,16 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
     $scope.FilterNearLocations = [];
     $scope.images = [];
+    $scope.googleMapsMainMarks = [];
+    $scope.googleMapsLinesMarks = [];
+    $scope.googleMapsStepMarks = [];
 
     $scope.UserRequestedOrder = [];
+    $scope.AttractionTravelStepsNearAttractionInfo = [];
+    $scope.GetAttractionsNextAttractions = [];
+
+    $scope.checkItFinalRequestOrNot = [];
+    $scope.AttractionXCategory = [];
 
     $scope.currentIndex = 0;
 
@@ -44,9 +51,19 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
     $scope.IsDistanceCalcuationMissing = true;
 
+    $scope.MapLineColor = ["Red","Green","Yellow","Blue","Black","Pink","Orange"];
 
+    $scope.GetAttractionsNextAttractionsAjaxRequest = [];
 
+    $scope.GetAttractionTravelStepsNearAttractionInfoAjaxRequest = [];
+    $scope.GetAttractionXCategoryAjaxRequest = [];
 
+    $scope.UserTripId = 0;
+
+    $scope.MapselectedCategoryList = [];
+
+    $scope.attractionTravelStepsId = 0;
+    $scope.orderId = 0;
 
     
 
@@ -57,12 +74,20 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     //GetCategoryList($scope, $http);
 
     $scope.init = function () {
+        
         //Get User stored information
+        $scope.UserTripId = getUrlVars().userTripId;
+        new EntryPoint.Main().IndexDbWrapper.openDataBase($scope.UserTripId, $scope);
+        
+    };
+
+    //this method will called from the IndexWrapper
+    $scope.LoadUserData = function () {
+        
         GetBreakInformation($scope, $http);
         GetTourInformationOnTripId($scope, $http);
         $scope.ExtraCategoryList = [];
         GetExtraCategoryList($scope, $http);
-        
     };
 
     
@@ -73,7 +98,6 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
     $scope.CategorySelected = function (categoryList) {
         //selectedCategoryList
-        
         var isRecordFound = false;
         $.each($scope.selectedCategoryList, function (categoryKey, categoryValue) {
             if (categoryValue["GoogleTypeID"] === categoryList.GoogleTypeID) {
@@ -98,6 +122,30 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $scope.CategorySelectedAttractionFilter();
     };
 
+    $scope.MapCategorySelected = function (categoryList) {
+        //selectedCategoryList
+        var isRecordFound = false;
+        $.each($scope.MapselectedCategoryList, function (categoryKey, categoryValue) {
+            if (categoryValue["GoogleTypeID"] === categoryList.GoogleTypeID) {
+                isRecordFound = true;
+                $scope.MapselectedCategoryList.splice(categoryKey, 1);
+                return false;
+            } else {
+                isRecordFound = false;
+            }
+        });
+        if (!isRecordFound) {
+            var item = [];
+            item.GoogleTypeID = categoryList.GoogleTypeID;
+            item.CategoryName = categoryList.TypeName;
+            $scope.MapselectedCategoryList.push(item);
+        }
+
+        if ($scope.attractionTravelStepsId > 0 && $scope.orderId > 0) {
+            $scope.mapStepBreakInfo($scope.attractionTravelStepsId, $scope.orderId);
+        }
+    };
+
     $scope.ClickMainCategorySelected = function(mainCategoryId) {
         $scope.MainCategorySelected = mainCategoryId;
         $scope.filterCategoryList = [];
@@ -115,6 +163,21 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $scope.CategorySelectedAttractionFilter();
 
         PublicFilterAttractions($scope, $http);
+    };
+
+    $scope.isMapCategoryExist = function(googleTypeId) {
+        var v = -1;
+
+        $.each($scope.MapselectedCategoryList,
+            function(key, value) {
+
+                if (value.GoogleTypeID === googleTypeId) {
+                    v = key;
+                    return false;
+                }
+            });
+
+        return v;
     };
 
     $scope.CategorySelectedAttractionFilter = function() {
@@ -257,29 +320,25 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
     //Getting the order of Attractions
     $scope.AttractionInformationBinding=function() {
-
-
+        
+        User_UserTripGetAttractions($scope, $http);
         $scope.UpdateUserReqestOrder();
 
         Public_GetOrderOfAttractionVisit($scope, $http);
     };
 
     $scope.UpdateUserReqestOrder = function() {
-        var attractionListConcated;
+        
         var isFirst = false;
         $.each($scope.attractionInterestedList, function (attractionKey, attractionValue) {
             if (!isFirst) {
                 isFirst = true;
                 $scope.SourceAttractionID = $scope.DestinationAttractionID = attractionListConcated = attractionValue["AttractionsId"];
             }
-            else {
-                attractionListConcated += "," + attractionValue["AttractionsId"];
-            }
         });
 
         //We need to make dynamic
         $scope.TravelModeId = 1;
-        $scope.AttractionID = attractionListConcated;
     };
 
     //Ajax return data for the order of attractions
@@ -301,29 +360,29 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     };
 
     //displaying the google maps information with the current attraction information
-    $scope.GoogleMapMarks = function (data) {
-        var googleMaps;
+    $scope.GoogleMapMarks = function(data) {
         var isFirst = true;
+        var isBreakAdd = false;
         
-        var path = [];
-        
+        var markerdata = [];
+        var index = 0;
 
         if (!jQuery.isEmptyObject(data)) {
             $.each(data,
-                function (key, value) {
-                    
+                function(key, value) {
+
                     if (!jQuery.isEmptyObject(value.ListGetOrderOfAttractionVisit)) {
                         $.each(value.ListGetOrderOfAttractionVisit,
-                            function (googleKey, googleValue) {
+                            function(googleKey, googleValue) {
 
-                                
-                                
+
                                 if (googleValue.SourceLatitude !== null &&
-                                    googleValue.SourceLongitude !== null && googleValue.DestinationLatitude!== null && 
+                                    googleValue.SourceLongitude !== null &&
+                                    googleValue.DestinationLatitude !== null &&
                                     googleValue.DestinationLongitude !== null
                                 ) {
 
-                                    
+
                                     if (isFirst) {
                                         isFirst = false;
                                         googleMaps = new GMaps({
@@ -332,70 +391,410 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                                             lng: googleValue.SourceLongitude
                                         });
 
-                                        googleMaps.addMarker({
-                                            lat: googleValue.SourceLatitude,
-                                            lng: googleValue.SourceLongitude,
-                                            title: googleValue.SourceAttractionName,
-                                            infoWindow: {
-                                                content: googleValue.SourceAttractionName +
-                                                    "<br/>" +
-                                                    googleValue.SourceSearchText +
-                                                    "<br/>"
-                                            }
+                                        
+                                            markerdata = [];
+                                            markerdata.lat = googleValue.SourceLatitude;
+                                        //this special adding because to resolve the conflict between the source and destination location
+                                            markerdata.lng = (parseFloat(googleValue.SourceLongitude)+.0001).toString();
+                                            markerdata.title = googleValue.SourceAttractionName;
+                                            markerdata.label = googleValue.RecordCount.toString();
+                                            markerdata.content = googleValue.SourceAttractionName +
+                                                "<br/>" +
+                                                "Start Location" +
+                                                "<br/>" +
+                                                "GroupDate:" +
+                                                value.GroupDate +
+                                                "<br/>" +
+                                                "Start:" +
+                                                googleValue.DateAndTime +
+                                                "<br/>";
+
+                                            $scope.googleMapsMainMarks.push(AddMarderk(markerdata));
+                                    }
+
+                                    //building the display Content
+                                    var destinationContent =
+                                        "<span class='mapAttractionSideHeadign'>" + "From: " + "</span>";
+                                    destinationContent += "<span class='mapAttractionName'>" +
+                                        googleValue.SourceAttractionName +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "To: " +
+                                        "</span>";
+                                    destinationContent += "<span class='mapAttractionName'>" +
+                                        googleValue.DestinationAttractionName +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionAddress'>" +
+                                        googleValue.DestinationSearchText +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "Date: " +
+                                        "</span>";
+                                    destinationContent +=
+                                        "<span class='mapAttractionSideText'>" +
+                                        value.GroupDate +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "Distance: " +
+                                        "</span>";
+                                    destinationContent += "<span class='mapAttractionSideText'>" +
+                                        googleValue.Distance +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "Distance Cover Time: " +
+                                        "</span>";
+                                    destinationContent += "<span class='mapAttractionSideText'>" +
+                                        googleValue.TravelTime +
+                                        " hh" +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "Reach Time: " +
+                                        "</span>";
+                                    destinationContent += "<span class='mapAttractionSideText'>" +
+                                        googleValue.ReachTime +
+                                        " hh" +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "Stay for View: " +
+                                        "</span>";
+                                    destinationContent += "<span class='mapAttractionSideText'>" +
+                                        googleValue.TimeRequiredToView +
+                                        " hh" +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                        "Complete Event: " +
+                                        "</span>";
+                                    destinationContent += "<span class='mapAttractionSideText'>" +
+                                        googleValue.EventEndTime +
+                                        " hh" +
+                                        "</span>";
+                                    destinationContent += "<br/>";
+                                    if (googleValue.IsNeedDrivningBreak) {
+                                        destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                            "It is a long journey do you want to take break  <button type='button' onclick='mapBreakInfo(" +
+                                            googleValue.RecordCount +
+                                            ")'>Yes</button>" +
+                                            "</span>";
+                                    }
+                                    var title = googleValue.RecordCount.toString() +
+                                        " " +
+                                        googleValue.DestinationAttractionName;
+
+                                    
+
+
+                                        markerdata = [];
+                                        markerdata.lat = googleValue.DestinationLatitude;
+                                        markerdata.lng = googleValue.DestinationLongitude;
+                                        markerdata.title = title;
+                                        markerdata.label = googleValue.RecordCount.toString();
+                                        markerdata.content = destinationContent;
+
+                                        $scope.googleMapsMainMarks.push(AddMarderk(markerdata));
+
+                                    
+                                        var isExist = false;
+                                        $.each($scope.GetAttractionsNextAttractions,
+                                            function(nextAttractionskey, nextAttractionsvalue) {
+                                                if (nextAttractionsvalue.AttractionsId === AttractionsId) {
+                                                    isExist = true;
+                                                    return false;
+                                                }
+                                            });
+
+                                        if (isExist === false) {
+                                            $scope.GetAttractionsNextAttractionsAjaxRequest.push(googleValue
+                                                .DestinationAttractionId);
+                                            QueGetAttractionsNextAttractions($scope);
+                                        }
+                                    
+
+
+                                    //If user select the Yes then we are reloading the map and opening the title window of map
+                                    $.each(value.DrivingSteps,
+                                        function(stepKey, stepValue) {
+
+                                            
+                                                var recordStepCounter = 1;
+                                                $.each(stepValue.DirectionSteps,
+                                                    function(sKey, sValue) {
+
+                                                        var isNearAttractionInfovalueExist = false;
+                                                        
+                                                        $.each($scope.AttractionTravelStepsNearAttractionInfo,
+                                                            function(nearAttractionInfokey, nearAttractionInfovalue) {
+                                                                if (nearAttractionInfovalue.attractionTravelStepsId ===
+                                                                    sValue.AttractionTravelStepsId &&
+                                                                    nearAttractionInfovalue.orderId ===
+                                                                    sValue.OrderId) {
+                                                                    isNearAttractionInfovalueExist = true;
+                                                                    return false;
+                                                                }
+                                                            });
+
+                                                        if (isNearAttractionInfovalueExist === false) {
+
+                                                            
+                                                            var sValuetemp = [];
+                                                            sValuetemp.AttractionTravelStepsId =
+                                                                sValue.AttractionTravelStepsId;
+                                                            sValuetemp.OrderId = sValue.OrderId;
+                                                            $scope
+                                                                .GetAttractionTravelStepsNearAttractionInfoAjaxRequest.push(
+                                                                    sValuetemp);
+                                                            
+
+                                                            QueGetAttractionTravelStepsNearAttractionInfo($scope);
+
+                                                            //This varaible will be used to get categories Id on the final call
+                                                            $scope.checkItFinalRequestOrNot = [];
+                                                            $scope.checkItFinalRequestOrNot.AttractionTravelStepsId =
+                                                                sValue.AttractionTravelStepsId;
+                                                            $scope.checkItFinalRequestOrNot.OrderId = sValue.OrderId;
+
+
+                                                        }
+
+                                                        recordStepCounter++;
+
+
+                                                    });
+
+                                            
                                         });
 
 
+                                    var sourceCoordinates = [];
+                                    var destinatinoCoordinates = [];
+                                    //Writing the PloyLine
+                                    var path = [];
+
+                                    if (googleValue.TravelTimeSeconds > 0) {
+                                        if (googleValue.IsNeedDrivningBreak) {
+
+                                            $.each(value.DrivingSteps,
+                                                function(stepKey, stepValue) {
+
+                                                    if (stepValue.RecordCount === googleValue.RecordCount) {
+                                                        $.each(stepValue.DirectionSteps,
+                                                            function(sKey, sValue) {
+
+                                                                sourceCoordinates = [];
+                                                                sourceCoordinates.push(sValue.Start_location_lat);
+                                                                sourceCoordinates.push(sValue.Start_location_lng);
+                                                                path.push(sourceCoordinates);
+
+                                                                destinatinoCoordinates = [];
+                                                                destinatinoCoordinates.push(sValue
+                                                                    .End_location_lat);
+                                                                destinatinoCoordinates.push(sValue
+                                                                    .End_location_lng);
+                                                                path.push(destinatinoCoordinates);
+                                                            });
+
+                                                    }
+                                                });
+
+                                        } else {
+                                            sourceCoordinates = [];
+                                            sourceCoordinates.push(googleValue.SourceLatitude);
+                                            sourceCoordinates.push(googleValue.SourceLongitude);
+                                            path.push(sourceCoordinates);
+
+                                            destinatinoCoordinates = [];
+                                            destinatinoCoordinates.push(googleValue.DestinationLatitude);
+                                            destinatinoCoordinates.push(googleValue.DestinationLongitude);
+                                            path.push(destinatinoCoordinates);
+                                        }
+
+                                        if (index === $scope.MapLineColor.length) {
+                                            index = 0;
+                                        }
+                                        if (path.length > 0) {
+                                            
+                                            $scope.googleMapsLinesMarks.push(googleMaps.drawPolyline({
+                                                path: path,
+                                                strokeColor: $scope.MapLineColor[index],
+                                                strokeOpacity: 0.6,
+                                                strokeWeight: 6
+                                            }));
+                                            index++;
+                                        }
                                     }
                                 }
-                                if (googleValue.SourceLatitude !== null &&
-                                    googleValue.SourceLongitude !== null &&
-                                    googleValue.DestinationLatitude !== null &&
-                                    googleValue.DestinationLongitude !== null) {
-                                    if (googleValue.DestinationLatitude !== null) {
-                                        googleMaps.addMarker({
-                                            lat: googleValue.DestinationLatitude,
-                                            lng: googleValue.DestinationLongitude,
-                                            title: googleValue.DestinationAttractionName,
-                                            infoWindow: {
-                                                content: googleValue.DestinationAttractionName +
-                                                    "<br/>" +
-                                                    googleValue.DestinationSearchText +
-                                                    "<br/>"
-                                            }
-                                        });
-
-                                        var sourceCoordinates = [];
-                                        sourceCoordinates.push(googleValue.SourceLatitude);
-                                        sourceCoordinates.push(googleValue.SourceLongitude);
-
-                                        path.push(sourceCoordinates);
-
-                                        var destinatinoCoordinates = [];
-                                        destinatinoCoordinates.push(googleValue.DestinationLatitude);
-                                        destinatinoCoordinates.push(googleValue.DestinationLongitude);
-
-                                        path.push(destinatinoCoordinates);
-
-
-                                    }
-                                }
-
-                                
-                               
                             });
-                        if (path.length > 0) {
-                            googleMaps.drawPolyline({
-                                path: path,
-                                strokeColor: '#131540',
-                                strokeOpacity: 0.6,
-                                strokeWeight: 6
-                            });
-                        }
                     }
                 });
         }
+        $("#googleMaps").width("800px");
+        $("#googleMaps").height("400px");
+        $("#googleMaps").focus();
+    };
 
+    $scope.GoogleMapStepMarks = function (data, recordCount) {
+        var isFirst = true;
+        var isBreakAdd = false;
+
+        var markerdata = [];
+        var index = 0;
         
+        if (!jQuery.isEmptyObject(data)) {
+            $.each(data,
+                function (key, value) {
+
+                    if (!jQuery.isEmptyObject(value.ListGetOrderOfAttractionVisit)) {
+                        $.each(value.ListGetOrderOfAttractionVisit,
+                            function (googleKey, googleValue) {
+
+
+                                if (googleValue.SourceLatitude !== null &&
+                                    googleValue.SourceLongitude !== null &&
+                                    googleValue.DestinationLatitude !== null &&
+                                    googleValue.DestinationLongitude !== null
+                                ) {
+
+                                    //If user select the Yes then we are reloading the map and opening the title window of map
+                                    if (googleValue.RecordCount === recordCount) {
+
+                                        $.each(value.DrivingSteps,
+                                            function (stepKey, stepValue) {
+
+                                                if (stepValue.RecordCount === googleValue.RecordCount) {
+                                                    var recordStepCounter = 1;
+                                                    $.each(stepValue.DirectionSteps,
+                                                        function (sKey, sValue) {
+
+                                                            if (sValue.Distance_Value > 1000) {
+                                                                var stepTitle =
+                                                                    "<span class='mapAttractionSideHeadign'>" +
+                                                                        "Start Time: " +
+                                                                        "</span>";
+                                                                stepTitle += "<span class='mapAttractionSideText'>" +
+                                                                    sValue.StartDateTime +
+                                                                    "</span>";
+                                                                stepTitle += "<br/>";
+                                                                stepTitle += "<span class='mapAttractionSideHeadign'>" +
+                                                                    "End Time: " +
+                                                                    "</span>";
+                                                                stepTitle += "<span class='mapAttractionSideText'>" +
+                                                                    sValue.EndDateTime +
+                                                                    "</span>";
+                                                                stepTitle += "<br/>";
+                                                                stepTitle += "<span class='mapAttractionSideHeadign'>" +
+                                                                    "Distance Covered: " +
+                                                                    "</span>";
+                                                                stepTitle += "<span class='mapAttractionSideText'>" +
+                                                                    sValue.DistanceCovered +
+                                                                    "</span>";
+                                                                stepTitle += "<br/>";
+                                                                stepTitle += "<span class='mapAttractionSideHeadign'>" +
+                                                                    "Distance Covered Time: " +
+                                                                    "</span>";
+                                                                stepTitle += "<span class='mapAttractionSideText'>" +
+                                                                    sValue.DistanceCoveredTime +
+                                                                    "</span>";
+                                                                stepTitle += "<br/>";
+                                                                stepTitle += "<span class='mapAttractionSideHeadign'>" +
+                                                                    "Check Neary by Events <button type='button' onclick='mapStepBreakInfo(" + sValue.AttractionTravelStepsId + "," + sValue.OrderId + ")'>Yes</button>" +
+                                                                    "</span>";
+
+                                                                markerdata = [];
+                                                                markerdata.lat = sValue.End_location_lat;
+                                                                markerdata.lng = sValue.End_location_lng;
+                                                                markerdata.title = recordStepCounter;
+                                                                markerdata.label = recordStepCounter.toString();
+                                                                markerdata.content = stepTitle;
+
+                                                                AddMarderk(markerdata);
+
+                                                                recordStepCounter++;
+                                                            }
+
+                                                        });
+                                                }
+                                            });
+
+                                    }
+
+
+                                    var sourceCoordinates = [];
+                                    var destinatinoCoordinates = [];
+                                    //Writing the PloyLine
+                                    var path = [];
+                                    if (googleValue.RecordCount === recordCount || recordCount === 0) {
+                                        if (googleValue.TravelTimeSeconds > 0) {
+                                            if (googleValue.IsNeedDrivningBreak) {
+
+                                                $.each(value.DrivingSteps,
+                                                    function (stepKey, stepValue) {
+
+                                                        if (stepValue.RecordCount === googleValue.RecordCount) {
+                                                            $.each(stepValue.DirectionSteps,
+                                                                function (sKey, sValue) {
+
+                                                                    sourceCoordinates = [];
+                                                                    sourceCoordinates.push(sValue.Start_location_lat);
+                                                                    sourceCoordinates.push(sValue.Start_location_lng);
+                                                                    path.push(sourceCoordinates);
+
+                                                                    destinatinoCoordinates = [];
+                                                                    destinatinoCoordinates.push(sValue
+                                                                        .End_location_lat);
+                                                                    destinatinoCoordinates.push(sValue
+                                                                        .End_location_lng);
+                                                                    path.push(destinatinoCoordinates);
+                                                                });
+
+                                                        }
+                                                    });
+
+                                            } else {
+                                                sourceCoordinates = [];
+                                                sourceCoordinates.push(googleValue.SourceLatitude);
+                                                sourceCoordinates.push(googleValue.SourceLongitude);
+                                                path.push(sourceCoordinates);
+
+                                                destinatinoCoordinates = [];
+                                                destinatinoCoordinates.push(googleValue.DestinationLatitude);
+                                                destinatinoCoordinates.push(googleValue.DestinationLongitude);
+                                                path.push(destinatinoCoordinates);
+                                            }
+
+                                            if (index === $scope.MapLineColor.length) {
+                                                index = 0;
+                                            }
+                                            if (path.length > 0) {
+                                                $scope.googleMapsLinesMarks.push(googleMaps.drawPolyline({
+                                                    path: path,
+                                                    strokeColor: $scope.MapLineColor[index],
+                                                    strokeOpacity: 0.6,
+                                                    strokeWeight: 6
+                                                }));
+                                                index++;
+                                            }
+                                        }
+                                    }
+
+
+                                }
+
+                            });
+
+
+                    }
+
+                });
+        }
+
+
 
         $("#googleMaps").width("800px");
         $("#googleMaps").height("400px");
@@ -500,24 +899,25 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
     //not intereseted attraction capturing and stroing into the list
     $scope.NotIntereseted = function (attractionID) {
         
-        var attractionIndex = 0;        
+        var isExisted = 0;
         $.each($scope.attractionInterestedList, function (attractionKey, attractionValue) {
             if (attractionValue.AttractionsId === attractionID) {
                 //$scope.notInterestedList.push(attractionValue);
-                attractionIndex = attractionKey;
+                isExisted = true;
                 return false;
             }
         });
+
+        if (isExisted) {
+            DeleteNotInterestedAttractionList($scope, attractionID);
+        } else {
+            alert("Attraction not in the list selected");
+        }
         
-        //removing the not inetreseted attraction from the attraction list
-        $scope.attractionInterestedList.splice(attractionIndex, 1);
-        $scope.filterAttractionList.push($scope.attractionInterestedList[attractionIndex]);
-        
-        //reloading the attraction information
-        $scope.AttractionInformationBinding();
     };
 
     $scope.Interested = function (attraction) {
+
         
         var isExisted = false;
         if ($scope.attractionInterestedList !== null) {
@@ -525,18 +925,19 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 function(key, value) {
                     if (value.AttractionsId === attraction.AttractionsId) {
                         isExisted = true;
+                        return false;
                     }
                 }
             );
         }
 
         if (!isExisted) {
-            $scope.attractionInterestedList.push(attraction);
-            //reloading the attraction information
-            $scope.AttractionInformationBinding();
+            AddInterestedAttractionList($scope, attraction.AttractionsId);
+        } else {
+            alert("Attraction Already selected");
         }
 
-        $scope.FilterInterestedAttraction();
+        
     };
 
 
@@ -655,7 +1056,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                     return false;
                 }
             });
-        debugger;
+        
         
         //$scope.UpdatedBreaks[indexCounter].IsUserInterestedDayBreak = $("#" + divId + "_IsUserInterestedDayBreak").prop('checked');
         $scope.UpdatedBreaks[indexCounter].UpdateDayEndTime = (jQuery.type($("#" + divId + "_UpdateDayEndTime").val()) === "undefined") ? "00:00:00" : $("#" + divId + "_UpdateDayEndTime").val();
@@ -811,7 +1212,13 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         UserGetCityList($scope, $http);
         $scope.GetCategoryList();
         User_UserTripGetAttractions($scope, $http);
+        User_RequestedBreaks($scope, $http);
 
+        $scope.UpdateUserReqestOrder();
+        User_GetUserStoredAttractinInfo($scope, $http);
+        User_UserTripBuildStatus($scope, $http);
+
+        $scope.BuildExpenseInfo();
         
 
     };
@@ -824,14 +1231,8 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                 item.AttractionsId = value.AttractionId;
                 $scope.attractionInterestedList.push(item);
             });
+
         $scope.FilterInterestedAttraction();
-        User_RequestedBreaks($scope, $http);
-
-        $scope.UpdateUserReqestOrder();
-        User_GetUserStoredAttractinInfo($scope, $http);
-        User_UserTripBuildStatus($scope, $http);
-
-        $scope.BuildExpenseInfo();
     };
 
     $scope.FilterInterestedAttraction = function() {
@@ -856,12 +1257,12 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
     $scope.RequestedBreaks = function(data) {
         $scope.UpdatedBreaks = [];
-
+        
 
         $.each(data,
             function(key, value) {
                 var temp = [];
-
+                
                 temp.RequestDate = value.RequestDate;
                 temp.IsUserInterestedDayBreak = value.IsUserInterestedDayBreak;
                 if (value.UpdateDayEndTime === null) {
@@ -934,13 +1335,12 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
 
                 temp.divId = "tab_" + value.RequestDate.replace("/", "_").replace("/", "_");
                 $scope.UpdatedBreaks.push(temp);
+                
             });
     };
 
 
-    $scope.AddLunchDinnerBreak = function (breakType, attractionId, divId, sourceLongitude, sourceLatitude) {
-        
-        
+    $scope.AddLunchDinnerBreak = function (breakType, attractionId, divId, sourceLongitude, sourceLatitude, attractionTravelStepsId) {
 
         $scope.breakValue = [];
         
@@ -949,6 +1349,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $scope.breakValue.divId = divId;
         $scope.breakValue.sourceLongitude = sourceLongitude;
         $scope.breakValue.sourceLatitude = sourceLatitude;
+        $scope.breakValue.attractionTravelStepsId = attractionTravelStepsId;
         $scope.BreakAttractionCalling();
     };
 
@@ -1466,7 +1867,7 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
                                             "Snow Fall : " +
                                             weatherValue.snowFall +
                                             "<br/>" +
-                                            "WindSpeed : " +
+                                            "Wind Speed : " +
                                             weatherValue.windSpeed +
                                             "<br/>" +
                                             "UV : " +
@@ -1487,6 +1888,275 @@ appPlanGoGo.controller('controlerIndex', function ($scope, $http) {
         $scope.init();
         Public_GetOrderOfAttractionVisit($scope, $http);
     };
+
+    $scope.AttractionTravelStepsNearAttractionInfoBinding = function (orderId, attractionTravelStepsId, data) {
+        
+        var isExist = false;
+        $.each($scope.AttractionTravelStepsNearAttractionInfo,
+            function(key, value) {
+                if (value.attractionTravelStepsId === attractionTravelStepsId && value.orderId === orderId) {
+                    isExist = true;
+                    return false;
+                }
+            });
+
+        if (isExist === false && data.length > 0) {
+            var temp = [];
+            temp.orderId = orderId;
+            temp.attractionTravelStepsId = attractionTravelStepsId;
+            temp.data = data;
+            if ($scope.AttractionTravelStepsNearAttractionInfo === null || jQuery.type($scope.AttractionTravelStepsNearAttractionInfo) === "undefined") {
+                $scope.AttractionTravelStepsNearAttractionInfo = [];
+            }
+            $scope.AttractionTravelStepsNearAttractionInfo.push(temp);
+
+            //string data into the Indexdb
+            var tempData = [];
+            tempData.orderId = orderId;
+            tempData.attractionTravelStepsId = attractionTravelStepsId;
+            tempData.data = JSON.stringify(data);
+            new EntryPoint.Main().IndexDbWrapper.storeTravelBreakNearByData($scope.UserTripId, tempData);
+        }
+
+        
+        
+        if ($scope.checkItFinalRequestOrNot.AttractionTravelStepsId === attractionTravelStepsId &&
+            $scope.checkItFinalRequestOrNot.OrderId === orderId) {
+            $scope.GettingAttractionXCategory();
+        }
+    };
+
+    $scope.GettingAttractionXCategory = function () {
+        
+        var getRecordInfo = [];
+            $.each($scope.AttractionTravelStepsNearAttractionInfo,
+                function (key, value) {
+                    $.each(value.data,
+                        function (dataKey, dataValue) {
+                            var exist = false;
+                            
+                            $.each($scope.AttractionXCategory,
+                                function (attKey, attValue) {
+                                    if (dataValue.AttractionsId === attValue.AttractionId) {
+                                        exist = true;
+                                        return false;
+                                    }
+                                });
+                            if (exist === false) {
+                                var temp = {};
+                                temp.ID = dataValue.AttractionsId;
+                                getRecordInfo.push(temp);
+                                if (getRecordInfo.length > 25) {
+                                    $scope.GetAttractionXCategoryAjaxRequest.push(getRecordInfo);
+                                    QueGetAttractionXCategory($scope);
+                                    return false;
+                                }
+                            }
+                        });
+                });
+        
+        if (getRecordInfo.length > 0) {
+            GetAttractionXCategory($scope, getRecordInfo);
+        }
+    };
+
+    $scope.GettingAttractionXCategoryBinding = function (data) {
+        
+        $.each(data,
+            function(key, value) {
+                var temp = [];
+                temp.AttractionId = value.AttractionId;
+                temp.CategoryId = value.CategoryId;
+                if ($scope.AttractionXCategory === null || jQuery.type($scope.AttractionXCategory) === "undefined") {
+                    $scope.AttractionXCategory = [];
+                }
+                $scope.AttractionXCategory.push(temp);
+
+
+                //stroing data into the index db
+                new EntryPoint.Main().IndexDbWrapper.storeAttractionCategoryData($scope.UserTripId, temp);
+            });
+    };
+
+    $scope.GetAttractionsNextAttractionsBinding = function (attractionsId, data) {
+
+        var isExist = false;
+        $.each($scope.GetAttractionsNextAttractions,
+            function (key, value) {
+                if (value.AttractionsId === AttractionsId) {
+                    isExist = true;
+                    return false;
+                }
+            });
+        
+        if (isExist === false && data.length>0) {
+            var temp = [];
+            temp.attractionTravelStepsId = AttractionsId;
+            temp.data = data;
+            if ($scope.GetAttractionsNextAttractions === null || jQuery.type($scope.GetAttractionsNextAttractions) === "undefined") {
+                $scope.GetAttractionsNextAttractions = [];
+            }
+            $scope.GetAttractionsNextAttractions.push(temp);
+
+            var tempData = [];
+            tempData.attractionTravelStepsId = AttractionsId;
+            tempData.data = JSON.stringify(data);
+            
+            new EntryPoint.Main().IndexDbWrapper.storeDestinationNearByData($scope.UserTripId, tempData);
+        }
+
+    };
+
+    $scope.mapBreakInfo = function (recordCount) {
+        
+        //$scope.OrderOfAttractionList
+        if (recordCount === 0)
+            $scope.GoogleMapMarks($scope.OrderOfAttractionList);
+        else
+            $scope.GoogleMapStepMarks($scope.OrderOfAttractionList, recordCount);
+    };
+
+    $scope.mapStepBreakInfo = function(attractionTravelStepsId, orderId) {
+        var markerdata = [];
+
+        var filterNearAttractionInfo = [];
+        if ($scope.MapselectedCategoryList.length > 0) {
+            $.each($scope.AttractionTravelStepsNearAttractionInfo,
+                function(key, value) {
+                    if (value.attractionTravelStepsId === attractionTravelStepsId && value.orderId === orderId) {
+                        $.each(value.data,
+                            function(dataKey, dataValue) {
+                                $.each($scope.AttractionXCategory,
+                                    function(xKey, xValue) {
+                                        if (dataValue.AttractionsId === xValue.AttractionId) {
+                                            $.each($scope.MapselectedCategoryList,
+                                                function(mapKey, mapValue) {
+                                                    if (xValue.CategoryId === mapValue.GoogleTypeID) {
+                                                        filterNearAttractionInfo.push(value);
+                                                    }
+                                                });
+                                        }
+                                    });
+
+                            });
+                    }
+                });
+        } else {
+            filterNearAttractionInfo = $scope.AttractionTravelStepsNearAttractionInfo;
+        }
+
+        $scope.AddNearByMarks(filterNearAttractionInfo);
+    };
+
+    $scope.AddNearByMarks = function(filterNearAttractionInfo) {
+
+        googleMaps.removeMarkers($scope.googleMapsStepMarks);
+        $.each(filterNearAttractionInfo,
+            function(key, value) {
+                if (value.attractionTravelStepsId === attractionTravelStepsId && value.orderId === orderId) {
+
+                    $.each(value.data,
+                        function(stepKey, stepValue) {
+
+
+                            //building the display Content
+                            var destinationContent = "<span class='mapAttractionName'>" +
+                                stepValue.SourceAttractionName +
+                                "</span>";
+                            destinationContent += "<br/>";
+                            destinationContent += "<span class='mapAttractionAddress'>" +
+                                stepValue.SourceSearchText +
+                                "</span>";
+                            destinationContent += "<br/>";
+                            destinationContent += "<a target='_blank' href='https://www.google.com/search?q=" +
+                                stepValue.SourceAttractionName +
+                                "'>Look in Google search</a>";
+                            destinationContent += "<br/>";
+                            destinationContent += "<br/>";
+                            if (stepValue.Distance !== null) {
+                                destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                    "Distance: " +
+                                    "</span>";
+                                destinationContent += "<span class='mapAttractionSideText'>" +
+                                    stepValue.Distance +
+                                    "</span>";
+                                destinationContent += "<br/>";
+                            }
+                            if (stepValue.TravelTimeHours !== null) {
+                                destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                    "Distance Cover Time: " +
+                                    "</span>";
+                                destinationContent += "<span cladestinationContent += ss='mapAttractionSideText'>" +
+                                    stepValue.TravelTimeHours +
+                                    " hh" +
+                                    "</span>";
+                                destinationContent += "<br/>";
+                            }
+                            if (stepValue.SourceRating !== null) {
+                                destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                    "Rating: " +
+                                    "</span>";
+                                destinationContent += "<span class='mapAttractionSideText'>" +
+                                    stepValue.SourceRating +
+                                    "</span>";
+                                destinationContent += "<br/>";
+                            }
+                            if (stepValue.SourceRatingTotal !== null) {
+                                destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                    "Total Rating: " +
+                                    "</span>";
+                                destinationContent += "<span class='mapAttractionSideText'>" +
+                                    stepValue.SourceRatingTotal +
+                                    "</span>";
+                                destinationContent += "<br/>";
+                            }
+                            if (stepValue.FoodExpense > 0) {
+                                destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                    "Food Expense: " +
+                                    "</span>";
+                                destinationContent += "<span class='mapAttractionSideText'>" +
+                                    stepValue.FoodExpense +
+                                    "</span>";
+                                destinationContent += "<br/>";
+                            }
+                            if (stepValue.StayExpense > 0) {
+                                destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                    "Stay Expense: " +
+                                    "</span>";
+                                destinationContent += "<span class='mapAttractionSideText'>" +
+                                    stepValue.StayExpense +
+                                    "</span>";
+                                destinationContent += "<br/>";
+                            }
+
+                            destinationContent += "<span class='mapAttractionSideHeadign'>" +
+                                "Add this attraction: " +
+                                "</span>";
+                            destinationContent +=
+                                "<button type='button' onclick='userInterested(" +
+                                stepValue.AttractionsId +
+                                ")'>Interested</button>";
+                            destinationContent += "<br/>";
+
+
+                            markerdata = [];
+                            markerdata.lat = stepValue.SourceLatitude;
+                            markerdata.lng = stepValue.SourceLongitude;
+                            markerdata.title = stepValue.AttractionName;
+                            markerdata.content = destinationContent;
+                            markerdata.IsNearLocation = true;
+
+                            var markInfo = AddMarderk(markerdata);
+
+                            $scope.googleMapsStepMarks.push(markInfo);
+                        });
+
+
+                    return false;
+                }
+            });
+    };
+
     $scope.init();
 });
 

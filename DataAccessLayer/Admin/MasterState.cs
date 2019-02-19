@@ -98,6 +98,24 @@ namespace DataAccessLayer.Admin
             }
         }
 
+        public void Admin_MergeStates(int sourceStateId,int destinationStateId)
+        {
+            try
+            {
+                SqlHelper.QuerySP("Admin_MergeStates",
+                    new
+                    {
+
+                        SourceStateId = sourceStateId,
+                        DestinationStateId = destinationStateId
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

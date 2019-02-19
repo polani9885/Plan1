@@ -778,7 +778,7 @@
         var marker = new google.maps.Marker(marker_options);
 
         marker.fences = fences;
-
+        
         if (options.infoWindow) {
             marker.infoWindow = new google.maps.InfoWindow(options.infoWindow);
 
@@ -836,6 +836,21 @@
             }
         });
 
+        google.maps.event.addListener(marker, 'mouseover', function () {
+            this.details = details;
+
+            if (options.click) {
+                options.click.apply(this, [this]);
+            }
+
+            if (marker.infoWindow) {
+                self.hideInfoWindows();
+                marker.infoWindow.open(self.map, marker);
+            }
+        });
+
+        
+
         google.maps.event.addListener(marker, 'rightclick', function (e) {
             e.marker = this;
 
@@ -885,6 +900,19 @@
         GMaps.fire('marker_added', marker, this);
 
         return marker;
+    };
+
+    GMaps.prototype.infoWindowOpen = function (title) {
+        
+        for (var i = 0; i < this.markers.length; i++) {
+
+            if (this.markers[i].title === title) {
+                this.markers[i].infoWindow.open(self.map, this.markers[i]);
+                break;
+            }
+
+        }
+        
     };
 
     GMaps.prototype.addMarkers = function (array) {

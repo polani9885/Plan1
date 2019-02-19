@@ -16,7 +16,7 @@ BEGIN
 			  ,[StateId] = @StateId
 			  ,[CityShortName] = @CityShortName
 			  ,[IsDefault] = @IsDefault
-		 WHERE StateId = @StateId
+		 WHERE CityId = @CityId
 
 		 
 	END
@@ -40,9 +40,10 @@ BEGIN
 
 	IF(@IsDefault = 1)
 	BEGIN
-		UPDATE [dbo].[MasterState]
+		UPDATE [dbo].MasterCity
 			SET [IsDefault] = 0
-		WHERE StateId NOT IN (@StateId)
+		WHERE CityId NOT IN (@CityId)
+		AND StateId = @StateId
 	END
 
 END

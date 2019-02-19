@@ -1,4 +1,6 @@
 ﻿using BusinessEntites;
+using BusinessEntites.DataBaseModels;
+using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.Scheduler;
 using BusinessEntites.Users;
@@ -130,11 +132,11 @@ namespace ServiceClient.Services
         }
 
         public void User_LogUserTripInformation(int travelModeId,
-            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+             List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             _userService.User_LogUserTripInformation(travelModeId,
-                attractionID, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,userTripId);
+                listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,userTripId);
         }
 
         public List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId)
@@ -142,9 +144,10 @@ namespace ServiceClient.Services
             return _userService.User_UserTripGetAttractions(userTripId);
         }
 
-        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId)
+        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId,int userId)
         {
-            return _userService.User_GetUserStoredAttractinInfo(userTripId);
+            return _userService.User_GetUserStoredAttractinInfo(userTripId,userId);
+            
         }
 
         public List<UserTable_UpdatedBreaksTemp> User_RequestedBreaks(int userTripId)
@@ -174,14 +177,14 @@ namespace ServiceClient.Services
             }
         }
 
-        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate)
+        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate, int attractionTravelStepsId)
         {
             try
             {
 
                 var returnResult = new List<public_FilterAttractions>();
 
-                var result = _userService.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate);
+                var result = _userService.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate, attractionTravelStepsId);
 
                 var groupResult = result.GroupBy(x => x.AttractionsId);
 
@@ -247,11 +250,11 @@ namespace ServiceClient.Services
             }
         }
 
-        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate, string startTime)
         {
             try
             {
-                _userService.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate, googleSearchText, breakType, breakDate);
+                _userService.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate, googleSearchText, breakType, breakDate, startTime);
 
             }
             catch (Exception e)
@@ -314,6 +317,96 @@ namespace ServiceClient.Services
             }
         }
 
+        public void User_AddInterestedAttractionList(int userTripId, int attractionId)
+        {
+            try
+            {
+                _userService.User_AddInterestedAttractionList(userTripId,attractionId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
+        public void User_DeleteNotInterestedAttractionList(int userTripId, int attractionId)
+        {
+            try
+            {
+                _userService.User_DeleteNotInterestedAttractionList(userTripId, attractionId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
+
+        public List<User_GetDirectionsSteps> User_GetDirectionsSteps(int countryId, int attractionTravelTimeDistanceId, string dateAndTime)
+        {
+            try
+            {
+                return _userService.User_GetDirectionsSteps(countryId, attractionTravelTimeDistanceId,dateAndTime);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionTravelStepsNearAttractionInfo(
+            int attractionTravelStepsId, int countryId)
+        {
+            try
+            {
+                return _userService.User_GetAttractionTravelStepsNearAttractionInfo(attractionTravelStepsId, countryId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionsNextAttractions(int attractionsId, int countryId)
+        {
+            try
+            {
+                return _userService.User_GetAttractionsNextAttractions(attractionsId, countryId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<AttractionXCategory> User_GetAttractionXCategory(List<userTable_OnlyId> attractionsId,
+            int countryId)
+        {
+            try
+            {
+                return _userService.User_GetAttractionXCategory(attractionsId, countryId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void User_UpdateBreakInformation(List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<EntityPredictions> User_AutoComplete(string address, int countryId)
+        {
+            try
+            {
+                return _userService.User_AutoComplete(address,countryId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

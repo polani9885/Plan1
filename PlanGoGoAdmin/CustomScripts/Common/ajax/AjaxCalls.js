@@ -3,7 +3,7 @@ function Admin_GetUser(angularScope, http, ngTableParams) {
 
     $.ajax({
         type: "GET",
-        url: '/User/Admin_GetUser',
+        url: serverUrl + '/User/Admin_GetUser',
         dataType: "json",
         beforeSend: function () {
 
@@ -30,7 +30,7 @@ function Admin_GetCountry(angularScope, http, ngTableParams) {
 
     $.ajax({
         type: "GET",
-        url: '/Country/Admin_GetCountry',
+        url: serverUrl + '/Country/Admin_GetCountry',
         dataType: "json",
         beforeSend: function () {
 
@@ -59,7 +59,7 @@ function Admin_GetCountryList(angularScope, http, ngTableParams) {
     
     $.ajax({
         type: "GET",
-        url: '/Country/Admin_GetCountry',
+        url: serverUrl + '/Country/Admin_GetCountry',
         dataType: "json",
         beforeSend: function () {
 
@@ -74,7 +74,7 @@ function Admin_GetCountryList(angularScope, http, ngTableParams) {
 
                     if (angularScope.paramCountryId > 0) {
                         $.each(data, function (_id, _value) {
-                            if (_value["CountryId"] == angularScope.paramCountryId)
+                            if (_value["CountryId"] === angularScope.paramCountryId)
                             {
                                 angularScope.CountrySelectedValue = _value;
                                 return false;
@@ -84,7 +84,6 @@ function Admin_GetCountryList(angularScope, http, ngTableParams) {
                     else {
                         angularScope.CountrySelectedValue = data[0];
                     }
-                    Admin_GetStates(angularScope, http, ngTableParams, angularScope.CountrySelectedValue);
                 }
             });
         },
@@ -98,11 +97,10 @@ function Admin_GetCountryList(angularScope, http, ngTableParams) {
 }
 
 //Getting the states
-function Admin_GetStates(angularScope, http, ngTableParams,countryId) {    
+function Admin_GetStates(angularScope, http, ngTableParams) {    
     $.ajax({
         type: "GET",
-        url: '/MasterState/Admin_GetStates',
-        data: { CountryId: countryId.CountryId },
+        url: serverUrl + '/MasterState/Admin_GetStates',
         dataType: "json",
         beforeSend: function () {
 
@@ -124,11 +122,10 @@ function Admin_GetStates(angularScope, http, ngTableParams,countryId) {
 }
 
 //Getting the City
-function Admin_GetCity(angularScope, http, ngTableParams, stateId) {
+function Admin_GetCity(angularScope, http, ngTableParams) {
     $.ajax({
         type: "GET",
-        url: '/MasterCity/Admin_GetCity',
-        data: { StateId: stateId.StateId },
+        url: serverUrl + '/MasterCity/Admin_GetCity',
         dataType: "json",
         beforeSend: function () {
 
@@ -153,7 +150,7 @@ function Admin_GetCity(angularScope, http, ngTableParams, stateId) {
 function Admin_MasterCategoryGet(angularScope, http, ngTableParams) {
     $.ajax({
         type: "GET",
-        url: '/MasterCategory/Admin_MasterCategoryGet',        
+        url: serverUrl + '/MasterCategory/Admin_MasterCategoryGet',
         dataType: "json",
         beforeSend: function () {
 
@@ -164,6 +161,7 @@ function Admin_MasterCategoryGet(angularScope, http, ngTableParams) {
                 angularScope.masterCategory = data;
                 angularScope.masterCategoryBinding(data);
             });
+            
         },
         error: function (result) {
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
@@ -179,8 +177,7 @@ function AttractionsOnCityId(angularScope, http, ngTableParams) {
     
     $.ajax({
         type: "GET",
-        url: '/Attractions/AttractionsOnCityId',
-        data:{CityId:angularScope.CitySelectedValue.CityId},
+        url: serverUrl + '/Attractions/AttractionsOnCityId',
         dataType: "json",
         beforeSend: function () {
 
@@ -204,7 +201,7 @@ function GetAttractionOpenTime(angularScope, http, ngTableParams) {
     
     $.ajax({
         type: "GET",
-        url: '/OpenTime/GetAttractionOpenTime',
+        url: serverUrl + '/OpenTime/GetAttractionOpenTime',
         data: { AttractionId: angularScope.paramAttractionId },
         dataType: "json",
         beforeSend: function () {
@@ -229,7 +226,7 @@ function AttractionTravelTimeDistanceGet(angularScope, http, ngTableParams) {
     
     $.ajax({
         type: "GET",
-        url: '/AttractionTravelTimeDistance/AttractionTravelTimeDistanceGet',
+        url: serverUrl + '/AttractionTravelTimeDistance/AttractionTravelTimeDistanceGet',
         data: { attractionId: angularScope.paramAttractionId },
         dataType: "json",
         beforeSend: function () {
@@ -254,7 +251,7 @@ function MissingDistanceAttractionsRecordsGet(angularScope, http, ngTableParams)
     
     $.ajax({
         type: "GET",
-        url: '/MissingDistanceAttractionsRecords/MissingDistanceAttractionsRecordsGet',       
+        url: serverUrl + '/MissingDistanceAttractionsRecords/MissingDistanceAttractionsRecordsGet',
         dataType: "json",
         beforeSend: function () {
 
@@ -277,7 +274,7 @@ function MissingDistanceAttractionsRecordsGet(angularScope, http, ngTableParams)
 function MissingDistanceAttractionsRecordsXAttractionsGet(angularScope, http, ngTableParams) {
     $.ajax({
         type: "GET",
-        url: '/MissingDistanceAttractionsRecords/MissingDistanceAttractionsRecordsXAttractionsGet',
+        url: serverUrl + '/MissingDistanceAttractionsRecords/MissingDistanceAttractionsRecordsXAttractionsGet',
         data: { MissingDistanceAttractionsRecordsID: angularScope.paramMissingDistanceAttractionsRecordsID },
         dataType: "json",
         beforeSend: function () {
@@ -291,6 +288,130 @@ function MissingDistanceAttractionsRecordsXAttractionsGet(angularScope, http, ng
         },
         error: function (result) {
             alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function GetBreakInformation(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: serverUrl + '/BreakInformation/GetBreakInformation',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        aync: false,
+        success: function (data) {
+            angularScope.$apply(function () {
+                angularScope.masterBreakInfo = data;
+                angularScope.masterBreakInfoBinding(data);
+            });
+        },
+        error: function (result) {
+            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function Scheduler_GetTravelMode(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: serverUrl + '/MasterTravelMode/Scheduler_GetTravelMode',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        aync: false,
+        success: function (data) {
+            angularScope.$apply(function () {
+                angularScope.masterTravelMode = data;
+                angularScope.masterTravelModeBinding(data);
+            });
+        },
+        error: function (result) {
+            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function Admin_MasterGoogleTypeGet(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: serverUrl + '/MasterGoogleType/Admin_MasterGoogleTypeGet',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        aync: false,
+        success: function (data) {
+            angularScope.$apply(function () {
+                angularScope.masterGoogleType = data;
+                angularScope.masterGoogleTypeFiltered = data;
+                angularScope.masterGoogleTypeBinding(data);
+            });
+        },
+        error: function (result) {
+            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+function Admin_MasterCategoryXMasterGoogleType(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: serverUrl + '/MasterGoogleType/Admin_MasterCategoryXMasterGoogleType',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        aync: false,
+        success: function (data) {
+            angularScope.$apply(function () {
+                angularScope.MasterCategoryXMasterGoogleType = data;
+            });
+        },
+        error: function (result) {
+            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+        },
+        complete: function () {
+
+        }
+    });
+}
+function Admin_GetMasterPriceInfo(angularScope, http) {
+
+    $.ajax({
+        type: "GET",
+        url: serverUrl + '/MasterPriceInfo/Admin_GetMasterPriceInfo',
+        dataType: "json",
+        beforeSend: function () {
+
+        },
+        aync: false,
+        success: function (data) {
+            angularScope.$apply(function () {
+                angularScope.masterPriceInfo = data;
+                angularScope.masterPriceInfoBinding(data);
+            });
+        },
+        error: function (result) {
+            //alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
         },
         complete: function () {
 

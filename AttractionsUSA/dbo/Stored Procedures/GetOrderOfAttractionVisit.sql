@@ -5,8 +5,7 @@
 -- =============================================
 CREATE PROCEDURE [dbo].[GetOrderOfAttractionVisit]	
 (	
-	@AttractionID userTable_OnlyId ReadOnly 
-	,@TravelModeId INT	
+	@TravelModeId INT	
 	,@UserBreakTime UserTable_UpdatedBreaks ReadOnly	
 	,@UserTripId INT
 )
@@ -17,12 +16,16 @@ BEGIN
 	,@DestinationAttractionID INT
 	,@StartDate DATETIME = NULL
 	,@StartTime TIME = NULL	
+	,@DrivingBreak INT = 0
 
+	IF @TravelModeId = 0 
+		SET @TravelModeId = 1
 
 	SELECT  
 		@SourceAttractionID = SourceAttractionId
 		,@DestinationAttractionID = DestinationAttractionId
 		,@StartDate = StartDate
+		,@DrivingBreak = DrivingBreak
 	FROM Attractions..UserTrip WITH(NOLOCK)
 	WHERE UserTripId = @UserTripId
 
@@ -75,8 +78,9 @@ BEGIN
 
 
 	INSERT INTO @AttractionInfomation
-	SELECT ID,ROW_NUMBER() OVER(ORDER BY ID) FROM @AttractionID
-	WHERE ID NOT IN (@SourceAttractionID)	
+	SELECT AttractionId,ROW_NUMBER() OVER(ORDER BY AttractionId) 
+	FROM Attractions..UserTripAttractionList WITH(NOLOCK)
+	WHERE UserTripId = @UserTripId	
 	
 	
 
@@ -109,74 +113,74 @@ BEGIN
 		FROM @OrderOfAttactionInfomration
 		ORDER BY RecordCount DESC
 			
+		--Find the way how to use break information, otherwise remove complete dependency
+		-------------------------------------------------------------------------------------------------------------------------------
+		----Start Break Time Logic		
+			
+		--	DELETE FROM @OrderOfAttactionInfomrationTemp
 		
-		-----------------------------------------------------------------------------------------------------------------------------
-		--Start Break Time Logic		
-			
-			DELETE FROM @OrderOfAttactionInfomrationTemp
+		--	INSERt INTO @OrderOfAttactionInfomrationTemp		
+		--	SELECT * FROM @OrderOfAttactionInfomration
 		
-			INSERt INTO @OrderOfAttactionInfomrationTemp		
-			SELECT * FROM @OrderOfAttactionInfomration
+		--	DELETE FROM @OrderOfAttactionInfomration		
+
+		--	INSERT INTO @OrderOfAttactionInfomration
+		--	(
+		--		RecordCount,
+		--		[SourceAttractionId],
+		--		[DestinationAttractionId],
+		--		[Distance],
+		--		[TravelTime],
+		--		[TravelModeId],
+		--		[SourceAttractionName],
+		--		[DestinationAttractionName],
+		--		[DateAndtime],
+		--		[ReachTime],
+		--		[TimeRequiredToView],
+		--		[EventEndTime],
+		--		[IsLunchDinnerBreakTime],
+		--		[IsDistanceCalculationMissing],
+		--		WeekDayId,
+		--		BreakInformationId
+		--	)		
+		--	EXEC BreakInformationUpdate 
+		--	@GetStartingTimeEvent = @GetStartingTimeEvent
+		--	,@OrderOfAttactionInfomration = @OrderOfAttactionInfomrationTemp
+		--	,@UserBreakTime = @UserBreakTime
+		--	,@RecordOrder = @RecordOrder		
+		--	,@UserTripId = @UserTripId
+		--	,@IsForceAdding = @IsForceAdding
+		--	,@BreakId = @BreakId
+		--	,@SourceAttractionID = @SourceAttractionID
+		--	,@TravelModeId = @TravelModeId
+
+			
+			
+		--	--These should be here only because of force break adding
+		--	SET @IsForceAdding = 0
+		--	SET @BreakId  = 0
 		
-			DELETE FROM @OrderOfAttactionInfomration		
-
-			INSERT INTO @OrderOfAttactionInfomration
-			(
-				RecordCount,
-				[SourceAttractionId],
-				[DestinationAttractionId],
-				[Distance],
-				[TravelTime],
-				[TravelModeId],
-				[SourceAttractionName],
-				[DestinationAttractionName],
-				[DateAndtime],
-				[ReachTime],
-				[TimeRequiredToView],
-				[EventEndTime],
-				[IsLunchDinnerBreakTime],
-				[IsDistanceCalculationMissing],
-				WeekDayId,
-				BreakInformationId
-			)		
-			EXEC BreakInformationUpdate 
-			@GetStartingTimeEvent = @GetStartingTimeEvent
-			,@OrderOfAttactionInfomration = @OrderOfAttactionInfomrationTemp
-			,@UserBreakTime = @UserBreakTime
-			,@RecordOrder = @RecordOrder		
-			,@UserTripId = @UserTripId
-			,@IsForceAdding = @IsForceAdding
-			,@BreakId = @BreakId
-			,@SourceAttractionID = @SourceAttractionID
-			,@TravelModeId = @TravelModeId
-
+		--	IF EXISTS (SELECT 1 FROM @OrderOfAttactionInfomration
+		--	WHERE BreakInformationId IS NOT NULL 
+		--	AND  IsLunchDinnerBreakTime  = 1
+		--	AND RecordCount = (SELECT MAX(RecordCount) FROM @OrderOfAttactionInfomration))
+		--	BEGIN
 			
-			
-			--These should be here only because of force break adding
-			SET @IsForceAdding = 0
-			SET @BreakId  = 0
-		
-			IF EXISTS (SELECT 1 FROM @OrderOfAttactionInfomration
-			WHERE BreakInformationId IS NOT NULL 
-			AND  IsLunchDinnerBreakTime  = 1
-			AND RecordCount = (SELECT MAX(RecordCount) FROM @OrderOfAttactionInfomration))
-			BEGIN
-			
-				SELECT @NextAttractionId = DestinationAttractionId 		
-						,@ResTravelModeId = TravelModeId 
-				FROM @OrderOfAttactionInfomration
-				WHERE BreakInformationId IS NOT NULL 
-				AND  IsLunchDinnerBreakTime  = 1
-				AND RecordCount = (SELECT MAX(RecordCount) FROM @OrderOfAttactionInfomration)
-			END
+		--		SELECT @NextAttractionId = DestinationAttractionId 		
+		--				,@ResTravelModeId = TravelModeId 
+		--		FROM @OrderOfAttactionInfomration
+		--		WHERE BreakInformationId IS NOT NULL 
+		--		AND  IsLunchDinnerBreakTime  = 1
+		--		AND RecordCount = (SELECT MAX(RecordCount) FROM @OrderOfAttactionInfomration)
+		--	END
 
 			
 
-			SELECT @RecordOrder = MAX(ISNULL(RecordCount,0)) + 1 FROM @OrderOfAttactionInfomration
+		--	SELECT @RecordOrder = MAX(ISNULL(RecordCount,0)) + 1 FROM @OrderOfAttactionInfomration
 
 			
-		--End break information missing adding
-		---------------------------------------------------------------------------------------------------------
+		----End break information missing adding
+		-----------------------------------------------------------------------------------------------------------
 		SELECT TOP 1 @GetStartingTimeEvent = EventEndTime					
 		FROM @OrderOfAttactionInfomration
 		ORDER BY RecordCount DESC
@@ -721,7 +725,7 @@ BEGIN
 						CAST(
 								OAI.[Distance] AS DECIMAL(18,2)
 							) 
-							* 0.00062137 AS DECIMAL(18,2)
+							* (SELECT MetersIn FROM [Attractions]..[MasterCountry]  WITH(NOLOCK) WHERE CountryId = 2 )AS DECIMAL(18,2)
 					) AS Varchar(50)
 				)
 		 + ' Miles' 		
@@ -763,6 +767,23 @@ BEGIN
 		,OAI.BreakInformationId
 		,(SELECT Food FROM [dbo].[MasterPriceInfo] WITH(NOLOCK) WHERE PriveLevel = DA.PriceLevel) AS FoodExpense
 		,(SELECT Stay FROM [dbo].[MasterPriceInfo] WITH(NOLOCK) WHERE PriveLevel = DA.PriceLevel) AS StayExpense
+		,CASE WHEN 
+			(OAI.[TravelTime]/60/60) >= @DrivingBreak 
+			AND OAI.[TravelModeId] = 1 
+			AND EXISTS
+			(	SELECT 1 FROM [dbo].[AttractionTravelTimeDistance] WITH(NOLOCK) 
+				WHERE SourceAttractionId = OAI.[SourceAttractionId] 
+				AND DestinationAttractionId = OAI.[DestinationAttractionId]
+				AND TravelModeId = OAI.[TravelModeId]
+			)
+		THEN 1 
+		ELSE 0 
+		END IsNeedDrivningBreak
+		,(	SELECT TOP 1 AttractionTravelTimeDistanceId FROM [dbo].[AttractionTravelTimeDistance] WITH(NOLOCK) 
+			WHERE SourceAttractionId = OAI.[SourceAttractionId] 
+			AND DestinationAttractionId = OAI.[DestinationAttractionId]
+			AND TravelModeId = OAI.[TravelModeId]
+		) AS AttractionTravelTimeDistanceId
 	FROM @OrderOfAttactionInfomration OAI
 	LEFT JOIN Attractions SA WITH(NOLOCK) ON SA.AttractionsId = OAI.SourceAttractionId
 	LEFT JOIN Attractions DA WITH(NOLOCK) ON DA.AttractionsId = OAI.DestinationAttractionId

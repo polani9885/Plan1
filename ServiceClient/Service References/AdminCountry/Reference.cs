@@ -16,10 +16,10 @@ namespace ServiceClient.AdminCountry {
     public interface ICountry {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_UpdateCountry", ReplyAction="http://tempuri.org/ICountry/Admin_UpdateCountryResponse")]
-        void Admin_UpdateCountry(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault);
+        void Admin_UpdateCountry(BusinessEntites.Admin.MasterCountryDTO dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_UpdateCountry", ReplyAction="http://tempuri.org/ICountry/Admin_UpdateCountryResponse")]
-        System.Threading.Tasks.Task Admin_UpdateCountryAsync(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault);
+        System.Threading.Tasks.Task Admin_UpdateCountryAsync(BusinessEntites.Admin.MasterCountryDTO dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_GetCountry", ReplyAction="http://tempuri.org/ICountry/Admin_GetCountryResponse")]
         System.Collections.Generic.List<BusinessEntites.Admin.MasterCountryDTO> Admin_GetCountry();
@@ -38,6 +38,18 @@ namespace ServiceClient.AdminCountry {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_GetCountryOnId", ReplyAction="http://tempuri.org/ICountry/Admin_GetCountryOnIdResponse")]
         System.Threading.Tasks.Task<BusinessEntites.Admin.MasterCountryDTO> Admin_GetCountryOnIdAsync(int countryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_MasterPriceInfoUpdate", ReplyAction="http://tempuri.org/ICountry/Admin_MasterPriceInfoUpdateResponse")]
+        void Admin_MasterPriceInfoUpdate(int countryId, BusinessEntites.DataBaseModels.MasterPriceInfo dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_MasterPriceInfoUpdate", ReplyAction="http://tempuri.org/ICountry/Admin_MasterPriceInfoUpdateResponse")]
+        System.Threading.Tasks.Task Admin_MasterPriceInfoUpdateAsync(int countryId, BusinessEntites.DataBaseModels.MasterPriceInfo dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_GetMasterPriceInfo", ReplyAction="http://tempuri.org/ICountry/Admin_GetMasterPriceInfoResponse")]
+        System.Collections.Generic.List<BusinessEntites.DataBaseModels.MasterPriceInfo> Admin_GetMasterPriceInfo(int countryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICountry/Admin_GetMasterPriceInfo", ReplyAction="http://tempuri.org/ICountry/Admin_GetMasterPriceInfoResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.DataBaseModels.MasterPriceInfo>> Admin_GetMasterPriceInfoAsync(int countryId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,12 +79,12 @@ namespace ServiceClient.AdminCountry {
                 base(binding, remoteAddress) {
         }
         
-        public void Admin_UpdateCountry(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault) {
-            base.Channel.Admin_UpdateCountry(countryId, countryName, countryShortName, createdBy, isDefault);
+        public void Admin_UpdateCountry(BusinessEntites.Admin.MasterCountryDTO dto) {
+            base.Channel.Admin_UpdateCountry(dto);
         }
         
-        public System.Threading.Tasks.Task Admin_UpdateCountryAsync(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault) {
-            return base.Channel.Admin_UpdateCountryAsync(countryId, countryName, countryShortName, createdBy, isDefault);
+        public System.Threading.Tasks.Task Admin_UpdateCountryAsync(BusinessEntites.Admin.MasterCountryDTO dto) {
+            return base.Channel.Admin_UpdateCountryAsync(dto);
         }
         
         public System.Collections.Generic.List<BusinessEntites.Admin.MasterCountryDTO> Admin_GetCountry() {
@@ -97,6 +109,22 @@ namespace ServiceClient.AdminCountry {
         
         public System.Threading.Tasks.Task<BusinessEntites.Admin.MasterCountryDTO> Admin_GetCountryOnIdAsync(int countryId) {
             return base.Channel.Admin_GetCountryOnIdAsync(countryId);
+        }
+        
+        public void Admin_MasterPriceInfoUpdate(int countryId, BusinessEntites.DataBaseModels.MasterPriceInfo dto) {
+            base.Channel.Admin_MasterPriceInfoUpdate(countryId, dto);
+        }
+        
+        public System.Threading.Tasks.Task Admin_MasterPriceInfoUpdateAsync(int countryId, BusinessEntites.DataBaseModels.MasterPriceInfo dto) {
+            return base.Channel.Admin_MasterPriceInfoUpdateAsync(countryId, dto);
+        }
+        
+        public System.Collections.Generic.List<BusinessEntites.DataBaseModels.MasterPriceInfo> Admin_GetMasterPriceInfo(int countryId) {
+            return base.Channel.Admin_GetMasterPriceInfo(countryId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.DataBaseModels.MasterPriceInfo>> Admin_GetMasterPriceInfoAsync(int countryId) {
+            return base.Channel.Admin_GetMasterPriceInfoAsync(countryId);
         }
     }
 }

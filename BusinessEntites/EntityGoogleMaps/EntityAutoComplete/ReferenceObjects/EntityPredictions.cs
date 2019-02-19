@@ -21,5 +21,7 @@ namespace BusinessEntites.EntityAutoComplete.ReferenceObjects
         public List<EntityTerms> terms { get; set; }
 
         public string[] types { get; set; }
+
+        public string googleSearchText { get; set; }
     }
 }

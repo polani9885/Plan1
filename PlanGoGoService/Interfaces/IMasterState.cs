@@ -24,5 +24,8 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         List<MasterStateDTO> Admin_MasterStateGetOnCountryId(int countryId);
+
+        [OperationContract]
+        void Admin_MergeStates(int sourceStateId, int destinationStateId);
     }
 }

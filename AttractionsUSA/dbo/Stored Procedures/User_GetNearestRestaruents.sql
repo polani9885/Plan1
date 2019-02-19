@@ -2,10 +2,11 @@
 (
 	@AttractionsId As INT
 	,@TravelModeId AS INT
-	,@sourceBeginLongitude AS DECIMAL(38,30)
-	,@sourceBeginLatitude AS DECIMAL(38,30)
-	,@sourceEndLongitude AS DECIMAL(38,30)
-	,@sourceEndLatitude AS DECIMAL(38,30)
+	,@sourceBeginLongitude AS DECIMAL(38,30) = NULL
+	,@sourceBeginLatitude AS DECIMAL(38,30) = NULL
+	,@sourceEndLongitude AS DECIMAL(38,30) = NULL
+	,@sourceEndLatitude AS DECIMAL(38,30) = NULL
+	,@attractionTravelStepsId AS INT
 )	
 AS
 BEGIN
@@ -30,6 +31,8 @@ BEGIN
 		  ,PhotoURL Varchar(Max)
 		  )
 
+IF @attractionTravelStepsId = 0 
+BEGIN
 	INSERT INTO @Attractions (AttractionsId 
 		  ,AttractionName 
 		  ,AddressOne 
@@ -127,6 +130,68 @@ BEGIN
  )
 DELETE CTE WHERE rn > 1
 
+
+END
+ELSE
+BEGIN
+	INSERT INTO @Attractions (AttractionsId 
+		  ,AttractionName 
+		  ,AddressOne 
+		  ,AddressTwo 
+		  ,GoogleInternational_phone_number 
+		  ,GoogleRating 
+		  ,PriceLevel 
+		  ,CityId 
+		  ,CategoryId 
+		  ,Longitude 
+		  ,Latitude 
+		  ,PlaceId 
+		  ,RankId 
+		  ,GoogleSearchText 
+		  ,TravelTime 
+		  ,Distance
+		  ,IsWithDistance
+		  ,PhotoURL)
+
+	SELECT 
+			A.[AttractionsId]
+		  ,A.[AttractionName]
+		  ,A.[AddressOne]
+		  ,A.[AddressTwo]
+		  ,A.GoogleInternational_phone_number
+		  ,A.GoogleRating
+		  ,A.PriceLevel
+		  ,A.[CityId]
+		  ,AC.[CategoryId]
+		  ,A.[Longitude]
+		  ,A.[Latitude]
+		  ,A.[PlaceId]
+		  ,A.[RankId]		  
+		  ,A.GoogleSearchText
+		  ,ATT.TravelTime
+		  ,CAST(
+				CAST( 
+					
+						CAST(
+								ATT.Distance AS DECIMAL(18,2)
+							) 
+							/ 5280 AS DECIMAL(18,2)
+					) AS Varchar(50)
+				)
+		 + ' Miles' 		
+		AS Distance
+		,0
+		,A.PhotoURL
+  FROM [dbo].[AttractionTravelStepsXAttractionsId] ATSA WITH(NOLOCK)  
+  JOIN  [dbo].[Attractions] A WITH(NOLOCK) ON A.AttractionsId = ATSA.AttractionsId
+  JOIN dbo.AttractionTravelTimeDistance ATT WITH(NOLOCK) ON ATT.SourceAttractionId = A.AttractionsId 
+  JOIN dbo.AttractionXCategory AC WITH(NOLOCK) ON AC.AttractionId = A.AttractionsId
+  JOIN Attractions..MasterGoogleType MGT WITH(NOLOCK) ON MGT.GoogleTypeID = AC.CategoryId    
+  WHERE    
+  ATSA.AttractionTravelStepsId = @attractionTravelStepsId
+  AND MGT.ExtraSearch = 1
+  AND ATT.TravelModeId = @TravelModeId
+END
 
   SELECT * FROM @Attractions
   

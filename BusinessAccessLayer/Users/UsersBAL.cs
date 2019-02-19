@@ -8,11 +8,16 @@ using BusinessEntites.Users;
 using Interfaces;
 using BusinessEntites.JsonParameters;
 using BusinessEntites;
+using BusinessEntites.Admin;
+using BusinessEntites.DataBaseModels;
+using GoogleMapsAPI.Features;
+using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 
 namespace BusinessAccessLayer.Users
 {
     public class UsersBAL : BaseBusinessClass, IDisposable, IUser
     {
+        private readonly RecalculateTourInfo recalculateTourInfo = new RecalculateTourInfo();
         public void Dispose()
         {
             GC.SuppressFinalize(this);
@@ -77,11 +82,11 @@ namespace BusinessAccessLayer.Users
         }
 
         public void User_LogUserTripInformation(int travelModeId,
-             List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+             List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
         {
             _dataAccessUsers.User_LogUserTripInformation(travelModeId,
-                attractionID, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,
+                listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,
                  userTripId);
         }
 
@@ -90,9 +95,9 @@ namespace BusinessAccessLayer.Users
             return _dataAccessUsers.User_UserTripGetAttractions(userTripId);
         }
 
-        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId)
+        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId,int userId)
         {
-            return _dataAccessUsers.User_GetUserStoredAttractinInfo(userTripId);
+            return _dataAccessUsers.User_GetUserStoredAttractinInfo(userTripId,userId);
         }
 
         public List<UserTable_UpdatedBreaksTemp> User_RequestedBreaks(int userTripId)
@@ -106,9 +111,9 @@ namespace BusinessAccessLayer.Users
         }
 
         public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId,
-            int countryId, List<Coordinate> coodinate)
+            int countryId, List<Coordinate> coodinate, int attractionTravelStepsId)
         {
-            return _dataAccessUsers.User_GetNearestRestaruents(attractionsId, travelModeId, countryId,coodinate);
+            return _dataAccessUsers.User_GetNearestRestaruents(attractionsId, travelModeId, countryId,coodinate,attractionTravelStepsId);
         }
 
         public void User_UserTrip_Update(UserTourInformation userTourInformation)
@@ -116,9 +121,9 @@ namespace BusinessAccessLayer.Users
             _dataAccessUsers.User_UserTrip_Update(userTourInformation);
         }
 
-        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate, string startTime)
         {
-            _dataAccessUsers.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate,googleSearchText,breakType,breakDate);
+            _dataAccessUsers.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate,googleSearchText,breakType,breakDate, startTime);
         }
 
         public UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId)
@@ -140,6 +145,111 @@ namespace BusinessAccessLayer.Users
         public List<GetOrderOfAttractionVisit> User_CheckTheCalculationPartIsDone(int userTripId)
         {
             return _dataAccessUsers.User_CheckTheCalculationPartIsDone(userTripId);
+        }
+
+        public void User_AddInterestedAttractionList(int userTripId, int attractionId)
+        {
+            _dataAccessUsers.User_AddInterestedAttractionList(userTripId,attractionId);
+        }
+
+        public void User_DeleteNotInterestedAttractionList(int userTripId, int attractionId)
+        {
+            _dataAccessUsers.User_DeleteNotInterestedAttractionList(userTripId,attractionId);
+        }
+
+        public List<User_GetDirectionsSteps> User_GetDirectionsSteps(int countryId, int attractionTravelTimeDistanceId, string dateAndTime)
+        {
+
+            var result = _dataAccessUsers.User_GetDirectionsSteps(countryId, attractionTravelTimeDistanceId, dateAndTime);
+
+            List<User_GetDirectionsSteps> returnResult = new List<User_GetDirectionsSteps>();
+
+            User_GetDirectionsSteps getDirectionsSteps = new User_GetDirectionsSteps();
+
+            DateTime startDateTime = new DateTime();
+            int distance = 0;
+
+            startDateTime = Convert.ToDateTime(dateAndTime);
+
+
+
+            var country = _dataAccessCountry.Admin_GetCountry().Where(x => x.CountryId == countryId).ToList().FirstOrDefault();
+            TimeSpan span;
+            foreach (var steps in result)
+            {
+                try
+                {
+                    getDirectionsSteps = new User_GetDirectionsSteps();
+                    getDirectionsSteps = steps;
+                    getDirectionsSteps.StartDateTime = startDateTime.ToString("yy-MMM-dd hh:mm") + " hours";
+                    getDirectionsSteps.EndDateTime = startDateTime.AddSeconds(steps.Duration_Value)
+                                                         .ToString("yy-MMM-dd hh:mm") + " hours";
+
+                    span = (startDateTime.AddSeconds(steps.Duration_Value) - Convert.ToDateTime(dateAndTime));
+                    getDirectionsSteps.DistanceCoveredTime = String.Format(
+                        "{0} days, {1} hours, {2} minutes",
+                        span.Days, span.Hours, span.Minutes);
+                    getDirectionsSteps.DistanceCovered =
+                        $"{((steps.Distance_Value + distance) * (string.IsNullOrEmpty(country.MetersIn.ToString()) ? 1 : country.MetersIn)):0.00}"
+                            .ToString() + " " +
+                        country.DistanceMeasure;
+                    startDateTime = startDateTime.AddSeconds(steps.Duration_Value);
+                    distance = steps.Distance_Value + distance;
+                    returnResult.Add(getDirectionsSteps);
+                }
+                catch (Exception e)
+                {
+
+
+                }
+
+            }
+
+            return returnResult;
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionTravelStepsNearAttractionInfo(
+            int attractionTravelStepsId, int countryId)
+        {
+            try
+            {
+                var result =
+                    _dataAccessUsers
+                        .User_GetAttractionTravelStepsNearAttractionInfo(attractionTravelStepsId, countryId);
+                result.Where(y => Convert.ToInt32(y.TravelTime) > 0).ToList().ForEach(x => x.TravelTimeHours =
+                    TimeSpan.FromSeconds(Convert.ToInt32(x.TravelTime)).ToString("hh") + ":" +
+                    TimeSpan.FromSeconds(Convert.ToInt32(x.TravelTime)).ToString("mm") + " hours");
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionsNextAttractions(int attractionsId, int countryId)
+        {
+            var result = _dataAccessUsers.User_GetAttractionsNextAttractions(attractionsId, countryId);
+            result.Where(y => Convert.ToInt32(y.TravelTime) > 0).ToList().ForEach(x => x.TravelTimeHours =
+                TimeSpan.FromSeconds(Convert.ToInt32(x.TravelTime)).ToString("hh") + ":" +
+                TimeSpan.FromSeconds(Convert.ToInt32(x.TravelTime)).ToString("mm") + " hours");
+            return result;
+        }
+
+        public List<AttractionXCategory> User_GetAttractionXCategory(List<userTable_OnlyId> attractionsId,
+            int countryId)
+        {
+            return _dataAccessUsers.User_GetAttractionXCategory(attractionsId, countryId);
+        }
+
+        public void User_UpdateBreakInformation(List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<EntityPredictions> User_AutoComplete(string address, int countryId)
+        {
+            return _dataAccessUsers.User_AutoComplete(address, countryId);
         }
     }
 }

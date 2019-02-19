@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="380ac9fc-3e2b-4462-bc6e-09991d2b7f54" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/Admin_User.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Admin_User.disco" MetadataType="Disco" ID="dfd73367-42be-4e61-9b8c-fd37cd01d3e0" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Admin_User.svc?disco" />
+    <MetadataFile FileName="Admin_User.wsdl" MetadataType="Wsdl" ID="b5f3d3c8-63cc-4e94-9480-354178324ae5" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Admin_User.svc?wsdl" />
+    <MetadataFile FileName="Admin_User.xsd" MetadataType="Schema" ID="1630d3e3-acc8-47ef-b418-a1ee548edc6b" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Admin_User.svc?xsd=xsd0" />
+    <MetadataFile FileName="Admin_User1.xsd" MetadataType="Schema" ID="a4566611-35b7-40d1-8bb0-e18b02de9d34" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Admin_User.svc?xsd=xsd1" />
+    <MetadataFile FileName="Admin_User2.xsd" MetadataType="Schema" ID="9f15d314-b3e6-4903-a25c-a7d823d3962f" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Admin_User.svc?xsd=xsd2" />
+    <MetadataFile FileName="Admin_User3.xsd" MetadataType="Schema" ID="3b3b05fa-b6df-41b6-b8bc-42c19ef0c054" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/Admin_User.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

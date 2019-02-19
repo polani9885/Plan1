@@ -30,22 +30,30 @@ namespace PlanGoGo.Helper
 
         public void UpdateCookieInformation()
         {
-            HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-            var ticket = FormsAuthentication.Decrypt(cookie.Value);
+            try
+            {
+                HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                var ticket = FormsAuthentication.Decrypt(cookie.Value);
 
-            FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version,
-                ticket.Name,
-                ticket.IssueDate,
-                ticket.Expiration,
-                true,
-                JsonConvert.SerializeObject(userEntity),
-                ticket.CookiePath);
-            // Encrypt the ticket.
-            string encTicket = FormsAuthentication.Encrypt(newTicket);
+                FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version,
+                    ticket.Name,
+                    ticket.IssueDate,
+                    ticket.Expiration,
+                    true,
+                    JsonConvert.SerializeObject(userEntity),
+                    ticket.CookiePath);
+                // Encrypt the ticket.
+                string encTicket = FormsAuthentication.Encrypt(newTicket);
 
-            cookie.Value = encTicket;
+                cookie.Value = encTicket;
 
-            HttpContext.Response.Cookies.Set(cookie);
+                HttpContext.Response.Cookies.Set(cookie);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         public bool IsUserAuthenticated()

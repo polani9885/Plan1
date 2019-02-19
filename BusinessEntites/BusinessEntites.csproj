@@ -63,6 +63,10 @@
     <Compile Include="Custom\InputParameters.cs" />
     <Compile Include="Custom\StepsConsolidated.cs" />
     <Compile Include="Custom\TimeInterval.cs" />
+    <Compile Include="DataBaseModels\Admin_MasterCategoryXMasterGoogleType.cs" />
+    <Compile Include="DataBaseModels\AttractionXCategory.cs" />
+    <Compile Include="DataBaseModels\MasterGoogleType.cs" />
+    <Compile Include="DataBaseModels\MasterPriceInfo.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\EntityAutoComplete.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\Entitydebug_log.cs" />
     <Compile Include="EntityGoogleMaps\EntityAutoComplete\ReferenceObjects\EntityMatched_substrings.cs" />
@@ -105,6 +109,7 @@
     <Compile Include="GetOrderOfAttractionVisit.cs" />
     <Compile Include="JsonParameters\CityVisitList.cs" />
     <Compile Include="JsonParameters\FilterLocations.cs" />
+    <Compile Include="JsonParameters\GetAttractionXCategoryParamerter.cs" />
     <Compile Include="JsonParameters\RequestOrder.cs" />
     <Compile Include="JsonResultReturn.cs" />
     <Compile Include="LoggingEntity.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="Scheduler\SchedulerInsertPlaceDetails.cs" />
     <Compile Include="Scheduler\WeekDaysOpenClose.cs" />
     <Compile Include="Users\AttractionPhotoReference.cs" />
+    <Compile Include="Users\DrivingSteps.cs" />
     <Compile Include="Users\UserAttractionEntity.cs" />
     <Compile Include="Users\UserEntity.cs" />
     <Compile Include="Users\UserTable_AttractionRequestOrder.cs" />
@@ -132,6 +138,7 @@
     <Compile Include="Users\UserTable_UpdatedBreaks.cs" />
     <Compile Include="Users\UserTourInformation.cs" />
     <Compile Include="Users\UserTripBuildStatus.cs" />
+    <Compile Include="Users\User_GetDirectionsSteps.cs" />
     <Compile Include="userTable_Category.cs" />
     <Compile Include="userTable_OnlyId.cs" />
     <Compile Include="userTable_OrderAttraction.cs" />

@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PlanGoGoService.Admin.Admin_User" CodeBehind="Admin_User.svc.cs" %>

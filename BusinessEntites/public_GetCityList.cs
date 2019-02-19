@@ -17,5 +17,7 @@ namespace BusinessEntites
         public int StateId { get; set; }
 
         public int CountryId { get; set; }
+
+        public int RecordIndex { get; set; }
     }
 }

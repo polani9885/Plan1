@@ -1,7 +1,10 @@
 ﻿CREATE TYPE [dbo].[UserTable_GetOrderOfAttractionVisit] AS TABLE(
+	AttractionsId INT,
 	[SourceAttractionId] [int] NULL,
 	[DestinationAttractionId] [int] NULL,
 	[Distance] [varchar](50) NULL,
+	TravelTimeSeconds Varchar(50),
+	TravelTimeHours Varchar(50),
 	[TravelTime] [varchar](50) NULL,
 	[TravelModeId] [int] NULL,
 	[SourceAttractionName] [varchar](1000) NULL,
@@ -42,7 +45,9 @@
 	[SourcePhotoUrl] [varchar](1000) NULL,
 	[DestinationPhotoUrl] [varchar](1000) NULL,
 	[BreakInformationId] [int] NULL,
-	FoodExpense Decimal(18,2),
-	StayExpense Decimal(18,2)
+	[FoodExpense] [decimal](18, 2) NULL,
+	[StayExpense] [decimal](18, 2) NULL,
+	[IsNeedDrivningBreak] [bit] NULL,
+	[AttractionTravelTimeDistanceId] [bigint] NULL
 )
 GO

@@ -39,8 +39,15 @@ namespace PlanGoGo.Controllers
 
         public ActionResult Index(int userTripId)
         {
-            userEntity.UserTripId = userTripId;
-            base.UpdateCookieInformation();
+            try
+            {
+                userEntity.UserTripId = userTripId;
+                base.UpdateCookieInformation();
+            }
+            catch (Exception ex)
+            {
+                RedirectToAction("PlannedTour", "UserControls");
+            }
             return View();
         }
 
@@ -126,15 +133,7 @@ namespace PlanGoGo.Controllers
         public JsonResult Public_GetOrderOfAttractionVisit(InputParameters inputParameters)
         {
             List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit = new List<GetOrderOfAttractionVisit>();
-            List<userTable_OnlyId> attractionList = new List<userTable_OnlyId>();
-            if (inputParameters.AttractionID != null && inputParameters.AttractionID.Count() > 0)
-            {
-                attractionList = inputParameters.AttractionID.Split(',').Select(x => new userTable_OnlyId
-                {
-                    ID = Convert.ToInt32(x)
-                }
-                ).ToList();
-            }
+           
 
             if (inputParameters.ListGroupWithDateAttractions != null)
             {
@@ -207,7 +206,6 @@ namespace PlanGoGo.Controllers
 
                 listGroupWithDateAttractions =
                     attractionInformationBinding.UserRequestedAttractionInformation(inputParameters.TravelModeId,
-                         attractionList,
                          listGetOrderOfAttractionVisit,
                         inputParameters.CountryId, userTable_UpdatedBreaks, userEntity.UserTripId);
 

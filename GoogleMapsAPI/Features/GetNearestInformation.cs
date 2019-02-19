@@ -211,9 +211,6 @@ namespace GoogleMapsAPI.Features
                             dALSchedulers.Scheduler_UpdateAttractionNoOfTimesStepsNearyByCalcuated(countryId,
                                 _attractionInfo.AttractionTravelStepsId);
                         }
-
-                        dALSchedulers.Scheduler_UpdateAttractionRestarentSearch(_attractionInfo.AttractionsId,
-                            countryId);
                     }
 
                 }
@@ -285,6 +282,7 @@ namespace GoogleMapsAPI.Features
                             longitude,
                             latitude,
                             true);
+                        throw new NullReferenceException();
                     }
 
                     //getPlaceInformation.GetPlaceDetails(countryId);

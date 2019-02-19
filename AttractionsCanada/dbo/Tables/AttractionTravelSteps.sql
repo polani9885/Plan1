@@ -10,6 +10,7 @@
 	[Travel_mode] [varchar](50) NULL,
 	[OrderId] [int] NULL,
  [IsNearestRestarentDone] BIT NULL, 
+    [ParentAttractionTravelStepsId] BIGINT NULL, 
     CONSTRAINT [PK_AttractionTravelSteps] PRIMARY KEY CLUSTERED 
 (
 	[AttractionTravelStepsId] ASC

@@ -67,4 +67,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Admin_MergeStates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sourceStateId" type="xs:int" />
+        <xs:element minOccurs="0" name="destinationStateId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Admin_MergeStatesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

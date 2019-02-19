@@ -19,5 +19,7 @@ namespace Interfaces
         MasterStateDTO Admin_MasterStateGetOnStateId(int stateId);
 
         List<MasterStateDTO> Admin_MasterStateGetOnCountryId(int countryId);
+
+        void Admin_MergeStates(int sourceStateId, int destinationStateId);
     }
 }

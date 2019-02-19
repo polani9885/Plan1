@@ -80,12 +80,14 @@ namespace BusinessAccessLayer
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-            List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+            List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             try
             {
-                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, AttractionID, listGetOrderOfAttractionVisit,
+                _dataAccessUsers.User_UpdateBreakInformation(userTable_UpdatedBreaks, userTripId);
+
+                return _dataAccess.Public_GetOrderOfAttractionVisit(TravelModeId, listGetOrderOfAttractionVisit,
                     CountryId,userTable_UpdatedBreaks,userTripId);
             }
             catch (Exception ex)

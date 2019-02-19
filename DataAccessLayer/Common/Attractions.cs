@@ -69,6 +69,7 @@ namespace DataAccessLayer.Common
         {
             try
             {
+                SqlHelper.countryId = attractionsDTO.CountryId;
                 List<AttractionsDTO> _returnResult = SqlHelper.QuerySP<AttractionsDTO>("AttractionsOnCityId",
                     new
                     {

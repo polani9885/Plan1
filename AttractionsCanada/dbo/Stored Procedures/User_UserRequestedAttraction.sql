@@ -7,6 +7,7 @@
 	,@GoogleSearchText AS Varchar(2000) = NULL
 	,@BreakType As INT = NULL
 	,@BreakDate As DATE = NULL
+	,@StartTime AS TIME = NULL
 )	
 AS
 BEGIN
@@ -122,5 +123,10 @@ BEGIN
 			SET StartDate = @StartDate			
 		WHERE UserTripId = @UserTripId
 	END
-
+	IF @IsSource IN (6)
+	BEGIN
+		UPDATE Attractions..UserTrip
+			SET StartTime = @StartTime			
+		WHERE UserTripId = @UserTripId
+	END
 END

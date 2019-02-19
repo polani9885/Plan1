@@ -14,12 +14,26 @@ namespace ServiceClient.Services
 
         public List<MasterStateDTO> Admin_MasterStateCheckExists(MasterStateDTO masterStateDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_MasterStateCheckExists(masterStateDTO);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<MasterStateDTO> Admin_MasterStateGet()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_MasterStateGet();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<MasterStateDTO> Admin_MasterStateGetOnCountryId(int countryId)
@@ -36,12 +50,38 @@ namespace ServiceClient.Services
 
         public MasterStateDTO Admin_MasterStateGetOnStateId(int stateId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_MasterStateGetOnStateId(stateId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Admin_MasterStateUpdate(MasterStateDTO masterStateDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _client.Admin_MasterStateUpdate(masterStateDTO);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Admin_MergeStates(int sourceStateId, int destinationStateId)
+        {
+            try
+            {
+                _client.Admin_MergeStates(sourceStateId, destinationStateId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -44,6 +44,12 @@ namespace ServiceClient.AdminMasterState {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterState/Admin_MasterStateGetOnCountryId", ReplyAction="http://tempuri.org/IMasterState/Admin_MasterStateGetOnCountryIdResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Admin.MasterStateDTO>> Admin_MasterStateGetOnCountryIdAsync(int countryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterState/Admin_MergeStates", ReplyAction="http://tempuri.org/IMasterState/Admin_MergeStatesResponse")]
+        void Admin_MergeStates(int sourceStateId, int destinationStateId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterState/Admin_MergeStates", ReplyAction="http://tempuri.org/IMasterState/Admin_MergeStatesResponse")]
+        System.Threading.Tasks.Task Admin_MergeStatesAsync(int sourceStateId, int destinationStateId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace ServiceClient.AdminMasterState {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.Admin.MasterStateDTO>> Admin_MasterStateGetOnCountryIdAsync(int countryId) {
             return base.Channel.Admin_MasterStateGetOnCountryIdAsync(countryId);
+        }
+        
+        public void Admin_MergeStates(int sourceStateId, int destinationStateId) {
+            base.Channel.Admin_MergeStates(sourceStateId, destinationStateId);
+        }
+        
+        public System.Threading.Tasks.Task Admin_MergeStatesAsync(int sourceStateId, int destinationStateId) {
+            return base.Channel.Admin_MergeStatesAsync(sourceStateId, destinationStateId);
         }
     }
 }

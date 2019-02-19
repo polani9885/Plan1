@@ -45,13 +45,9 @@
       <xs:element minOccurs="0" name="RequestDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="UpdateDayEndTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdateDayStartTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdateDinnerMinimumTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedBreakFastMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedBreakFastTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedBreakMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedBreakTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedDinnerTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedLunchMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedLunchTime" type="ser:duration" />
     </xs:sequence>
   </xs:complexType>

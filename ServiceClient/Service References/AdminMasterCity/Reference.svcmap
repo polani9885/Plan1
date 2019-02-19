@@ -24,11 +24,11 @@
     <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MasterCity.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MasterCity.xsd" MetadataType="Schema" ID="2d1d9b59-b71e-45ad-82a3-393ffa463726" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd1" />
     <MetadataFile FileName="MasterCity1.xsd" MetadataType="Schema" ID="f8ba1d3e-2fb4-4bac-abc8-8e1c14ff3889" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd2" />
-    <MetadataFile FileName="MasterCity.wsdl" MetadataType="Wsdl" ID="7cc5d36e-6009-4258-9836-abad481d9dfd" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?wsdl" />
-    <MetadataFile FileName="MasterCity.disco" MetadataType="Disco" ID="0ae8f713-235d-4cdf-9f30-0f0da54a2b94" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?disco" />
     <MetadataFile FileName="MasterCity2.xsd" MetadataType="Schema" ID="d4174ea0-11eb-4a87-8a3d-f3da837b3271" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterCity.xsd" MetadataType="Schema" ID="2d1d9b59-b71e-45ad-82a3-393ffa463726" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterCity.disco" MetadataType="Disco" ID="0ae8f713-235d-4cdf-9f30-0f0da54a2b94" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?disco" />
+    <MetadataFile FileName="MasterCity.wsdl" MetadataType="Wsdl" ID="7cc5d36e-6009-4258-9836-abad481d9dfd" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCity.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

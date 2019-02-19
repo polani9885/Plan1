@@ -24,5 +24,8 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         void Admin_MasterCityUpdate(MasterCityDTO masterCityDTO);
+
+        [OperationContract]
+        void Admin_MergeCity(int sourceCityId, int destinationCityId);
     }
 }

@@ -43,7 +43,8 @@ namespace PlanGoGoAdmin.Controllers
             {
                 MasterCategoryDTO _result = _IMasterCategory.Admin_MasterCategoryOnCategoryId(Category);
                 model.CategoryId = _result.CategoryId;
-                model.CategoryName = _result.CategoryName;                
+                model.CategoryName = _result.CategoryName;
+                model.ViewTime = _result.ViewTime;
             }
 
 
@@ -55,12 +56,12 @@ namespace PlanGoGoAdmin.Controllers
         {
             if (_IMasterCategory.Admin_MasterCategoryCheckExists(model.CategoryName, model.CategoryId).Count > 0)
             {
-                model.ErrorMessage = "Country name already existed";
+                model.ErrorMessage = "Category name already existed";
             }
             else
             {
-                _IMasterCategory.Admin_MasterCategoryUpdate(model.CategoryId, model.CategoryName);
-                Response.Redirect("/MasterCategory/ManageMasterCategory");
+                _IMasterCategory.Admin_MasterCategoryUpdate(model.CategoryId, model.CategoryName,model.ViewTime);
+                Response.Redirect("ManageMasterCategory");
             }
             return View(model);
         }

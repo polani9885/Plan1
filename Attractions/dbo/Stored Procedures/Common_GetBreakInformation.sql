@@ -4,9 +4,9 @@ AS
 BEGIN
 	SELECT [BreakInformationId]
       ,[BreakType]
-      ,CAST([StartTime] AS Varchar(8)) StartTime
-      ,CAST([MinimumTime] AS Varchar(8)) MinimumTime
+      ,convert(varchar(5),StartTime,108) StartTime
+      ,convert(varchar(5),MinimumTime,108) MinimumTime
       ,[Display]
-      ,CAST([EndTime] AS Varchar(8)) EndTime
+      ,convert(varchar(5),EndTime,108) EndTime
   FROM [dbo].[BreakInformation] WITH(NOLOCK)
 END

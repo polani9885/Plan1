@@ -14,17 +14,38 @@ namespace ServiceClient.Services
 
         public List<MasterCityDTO> Admin_MasterCityCheckExists(MasterCityDTO masterCityDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_MasterCityCheckExists(masterCityDTO);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<MasterCityDTO> Admin_MasterCityGet()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_MasterCityGet();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public MasterCityDTO Admin_MasterCityGetOnCityId(int cityId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _client.Admin_MasterCityGetOnCityId(cityId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<MasterCityDTO> Admin_MasterCityGetOnStateId(int stateId)
@@ -41,7 +62,26 @@ namespace ServiceClient.Services
 
         public void Admin_MasterCityUpdate(MasterCityDTO masterCityDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _client.Admin_MasterCityUpdate(masterCityDTO);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Admin_MergeCity(int sourceCityId, int destinationCityId)
+        {
+            try
+            {
+                _client.Admin_MergeCity(sourceCityId, destinationCityId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

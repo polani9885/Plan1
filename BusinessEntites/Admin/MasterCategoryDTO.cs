@@ -11,5 +11,6 @@ namespace BusinessEntites.Admin
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
+        public string ViewTime { get; set; }
     }
 }

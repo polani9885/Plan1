@@ -9,12 +9,20 @@ namespace BusinessEntites
 {
     public class GetOrderOfAttractionVisit
     {
+        //Whenever making chage on this entity please consider the following method on the UserDAL
+        //User_LogUserTripInformation(int travelModeId,
+        //    List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+        //    List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
 
+        public int AttractionsId { get;set; }
         public int SourceAttractionId { get; set; }
 
         public int DestinationAttractionId { get; set; }
 
         public string Distance { get; set; }
+
+        public string TravelTimeSeconds { get; set; }
+        public string TravelTimeHours { get; set; }
 
         public string TravelTime { get; set; }
 
@@ -96,6 +104,10 @@ namespace BusinessEntites
         public decimal FoodExpense { get; set; }
 
         public decimal StayExpense { get; set; }
+
+        public bool IsNeedDrivningBreak { get; set; }
+
+        public int AttractionTravelTimeDistanceId { get; set; }
 
         //public List<userTable_Category> userTable_Category { get; set; }
     }

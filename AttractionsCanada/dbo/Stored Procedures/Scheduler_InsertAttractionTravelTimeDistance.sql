@@ -64,7 +64,7 @@ BEGIN
 	IF EXISTS (SELECT 1 FROM @StepsConsolidated) AND @TravelTime > 3700 AND @TravelModeId = 1
 	BEGIN
 	
-		DELETE FROM AttractionTravelSteps WHERE AttractionTravelTimeDistanceId = @AttractionTravelTimeDistanceId	
+		--DELETE FROM AttractionTravelSteps WHERE AttractionTravelTimeDistanceId = @AttractionTravelTimeDistanceId	
 
 		INSERT INTO [dbo].[AttractionTravelSteps]
 			   ([AttractionTravelTimeDistanceId]
@@ -75,7 +75,8 @@ BEGIN
 			   ,[Start_location_lat]
 			   ,[Start_location_lng]
 			   ,[Travel_mode]
-			   ,OrderId)
+			   ,OrderId
+			   ,ParentAttractionTravelStepsId)
 		 SELECT 
 			@AttractionTravelTimeDistanceId,
 			distance_Value,
@@ -85,7 +86,34 @@ BEGIN
 			start_location_lat,
 			start_location_lng,
 			travel_mode,
-			OrderId
+			OrderId,
+			CASE WHEN EXISTS 
+					(SELECT 1 FROM [dbo].[AttractionTravelSteps] ATS WITH(NOLOCK)
+						WHERE ATS.End_location_lat = End_location_lat 
+						AND ATS.End_location_lng = End_location_lng
+					)
+				THEN
+					CASE WHEN  EXISTS 
+							(SELECT 1 FROM [dbo].[AttractionTravelSteps]  ATS WITH(NOLOCK)
+								WHERE ATS.End_location_lat = End_location_lat 
+								AND ATS.End_location_lng = End_location_lng
+								AND ISNULL(ParentAttractionTravelStepsId,0) > 0
+							)
+					THEN
+						(SELECT TOP 1 ParentAttractionTravelStepsId FROM [dbo].[AttractionTravelSteps]  ATS WITH(NOLOCK)
+						WHERE ATS.End_location_lat = End_location_lat 
+							AND ATS.End_location_lng = End_location_lng
+							AND ISNULL(ParentAttractionTravelStepsId,0) > 0)
+					ELSE
+						(SELECT TOP 1 AttractionTravelStepsId FROM [dbo].[AttractionTravelSteps]  ATS WITH(NOLOCK)
+						WHERE ATS.End_location_lat = End_location_lat 
+							AND ATS.End_location_lng = End_location_lng
+							)
+					END
+				ELSE
+					NULL
+				END
+				ParentAttractionTravelStepsId
 		FROM @StepsConsolidated
 
 		UPDATE AttractionTravelTimeDistance

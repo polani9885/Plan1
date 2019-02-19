@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -74,10 +73,6 @@
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -208,6 +203,12 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="CustomScripts\Common\ajax\AjaxCalls.js" />
+    <Content Include="CustomScripts\Common\commonFunctions.js" />
+    <Content Include="CustomScripts\Controller\controlleBreakInformation.js" />
+    <Content Include="CustomScripts\Controller\controlleMasterTravelMode.js" />
+    <Content Include="CustomScripts\Controller\controllerMasterGoogleType.js" />
+    <Content Include="CustomScripts\Controller\controllerMasterPriceInfo.js" />
+    <Content Include="CustomScripts\Helper\constants.js" />
     <Content Include="CustomScripts\Common\Internal\UpdateAttractions.js" />
     <Content Include="CustomScripts\Common\Internal\UpdateCity.js" />
     <Content Include="CustomScripts\Common\Internal\UpdateMasterCategory.js" />
@@ -1039,153 +1040,6 @@
     <Content Include="scripts\version.json" />
     <Content Include="scripts\ng-table.min.js.map" />
     <Content Include="scripts\ng-table.js.map" />
-    <None Include="Service References\AdminCountry\Country.wsdl" />
-    <None Include="Service References\AdminCountry\Country.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminCountry\Country1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminCountry\Country2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminUser\User.disco" />
-    <None Include="Service References\AdminUser\configuration91.svcinfo" />
-    <None Include="Service References\AdminUser\configuration.svcinfo" />
-    <None Include="Service References\AdminUser\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\AdminCountry\Country.disco" />
-    <None Include="Service References\AdminCountry\configuration91.svcinfo" />
-    <None Include="Service References\AdminCountry\configuration.svcinfo" />
-    <None Include="Service References\AdminCountry\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus.wsdl" />
-    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Attractions\Attractions.wsdl" />
-    <None Include="Service References\Attractions\Attractions.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Attractions\Attractions1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Attractions\Attractions2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance.wsdl" />
-    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues.wsdl" />
-    <None Include="Service References\GetListValues\GetListValues.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCategory\MasterCategory.wsdl" />
-    <None Include="Service References\MasterCategory\MasterCategory.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCategory\MasterCategory1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCategory\MasterCategory2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity.wsdl" />
-    <None Include="Service References\MasterCity\MasterCity.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterState\MasterState.disco" />
-    <None Include="Service References\MasterState\configuration91.svcinfo" />
-    <None Include="Service References\MasterState\configuration.svcinfo" />
-    <None Include="Service References\MasterState\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\MasterCity\MasterCity.disco" />
-    <None Include="Service References\MasterCity\configuration91.svcinfo" />
-    <None Include="Service References\MasterCity\configuration.svcinfo" />
-    <None Include="Service References\MasterCity\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\MasterCategory\MasterCategory.disco" />
-    <None Include="Service References\MasterCategory\configuration91.svcinfo" />
-    <None Include="Service References\MasterCategory\configuration.svcinfo" />
-    <None Include="Service References\MasterCategory\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\Attractions\Attractions.disco" />
-    <None Include="Service References\Attractions\configuration91.svcinfo" />
-    <None Include="Service References\Attractions\configuration.svcinfo" />
-    <None Include="Service References\Attractions\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\GetListValues\GetListValues.disco" />
-    <None Include="Service References\GetListValues\configuration91.svcinfo" />
-    <None Include="Service References\GetListValues\configuration.svcinfo" />
-    <None Include="Service References\GetListValues\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus.disco" />
-    <None Include="Service References\AttractionsActiveStatus\configuration91.svcinfo" />
-    <None Include="Service References\AttractionsActiveStatus\configuration.svcinfo" />
-    <None Include="Service References\AttractionsActiveStatus\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\MasterWeek\MasterWeek.disco" />
-    <None Include="Service References\MasterWeek\configuration91.svcinfo" />
-    <None Include="Service References\MasterWeek\configuration.svcinfo" />
-    <None Include="Service References\MasterWeek\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance.disco" />
-    <None Include="Service References\AttractionTravelTimeDistance\configuration91.svcinfo" />
-    <None Include="Service References\AttractionTravelTimeDistance\configuration.svcinfo" />
-    <None Include="Service References\AttractionTravelTimeDistance\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.disco" />
-    <None Include="Service References\MissingDistanceAttractionsRecords\configuration91.svcinfo" />
-    <None Include="Service References\MissingDistanceAttractionsRecords\configuration.svcinfo" />
-    <None Include="Service References\MissingDistanceAttractionsRecords\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1194,16 +1048,6 @@
     <Content Include="Views\shared\_authenticatedLayout.cshtml" />
     <Content Include="Views\User\ManageUser.cshtml" />
     <Content Include="Views\User\AddUpdateUser.cshtml" />
-    <None Include="Service References\AdminUser\User.wsdl" />
-    <None Include="Service References\AdminUser\User.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminUser\User1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\AdminUser\User2.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -1212,10 +1056,14 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AttractionsController.cs" />
     <Compile Include="Controllers\AttractionTravelTimeDistanceController.cs" />
+    <Compile Include="Controllers\BreakInformationController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\MasterCategoryController.cs" />
     <Compile Include="Controllers\MasterCityController.cs" />
+    <Compile Include="Controllers\MasterGoogleTypeController.cs" />
+    <Compile Include="Controllers\MasterPriceInfoController.cs" />
     <Compile Include="Controllers\MasterStateController.cs" />
+    <Compile Include="Controllers\MasterTravelModeController.cs" />
     <Compile Include="Controllers\MissingDistanceAttractionsRecordsController.cs" />
     <Compile Include="Controllers\OpenTimeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -1227,80 +1075,17 @@
     <Compile Include="Helper\Principal\CustomPrincipalSerializeModel.cs" />
     <Compile Include="Helper\Principal\ICustomPrincipal.cs" />
     <Compile Include="Models\Attractions\ModelAttractions.cs" />
+    <Compile Include="Models\BreakInformation\ModelBreakInformation.cs" />
     <Compile Include="Models\Country\ModelCountry.cs" />
+    <Compile Include="Models\ManageMasterGoogleType\ModelManageMasterGoogleType.cs" />
     <Compile Include="Models\MasterCategory\ModelMasterCategory.cs" />
     <Compile Include="Models\MasterCity\ModelMasterCity.cs" />
     <Compile Include="Models\MasterState\ModelMasterState.cs" />
+    <Compile Include="Models\MasterTravelMode\ModelTravelMode.cs" />
     <Compile Include="Models\OpenTime\ModelOpenTime.cs" />
     <Compile Include="Models\User\ModelAddUpdateUser.cs" />
     <Compile Include="Models\User\ModelLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Reference\Attractions.cs" />
-    <Compile Include="Repository\Reference\AttractionsActiveStatus.cs" />
-    <Compile Include="Repository\Reference\AttractionTravelTimeDistance.cs" />
-    <Compile Include="Repository\Reference\Country.cs" />
-    <Compile Include="Repository\Reference\GetListValues.cs" />
-    <Compile Include="Repository\Reference\MasterCategory.cs" />
-    <Compile Include="Repository\Reference\MasterCity.cs" />
-    <Compile Include="Repository\Reference\MasterState.cs" />
-    <Compile Include="Repository\Reference\MasterWeek.cs" />
-    <Compile Include="Repository\Reference\RepMissingDistanceAttractionsRecords.cs" />
-    <Compile Include="Repository\Reference\User.cs" />
-    <Compile Include="Service References\AdminCountry\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\AdminUser\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\AttractionsActiveStatus\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\Attractions\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\AttractionTravelTimeDistance\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\GetListValues\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MasterCategory\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MasterCity\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MasterState\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MasterWeek\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MissingDistanceAttractionsRecords\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -1312,21 +1097,8 @@
     </Content>
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
-    <None Include="Service References\AdminUser\User3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Country\AddCountry.cshtml" />
     <Content Include="Views\Country\ManageCountry.cshtml" />
-    <None Include="Service References\MasterState\MasterState.wsdl" />
-    <None Include="Service References\MasterState\MasterState.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterState\MasterState1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterState\MasterState2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\MasterState\ManageState.cshtml" />
     <Content Include="Views\MasterState\UpdateState.cshtml" />
     <Content Include="Views\MasterCity\ManageCity.cshtml" />
@@ -1337,29 +1109,22 @@
     <Content Include="Views\Attractions\UpdateAttractions.cshtml" />
     <Content Include="Views\OpenTime\ManageOpenTime.cshtml" />
     <Content Include="Views\OpenTime\UpdateOpenTime.cshtml" />
-    <None Include="Service References\MasterWeek\MasterWeek.wsdl" />
-    <None Include="Service References\MasterWeek\MasterWeek.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterWeek\MasterWeek1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MasterWeek\MasterWeek2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\AttractionTravelTimeDistance\ManageAttractionTravelTimeDistance.cshtml" />
     <Content Include="Views\MissingDistanceAttractionsRecords\ManageMissingDistanceAttractionsRecords.cshtml" />
-    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.wsdl" />
-    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecordsXAttractions.cshtml" />
+    <Content Include="Views\BreakInformation\ManageBreakInformation.cshtml" />
+    <Content Include="Views\BreakInformation\UpdateBreakInformation.cshtml" />
+    <Content Include="Views\MasterTravelMode\ManageTravelMode.cshtml" />
+    <Content Include="Views\MasterTravelMode\UpdateMasterTravelMode.cshtml" />
+    <Content Include="Views\MasterGoogleType\ManageMasterGoogleType.cshtml" />
+    <Content Include="Views\MasterGoogleType\UpdateMasterGoogleType.cshtml" />
+    <Content Include="Views\shared\_countryLayout.cshtml" />
+    <Content Include="Views\Country\ViewContryInfo.cshtml" />
+    <Content Include="Views\MasterPriceInfo\ManageMasterPriceInfo.cshtml" />
+    <Content Include="Views\MasterPriceInfo\UpdateMasterPriceInfo.cshtml" />
+    <Content Include="Views\shared\_stateLayout.cshtml" />
+    <Content Include="Views\MasterState\MergeStates.cshtml" />
+    <Content Include="Views\shared\_cityLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1374,19 +1139,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\AdminCountry\" />
-    <WCFMetadataStorage Include="Service References\AdminUser\" />
-    <WCFMetadataStorage Include="Service References\AttractionsActiveStatus\" />
-    <WCFMetadataStorage Include="Service References\Attractions\" />
-    <WCFMetadataStorage Include="Service References\AttractionTravelTimeDistance\" />
-    <WCFMetadataStorage Include="Service References\GetListValues\" />
-    <WCFMetadataStorage Include="Service References\MasterCategory\" />
-    <WCFMetadataStorage Include="Service References\MasterCity\" />
-    <WCFMetadataStorage Include="Service References\MasterState\" />
-    <WCFMetadataStorage Include="Service References\MasterWeek\" />
-    <WCFMetadataStorage Include="Service References\MissingDistanceAttractionsRecords\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
       <Project>{59acb6f7-a5a2-4532-9296-e06804d0c7cf}</Project>
       <Name>BusinessEntites</Name>
@@ -1398,6 +1150,10 @@
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>
       <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceClient\ServiceClient.csproj">
+      <Project>{9939494a-a7e1-473c-af0a-1a4851f21245}</Project>
+      <Name>ServiceClient</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -1430,7 +1186,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

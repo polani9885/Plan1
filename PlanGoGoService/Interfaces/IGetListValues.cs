@@ -27,7 +27,7 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-             List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+             List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId);
 
         [OperationContract]

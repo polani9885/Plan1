@@ -1,6 +1,7 @@
 ﻿using BusinessAccessLayer.Common;
 
 using BusinessEntites.Admin;
+using BusinessEntites.DataBaseModels;
 using Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ namespace BusinessAccessLayer.Admin
 {
     public class Country : BaseBusinessClass, ICountry, IDisposable
     {
-        public void Admin_UpdateCountry(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault)
+        public void Admin_UpdateCountry(MasterCountryDTO dto)
         {
             try
             {
-                _dataAccessCountry.Admin_UpdateCountry(countryId, countryName, countryShortName, createdBy, isDefault);
+                _dataAccessCountry.Admin_UpdateCountry(dto);
             }
             catch (Exception ex)
             {
@@ -58,6 +59,30 @@ namespace BusinessAccessLayer.Admin
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void Admin_MasterPriceInfoUpdate(int countryId, MasterPriceInfo dto)
+        {
+            try
+            {
+                _dataAccessCountry.Admin_MasterPriceInfoUpdate(countryId, dto);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<MasterPriceInfo> Admin_GetMasterPriceInfo(int countryId)
+        {
+            try
+            {
+                return _dataAccessCountry.Admin_GetMasterPriceInfo(countryId);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 

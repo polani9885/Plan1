@@ -40,10 +40,10 @@ namespace ServiceClient.GetListValues {
         System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.public_FilterAttractions>> Public_FilterAttractionsAsync(int countryId, System.Collections.Generic.List<BusinessEntites.JsonParameters.CityVisitList> cityVisitList, int mainCategorySelected);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit", ReplyAction="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisitResponse")]
-        System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId);
+        System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisit", ReplyAction="http://tempuri.org/IGetListValues/Public_GetOrderOfAttractionVisitResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> Public_GetOrderOfAttractionVisitAsync(int TravelModeId, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> Public_GetOrderOfAttractionVisitAsync(int TravelModeId, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetListValues/GetAttractionOpenTime", ReplyAction="http://tempuri.org/IGetListValues/GetAttractionOpenTimeResponse")]
         System.Collections.Generic.List<BusinessEntites.GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId);
@@ -135,12 +135,12 @@ namespace ServiceClient.GetListValues {
             return base.Channel.Public_FilterAttractionsAsync(countryId, cityVisitList, mainCategorySelected);
         }
         
-        public System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId) {
-            return base.Channel.Public_GetOrderOfAttractionVisit(TravelModeId, AttractionID, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks, userTripId);
+        public System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId) {
+            return base.Channel.Public_GetOrderOfAttractionVisit(TravelModeId, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks, userTripId);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> Public_GetOrderOfAttractionVisitAsync(int TravelModeId, System.Collections.Generic.List<BusinessEntites.userTable_OnlyId> AttractionID, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId) {
-            return base.Channel.Public_GetOrderOfAttractionVisitAsync(TravelModeId, AttractionID, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks, userTripId);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit>> Public_GetOrderOfAttractionVisitAsync(int TravelModeId, System.Collections.Generic.List<BusinessEntites.GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId, System.Collections.Generic.List<BusinessEntites.Users.UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId) {
+            return base.Channel.Public_GetOrderOfAttractionVisitAsync(TravelModeId, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks, userTripId);
         }
         
         public System.Collections.Generic.List<BusinessEntites.GetAttractionOpenTime> GetAttractionOpenTime(int AttractionId) {

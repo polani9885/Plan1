@@ -108,7 +108,7 @@ namespace DataAccessLayer
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-            List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+             List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
         {
             try
@@ -124,7 +124,6 @@ namespace DataAccessLayer
                         new
                         {
                             TravelModeId = TravelModeId,
-                            AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(AttractionID),
                             UserBreakTime =
                             CommonObjects.Convert.ToDataTable<UserTable_UpdatedBreaks>(userTable_UpdatedBreaks),
                             UserTripId= userTripId

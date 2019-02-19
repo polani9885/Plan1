@@ -17,15 +17,15 @@ img {
 }
 /*------------------------------ Sprites ------------------------------*/
 #navigation li, #navigation li a:hover, #navigation li.selected a {
-	background-image: url(/Templates/FormatedTemplates/beachresort/images/bg-menu.png);
+	background-image: url(http://localhost/PlanGoGo/Templates/FormatedTemplates/beachresort/images/bg-menu.png);
 	background-repeat: repeat-x;
 }
 #contents div.box, #contents div.box > div, #contents div.body {
-	background-image: url(/Templates/FormatedTemplates/beachresort/images/content-box.png);
+	background-image: url(http://localhost/PlanGoGo/Templates/FormatedTemplates/beachresort/images/content-box.png);
 	background-repeat: no-repeat;
 }
 #main div.box, #main div.box > div, #main div.box > div > div {
-	background-image: url(/Templates/FormatedTemplates/beachresort/images/bg-box.png);
+	background-image: url(http://localhost/PlanGoGo/Templates/FormatedTemplates/beachresort/images/bg-box.png);
 	background-repeat: no-repeat;
 }
 /*------------------------------ HEADER ------------------------------*/
@@ -41,7 +41,7 @@ img {
 }
 /** Navigation **/
 #navigation {
-	background: url(/Templates/FormatedTemplates/beachresort/images/bg-navigation.png) no-repeat;
+	background: url(http://localhost/PlanGoGo/Templates/FormatedTemplates/beachresort/images/bg-navigation.png) no-repeat;
 	clear: both;
 	height: 50px;
 	width: 860px;

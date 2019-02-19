@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessEntites.EntityAutoComplete.ReferenceObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessEntites.EntityAutoComplete.ReferenceObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfEntityPredictions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EntityPredictions" nillable="true" type="tns:EntityPredictions" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEntityPredictions" nillable="true" type="tns:ArrayOfEntityPredictions" />
+  <xs:complexType name="EntityPredictions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="matched_substrings" nillable="true" type="tns:ArrayOfEntityMatched_substrings" />
+      <xs:element minOccurs="0" name="place_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="terms" nillable="true" type="tns:ArrayOfEntityTerms" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="types" nillable="true" type="q1:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EntityPredictions" nillable="true" type="tns:EntityPredictions" />
+  <xs:complexType name="ArrayOfEntityMatched_substrings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EntityMatched_substrings" nillable="true" type="tns:EntityMatched_substrings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEntityMatched_substrings" nillable="true" type="tns:ArrayOfEntityMatched_substrings" />
+  <xs:complexType name="EntityMatched_substrings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="length" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="offset" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EntityMatched_substrings" nillable="true" type="tns:EntityMatched_substrings" />
+  <xs:complexType name="ArrayOfEntityTerms">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EntityTerms" nillable="true" type="tns:EntityTerms" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEntityTerms" nillable="true" type="tns:ArrayOfEntityTerms" />
+  <xs:complexType name="EntityTerms">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="offset" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EntityTerms" nillable="true" type="tns:EntityTerms" />
+</xs:schema>

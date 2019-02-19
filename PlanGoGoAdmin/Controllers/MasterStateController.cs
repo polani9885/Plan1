@@ -23,17 +23,12 @@ namespace PlanGoGoAdmin.Controllers
         /// Getting States Information
         /// </summary>
         /// <returns></returns>
-        public JsonResult Admin_GetStates(int countryId)
+        public JsonResult Admin_GetStates()
         {
             List<MasterStateDTO> getResult;
-            if (countryId > 0)
-            {
-                getResult = _IMasterState.Admin_MasterStateGetOnCountryId(countryId);
-            }
-            else
-            {
-                getResult = _IMasterState.Admin_MasterStateGet();
-            }
+
+            getResult = _IMasterState.Admin_MasterStateGetOnCountryId(userEntity.MasterCountryId);
+            
             return base.jsonReturn.JsonResult<MasterStateDTO>(getResult);
 
         }
@@ -63,7 +58,7 @@ namespace PlanGoGoAdmin.Controllers
         public ActionResult UpdateState(ModelMasterState model)
         {
             MasterStateDTO _dto = new MasterStateDTO();
-            _dto.CountryId = model.CountryId;
+            _dto.CountryId = userEntity.MasterCountryId;
             _dto.IsDefault = model.IsDefault;
             _dto.StateId = model.StateId;
             _dto.StateName = model.StateName;
@@ -76,9 +71,38 @@ namespace PlanGoGoAdmin.Controllers
             else
             {
                 _IMasterState.Admin_MasterStateUpdate(_dto);
-                Response.Redirect("/MasterState/ManageState?CountryId="+model.CountryId);
+                Response.Redirect("ManageState");
             }
             return View(model);
         }
+
+
+        public ActionResult MergeStates()
+        {
+            var getResult = _IMasterState.Admin_MasterStateGetOnCountryId(userEntity.MasterCountryId);
+            ModelMasterState model = new ModelMasterState();
+            model.States = getResult;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult MergeStates(ModelMasterState model)
+        {
+
+            _IMasterState.Admin_MergeStates(model.SourceStateId,model.DestinationStateId);
+            Response.Redirect("ManageState");
+
+            return View(model);
+        }
+
+        public ActionResult ViewStateInfo(int stateId)
+        {
+            GetCookieInformation();
+            userEntity.MasterStateId = stateId;
+            UpdateCookieInformation();
+            return RedirectToAction("ManageCity", "MasterCity");
+        }
+        
     }
 }

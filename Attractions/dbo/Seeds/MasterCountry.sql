@@ -13,7 +13,9 @@ BEGIN
 		   ,IsWindowsAccess
 		   ,UserName
 		   ,[Password]
-		   ,DatabaseName)
+		   ,DatabaseName
+		   ,DistanceMeasure
+		   ,MetersIn)
      VALUES
            (1
            ,'INDIA'
@@ -25,7 +27,9 @@ BEGIN
 		   ,1
 		   ,NULL
 		   ,NULL
-		   ,'AttractionsIN')
+		   ,'AttractionsIN'
+		   ,'Km'
+		   ,0.001)
 END
 GO
 IF(SELECT Count(1) FROM MasterCountry WHERE CountryName = 'United States') < 1
@@ -41,7 +45,9 @@ BEGIN
 		   ,IsWindowsAccess
 		   ,UserName
 		   ,[Password]
-		   ,DatabaseName)
+		   ,DatabaseName
+		   ,DistanceMeasure
+		   ,MetersIn)
      VALUES
            (2
            ,'United States'
@@ -53,7 +59,9 @@ BEGIN
 		   ,1
 		   ,NULL
 		   ,NULL
-		   ,'AttractionsUSA')
+		   ,'AttractionsUSA'
+		   ,'Miles'
+		   ,0.00062137)
 END
 GO
 IF(SELECT Count(1) FROM MasterCountry WHERE CountryName = 'Canada') < 1
@@ -69,7 +77,9 @@ BEGIN
 		   ,IsWindowsAccess
 		   ,UserName
 		   ,[Password]
-		   ,DatabaseName)
+		   ,DatabaseName
+		   ,DistanceMeasure
+		   ,MetersIn)
      VALUES
            (3
            ,'Canada'
@@ -81,6 +91,8 @@ BEGIN
 		   ,1
 		   ,NULL
 		   ,NULL
-		   ,'AttractionsCanada')
+		   ,'AttractionsCanada'
+		   ,'Miles'
+		   ,0.00062137)
 END
 GO

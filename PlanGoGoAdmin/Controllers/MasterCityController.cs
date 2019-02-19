@@ -23,20 +23,12 @@ namespace PlanGoGoAdmin.Controllers
         /// Getting City Information
         /// </summary>
         /// <returns></returns>
-        public JsonResult Admin_GetCity(int stateId)
+        public JsonResult Admin_GetCity()
         {
-            List<MasterCityDTO> getResult;
-            if (stateId > 0)
-            {
-                getResult = _IMasterCity.Admin_MasterCityGetOnStateId(stateId);
-            }
-            else
-            {
-                getResult = _IMasterCity.Admin_MasterCityGet();
-            }
 
+            var getResult = _IMasterCity.Admin_MasterCityGetOnStateId(userEntity.MasterStateId);
             return base.jsonReturn.JsonResult<MasterCityDTO>(getResult);
-            
+
         }
 
         public ActionResult ManageCity()
@@ -65,7 +57,7 @@ namespace PlanGoGoAdmin.Controllers
         public ActionResult UpdateCity(ModelMasterCity model)
         {
             MasterCityDTO _dto = new MasterCityDTO();
-            _dto.StateId = model.StateId;
+            _dto.StateId = userEntity.MasterStateId;
             _dto.IsDefault = model.IsDefault;
             _dto.CityId = model.CityId;
             _dto.CityName = model.CityName;
@@ -78,9 +70,17 @@ namespace PlanGoGoAdmin.Controllers
             else
             {
                 _IMasterCity.Admin_MasterCityUpdate(_dto);
-                Response.Redirect("/MasterCity/ManageCity?CountryId=" + model.CountryId);
+                Response.Redirect("ManageCity");
             }
             return View(model);
+        }
+
+        public ActionResult ViewCityInfo(int cityId)
+        {
+            GetCookieInformation();
+            userEntity.MasterCityId = cityId;
+            UpdateCookieInformation();
+            return RedirectToAction("ManageAttractions", "Attractions");
         }
     }
 }

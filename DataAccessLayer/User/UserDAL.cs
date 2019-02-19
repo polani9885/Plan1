@@ -10,6 +10,8 @@ using HelperFunctions;
 using BusinessEntites;
 using Interfaces;
 using BusinessEntites.JsonParameters;
+using BusinessEntites.DataBaseModels;
+using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 
 namespace DataAccessLayer.User
 {
@@ -230,7 +232,7 @@ namespace DataAccessLayer.User
 
 
         public void User_LogUserTripInformation(int travelModeId,
-            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             try
@@ -240,13 +242,32 @@ namespace DataAccessLayer.User
                         new
                         {
                             TravelModeId = travelModeId,
-                            AttractionID = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(attractionID),
                             UserBreakTime =
                             CommonObjects.Convert.ToDataTable<UserTable_UpdatedBreaks>(userTable_UpdatedBreaks),
                             //UpdatedOrderAttraction = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit),
                             UserTripId = userTripId,
                             CountryId = @countryId,
                             AttractionOrder = CommonObjects.Convert.ToDataTable<GetOrderOfAttractionVisit>(listGetOrderOfAttractionVisit),
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void User_UpdateBreakInformation(
+            List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks, int userTripId)
+        {
+            try
+            {
+                SqlHelper
+                    .QuerySP("User_UpdateBreakInformation",
+                        new
+                        {
+                            UserBreakTime =
+                            CommonObjects.Convert.ToDataTable<UserTable_UpdatedBreaks>(userTable_UpdatedBreaks),
+                            UserTripId = userTripId
                         });
             }
             catch (Exception ex)
@@ -273,10 +294,12 @@ namespace DataAccessLayer.User
             }
         }
 
-        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId)
+        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId,int userId)
         {
             try
             {
+                
+
                 var result = SqlHelper
                     .QuerySP<GetOrderOfAttractionVisit>("User_GetUserStoredAttractinInfo",
                         new
@@ -327,7 +350,7 @@ namespace DataAccessLayer.User
             }
         }
 
-        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate)
+        public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId, List<Coordinate> coodinate,int attractionTravelStepsId)
         {
             try
             {
@@ -341,6 +364,7 @@ namespace DataAccessLayer.User
                         sourceBeginLatitude = coodinate.Where(x => x.Least == true).Select(y => y.Latitude).FirstOrDefault(),
                         sourceEndLongitude = coodinate.Where(x => x.Least == false).Select(y => y.Longitude).FirstOrDefault(),
                         sourceEndLatitude = coodinate.Where(x => x.Least == false).Select(y => y.Latitude).FirstOrDefault(),
+                        attractionTravelStepsId = attractionTravelStepsId
                     }).ToList();
                
                 return result;
@@ -379,7 +403,7 @@ namespace DataAccessLayer.User
             }
         }
 
-        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate,string googleSearchText,int breakType,string breakDate)
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate,string googleSearchText,int breakType,string breakDate,string startTime)
         {
             try
             {
@@ -393,7 +417,8 @@ namespace DataAccessLayer.User
                         StartDate = (string.IsNullOrEmpty(startDate) ? DateTime.Now : Convert.ToDateTime(startDate)),
                         GoogleSearchText = googleSearchText,
                         BreakType = breakType,
-                        breakDate = (string.IsNullOrEmpty(breakDate.Trim()) ? DateTime.Now : Convert.ToDateTime(breakDate))
+                        breakDate = (string.IsNullOrEmpty(breakDate.Trim()) ? DateTime.Now : Convert.ToDateTime(breakDate)),
+                        startTime = (string.IsNullOrEmpty(startTime) ? DateTime.Parse("00:00:00") : DateTime.Parse(startTime))
                     });
             }
             catch (Exception ex)
@@ -479,7 +504,147 @@ namespace DataAccessLayer.User
             }
         }
 
+        public void User_AddInterestedAttractionList(int userTripId, int attractionId)
+        {
+            try
+            {
 
+                SqlHelper
+                    .QuerySP("User_AddInterestedAttractionList",
+                        new
+                        {
+                            UserTripId = userTripId,
+                            AttractionId = attractionId
+
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void User_DeleteNotInterestedAttractionList(int userTripId, int attractionId)
+        {
+            try
+            {
+
+                SqlHelper
+                    .QuerySP("User_DeleteNotInterestedAttractionList",
+                        new
+                        {
+                            UserTripId = userTripId,
+                            AttractionId = attractionId
+
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<User_GetDirectionsSteps> User_GetDirectionsSteps(int countryId, int attractionTravelTimeDistanceId,string dateAndTime)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+                var result = SqlHelper
+                    .QuerySP<User_GetDirectionsSteps>("User_GetDirectionsSteps",
+                        new
+                        {
+                            AttractionTravelTimeDistanceId = attractionTravelTimeDistanceId
+
+                        }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionTravelStepsNearAttractionInfo(int attractionTravelStepsId,int countryId)
+        {
+            try
+            {
+
+                SqlHelper.countryId = countryId;
+
+                List<GetOrderOfAttractionVisit> result = SqlHelper
+                    .QuerySP<GetOrderOfAttractionVisit>("User_GetAttractionTravelStepsNearAttractionInfo",
+                        new
+                        {
+                            AttractionTravelStepsId = attractionTravelStepsId
+                        }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionsNextAttractions(int attractionsId, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+
+                List<GetOrderOfAttractionVisit> result = SqlHelper
+                    .QuerySP<GetOrderOfAttractionVisit>("User_GetAttractionsNextAttractions",
+                        new
+                        {
+                            AttractionsId = attractionsId
+                        }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public List<AttractionXCategory> User_GetAttractionXCategory(List<userTable_OnlyId> attractionsId, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+
+                List<AttractionXCategory> result = SqlHelper
+                    .QuerySP<AttractionXCategory>("User_GetAttractionXCategory",
+                        new
+                        {
+                            attractionId = CommonObjects.Convert.ToDataTable<userTable_OnlyId>(attractionsId)
+                        }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<EntityPredictions> User_AutoComplete(string address, int countryId)
+        {
+            try
+            {
+                SqlHelper.countryId = countryId;
+
+                List<EntityPredictions> result = SqlHelper
+                    .QuerySP<EntityPredictions>("User_AutoComplete",
+                        new
+                        {
+                            address = address
+                        }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

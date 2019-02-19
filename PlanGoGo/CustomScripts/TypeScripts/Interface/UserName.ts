@@ -1,0 +1,3 @@
+﻿interface IUserName {
+    userName:string
+}

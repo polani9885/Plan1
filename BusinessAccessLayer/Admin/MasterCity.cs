@@ -72,6 +72,18 @@ namespace BusinessAccessLayer.Admin
             }
         }
 
+        public void Admin_MergeCity(int sourceCityId, int destinationCityId)
+        {
+            try
+            {
+                _dataAccessMasterCity.Admin_MergeCity(sourceCityId, destinationCityId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

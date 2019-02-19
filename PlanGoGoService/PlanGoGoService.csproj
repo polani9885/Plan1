@@ -74,6 +74,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Admin_User.svc" />
     <Content Include="Admin\Attractions.svc" />
     <Content Include="Admin\AttractionsActiveStatus.svc" />
     <Content Include="Admin\AttractionTravelTimeDistance.svc" />
@@ -83,7 +84,6 @@
     <Content Include="Admin\MasterCity.svc" />
     <Content Include="Admin\MasterWeek.svc" />
     <Content Include="Admin\MissingDistanceAttractionsRecords.svc" />
-    <Content Include="Admin\User.svc" />
     <Content Include="GetListValues.svc" />
     <Content Include="Global.asax" />
     <Content Include="Schedulers\Scheduler.svc" />
@@ -93,6 +93,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Admin_User.svc.cs">
+      <DependentUpon>Admin_User.svc</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Attractions.svc.cs">
       <DependentUpon>Attractions.svc</DependentUpon>
     </Compile>
@@ -120,6 +123,7 @@
     <Compile Include="Admin\MissingDistanceAttractionsRecords.svc.cs">
       <DependentUpon>MissingDistanceAttractionsRecords.svc</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IAdminUser.cs" />
     <Compile Include="Interfaces\IAttractions.cs" />
     <Compile Include="Interfaces\IAttractionsActiveStatus.cs" />
     <Compile Include="Interfaces\IAttractionTravelTimeDistance.cs" />
@@ -129,9 +133,6 @@
     <Compile Include="Interfaces\IMasterState.cs" />
     <Compile Include="Interfaces\IMasterWeek.cs" />
     <Compile Include="Interfaces\IMissingDistanceAttractionsRecords.cs" />
-    <Compile Include="Admin\User.svc.cs">
-      <DependentUpon>User.svc</DependentUpon>
-    </Compile>
     <Compile Include="BaseClasses\BaseReference.cs" />
     <Compile Include="GetListValues.svc.cs">
       <DependentUpon>GetListValues.svc</DependentUpon>

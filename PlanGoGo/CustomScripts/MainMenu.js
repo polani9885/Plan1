@@ -1,90 +1,72 @@
 ﻿init();
-
+var webpack;
+var btnloginCheck;
 function init() {
+    
     $(document).ready(function() {
+        new EntryPoint.Main().MainMenu.init();
+
+        
+    });
+    
+}
+
+$(document).ready(function() {
+
+    
+    window.onload = function() {
+        webpack = new EntryPoint.Main();
+
+        btnloginCheck = $("#btnLogin");
+        
+        
+        
+        
+        
         
 
-        $("#loginController").dialog({
-            autoOpen: false,
-            height: 400,
-            width: 350,
-            modal: true,
-            buttons: {
-                "Register": registerUser,
-                "Forget Password": forgetPassword,
-                Cancel: function() {
-                    $("#loginController").dialog("close");
-                }
-            },
-        });
+    };
 
-        $("#registerController").dialog({
-            autoOpen: false,
-            height: 400,
-            width: 350,
-            modal: true,
-            buttons: {
-                "Login": loginControl,
-                "Forget Password": forgetPassword,
-                Cancel: function() {
-                    $("#registerController").dialog("close");
-                }
-            },
-        });
-
-        $("#forgetController").dialog({
-            autoOpen: false,
-            height: 400,
-            width: 350,
-            modal: true,
-            buttons: {
-                "Login": loginControl,
-                "Register": registerUser,
-                Cancel: function() {
-                    $("#forgetController").dialog("close");
-                }
-            },
-        });
-
-
+    $("#btnLogin").click(function () {
+        
+        webpack.Validations.loginValidation();
     });
+    $("#btnRegisterRegister").click(function() {
+        webpack.Validations.registerValidation();
+    });
+    $("#btnForgetPassword").click(function() {
+        webpack.Validations.forgetValidation();
+    });
+});
 
-    IsUserLoggedIn();
+
+function googleMapsMethodInfo(sourceLatitude, sourceLongitude) {
+    
+    var angularScope = angular.element(document.getElementById('main')).scope();
+    angularScope.$apply(function () {
+        
+        angularScope.googleMaps = new GMaps({
+            div: '#googleMaps',
+            lat: sourceLatitude,
+            lng: sourceLongitude
+        });
+    });
 }
+
 
 
 function UserCheckUserNameExisted() {
-
-    CheckUserNameExisted($("#txtRegisterLogin").val());
-
+    new EntryPoint.Main().User.checkUserNameExisted($("#txtRegisterLogin").val());
 }
 
 
-function registerUser() {
-    $("#loginController")
-        .dialog("close");
-    $("#forgetController")
-        .dialog("close");
-    $("#registerController")
-        .dialog("open");
-}
 
-function forgetPassword() {
-    $("#loginController")
-        .dialog("close");
-    $("#registerController")
-        .dialog("close");
-    $("#forgetController")
-        .dialog("open");
-}
+
+
 
 function loginControl() {
-    $("#loginController")
-        .dialog("open");
-    $("#registerController")
-        .dialog("close");
-    $("#forgetController")
-        .dialog("close");
+    
+    new EntryPoint.Main().User.loginControl();
 }
 
 

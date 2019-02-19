@@ -52,6 +52,90 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            Server Name
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.ServerName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            Is Windows Access
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.IsWindowsAccess)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            User Name
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.UserName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            Password
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Password)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            Database Name
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.DatabaseName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            Distance Measure
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.DistanceMeasure)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="adminField">
+                        <span class="adminFieldText">
+                            Meters In
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.MetersIn)
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     <div class="adminActionControl">
                         <input type="submit" value="Submit" />

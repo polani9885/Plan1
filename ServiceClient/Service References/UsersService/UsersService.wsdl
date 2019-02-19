@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UsersService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpsBinding_IUserServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -8,6 +33,8 @@
       <xsd:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites" />
       <xsd:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.JsonParameters" />
       <xsd:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.DataBaseModels" />
+      <xsd:import schemaLocation="http://localhost/PlanGoGoService/Schedulers/UsersService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/BusinessEntites.EntityAutoComplete.ReferenceObjects" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserServices_User_DeleteUserAttractions_InputMessage">
@@ -148,6 +175,48 @@
   <wsdl:message name="IUserServices_User_CheckTheCalculationPartIsDone_OutputMessage">
     <wsdl:part name="parameters" element="tns:User_CheckTheCalculationPartIsDoneResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserServices_User_AddInterestedAttractionList_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_AddInterestedAttractionList" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_AddInterestedAttractionList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_AddInterestedAttractionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_DeleteNotInterestedAttractionList_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_DeleteNotInterestedAttractionList" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_DeleteNotInterestedAttractionList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_DeleteNotInterestedAttractionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetDirectionsSteps_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetDirectionsSteps" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetDirectionsSteps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetDirectionsStepsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetAttractionTravelStepsNearAttractionInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetAttractionTravelStepsNearAttractionInfo" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetAttractionTravelStepsNearAttractionInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetAttractionTravelStepsNearAttractionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetAttractionsNextAttractions_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetAttractionsNextAttractions" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetAttractionsNextAttractions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetAttractionsNextAttractionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetAttractionXCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetAttractionXCategory" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_GetAttractionXCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_GetAttractionXCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_AutoComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_AutoComplete" />
+  </wsdl:message>
+  <wsdl:message name="IUserServices_User_AutoComplete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_AutoCompleteResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserServices">
     <wsdl:operation name="User_DeleteUserAttractions">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_DeleteUserAttractions" message="tns:IUserServices_User_DeleteUserAttractions_InputMessage" />
@@ -240,6 +309,34 @@
     <wsdl:operation name="User_CheckTheCalculationPartIsDone">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDone" message="tns:IUserServices_User_CheckTheCalculationPartIsDone_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDoneResponse" message="tns:IUserServices_User_CheckTheCalculationPartIsDone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_AddInterestedAttractionList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_AddInterestedAttractionList" message="tns:IUserServices_User_AddInterestedAttractionList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_AddInterestedAttractionListResponse" message="tns:IUserServices_User_AddInterestedAttractionList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_DeleteNotInterestedAttractionList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_DeleteNotInterestedAttractionList" message="tns:IUserServices_User_DeleteNotInterestedAttractionList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_DeleteNotInterestedAttractionListResponse" message="tns:IUserServices_User_DeleteNotInterestedAttractionList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetDirectionsSteps">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetDirectionsSteps" message="tns:IUserServices_User_GetDirectionsSteps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetDirectionsStepsResponse" message="tns:IUserServices_User_GetDirectionsSteps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionTravelStepsNearAttractionInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetAttractionTravelStepsNearAttractionInfo" message="tns:IUserServices_User_GetAttractionTravelStepsNearAttractionInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetAttractionTravelStepsNearAttractionInfoResponse" message="tns:IUserServices_User_GetAttractionTravelStepsNearAttractionInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionsNextAttractions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetAttractionsNextAttractions" message="tns:IUserServices_User_GetAttractionsNextAttractions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetAttractionsNextAttractionsResponse" message="tns:IUserServices_User_GetAttractionsNextAttractions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionXCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_GetAttractionXCategory" message="tns:IUserServices_User_GetAttractionXCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_GetAttractionXCategoryResponse" message="tns:IUserServices_User_GetAttractionXCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_AutoComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserServices/User_AutoComplete" message="tns:IUserServices_User_AutoComplete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserServices/User_AutoCompleteResponse" message="tns:IUserServices_User_AutoComplete_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserServices" type="tns:IUserServices">
@@ -451,10 +548,350 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="User_AddInterestedAttractionList">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_AddInterestedAttractionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_DeleteNotInterestedAttractionList">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_DeleteNotInterestedAttractionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetDirectionsSteps">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetDirectionsSteps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionTravelStepsNearAttractionInfo">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetAttractionTravelStepsNearAttractionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionsNextAttractions">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetAttractionsNextAttractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionXCategory">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetAttractionXCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_AutoComplete">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_AutoComplete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpsBinding_IUserServices" type="tns:IUserServices">
+    <wsp:PolicyReference URI="#BasicHttpsBinding_IUserServices_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="User_DeleteUserAttractions">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_DeleteUserAttractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserAttractionSaved">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetUserAttractionSaved" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetUserInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertingUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertingUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserAttractionUpdate">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserAttractionUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserExistChecking">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserExistChecking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_AddUpdateTourName">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_AddUpdateTourName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetTourInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetTourInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertUpdateTripCities">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertUpdateTripCities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetCityList">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetCityList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertCategoryInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertCategoryInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_LogUserTripInformation">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_LogUserTripInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTripGetAttractions">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserTripGetAttractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetUserStoredAttractinInfo">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetUserStoredAttractinInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_RequestedBreaks">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_RequestedBreaks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTripBuildStatus">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserTripBuildStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetNearestRestaruents">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetNearestRestaruents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserTrip_Update">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserTrip_Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_UserRequestedAttraction">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_UserRequestedAttraction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetTourInformationOnTripId">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetTourInformationOnTripId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetOrderOfRequest">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetOrderOfRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_InsertUserRequested">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_InsertUserRequested" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_CheckTheCalculationPartIsDone">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_CheckTheCalculationPartIsDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_AddInterestedAttractionList">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_AddInterestedAttractionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_DeleteNotInterestedAttractionList">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_DeleteNotInterestedAttractionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetDirectionsSteps">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetDirectionsSteps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionTravelStepsNearAttractionInfo">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetAttractionTravelStepsNearAttractionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionsNextAttractions">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetAttractionsNextAttractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAttractionXCategory">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_GetAttractionXCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_AutoComplete">
+      <soap:operation soapAction="http://tempuri.org/IUserServices/User_AutoComplete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="UsersService">
     <wsdl:port name="BasicHttpBinding_IUserServices" binding="tns:BasicHttpBinding_IUserServices">
       <soap:address location="http://localhost/PlanGoGoService/Schedulers/UsersService.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpsBinding_IUserServices" binding="tns:BasicHttpsBinding_IUserServices">
+      <soap:address location="https://l4211079075.pharmerica.net/PlanGoGoService/Schedulers/UsersService.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

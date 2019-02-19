@@ -44,11 +44,11 @@ namespace ServiceClient.Services
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-             List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+              List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             return _client.Public_GetOrderOfAttractionVisit(TravelModeId,
-                AttractionID, listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks,userTripId);
+                listGetOrderOfAttractionVisit, CountryId, userTable_UpdatedBreaks,userTripId);
 
         }
 

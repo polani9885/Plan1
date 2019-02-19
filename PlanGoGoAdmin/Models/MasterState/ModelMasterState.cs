@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntites.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -30,5 +31,12 @@ namespace PlanGoGoAdmin.Models.MasterState
         public string ErrorMessage { get; set; }
 
         public int CountryId { get; set; }
+
+        public int SourceStateId { get; set; }
+
+        public int DestinationStateId { get; set; }
+
+        public List<MasterStateDTO> States { get; set; }
+
     }
 }

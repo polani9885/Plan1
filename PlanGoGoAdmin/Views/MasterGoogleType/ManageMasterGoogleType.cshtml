@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerMasterGoogleType")
+<div ng-controller="controllerMasterGoogleType" id="controllerMasterGoogleType">
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            Main Category
+                        </td>
+                        <td>
+                            <select id="ddlmainCategorySelected" onchange="MainCategorySelected()">
+                                <option value="0">Select</option>
+                                <option ng-repeat="result in masterCategory" value="{{result.CategoryId}}" >{{result.CategoryName}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="gridTable" cellpadding="5px">
+                    <tbody class="gridHeader">
+                    <tr>
+                        <th>
+                            Actions
+                        </th>
+                        <th>
+                            TypeName
+                        </th>
+                        <th>
+                            Is Needed
+                        </th>
+                        <th>
+                            Display For User
+                        </th>
+                        <th>
+                            View Time
+                        </th>
+                        <th>
+                            Extra Search
+                        </th>
+                    </tr>
+                    </tbody>
+                    <tr ng-repeat="_result in masterGoogleTypeFiltered">
+                        <td>
+                            <a href="~/MasterGoogleType/UpdateMasterGoogleType?googleTypeID={{_result.GoogleTypeID}}" title="Update Goggle Type">
+                                Edit
+                            </a>
+                        </td>
+                        <td title="Type Name">
+                            {{_result.TypeName}}
+                        </td>
+                        <td title="Is Needed">
+                            {{_result.IsNeeded}}
+                        </td>
+                        <td title="Display For User">
+                            {{_result.DisplayForUser}}
+                        </td>
+                        <td title="View Time">
+                            {{_result.ViewTime}}
+                        </td>
+                        <td title="Extra Search">
+                            {{_result.ExtraSearch}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+</div>

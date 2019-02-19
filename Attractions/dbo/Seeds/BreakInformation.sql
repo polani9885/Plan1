@@ -101,3 +101,24 @@ BEGIN
            ,'Day Break')
 
 END
+
+GO
+IF NOT EXISTS (SELECT 1 FROM dbo.BreakInformation WITH(NOLOCK) WHERE BreakInformationId = 6) 
+BEGIN
+
+	INSERT INTO [dbo].[BreakInformation]
+           ([BreakInformationId]
+           ,[BreakType]
+           ,[StartTime]
+		   ,[EndTime]
+           ,[MinimumTime]
+           ,[Display])
+     VALUES
+           (6
+           ,'Extra Break'
+           ,'00:00:00.0000000'
+		   ,'00:00:00.0000000'
+           ,'00:30:00.0000000'
+           ,'Extra Break')
+
+END

@@ -1,27 +1,10 @@
 ﻿@{
-    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+    Layout = "~/Views/shared/_stateLayout.cshtml";
 }
 @Scripts.Render("~/controllerManageCity")
 <div ng-controller="controllerManageCity">
 
     <table  cellspacing="0" border="0" class="gridTable" cellpadding="5px">
-        <tr>
-            <td>
-                Country
-            </td>
-            <td>
-                <select id="ddlCountryId" ng-model="CountrySelectedValue" ng-change="CountryDropDownSelected()"
-                        ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
-            </td>
-
-            <td>
-                State
-            </td>
-            <td>
-                <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
-                        ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
-            </td>
-        </tr>
         <tr>
             <td colspan="2">
                 <table class="gridTable" cellpadding="5px" data-ng-table="manageCityTableParams">
@@ -43,10 +26,10 @@
                     </tbody>
                     <tr ng-repeat="user in manageCity">
                         <td>
-                            <a href="/Attractions/ManageAttractions?CityId={{user.CityId}}" title="Attraction List">
+                            <a href="~/MasterCity/ViewCityInfo?cityId={{user.CityId}}" title="Attraction List">
                                 Attractions
                             </a>
-                            <a href="/MasterCity/UpdateCity?CityId={{user.CityId}}" title="Update City">
+                            <a href="~/MasterCity/UpdateCity?CityId={{user.CityId}}" title="Update City">
                                 Edit
                             </a>
                         </td>

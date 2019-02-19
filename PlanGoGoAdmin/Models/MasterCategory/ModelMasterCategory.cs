@@ -17,5 +17,7 @@ namespace PlanGoGoAdmin.Models.MasterCategory
         public string CategoryName { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public string ViewTime { get; set; }
     }
 }

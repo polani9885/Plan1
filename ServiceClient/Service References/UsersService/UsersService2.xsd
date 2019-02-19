@@ -61,6 +61,7 @@
       <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
       <xs:element minOccurs="0" name="DestinationAttractionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DrivingBreak" type="xs:int" />
       <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FuelPrice" type="xs:decimal" />
       <xs:element minOccurs="0" name="IsTripDone" type="xs:boolean" />
@@ -126,13 +127,9 @@
       <xs:element minOccurs="0" name="RequestDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="UpdateDayEndTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdateDayStartTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdateDinnerMinimumTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedBreakFastMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedBreakFastTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedBreakMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedBreakTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedDinnerTime" type="ser:duration" />
-      <xs:element minOccurs="0" name="UpdatedLunchMinimumTime" type="ser:duration" />
       <xs:element minOccurs="0" name="UpdatedLunchTime" type="ser:duration" />
     </xs:sequence>
   </xs:complexType>
@@ -201,13 +198,9 @@
       <xs:element minOccurs="0" name="RequestDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdateDayEndTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdateDayStartTime" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UpdateDinnerMinimumTime" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UpdatedBreakFastMinimumTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdatedBreakFastTime" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UpdatedBreakMinimumTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdatedBreakTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdatedDinnerTime" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UpdatedLunchMinimumTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdatedLunchTime" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -228,4 +221,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserTripBuildStatus" nillable="true" type="tns:UserTripBuildStatus" />
+  <xs:complexType name="ArrayOfUser_GetDirectionsSteps">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User_GetDirectionsSteps" nillable="true" type="tns:User_GetDirectionsSteps" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser_GetDirectionsSteps" nillable="true" type="tns:ArrayOfUser_GetDirectionsSteps" />
+  <xs:complexType name="User_GetDirectionsSteps">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttractionTravelStepsId" type="xs:int" />
+      <xs:element minOccurs="0" name="AttractionTravelTimeDistanceId" type="xs:int" />
+      <xs:element minOccurs="0" name="DistanceCovered" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DistanceCoveredTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance_Value" type="xs:int" />
+      <xs:element minOccurs="0" name="Duration_Value" type="xs:int" />
+      <xs:element minOccurs="0" name="EndDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="End_location_lat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="End_location_lng" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsNearestRestarentDone" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderId" type="xs:int" />
+      <xs:element minOccurs="0" name="StartDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Start_location_lat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Start_location_lng" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Travel_mode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User_GetDirectionsSteps" nillable="true" type="tns:User_GetDirectionsSteps" />
 </xs:schema>

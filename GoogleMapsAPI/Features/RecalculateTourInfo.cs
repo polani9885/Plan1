@@ -22,14 +22,24 @@ namespace GoogleMapsAPI.Features
 
             foreach (var tourdata in tourInfo)
             {
+                RecalcuateTourInfo(tourdata);
+            }
+
+
+            
+        }
+
+        public void RecalcuateTourInfo(UserTourInformation tourdata)
+        {
+            try
+            {
                 List<GetOrderOfAttractionVisit> storedAttractinInfo =
-                    userDal.User_GetUserStoredAttractinInfo(tourdata.UserTripId);
-                List<UserTable_AttractionRequestOrder> attractionList =
-                    userDal.User_UserTripGetAttractions(tourdata.UserTripId);
+                    userDal.User_GetUserStoredAttractinInfo(tourdata.UserTripId,tourdata.UserId);
+
                 List<UserTable_UpdatedBreaksTemp> breakInformation = userDal.User_RequestedBreaks(tourdata.UserTripId);
 
                 List<userTable_OnlyId> userattraction = new List<userTable_OnlyId>();
-                
+
 
                 List<UserTable_UpdatedBreaks> breakInfo = breakInformation
                     .Where(y => !string.IsNullOrEmpty(y.UpdateDayEndTime)
@@ -84,25 +94,22 @@ namespace GoogleMapsAPI.Features
                     }).ToList();
 
 
-                userattraction = attractionList.Select(x => new userTable_OnlyId
-                {
-                    ID = x.AttractionId
-                }).ToList();
+
 
 
                 using (AttractionInformationBinding attractionInformation = new AttractionInformationBinding())
                 {
                     attractionInformation.UserRequestedAttractionInformation(tourdata.TravelModeId,
-                         userattraction,
+
                         storedAttractinInfo, tourdata.CountryId,
                         breakInfo,
-                         tourdata.UserTripId);
+                        tourdata.UserTripId);
                 }
-
             }
-
-
-            
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

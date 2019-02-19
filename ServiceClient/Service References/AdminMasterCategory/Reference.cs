@@ -16,10 +16,10 @@ namespace ServiceClient.AdminMasterCategory {
     public interface IMasterCategory {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdate", ReplyAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdateResponse")]
-        void Admin_MasterCategoryUpdate(int categoryId, string categoryName);
+        void Admin_MasterCategoryUpdate(int categoryId, string categoryName, string viewTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdate", ReplyAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryUpdateResponse")]
-        System.Threading.Tasks.Task Admin_MasterCategoryUpdateAsync(int categoryId, string categoryName);
+        System.Threading.Tasks.Task Admin_MasterCategoryUpdateAsync(int categoryId, string categoryName, string viewTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryGet", ReplyAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryGetResponse")]
         System.Collections.Generic.List<BusinessEntites.Admin.MasterCategoryDTO> Admin_MasterCategoryGet();
@@ -38,6 +38,12 @@ namespace ServiceClient.AdminMasterCategory {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCategory/Admin_MasterCategoryOnCategoryId", ReplyAction="http://tempuri.org/IMasterCategory/Admin_MasterCategoryOnCategoryIdResponse")]
         System.Threading.Tasks.Task<BusinessEntites.Admin.MasterCategoryDTO> Admin_MasterCategoryOnCategoryIdAsync(int categoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCategory/Admin_BreakInformationCheckExists", ReplyAction="http://tempuri.org/IMasterCategory/Admin_BreakInformationCheckExistsResponse")]
+        System.Collections.Generic.List<BusinessEntites.BreakInformation> Admin_BreakInformationCheckExists(int breakInformationId, string breakType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMasterCategory/Admin_BreakInformationCheckExists", ReplyAction="http://tempuri.org/IMasterCategory/Admin_BreakInformationCheckExistsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.BreakInformation>> Admin_BreakInformationCheckExistsAsync(int breakInformationId, string breakType);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,12 +73,12 @@ namespace ServiceClient.AdminMasterCategory {
                 base(binding, remoteAddress) {
         }
         
-        public void Admin_MasterCategoryUpdate(int categoryId, string categoryName) {
-            base.Channel.Admin_MasterCategoryUpdate(categoryId, categoryName);
+        public void Admin_MasterCategoryUpdate(int categoryId, string categoryName, string viewTime) {
+            base.Channel.Admin_MasterCategoryUpdate(categoryId, categoryName, viewTime);
         }
         
-        public System.Threading.Tasks.Task Admin_MasterCategoryUpdateAsync(int categoryId, string categoryName) {
-            return base.Channel.Admin_MasterCategoryUpdateAsync(categoryId, categoryName);
+        public System.Threading.Tasks.Task Admin_MasterCategoryUpdateAsync(int categoryId, string categoryName, string viewTime) {
+            return base.Channel.Admin_MasterCategoryUpdateAsync(categoryId, categoryName, viewTime);
         }
         
         public System.Collections.Generic.List<BusinessEntites.Admin.MasterCategoryDTO> Admin_MasterCategoryGet() {
@@ -97,6 +103,14 @@ namespace ServiceClient.AdminMasterCategory {
         
         public System.Threading.Tasks.Task<BusinessEntites.Admin.MasterCategoryDTO> Admin_MasterCategoryOnCategoryIdAsync(int categoryId) {
             return base.Channel.Admin_MasterCategoryOnCategoryIdAsync(categoryId);
+        }
+        
+        public System.Collections.Generic.List<BusinessEntites.BreakInformation> Admin_BreakInformationCheckExists(int breakInformationId, string breakType) {
+            return base.Channel.Admin_BreakInformationCheckExists(breakInformationId, breakType);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<BusinessEntites.BreakInformation>> Admin_BreakInformationCheckExistsAsync(int breakInformationId, string breakType) {
+            return base.Channel.Admin_BreakInformationCheckExistsAsync(breakInformationId, breakType);
         }
     }
 }

@@ -36,6 +36,7 @@
       <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CityShortName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="RecordIndex" type="xs:int" />
       <xs:element minOccurs="0" name="StateId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -53,18 +54,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="userTable_Category" nillable="true" type="tns:userTable_Category" />
-  <xs:complexType name="ArrayOfuserTable_OnlyId">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfuserTable_OnlyId" nillable="true" type="tns:ArrayOfuserTable_OnlyId" />
-  <xs:complexType name="userTable_OnlyId">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
   <xs:complexType name="ArrayOfGetOrderOfAttractionVisit">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GetOrderOfAttractionVisit" nillable="true" type="tns:GetOrderOfAttractionVisit" />
@@ -73,6 +62,8 @@
   <xs:element name="ArrayOfGetOrderOfAttractionVisit" nillable="true" type="tns:ArrayOfGetOrderOfAttractionVisit" />
   <xs:complexType name="GetOrderOfAttractionVisit">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AttractionTravelTimeDistanceId" type="xs:int" />
+      <xs:element minOccurs="0" name="AttractionsId" type="xs:int" />
       <xs:element minOccurs="0" name="BreakInformationId" type="xs:int" />
       <xs:element minOccurs="0" name="DateAndTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationAttractionId" type="xs:int" />
@@ -93,6 +84,7 @@
       <xs:element minOccurs="0" name="FoodExpense" type="xs:decimal" />
       <xs:element minOccurs="0" name="IsDistanceCalculationMissing" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsLunchDinnerBreakTime" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsNeedDrivningBreak" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsOrderUpdated" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsPersonalRequest" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsUpdatedViewTime" type="xs:boolean" />
@@ -115,6 +107,8 @@
       <xs:element minOccurs="0" name="TimeRequiredToView" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TravelModeId" type="xs:int" />
       <xs:element minOccurs="0" name="TravelTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TravelTimeHours" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TravelTimeSeconds" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TravelType" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdatedOrder" type="xs:int" />
       <xs:element minOccurs="0" name="UpdatedTime" nillable="true" type="xs:string" />
@@ -169,4 +163,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="public_FilterAttractions" nillable="true" type="tns:public_FilterAttractions" />
+  <xs:complexType name="ArrayOfuserTable_OnlyId">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfuserTable_OnlyId" nillable="true" type="tns:ArrayOfuserTable_OnlyId" />
+  <xs:complexType name="userTable_OnlyId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="userTable_OnlyId" nillable="true" type="tns:userTable_OnlyId" />
 </xs:schema>

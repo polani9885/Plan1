@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+}
+@Scripts.Render("~/controllerMasterTravelMode")
+<div ng-controller="controllerMasterTravelMode">
+    <table class="gridTable" cellpadding="5px">
+        <tbody class="gridHeader">
+        <tr>
+            <th>
+                Actions
+            </th>
+            <th>
+                Travel Type
+            </th>
+        </tr>
+        </tbody>
+        <tr ng-repeat="_result in masterTravelMode">
+            <td>
+                <a href="~/MasterTravelMode/UpdateMasterTravelMode?travelModeId={{_result.TravelModeId}}" title="Update Travel Type">
+                    Edit
+                </a>
+            </td>
+            <td title="Travel Type">
+                {{_result.TravelType}}
+            </td>
+        </tr>
+    </table>
+</div>

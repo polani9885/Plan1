@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+    Layout = "~/Views/shared/_countryLayout.cshtml";
 }
 @Scripts.Render("~/controllerManageStates")
 
@@ -7,15 +7,7 @@
 <div ng-controller="controllerManageState">
 
     <table cellpadding="0" class="gridTable" cellspacing="0" border="0">
-        <tr>
-            <td>
-                Country
-            </td>
-            <td>
-                <select id="ddlCountryId" ng-model="CountrySelectedValue" ng-change="CountryDropDownSelected()"
-                        ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>   
-            </td>
-        </tr>
+        
         <tr>
             <td colspan="2">
                 <table class="gridTable" cellpadding="5px">
@@ -33,16 +25,27 @@
                             <th>
                                 Is Default
                             </th>
+                            <th>
+                                City Count
+                            </th>
                         </tr>
                     </tbody>
                     <tr ng-repeat="user in manageStates">
                         <td>
-                            <a href="/MasterCity/ManageCity?StateId={{user.StateId}}" title="City List">
-                                City List
-                            </a>
-                            <a href="/MasterState/UpdateState?StateId={{user.StateId}}" title="Update State">
-                                Edit
-                            </a>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="~/MasterState/ViewStateInfo?StateId={{user.StateId}}" title="City List">
+                                            View City Info
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="~/MasterState/UpdateState?stateId={{user.StateId}}" title="Update State">
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                         <td title="'State Name'">
                             {{user.StateName}}
@@ -52,6 +55,9 @@
                         </td>
                         <td title="'Is Default'">
                             {{user.IsDefault}}
+                        </td>
+                        <td title="City Count">
+                            {{user.CityCount}}
                         </td>
                     </tr>
                 </table>

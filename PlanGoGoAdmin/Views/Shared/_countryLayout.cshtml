@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui", "~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularSupport")
+    @Styles.Render("~/Content/themes/base/css")
+
+    @Scripts.Render("~/customscript")
+    
+    
+
+    <script>
+  $( function() {
+    $( "#menu" ).menu();
+  } );
+    </script>
+</head>
+<body ng-app="AppPlanGoGo">
+    <div class="adminMainHeader">
+    <div id="MainDev" class="mainMenu">
+        <!--Menu List-->
+        <div style="float: left">
+            <ul id="menu" class="bodyContent">
+                <li>
+                    <a href="~/Country/ManageCountry" title="Manage Country">
+                        View Country
+                    </a>
+                </li>
+                <li>
+                    <div>Master Price Info</div>
+                    <ul>
+                        <li>
+                            <a href="~/MasterPriceInfo/ManageMasterPriceInfo" title="View PriceInfo">
+                                View PriceInfo
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/MasterPriceInfo/UpdateMasterPriceInfo?adminUserId=0" title="Add Price Info">
+                                Add Price Info
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Manage States</div>
+                    <ul>
+                        <li>
+                            <a href="~/MasterState/ManageState" title="Manage State">
+                                View States
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/MasterState/UpdateState?StateId=0" title="Update State">
+                                Update State
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="~/MasterState/MergeStates" title="Merge States">
+                        Merge States
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div style="float: left;" class="bodyContent">
+            @RenderBody()
+        </div>
+    </div>
+    </div>
+</body>
+</html>

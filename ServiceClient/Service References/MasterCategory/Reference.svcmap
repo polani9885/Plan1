@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="82e32a27-0bfd-4117-8658-07f4c4076c3d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/PlanGoGoService/Admin/MasterCategory.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MasterCategory1.xsd" MetadataType="Schema" ID="5b38e8b2-9c24-4ce0-bffb-83ca785122a3" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterCategory2.xsd" MetadataType="Schema" ID="1434d734-7c18-4fe5-a85e-91f84c3bae67" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterCategory.xsd" MetadataType="Schema" ID="aa35fa0e-a028-401f-aa75-da42b8f4a5ee" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd2" />
+    <MetadataFile FileName="MasterCategory3.xsd" MetadataType="Schema" ID="b787845c-7ca6-433e-81bf-278726c779eb" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd3" />
+    <MetadataFile FileName="MasterCategory4.xsd" MetadataType="Schema" ID="1d468531-f232-49ac-bcf2-62029774be6f" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd4" />
+    <MetadataFile FileName="MasterCategory5.xsd" MetadataType="Schema" ID="73dd7b11-697c-4912-a6a6-4bf2fe6d07d7" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?xsd=xsd5" />
+    <MetadataFile FileName="MasterCategory.disco" MetadataType="Disco" ID="14b7e182-f4a2-4094-be6c-299b2c2f9eb9" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?disco" />
+    <MetadataFile FileName="MasterCategory.wsdl" MetadataType="Wsdl" ID="f61a36c2-8ac4-46ab-838d-ce60b71dc7cc" SourceId="1" SourceUrl="http://localhost/PlanGoGoService/Admin/MasterCategory.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

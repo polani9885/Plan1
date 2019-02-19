@@ -18,5 +18,7 @@ namespace Interfaces
         MasterCityDTO Admin_MasterCityGetOnCityId(int cityId);
 
         void Admin_MasterCityUpdate(MasterCityDTO masterCityDTO);
+
+        void Admin_MergeCity(int sourceCityId, int destinationCityId);
     }
 }

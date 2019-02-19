@@ -12,4 +12,6 @@ BEGIN
   LEFT JOIN dbo.AttractionNoOfTimesStepsNearyByCalcuated ANTS WITH(NOLOCK) ON ANTS.AttractionTravelStepsId = ATS.AttractionTravelStepsId
   WHERE ISNULL(IsNearestRestarentDone,0) = 0
   AND ISNULL(ANTS.NoOfTimesTried,0) < 5
+  AND ISNULL(ATS.ParentAttractionTravelStepsId,0) = 0
+  ORDER BY ATS.AttractionTravelStepsId DESC
 END

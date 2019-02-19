@@ -15,6 +15,7 @@
 	[CarMileage] [decimal](18, 2) NULL,
 	[FuelPrice] [decimal](18, 2) NULL,
  [DrivingBreak] INT NULL, 
+    [StartTime] TIME NULL, 
     CONSTRAINT [PK_UserTrip] PRIMARY KEY CLUSTERED 
 (
 	[UserTripId] ASC

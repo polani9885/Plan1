@@ -89,7 +89,42 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\Admin_User\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AttractionsActiveStatus\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Attractions\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AttractionTravelTimeDistance\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\GetListValues\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MasterCategory\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MasterWeek\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MissingDistanceAttractionsRecords\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -99,10 +134,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Services\Admin_User.cs" />
+    <Compile Include="Services\Attractions.cs" />
+    <Compile Include="Services\AttractionsActiveStatus.cs" />
+    <Compile Include="Services\AttractionTravelTimeDistance.cs" />
     <Compile Include="Services\Country.cs" />
     <Compile Include="Services\GetListValues.cs" />
+    <Compile Include="Services\MasterCategory.cs" />
     <Compile Include="Services\MasterCity.cs" />
     <Compile Include="Services\MasterState.cs" />
+    <Compile Include="Services\MasterWeek.cs" />
+    <Compile Include="Services\MissingDistanceAttractionsRecords.cs" />
     <Compile Include="Services\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin.AdminUser.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.AttractionTravelTimeDistanceDTO.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.AttractionTravelTimeDistanceDTO1.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.MasterCategoryDTO.datasource" />
@@ -124,9 +167,16 @@
     <None Include="Properties\DataSources\BusinessEntites.Admin.MasterWeekDTO1.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Admin_GetUser.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.BreakInformation.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Common.AttractionsDTO.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Common.AttractionsDTO1.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Common.MasterTravelModeDTO.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.DataBaseModels.Admin_MasterCategoryXMasterGoogleType.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.DataBaseModels.AttractionXCategory.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.DataBaseModels.MasterGoogleType.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.DataBaseModels.MasterPriceInfo.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.EntityAutoComplete.ReferenceObjects.EntityPredictions.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime1.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.GetAttractionOpenTime2.datasource" />
@@ -149,6 +199,7 @@
     <None Include="Properties\DataSources\BusinessEntites.Users.UserTable_UpdatedBreaksTemp.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Users.UserTourInformation.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Users.UserTripBuildStatus.datasource" />
+    <None Include="Properties\DataSources\BusinessEntites.Users.User_GetDirectionsSteps.datasource" />
     <None Include="Properties\DataSources\BusinessEntites.Users.User_TripInfo.datasource" />
     <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus.wsdl" />
     <None Include="Service References\AdminAttractionsActiveStatus\AttractionsActiveStatus.xsd">
@@ -190,6 +241,9 @@
     <None Include="Service References\AdminCountry\Country2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\AdminCountry\Country3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\AdminMasterCategory\MasterCategory.wsdl" />
     <None Include="Service References\AdminMasterCategory\MasterCategory.xsd">
       <SubType>Designer</SubType>
@@ -198,6 +252,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\AdminMasterCategory\MasterCategory2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AdminMasterCategory\MasterCategory3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\AdminMasterCity\MasterCity.wsdl" />
@@ -240,6 +297,49 @@
     <None Include="Service References\AdminMissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\Admin_User\Admin_User.wsdl" />
+    <None Include="Service References\Admin_User\Admin_User.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Admin_User\Admin_User1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Admin_User\Admin_User2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Admin_User\Admin_User3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus.wsdl" />
+    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Attractions\Attractions.wsdl" />
+    <None Include="Service References\Attractions\Attractions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Attractions\Attractions1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Attractions\Attractions2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance.wsdl" />
+    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\GetListValues\GetListValues.wsdl" />
     <None Include="Service References\GetListValues\GetListValues.xsd">
       <SubType>Designer</SubType>
@@ -262,6 +362,45 @@
     <None Include="Service References\GetListValues\GetListValues6.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\MasterCategory\MasterCategory.wsdl" />
+    <None Include="Service References\MasterCategory\MasterCategory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterCategory\MasterCategory1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterCategory\MasterCategory2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterCategory\MasterCategory3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterCategory\MasterCategory4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterCategory\MasterCategory5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterWeek\MasterWeek.wsdl" />
+    <None Include="Service References\MasterWeek\MasterWeek.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterWeek\MasterWeek1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterWeek\MasterWeek2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.wsdl" />
+    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\UsersService\UsersService.wsdl" />
     <None Include="Service References\UsersService\UsersService.xsd">
       <SubType>Designer</SubType>
@@ -281,6 +420,12 @@
     <None Include="Service References\UsersService\UsersService5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\UsersService\UsersService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersService\UsersService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\AdminAttractionsActiveStatus\" />
@@ -292,7 +437,14 @@
     <WCFMetadataStorage Include="Service References\AdminMasterState\" />
     <WCFMetadataStorage Include="Service References\AdminMasterWeek\" />
     <WCFMetadataStorage Include="Service References\AdminMissingDistanceAttractionsRecords\" />
+    <WCFMetadataStorage Include="Service References\Admin_User\" />
+    <WCFMetadataStorage Include="Service References\AttractionsActiveStatus\" />
+    <WCFMetadataStorage Include="Service References\Attractions\" />
+    <WCFMetadataStorage Include="Service References\AttractionTravelTimeDistance\" />
     <WCFMetadataStorage Include="Service References\GetListValues\" />
+    <WCFMetadataStorage Include="Service References\MasterCategory\" />
+    <WCFMetadataStorage Include="Service References\MasterWeek\" />
+    <WCFMetadataStorage Include="Service References\MissingDistanceAttractionsRecords\" />
     <WCFMetadataStorage Include="Service References\UsersService\" />
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +618,111 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UsersService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionsActiveStatus\AttractionsActiveStatus.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionsActiveStatus\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionsActiveStatus\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionsActiveStatus\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterWeek\MasterWeek.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterWeek\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterWeek\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterWeek\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionTravelTimeDistance\AttractionTravelTimeDistance.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionTravelTimeDistance\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionTravelTimeDistance\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AttractionTravelTimeDistance\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MissingDistanceAttractionsRecords\MissingDistanceAttractionsRecords.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MissingDistanceAttractionsRecords\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MissingDistanceAttractionsRecords\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MissingDistanceAttractionsRecords\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Attractions\Attractions.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Attractions\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Attractions\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Attractions\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterCategory\MasterCategory.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterCategory\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterCategory\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MasterCategory\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Admin_User\Admin_User.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Admin_User\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Admin_User\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Admin_User\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

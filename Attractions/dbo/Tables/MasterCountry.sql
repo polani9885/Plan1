@@ -12,6 +12,8 @@
     [UserName] VARCHAR(50) NULL, 
     [Password] VARCHAR(50) NULL, 
     [DatabaseName] VARCHAR(50) NULL, 
+    [DistanceMeasure] VARCHAR(50) NULL, 
+    [MetersIn] DECIMAL(32, 18) NULL, 
     CONSTRAINT [PK_MaterCountry] PRIMARY KEY CLUSTERED ([CountryId] ASC)
 );
 

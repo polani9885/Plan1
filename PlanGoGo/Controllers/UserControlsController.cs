@@ -15,6 +15,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
 using BusinessEntites.JsonParameters;
+using BusinessEntites.DataBaseModels;
 
 namespace PlanGoGo.Controllers
 {
@@ -23,13 +24,16 @@ namespace PlanGoGo.Controllers
 
         IUser _IUserInfo;
         private ICountry _ICountry;
+        private IGetListValues _IGetListValues;
         private readonly AutoCompleteFeature autoCompleteFeature = new AutoCompleteFeature();
         private readonly GetNearestInformation getNearestInformation = new GetNearestInformation();
+        
 
-        public UserControlsController(IUser IUserInfo, ICountry iCountry)
+        public UserControlsController(IUser IUserInfo, ICountry iCountry,IGetListValues iGetListValues)
         {
             _IUserInfo = IUserInfo;
             _ICountry = iCountry;
+            _IGetListValues = iGetListValues;
         }
 
         // GET: UserControls
@@ -42,7 +46,31 @@ namespace PlanGoGo.Controllers
                 updatedBreaks = breakInformation,
                 divId = divId
             };
-            
+
+            List<DrivingSteps> listdrivingSteps = new List<DrivingSteps>();
+
+            DrivingSteps drivingSteps = new DrivingSteps();
+
+            var breakInfo = _IGetListValues.GetBreakInformation();
+
+             
+
+            List <UserTourInformation> result = _IUserInfo.User_GetTourInformation(userEntity.UserId);
+
+            int countryId = result.Where(x => x.UserTripId == userEntity.UserTripId).Select(y => y.CountryId)
+                .FirstOrDefault();
+
+            foreach (var attractions in public_FilterAttractions.Where(x => x.IsNeedDrivningBreak))
+            {
+                drivingSteps = new DrivingSteps();
+                drivingSteps.RecordCount = attractions.RecordCount;
+                drivingSteps.DirectionSteps = _IUserInfo.User_GetDirectionsSteps(countryId,
+                    attractions.AttractionTravelTimeDistanceId,attractions.DateAndTime);
+                listdrivingSteps.Add(drivingSteps);
+            }
+            model.Directions = listdrivingSteps;
+            model.BreakInformation = breakInfo;
+
             return View(model);
         }
 
@@ -205,7 +233,11 @@ namespace PlanGoGo.Controllers
         public JsonResult User_GetUserStoredAttractinInfo()
         {
             AttractionInformationBinding attractionInformationBinding = new AttractionInformationBinding();
-            List<GroupWithDateAttractions> result = attractionInformationBinding.User_GetUserStoredAttractinInfo(userEntity.UserTripId);
+
+            var userResult = _IUserInfo.User_GetCityList(userEntity.UserTripId);
+            List<GroupWithDateAttractions> result =
+                attractionInformationBinding.User_GetUserStoredAttractinInfo(userEntity.UserTripId,
+                    userResult.Select(x => x.CountryId).FirstOrDefault(), userEntity.UserId);
             return jsonReturn.JsonResult<GroupWithDateAttractions>(result);
             
         }
@@ -224,15 +256,20 @@ namespace PlanGoGo.Controllers
             
         }
 
-        public JsonResult User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId,int distance, string sourceLongitude,string sourceLatitude)
+        public JsonResult User_GetNearestRestaruents(int attractionsId, int travelModeId, int countryId,int distance, string sourceLongitude,string sourceLatitude,int attractionTravelStepsId)
         {
 
             SearchForNextAttractions searchForNextAttractions = new SearchForNextAttractions();
 
-            List<Coordinate> cordinates = searchForNextAttractions.GetBoundingCoords(Convert.ToDouble(sourceLatitude),
-                Convert.ToDouble(sourceLongitude), distance);
+            List<Coordinate> cordinates = new List<Coordinate>();
+
+            if (attractionTravelStepsId == 0)
+            {
+                cordinates = searchForNextAttractions.GetBoundingCoords(Convert.ToDouble(sourceLatitude),
+                    Convert.ToDouble(sourceLongitude), distance);
+            }
             List<public_FilterAttractions> result =
-                _IUserInfo.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, cordinates);
+                _IUserInfo.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, cordinates, attractionTravelStepsId);
 
             return jsonReturn.JsonResult<public_FilterAttractions>(result);
             
@@ -260,9 +297,13 @@ namespace PlanGoGo.Controllers
         {
             List<EntityPredictions> result = new List<EntityPredictions>();
 
-            result = autoCompleteFeature.SearchString(address,
-                _ICountry.Admin_GetCountry().Where(x => x.CountryId == countryId).Select(y => y.CountryShortName)
-                    .FirstOrDefault());
+            result = _IUserInfo.User_AutoComplete(address, countryId);
+            if (result == null || result.Count == 0)
+            {
+                result = autoCompleteFeature.SearchString(address,
+                    _ICountry.Admin_GetCountry().Where(x => x.CountryId == countryId).Select(y => y.CountryShortName)
+                        .FirstOrDefault());
+            }
 
             return jsonReturn.JsonResult<EntityPredictions>(result);
         }
@@ -290,7 +331,7 @@ namespace PlanGoGo.Controllers
         }
 
         [HttpGet]
-        public JsonResult UserRequestedAttraction(string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        public JsonResult UserRequestedAttraction(string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate, string startTime)
         {
             List<MasterCountryDTO> result = new List<MasterCountryDTO>();
             if (!string.IsNullOrEmpty(breakDate.Trim()))
@@ -299,7 +340,7 @@ namespace PlanGoGo.Controllers
             }
             
 
-            _IUserInfo.User_UserRequestedAttraction(userEntity.UserTripId,address,countryId, isSource, startDate,googleSearchText,breakType,breakDate);
+            _IUserInfo.User_UserRequestedAttraction(userEntity.UserTripId,address,countryId, isSource, startDate,googleSearchText,breakType,breakDate,startTime);
 
             return jsonReturn.JsonResult<MasterCountryDTO>(result);
         }
@@ -343,7 +384,67 @@ namespace PlanGoGo.Controllers
 
             result = _IUserInfo.User_CheckTheCalculationPartIsDone(userEntity.UserTripId);
 
+            if (result.Count > 0 && result.Any(x => x.IsDistanceCalculationMissing))
+            {
+                return jsonReturn.JsonResult<GetOrderOfAttractionVisit>(result);
+            }
+            else
+            {
+                return jsonReturn.JsonResult<GetOrderOfAttractionVisit>(new List<GetOrderOfAttractionVisit>());
+            }
+            
+        }
+
+        [HttpGet]
+        public JsonResult AddInterestedAttractionList(int attractionId)
+        {
+            List<UserTable_AttractionRequestOrder> result = new List<UserTable_AttractionRequestOrder>();
+
+            _IUserInfo.User_AddInterestedAttractionList(userEntity.UserTripId,attractionId);
+
+            return jsonReturn.JsonResult<UserTable_AttractionRequestOrder>(result);
+        }
+
+        [HttpGet]
+        public JsonResult DeleteNotInterestedAttractionList(int attractionId)
+        {
+            List<UserTable_AttractionRequestOrder> result = new List<UserTable_AttractionRequestOrder>();
+
+            _IUserInfo.User_DeleteNotInterestedAttractionList(userEntity.UserTripId,attractionId);
+
+            return jsonReturn.JsonResult<UserTable_AttractionRequestOrder>(result);
+        }
+
+
+        [HttpGet]
+        public JsonResult GetAttractionTravelStepsNearAttractionInfo(int attractionTravelStepsId,int countryId)
+        {
+            List<GetOrderOfAttractionVisit> result = new List<GetOrderOfAttractionVisit>();
+
+            result = _IUserInfo.User_GetAttractionTravelStepsNearAttractionInfo(attractionTravelStepsId, countryId);
+
             return jsonReturn.JsonResult<GetOrderOfAttractionVisit>(result);
+        }
+
+        [HttpGet]
+        public JsonResult GetAttractionsNextAttractions(int attractionsId, int countryId)
+        {
+            List<GetOrderOfAttractionVisit> result = new List<GetOrderOfAttractionVisit>();
+
+            result = _IUserInfo.User_GetAttractionsNextAttractions(attractionsId, countryId);
+
+            return jsonReturn.JsonResult<GetOrderOfAttractionVisit>(result);
+        }
+
+
+        [HttpPost]
+        public JsonResult GetAttractionXCategory(GetAttractionXCategoryParamerter parameter)
+        {
+            List<AttractionXCategory> result = new List<AttractionXCategory>();
+
+            result = _IUserInfo.User_GetAttractionXCategory(parameter.attractionsId, parameter.countryId);
+
+            return jsonReturn.JsonResult<AttractionXCategory>(result);
         }
 
 

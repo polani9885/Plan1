@@ -12,15 +12,8 @@ appPlanGoGo.controller('controllerManageCity', function ($scope, $http, NgTableP
     $scope.StateSelectedValue = 0;
     $scope.paramStateId = getUrlParameter("StateId");
 
-    $scope.manageStatesBinding = function (data) {
-        if (data.length > 0) {
-            
-            Admin_GetCity($scope, $http, NgTableParams, data[0]);
-            $scope.StateSelectedValue = data[0];
-        }
-    }
 
-    $scope.manageCityBinding = function (data) {
+    $scope.manageCityBinding = function(data) {
 
         var initialParams = {
             page: 1,
@@ -36,22 +29,15 @@ appPlanGoGo.controller('controllerManageCity', function ($scope, $http, NgTableP
             dataset: data
         };
         $scope.manageCityTableParams = new NgTableParams(initialParams, initialSettings);
-    }
-
-
-    $scope.CountryDropDownSelected = function () {        
-        Admin_GetStates($scope, $http, NgTableParams, $scope.CountrySelectedValue);
     };
 
-    $scope.StateDropDownSelected = function () {
 
-        Admin_GetCity($scope, $http, NgTableParams, $scope.StateSelectedValue);
-    };
+    
 
     $scope.SubmitClick = function () {
         $("#CountryId").val($("#ddlCountryId").val());
     };
 
 
-    Admin_GetCountryList($scope, $http, NgTableParams);
+    Admin_GetCity($scope, $http, NgTableParams);
 });

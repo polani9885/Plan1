@@ -72,6 +72,18 @@ namespace BusinessAccessLayer.Admin
             }
         }
 
+        public void Admin_MergeStates(int sourceStateId, int destinationStateId)
+        {
+            try
+            {
+                _dataAccessMasterState.Admin_MergeStates(sourceStateId, destinationStateId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/shared/_authenticatedLayout.cshtml";
+    Layout = "~/Views/shared/_stateLayout.cshtml";
 }
 @model PlanGoGoAdmin.Models.MasterCity.ModelMasterCity
 @Scripts.Render("~/controllerManageCity")
@@ -11,36 +11,6 @@
                 <tr>
                     <td colspan="2" style="color: red">
                         @Model.ErrorMessage
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="adminField">
-                            <span class="adminFieldText">
-                                Country
-                            </span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="adminInputControl">
-                            <select id="ddlCountryId" ng-model="CountrySelectedValue"
-                                    ng-options="_country as _country.CountryName for _country in manageCountry track by _country.CountryId"></select>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="adminField">
-                            <span class="adminFieldText">
-                                State
-                            </span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="adminInputControl">
-                            <select id="ddlStateId" ng-model="StateSelectedValue" ng-change="StateDropDownSelected()"
-                                    ng-options="_state as _state.StateName for _state in manageStates track by _state.StateId"></select>
-                        </div>
                     </td>
                 </tr>
                 <tr>

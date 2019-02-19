@@ -77,12 +77,12 @@ namespace PlanGoGoService
         }
 
         public List<GetOrderOfAttractionVisit> Public_GetOrderOfAttractionVisit(int TravelModeId,
-             List<userTable_OnlyId> AttractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
+             List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int CountryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             try
             {
-                return _businessAccess.Public_GetOrderOfAttractionVisit(TravelModeId, AttractionID, listGetOrderOfAttractionVisit,
+                return _businessAccess.Public_GetOrderOfAttractionVisit(TravelModeId, listGetOrderOfAttractionVisit,
                     CountryId, userTable_UpdatedBreaks, userTripId);
             }
             catch (Exception ex)

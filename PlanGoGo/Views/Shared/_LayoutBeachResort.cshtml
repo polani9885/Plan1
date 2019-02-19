@@ -3,6 +3,7 @@
 <head >
     <meta charset="UTF-8">
     <title>Plan Go Go</title>    
+    
     @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui","~/bundles/jqueryval", "~/customScript")  
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularSupport")
@@ -13,14 +14,21 @@
     
 
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
-    @Styles.Render("~/bundles/pluginsCSS")
-
+    
+    
+    
     <link rel="stylesheet" href="~/Templates/BeachResort/css/style.css" type="text/css">
     <link href='//fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+    
+    <script type="text/javascript" src="~/TypeScriptFiles/webpack.js?v=f649a140-e2a2-11e8-a352-8bdfa6c5d61f"></script>
+
+
+   
+   
 </head>
 <body ng-app="AppPlanGoGo">
 <div class="blockPage" style="display:none">
-    <img class="Centered" src="Images/ApplicationImages/LoadingImages/InternetSlowdown_Day.gif" width="300" height="300" />
+    @*<img class="Centered" src="~/Images/ApplicationImages/LoadingImages/InternetSlowdown_Day.gif" width="300" height="300" />*@
 </div>
 <div id="background">
     <div id="page">
@@ -28,13 +36,63 @@
             <div id="logo">
                 @*<a href="index.html"><img src="/Images/Logos/logo.png" alt="LOGO" height="112" width="118"></a>*@
             </div>
-            <div id="navigation">
+            <div >
+                <table>
+                    <tr>
+                        <td>
+                            <a href="~/index.html">Home</a>    
+                        </td>
+                        <td>
+                            <a href="~/UserControls/PlannedTour" id="linkPlannedTour">Planned Tour</a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" onclick="loginControl()" id="linkLogin">Login</a>
+                            <a href="javascript:void(0)" onclick="UserLogOut()" id="linkLogOut" style="display: none">Log Out</a>
+                        </td>
+                        
+                        
+                    </tr>
+                </table>
+                </div>
+            @*<div id="navigation">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="~/index.html">Home</a>    
+                        </td>
+                        <td>
+                            <a href="~/about.html">About</a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" onclick="loginControl()" id="linkLogin">Login</a>
+                            <a href="javascript:void(0)" onclick="UserLogOut()" id="linkLogOut" style="display: none">Log Out</a>
+                        </td>
+                        <td>
+                            <a href="~/UserControls/PlannedTour">Planned Tour</a>
+                        </td>
+                        <td>
+                            <a href="~/foods.html">Food</a>
+                        </td>
+                        <td>
+                            <a href="~/news.html">News</a>
+                        </td>
+                        <td>
+                                <a href="~/contact.html">Contact</a>
+                        </td>
+                        <td>
+                                <a href="~/contact.html">My Account</a>
+                        </td>
+                        <td>
+                        <a href="~/contact.html">My Plans</a>
+                            </td>
+</tr>
+                </table>
                 <ul>
                     <li class="selected">
                         <a href="~/index.html">Home</a>
                     </li>
                     <li>
-                        <a href="~/about.html" >About</a>
+                        <a href="~/about.html">About</a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" onclick="loginControl()" id="linkLogin">Login</a>
@@ -59,7 +117,7 @@
                         <a href="~/contact.html">My Plans</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
         </div>
         <div id="contents">
             @RenderBody()		
@@ -102,7 +160,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input id="btnLogin" type="button" value="Login" onclick="LoginValidation()">
+                            <input id="btnLogin" type="button" value="Login" >
                         </td>
                     </tr>
                 </table>
@@ -161,7 +219,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input id="btnRegisterRegister" type="button" value="Register" onclick="RegisterValidation()">
+                            <input id="btnRegisterRegister" type="button" value="Register" >
                         </td>
                     </tr>
                 </table>
@@ -203,7 +261,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input id="btnForgetPassword" type="button" value="Forget Password" onclick="ForgetValidation()">
+                            <input id="btnForgetPassword" type="button" value="Forget Password" >
                         </td>
                     </tr>
                 </table>

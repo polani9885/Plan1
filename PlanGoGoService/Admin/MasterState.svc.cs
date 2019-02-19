@@ -73,5 +73,17 @@ namespace PlanGoGoService.Admin
                 throw ex;
             }
         }
+
+        public void Admin_MergeStates(int sourceStateId, int destinationStateId)
+        {
+            try
+            {
+                _businessMasterState.Admin_MergeStates(sourceStateId, destinationStateId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

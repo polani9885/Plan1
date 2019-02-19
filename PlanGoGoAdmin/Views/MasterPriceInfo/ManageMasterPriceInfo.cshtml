@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/shared/_countryLayout.cshtml";
+}
+
+@Scripts.Render("~/controllerMasterPriceInfo")
+
+<div ng-controller="controllerMasterPriceInfo">
+    <table class="gridTable" cellpadding="5px">
+        <tbody class="gridHeader">
+        <tr>
+            <th>
+                Actions
+            </th>
+            <th>
+                Prive Level
+            </th>
+            <th>
+                Food
+            </th>
+            <th>
+                Stay
+            </th>
+        </tr>
+        </tbody>
+        <tr ng-repeat="_result in masterPriceInfo">
+            <td>
+                <a href="~/MasterPriceInfo/UpdateMasterPriceInfo?masterPriceInfoId={{_result.MasterPriceInfoId}}" title="Update Price Info">
+                    Edit
+                </a>
+            </td>
+            <td title="'Prive Level'">
+                {{_result.PriveLevel}}
+            </td>
+            <td title="Food">
+                {{_result.Food}}
+            </td>
+            <td title="Stay">
+                {{_result.Stay}}
+            </td>
+        </tr>
+    </table>
+</div>
+

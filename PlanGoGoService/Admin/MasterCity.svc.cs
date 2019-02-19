@@ -73,5 +73,17 @@ namespace PlanGoGoService.Admin
                 throw ex;
             }
         }
+
+        public void Admin_MergeCity(int sourceCityId, int destinationCityId)
+        {
+            try
+            {
+                _businessMasterCity.Admin_MergeCity(sourceCityId, destinationCityId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -11,6 +11,8 @@ using BusinessEntites.Users;
 using BusinessEntites.JsonParameters;
 using BusinessEntites;
 using BusinessEntites.Scheduler;
+using BusinessEntites.DataBaseModels;
+using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 
 namespace PlanGoGoService.Schedulers
 {
@@ -76,11 +78,11 @@ namespace PlanGoGoService.Schedulers
         }
 
         public void User_LogUserTripInformation(int travelModeId,
-            List<userTable_OnlyId> attractionID, List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
+            List<GetOrderOfAttractionVisit> listGetOrderOfAttractionVisit, int countryId,
             List<UserTable_UpdatedBreaks> userTable_UpdatedBreaks,int userTripId)
         {
             _businessUserBAL.User_LogUserTripInformation(travelModeId,
-                attractionID, listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,userTripId);
+                 listGetOrderOfAttractionVisit, countryId, userTable_UpdatedBreaks,userTripId);
         }
 
         public List<UserTable_AttractionRequestOrder> User_UserTripGetAttractions(int userTripId)
@@ -89,9 +91,9 @@ namespace PlanGoGoService.Schedulers
         }
 
 
-        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId)
+        public List<GetOrderOfAttractionVisit> User_GetUserStoredAttractinInfo(int userTripId,int userId)
         {
-            return _businessUserBAL.User_GetUserStoredAttractinInfo(userTripId);
+            return _businessUserBAL.User_GetUserStoredAttractinInfo(userTripId,userId);
         }
 
         public List<UserTable_UpdatedBreaksTemp> User_RequestedBreaks(int userTripId)
@@ -105,9 +107,9 @@ namespace PlanGoGoService.Schedulers
         }
 
         public List<public_FilterAttractions> User_GetNearestRestaruents(int attractionsId, int travelModeId,
-            int countryId, List<Coordinate> coodinate)
+            int countryId, List<Coordinate> coodinate, int attractionTravelStepsId)
         {
-            return _businessUserBAL.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate);
+            return _businessUserBAL.User_GetNearestRestaruents(attractionsId, travelModeId, countryId, coodinate,attractionTravelStepsId);
         }
 
         public void User_UserTrip_Update(UserTourInformation userTourInformation)
@@ -115,9 +117,9 @@ namespace PlanGoGoService.Schedulers
             _businessUserBAL.User_UserTrip_Update(userTourInformation);
         }
 
-        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate)
+        public void User_UserRequestedAttraction(int userTripId, string address, int countryId,int isSource, string startDate, string googleSearchText, int breakType, string breakDate, string startTime)
         {
-            _businessUserBAL.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate, googleSearchText, breakType, breakDate);
+            _businessUserBAL.User_UserRequestedAttraction(userTripId, address, countryId, isSource, startDate, googleSearchText, breakType, breakDate, startTime);
         }
 
         public UserTourInformation User_GetTourInformationOnTripId(int userTripId, int userId)
@@ -141,6 +143,42 @@ namespace PlanGoGoService.Schedulers
             return _businessUserBAL.User_CheckTheCalculationPartIsDone(userTripId);
         }
 
+        public void User_AddInterestedAttractionList(int userTripId, int attractionId)
+        {
+            _businessUserBAL.User_AddInterestedAttractionList(userTripId,attractionId);
+        }
+
+        public void User_DeleteNotInterestedAttractionList(int userTripId, int attractionId)
+        {
+            _businessUserBAL.User_DeleteNotInterestedAttractionList(userTripId,attractionId);
+        }
+
+        public List<User_GetDirectionsSteps> User_GetDirectionsSteps(int countryId, int attractionTravelTimeDistanceId, string dateAndTime)
+        {
+            return _businessUserBAL.User_GetDirectionsSteps(countryId, attractionTravelTimeDistanceId,dateAndTime);
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionTravelStepsNearAttractionInfo(
+            int attractionTravelStepsId, int countryId)
+        {
+            return _businessUserBAL.User_GetAttractionTravelStepsNearAttractionInfo(attractionTravelStepsId, countryId);
+        }
+
+        public List<GetOrderOfAttractionVisit> User_GetAttractionsNextAttractions(int attractionsId, int countryId)
+        {
+            return _businessUserBAL.User_GetAttractionsNextAttractions(attractionsId, countryId);
+        }
+
+        public List<AttractionXCategory> User_GetAttractionXCategory(List<userTable_OnlyId> attractionsId,
+            int countryId)
+        {
+            return _businessUserBAL.User_GetAttractionXCategory(attractionsId, countryId);
+        }
+
+        public List<EntityPredictions> User_AutoComplete(string address, int countryId)
+        {
+            return _businessUserBAL.User_AutoComplete(address, countryId);
+        }
 
     }
 }

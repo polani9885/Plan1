@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using BusinessEntites.DataBaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace PlanGoGoService.Interfaces
     public interface ICountry
     {
         [OperationContract]
-        void Admin_UpdateCountry(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault);
+        void Admin_UpdateCountry(MasterCountryDTO dto);
 
         [OperationContract]
         List<MasterCountryDTO> Admin_GetCountry();
@@ -22,5 +23,10 @@ namespace PlanGoGoService.Interfaces
 
         [OperationContract]
         MasterCountryDTO Admin_GetCountryOnId(int countryId);
+
+        [OperationContract]
+        void Admin_MasterPriceInfoUpdate(int countryId, MasterPriceInfo dto);
+        [OperationContract]
+        List<MasterPriceInfo> Admin_GetMasterPriceInfo(int countryId);
     }
 }

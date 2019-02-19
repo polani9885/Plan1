@@ -10,16 +10,16 @@ BEGIN
       ,[CreatedDate]
       ,[ModifiedDate]
       ,[IsUserInterestedDayBreak] 
-      ,CAST([UpdateDayEndTime] AS VARCHAR(8)) UpdateDayEndTime
-      ,CAST([UpdateDayStartTime] AS VARCHAR(8)) UpdateDayStartTime
+      ,CAST(ISNULL([UpdateDayEndTime],'00:00:00') AS VARCHAR(8)) UpdateDayEndTime
+      ,CAST(ISNULL([UpdateDayStartTime],'00:00:00') AS VARCHAR(8)) UpdateDayStartTime
       ,[IsUserInterestedLunchBreak]
-      ,CAST([UpdatedLunchTime] AS VARCHAR(8)) UpdatedLunchTime      
+      ,CAST(ISNULL([UpdatedLunchTime],'00:00:00') AS VARCHAR(8)) UpdatedLunchTime      
       ,[IsUserInterestedBreak]
-      ,CAST([UpdatedBreakTime] AS VARCHAR(8)) UpdatedBreakTime      
+      ,CAST(ISNULL([UpdatedBreakTime],'00:00:00') AS VARCHAR(8)) UpdatedBreakTime      
       ,[IsUserInterestedDinnerBreak]
-      ,CAST([UpdatedDinnerTime] AS VARCHAR(8)) UpdatedDinnerTime      
+      ,CAST(ISNULL([UpdatedDinnerTime],'00:00:00') AS VARCHAR(8)) UpdatedDinnerTime      
 	  ,IsUserInterestedBreakFast
-	  ,CAST(UpdatedBreakFastTime AS VARCHAR(8)) UpdatedBreakFastTime	  
+	  ,CAST(ISNULL(UpdatedBreakFastTime,'00:00:00') AS VARCHAR(8)) UpdatedBreakFastTime	  
 	  ,[IsBreakAdded]
       ,[BreakAttractionId]
       ,[IsLunchAdded]

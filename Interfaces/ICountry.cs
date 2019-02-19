@@ -1,4 +1,5 @@
 ﻿using BusinessEntites.Admin;
+using BusinessEntites.DataBaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Interfaces
 {
     public interface ICountry
     {
-        void Admin_UpdateCountry(int countryId, string countryName, string countryShortName, string createdBy, bool isDefault);
+        void Admin_UpdateCountry(MasterCountryDTO dto);
 
         List<MasterCountryDTO> Admin_GetCountry();
 
@@ -17,5 +18,8 @@ namespace Interfaces
 
 
         MasterCountryDTO Admin_GetCountryOnId(int countryId);
+
+        void Admin_MasterPriceInfoUpdate(int countryId, MasterPriceInfo dto);
+        List<MasterPriceInfo> Admin_GetMasterPriceInfo(int countryId);
     }
 }

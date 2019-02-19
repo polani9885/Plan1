@@ -54,7 +54,7 @@ BEGIN
 	ELSE
 	BEGIN		
 		
-		INSERT INTO [dbo].[AttractionTravelStepsXAttractionsId]
+		INSERT INTO [dbo].[AttractionTravelStepsXAttractions]
 			   ([AttractionTravelStepsId]
 			   ,[AttractionsId])
 
