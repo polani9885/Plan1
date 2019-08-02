@@ -60,8 +60,8 @@ namespace GoogleMapsAPI.Features
         {
             try
             {
-                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("geocode");
-                if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                //var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("geocode");
+                //if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                 {
                     AttractionsDTO attractionDto;
                     string retsult = string.Empty;
@@ -76,15 +76,15 @@ namespace GoogleMapsAPI.Features
 
                     if (placeDetailsInfo.results != null && placeDetailsInfo.results.Count > 0)
                     {
-                        dALSchedulers.Scheduler_GoogleLogging("geocode", "GetAutoCompleteInformation",
-                            details.AttractionName, "", "",
-                            false);
+                        //dALSchedulers.Scheduler_GoogleLogging("geocode", "GetAutoCompleteInformation",
+                        //    details.AttractionName, "", "",
+                        //    false);
                     }
                     else
                     {
-                        dALSchedulers.Scheduler_GoogleLogging("geocode", "GetAutoCompleteInformation",
-                            details.AttractionName, "", "",
-                            true);
+                        //dALSchedulers.Scheduler_GoogleLogging("geocode", "GetAutoCompleteInformation",
+                        //    details.AttractionName, "", "",
+                        //    true);
                     }
 
                     if (placeDetailsInfo != null)
@@ -277,9 +277,9 @@ namespace GoogleMapsAPI.Features
         {
             if (!string.IsNullOrEmpty(placeId))
             {
-                var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
-                if (googleCounter == null || googleCounter.Counter <
-                    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                //var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                //if (googleCounter == null || googleCounter.Counter <
+                //    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                 {
                     string retsult = string.Empty;
                     string googleUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId +
@@ -292,13 +292,13 @@ namespace GoogleMapsAPI.Features
 
                     if (placeDetailsInfo.result != null)
                     {
-                        dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
-                            false);
+                        //dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
+                        //    false);
                     }
                     else
                     {
-                        dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
-                            true);
+                        //dALSchedulers.Scheduler_GoogleLogging("place", "GetPlaceDetails", placeId, "", "",
+                        //    true);
                     }
 
 

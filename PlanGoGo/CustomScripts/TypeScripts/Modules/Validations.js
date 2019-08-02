@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
 var TourInfo_1 = require("../Modules/TourInfo");
 var User_1 = require("../Modules/User");
-var Validations = (function () {
+var Validations = /** @class */ (function () {
     function Validations() {
         this.errorParameters = {};
     }

@@ -12,5 +12,7 @@ namespace BusinessEntites.Scheduler
         public string Longitude { get; set; }
 
         public int AttractionsId { get; set; }
+
+        public string AttractionName { get; set; }
     }
 }

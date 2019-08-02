@@ -1,5 +1,4 @@
 ﻿using BusinessEntites;
-using CommonFunctions;
 using Interfaces;
 using PlanGoGoAdmin.Helper;
 using PlanGoGoAdmin.Models.BreakInformation;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CommFunction;
 
 namespace PlanGoGoAdmin.Controllers
 {

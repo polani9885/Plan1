@@ -1,7 +1,8 @@
 "use strict";
+exports.__esModule = true;
 var Constants_1 = require("../Common/Constants");
 var Error_1 = require("../Modules/Error");
-var IndexDbMain = (function () {
+var IndexDbMain = /** @class */ (function () {
     function IndexDbMain() {
         this.errorParameters = {};
     }
@@ -69,7 +70,7 @@ var IndexDbMain = (function () {
                 cursor_1 = event.target.result;
                 if (cursor_1) {
                     callback(cursor_1.value);
-                    cursor_1.continue();
+                    cursor_1["continue"]();
                 }
             };
             openCursor.oncomplete = function (event) {

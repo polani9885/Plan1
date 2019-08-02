@@ -54,7 +54,7 @@ BEGIN
            )
      VALUES
            (4
-		   ,'Auto Complete'
+		   ,'LatAndLong'
 		   )
 
 END

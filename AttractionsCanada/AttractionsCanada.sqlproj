@@ -86,7 +86,6 @@
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionAuto.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionInfo.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_InsertAttractionTravelTimeDistance.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_InsertGoogleSearchText.sql" />
     <Build Include="dbo\Tables\AttractionAverageTime.sql" />
     <Build Include="dbo\Tables\AttractionPhotos.sql" />
     <Build Include="dbo\Tables\AttractionReview.sql" />
@@ -115,8 +114,6 @@
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteMissingDistance.sql" />
     <Build Include="dbo\Stored Procedures\AddingMissingClaims.sql" />
     <Build Include="dbo\Stored Procedures\GetOrderOfAttractionVisit_Back.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_GetNoGoogleSearchText.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_UpdateGoogleSearchText.sql" />
     <Build Include="dbo\Functions\Scalar-valued Functions\fun_GetStartTime.sql" />
     <Build Include="dbo\Tables\CityXGoogleType.sql" />
     <Build Include="dbo\Stored Procedures\GetCityCategoryPending.sql" />
@@ -135,7 +132,6 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_DeleteUserRequested.sql" />
     <Build Include="dbo\Stored Procedures\User_GetTourInformationOnTripId.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_UpdateAttractionRestarentSearch_1.sql" />
     <Build Include="dbo\Tables\AttractionTravelStepsXAttractions.sql" />
     <Build Include="dbo\Tables\AttractionNoOfTimesStepsNearyByCalcuated.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetStepsSearchnearBy.sql" />
@@ -147,6 +143,11 @@
     <Build Include="dbo\Stored Procedures\User_GetAttractionsNextAttractions.sql" />
     <Build Include="dbo\Stored Procedures\User_GetAttractionXCategory.sql" />
     <Build Include="dbo\Stored Procedures\User_AutoComplete.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_UpdateLatAndLong.sql" />
+    <Build Include="dbo\Tables\MainData.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_GetNoLatitudeAndLogitute.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_InsertNearBy.sql" />
+    <Build Include="dbo\Stored Procedures\splitstring.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\CityVisitList.sql" />
@@ -161,5 +162,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\User_StepsConsolidated.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Seeds\MainData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AttractionsCanada.refactorlog" />
   </ItemGroup>
 </Project>

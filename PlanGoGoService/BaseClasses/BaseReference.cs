@@ -46,7 +46,7 @@ namespace PlanGoGoService.BaseClasses
             _businessAttractionsActiveStatus = new BusinessAccessLayer.Admin.AttractionsActiveStatus();
             _businessMasterWeek = new BusinessAccessLayer.Admin.MasterWeek();
             _businessAttractionTravelTimeDistance = new BusinessAccessLayer.Admin.AttractionTravelTimeDistance();
-            _businessMissingDistanceAttractionsRecords = new BusinessAccessLayer.Admin.BALMissingDistanceAttractionsRecords();
+            _businessMissingDistanceAttractionsRecords = new BusinessAccessLayer.Admin.BalMissingDistanceAttractionsRecords();
             _businessSchedulers = new BusinessAccessLayer.Scheduler.BALScheduler();
             _businessUserBAL = new BusinessAccessLayer.Users.UsersBAL();
         }

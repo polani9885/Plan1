@@ -41,7 +41,7 @@ namespace BusinessAccessLayer.Common
             _dataAccessAttractionsActiveStatus = new DataAccessLayer.Admin.AttractionsActiveStatus();
             _dataAccessMasterWeek = new DataAccessLayer.Admin.MasterWeek();
             _dataAccessAttractionTravelTimeDistance = new DataAccessLayer.Admin.AttractionTravelTimeDistance();
-            _dataAccessMissingDistanceAttractionsRecords = new DataAccessLayer.Admin.DALMissingDistanceAttractionsRecords();
+            _dataAccessMissingDistanceAttractionsRecords = new DataAccessLayer.Admin.DalMissingDistanceAttractionsRecords();
             _dataAccessSchedulers = new DataAccessLayer.Schedulers.DALSchedulers();
             _dataAccessUsers = new DataAccessLayer.User.UserDAL();           
 

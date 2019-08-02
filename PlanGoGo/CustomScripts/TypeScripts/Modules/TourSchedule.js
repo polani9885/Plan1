@@ -1,9 +1,10 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
 var BaseAjaxCall_1 = require("../Common/BaseAjaxCall");
 var Constants_1 = require("../Common/Constants");
 var GlobalVaraibles_1 = require("../Common/GlobalVaraibles");
-var TourSchedule = (function () {
+var TourSchedule = /** @class */ (function () {
     function TourSchedule() {
         this.errorParameters = {};
         this.parameters = {};
@@ -612,6 +613,7 @@ var TourSchedule = (function () {
             //0 = Error
             if (success === 0) {
                 GlobalVaraibles_1.GlobalVaraibles.queCounterGetAttractionTravelStepsNearAttractionInfo--;
+                //QueGetAttractionTravelStepsNearAttractionInfo(callBackData.scope);
             }
         }
         catch (e) {
@@ -651,6 +653,7 @@ var TourSchedule = (function () {
             //0 = Error
             if (success === 0) {
                 GlobalVaraibles_1.GlobalVaraibles.queCounterGetAttractionsNextAttractions--;
+                //QueGetAttractionsNextAttractions(callBackData.scope);
             }
         }
         catch (e) {
@@ -682,6 +685,7 @@ var TourSchedule = (function () {
             if (success === 1) {
                 callBackData.scope.gettingAttractionXCategoryBinding(data);
                 GlobalVaraibles_1.GlobalVaraibles.queCounterGetAttractionXCategory--;
+                //QueGetAttractionXCategory(callBackData.scope);
             }
             //2 = Completed
             if (success === 2) {
@@ -689,6 +693,7 @@ var TourSchedule = (function () {
             //0 = Error
             if (success === 0) {
                 GlobalVaraibles_1.GlobalVaraibles.queCounterGetAttractionXCategory--;
+                //QueGetAttractionXCategory(callBackData.scope);
             }
         }
         catch (e) {

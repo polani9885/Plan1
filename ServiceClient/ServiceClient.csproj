@@ -449,7 +449,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntites\BusinessEntites.csproj">
-      <Project>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</Project>
+      <Project>{59acb6f7-a5a2-4532-9296-e06804d0c7cf}</Project>
       <Name>BusinessEntites</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">

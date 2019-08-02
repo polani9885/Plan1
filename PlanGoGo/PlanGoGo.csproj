@@ -25,7 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1453,9 +1453,9 @@
       <Project>{59ACB6F7-A5A2-4532-9296-E06804D0C7CF}</Project>
       <Name>BusinessEntites</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonFunctions\CommonFunctions.csproj">
-      <Project>{21B5F30C-5A5E-4C8C-8A02-6C19A2426639}</Project>
-      <Name>CommonFunctions</Name>
+    <ProjectReference Include="..\CommFunction\CommFunction.csproj">
+      <Project>{a0e144ea-6831-4bbd-b9e1-0947729784b0}</Project>
+      <Name>CommFunction</Name>
     </ProjectReference>
     <ProjectReference Include="..\GoogleMapsAPI\GoogleMapsAPI.csproj">
       <Project>{f3dfcacc-3110-4d28-9344-2c47923da332}</Project>

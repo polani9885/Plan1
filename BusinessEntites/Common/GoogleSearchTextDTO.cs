@@ -15,5 +15,6 @@ namespace BusinessEntites.Common
         public string AddressOne { get; set; }
 
         public string AddressTwo { get; set; }
+        public string GoogleSearchText { get; set; }
     }
 }

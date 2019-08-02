@@ -1,11 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[Scheduler_InsertAttractionAuto]
 (
-	@AddressOne AS varchar(500)
-	,@AddressTwo AS varchar(500)
-	,@CityName AS Varchar(50)
+	
+	@CityName AS Varchar(50)
 	,@Longitude AS varchar(250)
-	,@Latitude AS varchar(250)
-	,@PlaceId AS varchar(250)
+	,@Latitude AS varchar(250)	
 	,@CreatedBy AS varchar(50)
 	,@AttractionsId AS INT
 	,@StateName AS Varchar(50)
@@ -92,13 +90,9 @@ BEGIN
 	END
 
 	UPDATE [dbo].[Attractions]
-	   SET 
-		  [AddressOne] = @AddressOne
-		  ,[AddressTwo] = @AddressTwo
-		  ,[CityId] = @CityId		  
-		  ,[Longitude] = @Longitude
-		  ,[Latitude] = @Latitude
-		  ,[PlaceId] = @PlaceId		  		  
+	   SET	  
+		  [Longitude] = @Longitude
+		  ,[Latitude] = @Latitude		  
 		  ,[ModifiedDate] = getdate()
 		  ,[ModifiedBy] = @CreatedBy		  		  
 	 WHERE AttractionsId = @AttractionsId

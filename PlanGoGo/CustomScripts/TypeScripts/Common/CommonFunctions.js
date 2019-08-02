@@ -1,6 +1,7 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
-var CommonFunctions = (function () {
+var CommonFunctions = /** @class */ (function () {
     function CommonFunctions() {
         this.errorParameters = {};
     }

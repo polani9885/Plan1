@@ -132,10 +132,7 @@
     <Build Include="dbo\Stored Procedures\Scheduler_GetTypes.sql" />
     <Build Include="dbo\Stored Procedures\Scheduler_GetTravelMode.sql" />
     <Build Include="dbo\Stored Procedures\Public_GetMasterCategory.sql" />
-    <Build Include="dbo\Tables\GoogleMapsLogging.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_GetGoogleMapsMethodCount.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCityNearestLocationDont.sql" />
-    <Build Include="dbo\Stored Procedures\Scheduler_GoogleLogging.sql" />
     <Build Include="dbo\Tables\MasterCategoryXMasterGoogleType.sql" />
     <Build Include="dbo\Tables\UserTrip.sql" />
     <Build Include="dbo\Tables\UserTripDates.sql" />
@@ -184,6 +181,11 @@
     <Build Include="dbo\Tables\MapsXMapsFeatures.sql" />
     <Build Include="dbo\Tables\MapsXCategory.sql" />
     <Build Include="dbo\Tables\MapsXCategoryXMasterGoogleType.sql" />
+    <Build Include="dbo\Tables\MapsXAPIXFeature.sql" />
+    <Build Include="dbo\Tables\MapsLogging.sql" />
+    <Build Include="dbo\Tables\MapsLoggingError.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_MapsLogging.sql" />
+    <Build Include="dbo\Stored Procedures\Scheduler_CheckWithAccountNeedToUse.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\User Defined Types\user_AttractionTravelTimeDistance.sql" />
@@ -209,6 +211,7 @@
     <None Include="dbo\Seeds\Maps.sql" />
     <None Include="dbo\Seeds\MapsXCategory.sql" />
     <None Include="dbo\Seeds\MapsXCategoryXMasterGoogleType.sql" />
+    <None Include="dbo\Seeds\MapsXAPIXFeature.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Attractions.refactorlog" />

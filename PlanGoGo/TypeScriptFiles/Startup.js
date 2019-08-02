@@ -1,4 +1,4 @@
-var Startup = (function () {
+var Startup = /** @class */ (function () {
     function Startup() {
     }
     Startup.main = function () {
@@ -8,4 +8,4 @@ var Startup = (function () {
     };
     return Startup;
 }());
-//Startup.main(); 
+//Startup.main();

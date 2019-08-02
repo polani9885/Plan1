@@ -1,9 +1,10 @@
 "use strict";
+exports.__esModule = true;
 var Constants_1 = require("../Common/Constants");
 var TourInfo_1 = require("../Modules/TourInfo");
 var Error_1 = require("../Modules/Error");
 var Validations_1 = require("../Modules/Validations");
-var ControlerPlannedTour = (function () {
+var ControlerPlannedTour = /** @class */ (function () {
     function ControlerPlannedTour($scope) {
         var _this = this;
         this.errorParameters = {};

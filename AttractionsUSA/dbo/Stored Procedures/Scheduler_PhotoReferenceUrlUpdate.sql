@@ -11,10 +11,6 @@ BEGIN
 
 	DECLARE @AttractionId As BIGINT
 
-	SELECT @AttractionId = AttractionId FROM dbo.AttractionPhotos WITH(NOLOCK) WHERE AttractionPhotosId = @AttractionPhotosId
-
-	UPDATE dbo.Attractions
-		SET PhotoUrl = (SELECT TOP 1 PhotoURL FROM dbo.AttractionPhotos WITH(NOLOCK) WHERE AttractionId = @AttractionId AND PhotoURL IS NOT NULL ORDER BY AttractionPhotosId)
-	WHERE AttractionsId  = @AttractionId 
+	SELECT @AttractionId = AttractionId FROM dbo.AttractionPhotos WITH(NOLOCK) WHERE AttractionPhotosId = @AttractionPhotosId	
 
 END

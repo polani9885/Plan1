@@ -1,7 +1,8 @@
 "use strict";
+exports.__esModule = true;
 var User_1 = require("../Modules/User");
 var Error_1 = require("../Modules/Error");
-var MainMenu = (function () {
+var MainMenu = /** @class */ (function () {
     function MainMenu() {
         this.errorParameters = {};
     }

@@ -1,6 +1,7 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
-var MapsActions = (function () {
+var MapsActions = /** @class */ (function () {
     function MapsActions() {
         this.errorParameters = {};
     }

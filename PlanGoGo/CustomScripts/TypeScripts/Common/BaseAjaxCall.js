@@ -1,6 +1,7 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
-var BaseAjaxCall = (function () {
+var BaseAjaxCall = /** @class */ (function () {
     function BaseAjaxCall() {
         this.temp = {};
         this.errorParameters = {};

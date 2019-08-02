@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessAccessLayer.Admin
 {
-    public class BALMissingDistanceAttractionsRecords : BaseBusinessClass, IMissingDistanceAttractionsRecords, IDisposable
+    public class BalMissingDistanceAttractionsRecords : BaseBusinessClass, IMissingDistanceAttractionsRecords, IDisposable
     {
         public List<MissingDistanceAttractionsRecordsDTO> Admin_MissingDistanceAttractionsRecordsGet()
         {

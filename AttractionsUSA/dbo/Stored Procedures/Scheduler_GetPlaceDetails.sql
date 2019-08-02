@@ -4,28 +4,21 @@ AS
 BEGIN
 
 	SELECT [AttractionsId]
-		  ,[AttractionName]
-		  ,[AddressOne]
-		  ,[AddressTwo]
-		  ,[CityId]
-		  ,[CategoryId]
+		  ,[AttractionName]		  
+		  ,[CityId]		  
 		  ,[Longitude]
-		  ,[Latitude]
-		  ,[PlaceId]
+		  ,[Latitude]		  
 		  ,[RankId]
 		  ,[CreatedDate]
 		  ,[CreatedBy]
 		  ,[ModifiedDate]
 		  ,[ModifiedBy]
-		  ,[GoogleSearchText]
-		  ,[GoogleWebSite]
-		  ,[GoogleICon]
-		  ,[GoogleInternational_phone_number]
-		  ,[Googleadr_address]
-		  ,[GoogleName]
-		  ,[GoogleRating]		  
+		  ,[SearchAddress]
+		  ,[WebSite]		  
+		  ,[phone_number]		  		  
+		  ,[Rating]		  
 		  ,[IsScannedNearBy]
 	  FROM [dbo].[Attractions]
-	  WHERE ISNULL(GoogleSearchText,'') <> ''
+	  WHERE ISNULL(SearchAddress,'') <> ''
 	  AND ISNULL(IsPlaceDetailsDone,0) = 0
 END

@@ -31,24 +31,17 @@ BEGIN
 	BEGIN			
 
 		UPDATE [dbo].[Attractions]
-		   SET [AttractionName] = @AttractionName
-			  ,[AddressOne] = @AddressOne
-			  ,[AddressTwo] = @AddressTwo
-			  ,[CityId] = @CityId
-			  ,[CategoryId] = @CategoryId
+		   SET [AttractionName] = @AttractionName			  
+			  ,[CityId] = @CityId			  
 			  ,[Longitude] = @Longitude
-			  ,[Latitude] = @Latitude
-			  ,[PlaceId] = @PlaceId
+			  ,[Latitude] = @Latitude			  
 			  ,[RankId] = @RankId			  
 			  ,[ModifiedDate] = getdate()
 			  ,[ModifiedBy] = @CreatedBy
-			  ,[GoogleSearchText] = @GoogleSearchText
-			  ,[GoogleWebSite] = @GoogleWebSite
-			  ,[GoogleICon] = @GoogleICon
-			  ,[GoogleInternational_phone_number] = @GoogleInternational_phone_number
-			  ,[Googleadr_address] = @Googleadr_address
-			  ,[GoogleName] = @GoogleName
-			  ,[GoogleRating] = @GoogleRating			  
+			  ,[SearchAddress] = @GoogleSearchText
+			  ,[WebSite] = @GoogleWebSite			  
+			  ,[phone_number] = @GoogleInternational_phone_number			  
+			  ,[Rating] = @GoogleRating			  
 		 WHERE AttractionsId = @AttractionsId
 
 
@@ -62,43 +55,29 @@ BEGIN
 		
 
 		INSERT INTO [dbo].[Attractions]
-				   ([AttractionName]
-				   ,[AddressOne]
-				   ,[AddressTwo]
-				   ,[CityId]
-				   ,[CategoryId]
+				   ([AttractionName]				   
+				   ,[CityId]				   
 				   ,[Longitude]
-				   ,[Latitude]
-				   ,[PlaceId]
+				   ,[Latitude]				   
 				   ,[RankId]
 				   ,[CreatedDate]
 				   ,[CreatedBy]				   
-				   ,[GoogleSearchText]
-				   ,[GoogleWebSite]
-				   ,[GoogleICon]
-				   ,[GoogleInternational_phone_number]
-				   ,[Googleadr_address]
-				   ,[GoogleName]
-				   ,[GoogleRating]
+				   ,[SearchAddress]
+				   ,[WebSite]				   
+				   ,[phone_number]				   
+				   ,[Rating]
 				   )
 			 VALUES
-				   (@AttractionName
-				   ,@AddressOne
-				   ,@AddressTwo
-				   ,@CityId
-				   ,@CategoryId
+				   (@AttractionName				   
+				   ,@CityId				   
 				   ,@Longitude
-				   ,@Latitude
-				   ,@PlaceId
+				   ,@Latitude				   
 				   ,@RankId
 				   ,getdate()
 				   ,@CreatedBy				   
 				   ,@GoogleSearchText
-				   ,@GoogleWebSite
-				   ,@GoogleICon
-				   ,@GoogleInternational_phone_number
-				   ,@Googleadr_address 
-				   ,@GoogleName
+				   ,@GoogleWebSite				   
+				   ,@GoogleInternational_phone_number				   
 				   ,@GoogleRating
 				   )
 	END	

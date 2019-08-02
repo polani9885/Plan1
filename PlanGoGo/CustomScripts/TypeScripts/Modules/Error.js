@@ -1,5 +1,6 @@
 "use strict";
-var Error = (function () {
+exports.__esModule = true;
+var Error = /** @class */ (function () {
     function Error() {
     }
     Error.prototype.logError = function (className, methodName, parameters, error) {

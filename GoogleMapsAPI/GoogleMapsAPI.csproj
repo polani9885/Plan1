@@ -72,7 +72,7 @@
     <Compile Include="Features\AutoCompleteFeature.cs" />
     <Compile Include="Features\CategorySearch.cs" />
     <Compile Include="Features\GetDistanceCalculation.cs" />
-    <Compile Include="Features\GetGoogleSearchText.cs" />
+    <Compile Include="Features\LatAndLong.cs" />
     <Compile Include="Features\GetNearestInformation.cs" />
     <Compile Include="Features\GetPlaceInformation.cs" />
     <Compile Include="Features\PhotoReferences.cs" />
@@ -96,9 +96,9 @@
       <Project>{59acb6f7-a5a2-4532-9296-e06804d0c7cf}</Project>
       <Name>BusinessEntites</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonFunctions\CommonFunctions.csproj">
-      <Project>{21b5f30c-5a5e-4c8c-8a02-6c19a2426639}</Project>
-      <Name>CommonFunctions</Name>
+    <ProjectReference Include="..\CommFunction\CommFunction.csproj">
+      <Project>{a0e144ea-6831-4bbd-b9e1-0947729784b0}</Project>
+      <Name>CommFunction</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{3aece02d-e791-4b1a-94d6-a50ac4040ada}</Project>
@@ -107,6 +107,10 @@
     <ProjectReference Include="..\HelperFunctions\HelperFunctions.csproj">
       <Project>{48DBFB0D-7731-402D-B172-76FFA6251858}</Project>
       <Name>HelperFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{228C6FFC-078F-482B-8B8C-CC8266D3FC3C}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceClient\ServiceClient.csproj">
       <Project>{9939494a-a7e1-473c-af0a-1a4851f21245}</Project>

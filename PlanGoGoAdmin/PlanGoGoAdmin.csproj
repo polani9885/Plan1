@@ -1143,9 +1143,9 @@
       <Project>{59acb6f7-a5a2-4532-9296-e06804d0c7cf}</Project>
       <Name>BusinessEntites</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonFunctions\CommonFunctions.csproj">
-      <Project>{21B5F30C-5A5E-4C8C-8A02-6C19A2426639}</Project>
-      <Name>CommonFunctions</Name>
+    <ProjectReference Include="..\CommFunction\CommFunction.csproj">
+      <Project>{A0E144EA-6831-4BBD-B9E1-0947729784B0}</Project>
+      <Name>CommFunction</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{228c6ffc-078f-482b-8b8c-cc8266d3fc3c}</Project>

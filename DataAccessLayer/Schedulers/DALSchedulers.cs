@@ -207,11 +207,14 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public List<GoogleTypes> Scheduler_GetTypes()
+        public List<GoogleTypes> Scheduler_GetTypes(int mapsId)
         {
             try
             {
-                List<GoogleTypes> _returnResult = SqlHelper.QuerySP<GoogleTypes>("Scheduler_GetTypes").ToList();
+                List<GoogleTypes> _returnResult = SqlHelper.QuerySP<GoogleTypes>("Scheduler_GetTypes",new
+                {
+                    MapsId = mapsId
+                }).ToList();
                 return _returnResult;
             }
             catch (Exception ex)
@@ -256,17 +259,18 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_InsertGoogleSearchText(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId,int attractionId, int attractionTravelStepsId)
+        public void Scheduler_InsertNearBy(List<NearByPlaceSearchEntity> nearByPlaceSearchEntity, int countryId,int attractionId, int attractionTravelStepsId,int mapsId)
         {
             try
             {
                 SqlHelper.countryId = countryId;
-                SqlHelper.QuerySP("Scheduler_InsertGoogleSearchText",
+                SqlHelper.QuerySP("Scheduler_InsertNearBy",
                     new
                     {
                         NearBySearchData = DataTableFun.ToDataTable<NearByPlaceSearchEntity>(nearByPlaceSearchEntity)
                         ,AttractionsId = attractionId
                         ,AttractionTravelStepsId = attractionTravelStepsId
+                        ,MapsId = mapsId
                     });
             }
             catch (Exception ex)
@@ -554,19 +558,28 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_GoogleLogging(string mapType,string methodName,string attractionName,string logitude,string latitude,bool isError)
+        public void Scheduler_MapsLogging(string methodName, int mapsId, int mapsCredentialsId, int mapFeaturesId,
+            string response, string errorMessage, string errorStack, int countryId, int attractionId, string uRL,
+            bool isError,int attractionTravelStepsId)
         {
             try
             {
-                SqlHelper.QuerySP("Scheduler_GoogleLogging",
+                SqlHelper.QuerySP("Scheduler_MapsLogging",
                     new
                     {
-                        MapType = mapType,
-                        MethodName = methodName,
-                        AttractionName = attractionName,
-                        Logitude = logitude,
-                        Latitude = latitude,
-                        IsError = isError
+                        MethodName  = methodName,
+                        MapsId  = mapsId,
+                        MapsCredentialsId = mapsCredentialsId,
+                        MapFeaturesId = mapFeaturesId,
+                        Response  = response,
+                        ErrorMessage = errorMessage,
+                        ErrorStack  = errorStack,
+                        CountryId  = countryId,
+                        AttractionId  = attractionId,
+                        URL  = uRL,
+                        IsError  = isError,
+                        AttractionTravelStepsId = attractionTravelStepsId
+
                     });
             }
             catch (Exception ex)
@@ -575,28 +588,15 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public GoogleMapsLoggingDTO Scheduler_GetGoogleMapsMethodCount(string mapType)
-        {
-            try
-            {
-                List<GoogleMapsLoggingDTO> _returnResult =
-                    SqlHelper.QuerySP<GoogleMapsLoggingDTO>("Scheduler_GetGoogleMapsMethodCount",
-                        new {MapType = mapType}).ToList();
-                return _returnResult.FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
-        public List<GoogleSearchTextDTO> Scheduler_GetNoGoogleSearchText(int countryId)
+
+        public List<GoogleSearchTextDTO> Scheduler_GetNoLatitudeAndLogitute(int countryId)
         {
             try
             {
                 SqlHelper.countryId = countryId;
                 List<GoogleSearchTextDTO> _returnResult =
-                    SqlHelper.QuerySP<GoogleSearchTextDTO>("Scheduler_GetNoGoogleSearchText").ToList();
+                    SqlHelper.QuerySP<GoogleSearchTextDTO>("Scheduler_GetNoLatitudeAndLogitute").ToList();
                 return _returnResult;
             }
             catch (Exception ex)
@@ -605,16 +605,17 @@ namespace DataAccessLayer.Schedulers
             }
         }
 
-        public void Scheduler_UpdateGoogleSearchText(int attractionsId,string googleSearchText,int countryId)
+        public void Scheduler_UpdateLatAndLong(int attractionsId,int countryId,string latitude,string longitude)
         {
             try
             {
                 SqlHelper.countryId = countryId;
-                SqlHelper.QuerySP("Scheduler_UpdateGoogleSearchText",
+                SqlHelper.QuerySP("Scheduler_UpdateLatAndLong",
                     new
                     {
                         AttractionsId = attractionsId,
-                        GoogleSearchText = googleSearchText
+                        Latitude= latitude,
+                        Longitude = longitude
                     });
             }
             catch (Exception ex)
@@ -747,6 +748,25 @@ namespace DataAccessLayer.Schedulers
                     {
                         UserRequestedId = userRequestedId
                     });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public MapsXAPIXFeature Scheduler_CheckWithAccountNeedToUse(string featureName,int countryId)
+        {
+            try
+            {
+                var result = SqlHelper.QuerySP<MapsXAPIXFeature>("Scheduler_CheckWithAccountNeedToUse",
+                    new
+                    {
+                        FeatureName = featureName
+                        ,CountryId = countryId
+                    }).ToList();
+
+                return result.FirstOrDefault();
             }
             catch (Exception ex)
             {

@@ -92,13 +92,10 @@ BEGIN
 	END
 
 	UPDATE [dbo].[Attractions]
-	   SET 
-		  [AddressOne] = @AddressOne
-		  ,[AddressTwo] = @AddressTwo
-		  ,[CityId] = @CityId		  
+	   SET		  
+		  [CityId] = @CityId		  
 		  ,[Longitude] = @Longitude
-		  ,[Latitude] = @Latitude
-		  ,[PlaceId] = @PlaceId		  		  
+		  ,[Latitude] = @Latitude		  
 		  ,[ModifiedDate] = getdate()
 		  ,[ModifiedBy] = @CreatedBy		  		  
 	 WHERE AttractionsId = @AttractionsId

@@ -1,9 +1,18 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
 var NormalAjax = require("./AjaxCalls/NormalAjax");
 var NormalAjax1 = NormalAjax.NormalAjax;
 var User = require("./Modules/User");
@@ -30,20 +39,21 @@ var CommonFunctions = require("./Common/CommonFunctions");
 var CommonFunctions1 = CommonFunctions.CommonFunctions;
 var GlobalVaraibles = require("./Common/GlobalVaraibles");
 var GlobalVaraibles1 = GlobalVaraibles.GlobalVaraibles;
-var Main = (function (_super) {
+var Main = /** @class */ (function (_super) {
     __extends(Main, _super);
     function Main() {
-        _super.apply(this, arguments);
-        this.Constants = new Constants1();
-        this.NormalAjax = new NormalAjax1();
-        this.User = new User1();
-        this.IndexDbWrapper = new IndexDbWrapper1();
-        this.TourInfo = new TourInfo1();
-        this.TourSchedule = new TourSchedule1();
-        this.TourExpenses = new TourExpenses1();
-        this.MainMenu = new MainMenu1();
-        this.Validations = new Validations1();
-        this.CommonFunctions = new CommonFunctions1();
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.Constants = new Constants1();
+        _this.NormalAjax = new NormalAjax1();
+        _this.User = new User1();
+        _this.IndexDbWrapper = new IndexDbWrapper1();
+        _this.TourInfo = new TourInfo1();
+        _this.TourSchedule = new TourSchedule1();
+        _this.TourExpenses = new TourExpenses1();
+        _this.MainMenu = new MainMenu1();
+        _this.Validations = new Validations1();
+        _this.CommonFunctions = new CommonFunctions1();
+        return _this;
     }
     return Main;
 }(GlobalVaraibles1));

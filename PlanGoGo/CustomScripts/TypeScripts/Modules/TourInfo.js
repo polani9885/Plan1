@@ -1,9 +1,10 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
 var BaseAjaxCall_1 = require("../Common/BaseAjaxCall");
 var Constants_1 = require("../Common/Constants");
 var IndexDbWrapper_1 = require("../Plugins/IndexDbWrapper");
-var TourInfo = (function () {
+var TourInfo = /** @class */ (function () {
     function TourInfo() {
         this.errorParameters = {};
         this.parameters = {};

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="260e1ceb-e5b4-433a-9eab-029d8c232437" ChangeDateTime="03/07/2019 21:50:21">
+    <Property Name="ElementName" Value="[dbo].[Attractions].[IsGoogleSearchTextDone]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Attractions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsLatAndLon" />
+  </Operation>
+</Operations>

@@ -24,7 +24,7 @@ namespace ServiceClient.Services
             }
         }
 
-        public List<MissingDistanceAttractionsRecordsDTO> Admin_MissingDistanceAttractionsRecordsXAttractionsGet(int MissingDistanceAttractionsRecordsID)
+        public List<BusinessEntites.Admin.MissingDistanceAttractionsRecordsDTO> Admin_MissingDistanceAttractionsRecordsXAttractionsGet(int MissingDistanceAttractionsRecordsID)
         {
             try
             {

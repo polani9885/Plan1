@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
 var IndexDbWrapper_1 = require("../Plugins/IndexDbWrapper");
 var CommonFunctions_1 = require("../Common/CommonFunctions");
@@ -7,7 +8,7 @@ var GlobalVaraibles_1 = require("../Common/GlobalVaraibles");
 var MapsActions_1 = require("../Modules/MapsActions");
 var Constants_1 = require("../Common/Constants");
 var TourExpenses_1 = require("../Modules/TourExpenses");
-var ControlerIndex = (function () {
+var ControlerIndex = /** @class */ (function () {
     function ControlerIndex($scope) {
         var _this = this;
         this.errorParameters = {};
@@ -1808,6 +1809,7 @@ var ControlerIndex = (function () {
                 this.persistTab();
             }
             this.weatherUpdate(data);
+            //$("#"+firstDate).triggerHandler('click');
         }
         catch (e) {
             ControlerIndex.prototype.errorParameters = {};

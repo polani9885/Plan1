@@ -1,10 +1,10 @@
 ﻿using BusinessEntites.Users;
-using CommonFunctions;
 using Newtonsoft.Json;
 using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using CommFunction;
 
 namespace PlanGoGo.Helper
 {

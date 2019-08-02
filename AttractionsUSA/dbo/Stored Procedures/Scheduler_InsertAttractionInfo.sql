@@ -46,11 +46,9 @@ BEGIN
 	UPDATE [dbo].[Attractions]
 	   SET [ModifiedDate] = getdate()
 		  ,[ModifiedBy] = 'Scheduler'		  
-		  ,[GoogleWebSite] = @GoogleWebSite
-		  ,[GoogleICon] = @GoogleICon
-		  ,[GoogleInternational_phone_number] = @GoogleInternational_phone_number		  
-		  ,[GoogleName] = @GoogleName		 
-		  ,[GoogleRating] = @GoogleRating		  	  
+		  ,[WebSite] = @GoogleWebSite		  
+		  ,[phone_number] = @GoogleInternational_phone_number		  		  
+		  ,[Rating] = @GoogleRating		  	  
 		  ,[IsPlaceDetailsDone] = 1		  
 		  ,[PriceLevel] = @Pricelevel
 		  ,Utc_offset = @Utc_offset

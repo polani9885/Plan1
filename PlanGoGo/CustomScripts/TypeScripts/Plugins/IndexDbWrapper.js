@@ -1,9 +1,10 @@
 "use strict";
+exports.__esModule = true;
 var IndexDbMain_1 = require("../Plugins/IndexDbMain");
 var Constants_1 = require("../Common/Constants");
 var GlobalVaraibles_1 = require("../Common/GlobalVaraibles");
 var Error_1 = require("../Modules/Error");
-var IndexDbWrapper = (function () {
+var IndexDbWrapper = /** @class */ (function () {
     function IndexDbWrapper() {
         this.errorParameters = {};
         this.indexDbMain = new IndexDbMain_1.IndexDbMain();

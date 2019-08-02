@@ -24,9 +24,9 @@ namespace GoogleMapsAPI.Features
 
         public void MissingDistance(int countryId)
         {
-            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
-            if (googleCounter == null || googleCounter.Counter <
-                Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+            //var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
+            //if (googleCounter == null || googleCounter.Counter <
+            //    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
             {
                 var pendingRecords = dALSchedulers.Scheduler_GetMissingDistance(countryId);
                 var travelMode = dALSchedulers.Scheduler_GetTravelMode();
@@ -61,8 +61,8 @@ namespace GoogleMapsAPI.Features
 
         public void CalculateDistance(int countryId)
         {
-            var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
-            if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+            //var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
+            //if (googleCounter == null || googleCounter.Counter < Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
             {
                 var pendingRecords = dALSchedulers.Scheduler_GetDistancePending(countryId);
                 var travelMode = dALSchedulers.Scheduler_GetTravelMode();
@@ -78,9 +78,9 @@ namespace GoogleMapsAPI.Features
                     {
                         foreach (MasterTravelModeDTO masterTravelModeDTO in travelMode.Where(x=>x.TravelModeId == 1))
                         {
-                            googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
-                            if (googleCounter == null || googleCounter.Counter <
-                                Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                            //googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("directions");
+                            //if (googleCounter == null || googleCounter.Counter <
+                            //    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                             {
                                 DistanceGetting(masterTravelModeDTO.TravelType, attractionsDTO.GoogleSearchText,
                                     _attractionsDTO.GoogleSearchText, attractionsDTO.AttractionsId,
@@ -115,15 +115,15 @@ namespace GoogleMapsAPI.Features
 
                 if (returnsInformation.results != null && returnsInformation.results.Count > 0)
                 {
-                    dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
-                        string.Empty, string.Empty,
-                        false);
+                    //dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
+                    //    string.Empty, string.Empty,
+                    //    false);
                 }
                 else
                 {
-                    dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
-                        string.Empty, string.Empty,
-                        true);
+                    //dALSchedulers.Scheduler_GoogleLogging("directions", "CalculateDistance", "",
+                    //    string.Empty, string.Empty,
+                    //    true);
                 }
 
                 attractionTravelTimeDistanceDTO = new AttractionTravelTimeDistanceDTO();

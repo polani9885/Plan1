@@ -3,7 +3,6 @@ using BusinessEntites.Admin;
 using BusinessEntites.Custom;
 using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 using BusinessEntites.Users;
-using CommonFunctions;
 using GoogleMapsAPI.Features;
 using Interfaces;
 using PlanGoGo.Helper;
@@ -16,6 +15,7 @@ using System.Web.Mvc;
 using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
 using BusinessEntites.JsonParameters;
 using BusinessEntites.DataBaseModels;
+using CommFunction;
 
 namespace PlanGoGo.Controllers
 {
@@ -314,8 +314,9 @@ namespace PlanGoGo.Controllers
         {
             List<ResultsList> result = new List<ResultsList>();
 
-            result = getNearestInformation.NearestLocationAutocomplete(latitude, longitude,
-                Convert.ToInt32(distance / 0.00062137).ToString(), address);
+            //Need to find the proper method to get the autocomplete information
+            //result = getNearestInformation.NearestLocationAutocomplete(latitude, longitude,
+            //    Convert.ToInt32(distance / 0.00062137).ToString(), address);
 
             return jsonReturn.JsonResult<ResultsList>(result);
         }

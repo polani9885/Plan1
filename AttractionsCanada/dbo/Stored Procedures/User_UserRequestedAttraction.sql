@@ -26,7 +26,7 @@ BEGIN
 		SELECT @AttractionId = AttractionsId 
 			,@CityId = CityId	
 		FROM Attractions WITH(NOLOCK) 
-		WHERE GoogleSearchText = @Address
+		WHERE SearchAddress = @Address
 		OR AttractionName = @Address
 
 
@@ -35,12 +35,12 @@ BEGIN
 			
 			IF @IsSource = 4
 			BEGIN
-				INSERT INTO Attractions(AttractionName,GoogleSearchText,IsUserRequested)
+				INSERT INTO Attractions(AttractionName,SearchAddress,IsUserRequested)
 				VALUES(@AttractionName,@GoogleSearchText,1)
 			END
 			ELSE
 			BEGIN
-				INSERT INTO Attractions (GoogleSearchText,IsUserRequested)
+				INSERT INTO Attractions (SearchAddress,IsUserRequested)
 				VALUES(@Address,1)
 			END
 

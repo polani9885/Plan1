@@ -1,22 +1,9 @@
-﻿using BusinessEntites.Common;
-using BusinessEntites.EntityGoogleMaps.EntityNearBySearch;
-using BusinessEntites.EntityGoogleMaps.EntityPlaceSearch.ReferenceObjects;
-using BusinessEntites.EntityPlaceDetails;
-using BusinessEntites.EntityPlaceDetails.RefernceObjects;
-using BusinessEntites.EntityPlaceSearch;
-using BusinessEntites.Scheduler;
-using DataAccessLayer.Admin;
+﻿using BusinessEntites.Scheduler;
 using DataAccessLayer.Schedulers;
 using GoogleMapsAPI.Features;
-using GoogleMapsAPI.Helper;
 using SchedulerCode;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoogleMapsAPI
 {
@@ -28,7 +15,7 @@ namespace GoogleMapsAPI
             GetNearestInformation getNearestInformation = new GetNearestInformation();
             GetPlaceInformation getPlaceInformation = new GetPlaceInformation();
             GetDistanceCalculation getDistanceCalculation = new GetDistanceCalculation();
-            GetGoogleSearchText googleSearchText = new GetGoogleSearchText();
+            LatAndLong latAndLong = new LatAndLong();
             CategorySearch categorySearch = new CategorySearch();
             RecalculateTourInfo recalculateTourInfo = new RecalculateTourInfo();
             PhotoReferences photoReferences = new PhotoReferences();
@@ -61,21 +48,21 @@ namespace GoogleMapsAPI
                 {
                     case "NEARBYSEARCH":
                     {
-                        getNearestInformation.GetRadiusInformation(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        getNearestInformation.Init(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         //getPlaceInformation.GetPlaceDetails(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
-                    case "SEARCHCATEGORY":
-                    {
-                        categorySearch.SearchByCategory(Convert.ToInt32(argmentarray[1].Split('~')[1]));
-                        break;
-                    }
-                    case "SEARCHCATEGORYRESTARUNT":
-                    {
-                        getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
-                            .Split('~')[1]));
-                        break;
-                    }
+                    //case "SEARCHCATEGORY":
+                    //{
+                    //    categorySearch.SearchByCategory(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                    //    break;
+                    //}
+                    //case "SEARCHCATEGORYRESTARUNT":
+                    //{
+                    //    getNearestInformation.SearchByCategoryAttraction(Convert.ToInt32(argmentarray[1]
+                    //        .Split('~')[1]));
+                    //    break;
+                    //}
                     case "SEARCHSTEPSDISTANCENEARBY":
                     {
                         getNearestInformation.SearchStepsDistanceNearBy(Convert.ToInt32(argmentarray[1]
@@ -97,9 +84,9 @@ namespace GoogleMapsAPI
                         getDistanceCalculation.MissingDistance(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
-                    case "GOOGLESEARCHTEXT":
+                    case "LATANDLONG":
                     {
-                        googleSearchText.GoogleSearchText(Convert.ToInt32(argmentarray[1].Split('~')[1]));
+                        latAndLong.Init(Convert.ToInt32(argmentarray[1].Split('~')[1]));
                         break;
                     }
                     case "USERFAILEDRECORDS":

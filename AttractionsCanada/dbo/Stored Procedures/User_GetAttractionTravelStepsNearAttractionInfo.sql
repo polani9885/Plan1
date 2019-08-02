@@ -19,16 +19,14 @@ BEGIN
 		AS Distance
 		,ATTDX.[TravelTime]
 		,ATTDX.[TravelModeId]
-		,A.AttractionName SourceAttractionName				
-		,A.GoogleICon SourceIcon		
-		,A.GoogleWebSite SourceDirection		
-		,A.GoogleRating SourceRating		
-		,A.GoogleUser_ratings_total SourceRatingTotal		
-		,A.GoogleSearchText SourceSearchText								
+		,A.AttractionName SourceAttractionName						
+		,A.WebSite SourceDirection		
+		,A.Rating SourceRating		
+		,A.User_ratings_total SourceRatingTotal		
+		,A.SearchAddress SourceSearchText								
 		,(SELECT TOP 1 Html_attributions FROM AttractionPhotos SAP WITH(NOLOCK) WHERE SAP.AttractionId = A.AttractionsId) SourcePhoto		
 		,A.Longitude SourceLongitude
-		,A.Latitude SourceLatitude		
-		,A.PhotoUrl SourcePhotoUrl				
+		,A.Latitude SourceLatitude				
 		,(SELECT TOP 1 Food FROM [dbo].[MasterPriceInfo] WITH(NOLOCK) WHERE PriveLevel = A.PriceLevel) AS FoodExpense
 		,(SELECT TOP 1 Stay FROM [dbo].[MasterPriceInfo] WITH(NOLOCK) WHERE PriveLevel = A.PriceLevel) AS StayExpense				
   FROM [dbo].[AttractionTravelSteps]  ATS WITH(NOLOCK)

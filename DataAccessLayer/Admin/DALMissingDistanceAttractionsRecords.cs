@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Admin
 {
-    public class DALMissingDistanceAttractionsRecords : IMissingDistanceAttractionsRecords, IDisposable
+    public class DalMissingDistanceAttractionsRecords : IMissingDistanceAttractionsRecords, IDisposable
     {
         public List<MissingDistanceAttractionsRecordsDTO> Admin_MissingDistanceAttractionsRecordsGet()
         {

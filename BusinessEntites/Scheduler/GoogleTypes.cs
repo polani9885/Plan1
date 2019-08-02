@@ -8,7 +8,7 @@ namespace BusinessEntites.Scheduler
 {
     public class GoogleTypes
     {
-        public int GoogleTypeID { get; set; }
+        public int MapsXCategoryId { get; set; }
 
         public string TypeName { get; set; }
 

@@ -1,5 +1,6 @@
 "use strict";
-var Constants = (function () {
+exports.__esModule = true;
+var Constants = /** @class */ (function () {
     function Constants() {
         //it contain all the autocomplete city information
         this.cityList = [];

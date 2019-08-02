@@ -7,11 +7,11 @@ BEGIN
 	
 
 	SELECT DISTINCT [AttractionsId] Id
-      ,[AttractionName] +', '+ [GoogleSearchText] description      
-	  ,[GoogleSearchText] GoogleSearchText 
+      ,[AttractionName] +', '+ [SearchAddress] description      
+	  ,SearchAddress GoogleSearchText 
 	FROM [dbo].[Attractions] WITH(NOLOCK)
 	WHERE AttractionName LIKE '%'+ @address +'%'
-	OR GoogleSearchText LIKE '%'+ @address +'%'
+	OR SearchAddress LIKE '%'+ @address +'%'
 
 
 END

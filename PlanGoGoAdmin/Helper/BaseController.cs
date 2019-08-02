@@ -1,5 +1,5 @@
 ﻿using BusinessEntites.Users;
-using CommonFunctions;
+using CommFunction;
 using Newtonsoft.Json;
 using PlanGoGoAdmin.Helper.Principal;
 using System;

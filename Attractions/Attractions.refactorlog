@@ -21,4 +21,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Distance" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="a6d0e5b4-4c04-4807-bfb3-bc59066bc8b3" ChangeDateTime="02/21/2019 21:21:49">
+    <Property Name="ElementName" Value="[dbo].[GoogleMapsLogging].[DateTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[GoogleMapsLogging]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aef4828b-dcce-4ab3-aca7-2df3a716eac9" ChangeDateTime="03/07/2019 19:19:05">
+    <Property Name="ElementName" Value="[dbo].[MapsLoggingError].[ErrotStach]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MapsLoggingError]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ErrotStack" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0e65b448-43a6-4e8d-97cb-40c769f55ccf" ChangeDateTime="03/07/2019 20:35:40">
+    <Property Name="ElementName" Value="[dbo].[MapsLoggingError].[ErrotStack]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MapsLoggingError]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ErrorStack" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ab20eeb3-cb70-4064-a47c-0b51a60c539b" ChangeDateTime="03/22/2019 20:20:24">
+    <Property Name="ElementName" Value="[dbo].[MapsCredentials].[apiKey]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MapsCredentials]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="apiKeyOrapiId" />
+  </Operation>
 </Operations>

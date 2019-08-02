@@ -26,9 +26,9 @@ namespace GoogleMapsAPI.Features
                 string radiusData = string.Empty;
                 foreach (var attractionPhotoReference in pendingReference)
                 {
-                    var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
-                    if (googleCounter == null || googleCounter.Counter <
-                        Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                    //var googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                    //if (googleCounter == null || googleCounter.Counter <
+                    //    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                     {
                         try
                         {
@@ -52,11 +52,11 @@ namespace GoogleMapsAPI.Features
                                 attractionPhotoReference.AttractionPhotosId);
                         }
 
-                        dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", string.Empty, string.Empty,
-                            false);
-                        googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
-                        if (googleCounter == null || googleCounter.Counter >
-                            Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
+                        //dALSchedulers.Scheduler_GoogleLogging("place", "GetRadiusInformation", "", string.Empty, string.Empty,
+                        //    false);
+                        //googleCounter = dALSchedulers.Scheduler_GetGoogleMapsMethodCount("place");
+                        //if (googleCounter == null || googleCounter.Counter >
+                        //    Convert.ToInt32(ConfigurationManager.AppSettings["recordCount"]))
                         {
                             break;
                         }

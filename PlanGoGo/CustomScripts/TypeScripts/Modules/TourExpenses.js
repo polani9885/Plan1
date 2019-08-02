@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var Error_1 = require("../Modules/Error");
 var BaseAjaxCall_1 = require("../Common/BaseAjaxCall");
 var Constants_1 = require("../Common/Constants");
-var TourExpenses = (function () {
+var TourExpenses = /** @class */ (function () {
     function TourExpenses() {
         this.errorParameters = {};
         this.parameters = {};

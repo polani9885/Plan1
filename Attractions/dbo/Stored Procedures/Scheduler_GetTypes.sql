@@ -1,14 +1,17 @@
 ﻿CREATE PROCEDURE Scheduler_GetTypes 
-	
+(
+	@MapsId INT	
+)	
 AS
 BEGIN
 
 
-SELECT [GoogleTypeID]
-      ,[TypeName]
-      ,[IsNeeded]
-  FROM [dbo].[MasterGoogleType]
+SELECT 
+	MapsXCategoryId
+	,TypeName
+  FROM [dbo].[MapsXCategory] WITH(NOLOCK)
 WHERE IsNeeded = 1
+AND MapsId = @MapsId
 
 
 END

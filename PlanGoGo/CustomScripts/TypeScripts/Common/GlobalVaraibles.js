@@ -1,5 +1,6 @@
 "use strict";
-var GlobalVaraibles = (function () {
+exports.__esModule = true;
+var GlobalVaraibles = /** @class */ (function () {
     function GlobalVaraibles() {
     }
     GlobalVaraibles.queCounterGetAttractionTravelStepsNearAttractionInfo = 0;

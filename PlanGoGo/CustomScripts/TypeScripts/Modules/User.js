@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var BaseAjaxCall_1 = require("../Common/BaseAjaxCall");
 var Constants_1 = require("../Common/Constants");
 var Error_1 = require("./Error");
-var User = (function () {
+var User = /** @class */ (function () {
     function User() {
         this.parameters = {};
         this.errorParameters = {};

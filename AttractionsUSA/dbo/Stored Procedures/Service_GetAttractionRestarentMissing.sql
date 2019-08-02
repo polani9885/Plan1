@@ -3,37 +3,26 @@
 AS
 BEGIN
 	SELECT A.[AttractionsId]
-		  ,[AttractionName]
-		  ,[AddressOne]
-		  ,[AddressTwo]
-		  ,[CityId]
-		  ,[CategoryId]
+		  ,[AttractionName]		  
+		  ,[CityId]		  
 		  ,[Longitude]
-		  ,[Latitude]
-		  ,[PlaceId]
+		  ,[Latitude]		  
 		  ,[RankId]
 		  ,A.[CreatedDate]
 		  ,[CreatedBy]
 		  ,[ModifiedDate]
 		  ,[ModifiedBy]
-		  ,[GoogleSearchText]
-		  ,[GoogleWebSite]
-		  ,[GoogleICon]
-		  ,[GoogleInternational_phone_number]
-		  ,[Googleadr_address]
-		  ,[GoogleName]
+		  ,[SearchAddress]
+		  ,[WebSite]		  
+		  ,[phone_number]
+		  ,[SearchAddress]		  
 		  ,[IsScannedNearBy]
 		  ,[IsPlaceDetailsDone]
 		  ,[IsNearDistanceDone]
 		  ,[PriceLevel]
-		  ,[GoogleRating]
-		  ,[GoogleUser_ratings_total]
-		  ,[IsGoogleSearchTextDone]
-		  ,[Utc_offset]
-		  ,[IsNearRestarentDone]
+		  ,[Rating]
+		  ,[User_ratings_total]
+		  ,[IsLatAndLon]
+		  ,[Utc_offset]		  
 	  FROM [dbo].[Attractions] A WITH(NOLOCK)
-	  WHERE IsNULL(IsNearRestarentDone,0) = 0
-
-
-
 END

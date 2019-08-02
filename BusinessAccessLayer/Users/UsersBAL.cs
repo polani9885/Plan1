@@ -10,14 +10,13 @@ using BusinessEntites.JsonParameters;
 using BusinessEntites;
 using BusinessEntites.Admin;
 using BusinessEntites.DataBaseModels;
-using GoogleMapsAPI.Features;
 using BusinessEntites.EntityAutoComplete.ReferenceObjects;
 
 namespace BusinessAccessLayer.Users
 {
     public class UsersBAL : BaseBusinessClass, IDisposable, IUser
     {
-        private readonly RecalculateTourInfo recalculateTourInfo = new RecalculateTourInfo();
+        
         public void Dispose()
         {
             GC.SuppressFinalize(this);

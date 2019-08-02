@@ -3,35 +3,28 @@
 AS
 BEGIN
 	SELECT [AttractionsId]
-      ,[AttractionName]
-      ,[AddressOne]
-      ,[AddressTwo]
-      ,[CityId]
-      ,[CategoryId]
+      ,[AttractionName]      
+      ,[CityId]      
       ,[Longitude]
-      ,[Latitude]
-      ,[PlaceId]
+      ,[Latitude]      
       ,[RankId]
       ,[CreatedDate]
       ,[CreatedBy]
       ,[ModifiedDate]
       ,[ModifiedBy]
-      ,[GoogleSearchText]
-      ,[GoogleWebSite]
-      ,[GoogleICon]
-      ,[GoogleInternational_phone_number]
-      ,[Googleadr_address]
-      ,[GoogleName]
+      ,[SearchAddress]
+      ,[WebSite]      
+      ,[phone_number]            
       ,[IsScannedNearBy]
       ,[IsPlaceDetailsDone]
       ,[IsNearDistanceDone]
       ,[PriceLevel]
-      ,[GoogleRating]
+      ,[Rating]
   FROM [dbo].[Attractions]
   WHERE ISNULL(IsNearDistanceDone,0) = 0
   AND Longitude IS NOT NULL
   AND Latitude Is NOT NULL
-  AND GoogleSearchText IS NOT NULL
-  AND GoogleSearchText <> ''
+  AND SearchAddress IS NOT NULL
+  AND SearchAddress <> ''
 
 END
